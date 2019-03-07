@@ -76,18 +76,19 @@ module.exports={
     createProfile: async (req,res)=>{
         // console.log('this worked!');
         const db = req.app.get('db');
+        //need to figure out where I would pass the user_id to all of the queries...
         const {schName:sch_Name,major,edLevel:ed_Level,schLoc:sch_Loc,gradDate:grad_Date,schLogo:sch_Logo} = req.body.education;
         const {empName:emp_Name,position,empLoc:emp_Loc,hireDate:hire_Date,endDate:end_Date,empLogo:emp_Logo} = req.body.work;
         const {skill} = req.body.skills;
         const {language} = req.body.languages;
         const {project} = req.body.projects;
-        
+
         // let profile = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
-        let education = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
-        let work = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
-        let skills = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
-        let languages = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
-        let projects = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
+        let education = await db.create_education({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,user_id})
+        let work = await db.create_work({emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,user_id})
+        let skills = await db.create_skills({skill,user_id})
+        let languages = await db.create_languages({language,user_id})
+        let projects = await db.create_projects({project,user_id})
         
         res.status(200).send('hello')
     }
