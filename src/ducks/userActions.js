@@ -1,4 +1,4 @@
-import {UPDATE_USER,UPDATE_PROFILE,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL_AND_LANG,UPDATE_PROJECT} from './constants'
+import {UPDATE_USER,UPDATE_PROFILE,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL_AND_LANG,UPDATE_PROJECT, CLEAR_USER} from './constants'
 
 export function updateUser ({first_name,last_name,email,image_url}){
     return {
@@ -25,30 +25,20 @@ export function updateProfile (firstName,lastName,email,password,imageUrl){
     }
 }
 
-export function updateEducation (schName,major,edLevel,schLoc,gradDate,schLogo){
+export function updateEducation (education){
     return {
         type:UPDATE_EDUCATION,
         payload:{
-            schName,
-            major,
-            edLevel,
-            schLoc,
-            gradDate,
-            schLogo
+            education
         }
     }
 }
 
-export function updateWork (empName,position,empLoc,hireDate,endDate,empLogo){
+export function updateWork (work){
     return {
         type:UPDATE_WORK,
         payload:{
-            empName,
-            position,
-            empLoc,
-            hireDate,
-            endDate,
-            empLogo
+            work
         }
     }
 }
@@ -64,11 +54,17 @@ export function updateSkillAndLang (skills,languages) {
     }
 }
 
-export function updateProject (project) {
+export function updateProject (projects) {
     return {
         type:UPDATE_PROJECT,
         payload:{
-            project
+            projects
         }
+    }
+}
+
+export function clearUser (){
+    return{
+        type:CLEAR_USER
     }
 }

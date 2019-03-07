@@ -6,44 +6,69 @@ class StepTwo extends Component {
     constructor(props){
         super(props);
         this.state={
-            schName:this.props.schName,
-            major:this.props.major,
-            edLevel:this.props.edLevel,
-            schLoc:this.props.schLoc,
-            gradDate:this.props.gradDate,
-            schLogo:this.props.schLogo
+            education:this.props.education,
+            schName:'',
+            major:'',
+            edLevel:'',
+            schLoc:'',
+            gradDate:'',
+            schLogo:''
         }
     }
     componentDidMount(){
         // console.log(this.props.firstName)
-        const {schName,major,edLevel,schLoc,gradDate,schLogo} = this.props;
-        this.props.updateEducation(schName,major,edLevel,schLoc,gradDate,schLogo)
+        const {education} = this.props;
+        this.props.updateEducation(education)
     }
 
     handleInput(prop,value){
         this.setState({
             [prop]:value
         })
-        console.log(111,prop,value)
+        // console.log(111,prop,value)
+    }
+
+    handleAddEducation(){
+        const {education,schName,major,edLevel,schLoc,gradDate,schLogo} = this.state;
+        education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
+        this.props.updateEducation(education);
+        this.setState({
+            schName:'',
+            major:'',
+            edLevel:'',
+            schLoc:'',
+            gradDate:'',
+            schLogo:''
+        });
     }
 
     handlePrevious(){
-        const {schName,major,edLevel,schLoc,gradDate,schLogo} = this.state;
+        const {education,schName,major,edLevel,schLoc,gradDate,schLogo} = this.state;
+        // if(schName!=="" && major!=="" && schLoc !=="" && gradDate !=="" && schLogo !==""){
+            // education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
+            this.props.updateEducation(education);
+        // }
         // console.log(222,schName,this.props)
-        
-        this.props.updateEducation(schName,major,edLevel,schLoc,gradDate,schLogo);
-        this.props.history.push('/register/step1')   
+        // this.props.history.push('/register/step1')   
     }
 
     handleNext(){
-        const {schName,major,edLevel,schLoc,gradDate,schLogo} = this.state;
+        const {education,schName,major,edLevel,schLoc,gradDate,schLogo} = this.state;
+        // if(schName!=="" && major!=="" && schLoc !=="" && gradDate !=="" && schLogo !==""){
+            education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
+            this.props.updateEducation(education);
+            this.props.history.push('/register/step3')   
+        // } else {
+        //     this.props.history.push('/register/step3')   
+        // }
+        
         // console.log(222,schName,this.props)
         
-        this.props.updateEducation(schName,major,edLevel,schLoc,gradDate,schLogo);
-        this.props.history.push('/register/step3')   
+        
     }
 
     render (){
+        console.log(2222,this.props)
         const {schName,major,edLevel,schLoc,gradDate,schLogo} = this.state
         return (
             <div>
@@ -90,24 +115,22 @@ class StepTwo extends Component {
                     onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}
                     />
 
-                <button>Add Another School</button>
-                <button onClick={()=>{this.handlePrevious(schName,major,edLevel,schLoc,gradDate,schLogo)}}>Go back to Profile Info</button>
-                <button onClick={()=>{this.handleNext(schName,major,edLevel,schLoc,gradDate,schLogo)}}>Go to Add Work Experience Info</button>
+                <button onClick={()=>this.handleAddEducation(schName,major,edLevel,schLoc,gradDate,schLogo)}>Add Another School</button>
+
+                <br/>
+                <br/>
+                {/* <button onClick={()=>{this.handlePrevious(schName,major,edLevel,schLoc,gradDate,schLogo)}}>Go back to Profile Info</button> */}
+                <button onClick={()=>{this.handleNext(schName,major,edLevel,schLoc,gradDate,schLogo)}}>Next</button>
             </div>
         )
     }
 }
 
 function mapStateToProps (reduxState){
-    const {schName,major,edLevel,schLoc,gradDate,schLogo} = reduxState
+    const {education,work} = reduxState
     return {
-        schName,
-        major,
-        edLevel,
-        schLoc,
-        gradDate,
-        schLogo
-        // firstName:firstName
+        education,
+        work
     }
 }
 

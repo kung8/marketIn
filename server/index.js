@@ -38,6 +38,7 @@ app.post('/auth/register',userCtrl.register);
 app.post('/auth/login',userCtrl.login);
 app.get('/auth/current',userCtrl.getUser);
 app.post('/auth/logout',userCtrl.logout);
+app.post('/auth/createProfile',userCtrl.createProfile)
 
 
 

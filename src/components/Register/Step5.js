@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {updateProject} from '../../ducks/userActions';
+import axios from 'axios';
 
 class StepFive extends Component {
     constructor(props){
         super(props);
         this.state = {
-            project:this.props.project
+            projects:this.props.projects,
+            project:''
         }
     }
     
@@ -17,22 +19,40 @@ class StepFive extends Component {
         // console.log(111,prop,value)
     }
     
+    handleAddProject(){
+        const {project,projects} = this.state;
+        projects.push({project})
+        this.props.updateProject(projects)
+        this.setState({
+            project:''
+        })
+    }
+
     handlePrevious(){
-        const {project} = this.state;
-        this.props.updateProject(project);
+        const {project,projects} = this.state;
+        projects.push({project})
+        this.props.updateProject(projects)
         this.props.history.push('/register/step4')   
        }
 
-
-    registerUser(){
-        const {project} = this.state;
-        this.props.updateProject(project);
+    async completeProfile(){
+        const {projects} = this.state;
+        const {skills,languages,work,education} = this.props
+        let profile = await axios.post('/auth/createProfile',{education,work,skills,languages,projects})
+        
+        this.props.updateProject(profile.data);
         this.props.history.push('/profile')
     }
 
     render (){
-        console.log(11234,this.props.skills)
-        const {project} = this.state;
+        console.log(5555,this.props)
+        const {project,projects} = this.state;
+
+        let mappedProjects = projects.map(project =>{
+            return(
+                <div key={project.id} >{project['project']}</div>
+            )
+        })
 
         return (
             <div>
@@ -44,19 +64,22 @@ class StepFive extends Component {
                     onChange={(e)=>{this.handleInput('project',e.target.value)}}
                     />
                 
-                <button>Add Another Project</button>
+                <button onClick={()=>this.handleAddProject(project)}>Add Another Project</button>
+
+                {mappedProjects}
+                <br/>
+                <br/>
+
                 <button onClick={()=>{this.handlePrevious(project)}}>Go back to Skills/Languages Info</button>
-                <button onClick={()=>{this.registerUser(project)}}>Complete Profile</button>
+                <button onClick={()=>{this.completeProfile(project)}}>Complete Profile</button>
             </div>
         )
     }
 }
 
 function mapStateToProps(reduxState){
-    const {project,skills} = reduxState
     return {
-        project,
-        skills
+        reduxState
     }
 } 
 

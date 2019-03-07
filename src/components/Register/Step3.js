@@ -6,40 +6,60 @@ class StepThree extends Component {
     constructor (props){
         super(props);
         this.state = {
-            empName:this.props.empName,
-            position:this.props.position,
-            empLoc:this.props.empLoc,
-            hireDate:this.props.hireDate,
-            endDate:this.props.endDate,
-            empLogo:this.props.empLogo
+            work:this.props.work,
+            empName:'',
+            position:'',
+            empLoc:'',
+            hireDate:'',
+            endDate:'',
+            empLogo:''
         }
     }
 
     componentDidMount () {
-        const {empName,position,empLoc,hireDate,endDate,empLogo} = this.props;
-        this.props.updateWork(empName,position,empLoc,hireDate,endDate,empLogo)
+        const {work} = this.props;
+        this.props.updateWork(work)
     }
 
     handleInput(prop,value){
         this.setState({
             [prop]:value
         })
-        console.log(111,prop,value)
+        // console.log(111,prop,value)
     }
 
-    handlePrevious(){
-        const {empName,position,empLoc,hireDate,endDate,empLogo} = this.state;
-        this.props.updateWork(empName,position,empLoc,hireDate,endDate,empLogo);
+    handleAddWork=()=>{
+        const {work,empName,position,empLoc,hireDate,endDate,empLogo} = this.state;
+        work.push({empName,position,empLoc,hireDate,endDate,empLogo});
+        this.props.updateWork(work);
+        this.setState({
+            empName:'',
+            position:'',
+            empLoc:'',
+            hireDate:'',
+            endDate:'',
+            empLogo:''
+        })
+    }
+
+    handlePrevious=()=>{
+        const {work,empName,position,empLoc,hireDate,endDate,empLogo} = this.state;
+        work.push({empName,position,empLoc,hireDate,endDate,empLogo});
+        this.props.updateWork(work);
+        // this.handleAddWork(empName,position,empLoc,hireDate,endDate,empLogo);
         this.props.history.push('/register/step2')   
     }
     
-    handleNext(){
-        const {empName,position,empLoc,hireDate,endDate,empLogo} = this.state;
-        this.props.updateWork(empName,position,empLoc,hireDate,endDate,empLogo);
+    handleNext=()=>{
+        const {work,empName,position,empLoc,hireDate,endDate,empLogo} = this.state;
+        work.push({empName,position,empLoc,hireDate,endDate,empLogo});
+        this.props.updateWork(work);
+        // this.handleAddWork(empName,position,empLoc,hireDate,endDate,empLogo);
         this.props.history.push('/register/step4')   
     }
 
     render (){
+        console.log(3333,this.props,this.state)
         const {empName,position,empLoc,hireDate,endDate,empLogo} = this.state
 
         return (
@@ -84,25 +104,26 @@ class StepThree extends Component {
                     value={empLogo} 
                     onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}
                     />
+                <br/>
+                <br/>
 
-                <button>Add Another Work Experience</button>
-                <button onClick={()=>{this.handlePrevious()}}>Go back to Education Info</button>
-                <button onClick={()=>{this.handleNext()}}>Go to Add Skills/Languages Info</button>
+                <button onClick={this.handleAddWork}>Add Another Work Experience</button>
+                <br/>
+                <br/>
+                <button onClick={this.handlePrevious}>Previous</button>
+                <button onClick={this.handleNext}>Next</button>
             </div>
         )
     }
 }
 
 function mapStateToProps (reduxState){
-    const {empName,position,empLoc,hireDate,endDate,empLogo,firstName} = reduxState
+    const {work,education,language,skills} = reduxState
     return {
-        empName,
-        position,
-        empLoc,
-        hireDate,
-        endDate,
-        empLogo, 
-        firstName
+        work,
+        education,
+        skills,
+        language
     }
 }
 

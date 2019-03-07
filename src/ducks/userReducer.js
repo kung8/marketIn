@@ -1,50 +1,21 @@
-import {UPDATE_USER,UPDATE_PROFILE,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL_AND_LANG,UPDATE_PROJECT} from './constants'
+import {UPDATE_USER,UPDATE_PROFILE,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL_AND_LANG,UPDATE_PROJECT,CLEAR_USER} from './constants'
 
 const initialState = {
+    id:0,
     firstName:'',
     lastName:'',
     email:'',
     password:'',
     imageUrl:'',
-    education: [
-        {
-            schName:'',
-            major:'',
-            edLevel:'',
-            schLoc:'',
-            gradDate:'',
-            schLogo:''
-        }
-    ],
-    work: [
-        {
-            empName:'',
-            position:'',
-            empLoc:'',
-            hireDate:'',
-            endDate:'',
-            empLogo:''
-        }
-    ],
-    skills: [
-        {
-            skill:''
-        }
-    ],
-    languages: [
-        {
-            language:''
-        }
-    ],
-    projects: [
-        {
-            project:''
-        }
-    ]
+    education: [],
+    work: [],
+    skills: [],
+    languages: [],
+    projects: []
 }
 
 export default function userReducer(state = initialState,action){
-    console.log(333,action.payload)
+    console.log(1111,action.payload)
     
     switch(action.type){
         case UPDATE_USER:
@@ -54,21 +25,21 @@ export default function userReducer(state = initialState,action){
         //     const {firstName,lastName,email,password,imageUrl} = action.payload;
         //     return {...state,firstName,lastName,email,password,imageUrl};
         case UPDATE_EDUCATION:
-            const {schName,major,edLevel,schLoc,gradDate,schLogo} = action.payload
+            const {education} = action.payload
             // console.log(4444,schName)
-            return {...state,schName,major,edLevel,schLoc,gradDate,schLogo};
+            return {...state,education};
         case UPDATE_WORK:
-            const {empName,position,empLoc,hireDate,endDate,empLogo} = action.payload;
-            return {...state,empName,position,empLoc,hireDate,endDate,empLogo};
+            const {work} = action.payload;
+            return {...state,work};
         case UPDATE_SKILL_AND_LANG:
             const {skills,languages} = action.payload
-            // console.log(7777,skill,language)
-            // skills = skills.push(skill)
-            // languages = languages.push(language)
             return {...state,skills,languages}
         case UPDATE_PROJECT:
-            const {project} = action.payload;
-            return {...state,project}
+            const {projects} = action.payload;
+            return {...state,projects};
+        case CLEAR_USER:
+            // console.log(7777,state); 
+            return {...state,firstName:'',lastName:'',email:'',imageUrl:'',id:0,education:[],work:[],skills:[],languages:[],projects:[]}
         default: 
             return state
     }

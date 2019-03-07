@@ -32,9 +32,9 @@ module.exports={
         let hash = bcrypt.hashSync(password,salt);
         let newUser = await db.register({first_name,last_name,email,password:hash,image_url});
         newUser = newUser[0];
-        console.log(1111, newUser,req.session);
+        // console.log(1111, newUser,req.session);
         req.session.user = newUser;
-        console.log(2222, newUser,req.session);
+        // console.log(2222, newUser,req.session);
         res.status(200).send(newUser);
     },
 
@@ -67,10 +67,28 @@ module.exports={
         res.status(200).send('Session Connected!')
     },
 
-    logout: async (req,res)=>{
+    logout: (req,res)=>{
         // console.log('logged out connected');
-        const db = req.app.get('db');
-
+        req.session.destroy();
         res.status(200).send('Logged Out Connected!')
+    },
+
+    createProfile: async (req,res)=>{
+        // console.log('this worked!');
+        const db = req.app.get('db');
+        const {schName:sch_Name,major,edLevel:ed_Level,schLoc:sch_Loc,gradDate:grad_Date,schLogo:sch_Logo} = req.body.education;
+        const {empName:emp_Name,position,empLoc:emp_Loc,hireDate:hire_Date,endDate:end_Date,empLogo:emp_Logo} = req.body.work;
+        const {skill} = req.body.skills;
+        const {language} = req.body.languages;
+        const {project} = req.body.projects;
+        
+        // let profile = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
+        let education = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
+        let work = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
+        let skills = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
+        let languages = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
+        let projects = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
+        
+        res.status(200).send('hello')
     }
 }

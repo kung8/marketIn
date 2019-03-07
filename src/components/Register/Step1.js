@@ -31,7 +31,7 @@ class StepOne extends Component {
         const {firstName,lastName,email,password,imageUrl} = this.state;
         try {
             let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})
-            console.log(user.data);
+            // console.log(user.data);
             // this.props.updateProfile(user.data);
             this.props.history.push('/register/step2')   
         } catch (err) {
@@ -43,6 +43,8 @@ class StepOne extends Component {
         const {firstName,lastName,email,password,imageUrl} = this.state;
         return (
             <div>
+                <h1>Basic Info</h1>
+
                 <input 
                     value={firstName} 
                     placeholder="First Name" 
@@ -72,7 +74,7 @@ class StepOne extends Component {
                     onChange={(e)=>this.handleInput('imageUrl',e.target.value)}
                     />
                     
-                <button onClick={()=>{this.register(firstName,lastName,email,password,imageUrl)}}>Go to Add Education Info</button>
+                <button onClick={()=>{this.register(firstName,lastName,email,password,imageUrl)}}>Register</button>
             </div>
         )
     }

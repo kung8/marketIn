@@ -1,15 +1,22 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import axios from 'axios';
+import {connect} from 'react-redux';
+import {clearUser} from '../../ducks/userActions';
 
 class Profile extends Component {
+    async logout(){
+        await axios.post('/auth/logout');
+        this.props.history.push('/');  
+    }
+    
     render(){
         return (
             <div>
-                <Link to='/'><button>Logout</button></Link>
+                <button onClick={()=>this.logout()}>Logout</button>
             </div>
         )
     }
 }
 
 
-export default Profile
+export default connect('',{clearUser})(Profile)
