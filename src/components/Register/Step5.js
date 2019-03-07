@@ -1,37 +1,63 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {updateProject} from '../../ducks/userActions';
 
 class StepFive extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            project:this.props.project
+        }
+    }
+    
+    handleInput(prop,value){
+        this.setState({
+            [prop]:value
+        })
+        // console.log(111,prop,value)
+    }
+    
     handlePrevious(){
+        const {project} = this.state;
+        this.props.updateProject(project);
         this.props.history.push('/register/step4')   
        }
 
 
     registerUser(){
+        const {project} = this.state;
+        this.props.updateProject(project);
         this.props.history.push('/profile')
     }
 
     render (){
+        console.log(11234,this.props.skills)
+        const {project} = this.state;
+
         return (
             <div>
-                <h1>Work Experience</h1>
-                <h3>Employer</h3>
-                <input placeholder="Employer Name"/>
-                <h3>Position</h3>
-                <input placeholder="Position"/>
-                <h3>Location</h3>
-                <input placeholder="Location"/>
-                <h3>Hire Date</h3>
-                <input placeholder="Hire Date"/>
-                <h3>End Date</h3>
-                <input placeholder="End Date"/>
-                <h3>Employer Logo</h3>
-                <input placeholder="Employer Logo"/>
-                <button>Add Another Work Experience</button>
-                <button onClick={()=>{this.handlePrevious()}}>Back to Skills/Languages Info</button>
-                <button onClick={()=>{this.registerUser()}}>Complete Profile</button>
+                <h1>Projects</h1>
+                <h3>Project</h3>
+                <input 
+                    placeholder="Project"
+                    value={project} 
+                    onChange={(e)=>{this.handleInput('project',e.target.value)}}
+                    />
+                
+                <button>Add Another Project</button>
+                <button onClick={()=>{this.handlePrevious(project)}}>Go back to Skills/Languages Info</button>
+                <button onClick={()=>{this.registerUser(project)}}>Complete Profile</button>
             </div>
         )
     }
 }
 
-export default StepFive
+function mapStateToProps(reduxState){
+    const {project,skills} = reduxState
+    return {
+        project,
+        skills
+    }
+} 
+
+export default connect(mapStateToProps,{updateProject})(StepFive)
