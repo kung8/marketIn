@@ -76,8 +76,8 @@ class StepTwo extends Component {
     }
 
     render (){
-        console.log(2222,this.props)
-        console.log(99999,this.state.schName)
+        // console.log(2222,this.props)
+        // console.log(99999,this.state.schName)
         const {schName,major,edLevel,schLoc,gradDate,schLogo} = this.state
         return (
             <div>

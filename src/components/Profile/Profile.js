@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {clearUser,updateUser,updateEducation,updateWork,updateSkillAndLang,updateProject} from '../../ducks/userActions';
+import {clearUser,updateUser,updateEducation,updateWork,updateSkill,updateLang,updateProject} from '../../ducks/userActions';
+import { join } from 'path';
 
 class Profile extends Component {
     constructor(props){
@@ -31,19 +32,21 @@ class Profile extends Component {
         //do a get call to be able to find their information from the backend and restore it in the reduxState...
         if(!this.props.id){
             let user = await axios.get('/auth/current')
-            this.props.updateUser(user.data)
+                this.props.updateUser(user.data)
         }
     }
 
-    async getProfile(){
+    getProfile(){
         if(!this.props.id){
-            console.log('entered into!')
-            let profile = await axios.get('/profile/get')
-            const {edProfile,workProfile,skillsProfile,langProfile,projProfile} = profile.data;
-            this.props.updateEducation(edProfile);
-            this.props.updateWork(workProfile);
-            this.props.updateSkillAndLang(skillsProfile,langProfile);
-            this.props.updateProject(projProfile);
+            // console.log('entered into!')
+            axios.get('/profile/get').then(profile =>{
+                const {edProfile,workProfile,skillsProfile,langProfile,projProfile} = profile.data;
+                this.props.updateEducation(edProfile);
+                this.props.updateWork(workProfile);
+                this.props.updateSkill(skillsProfile);
+                this.props.updateLang(langProfile);
+                this.props.updateProject(projProfile);
+            })
         }
     }
 
@@ -53,19 +56,67 @@ class Profile extends Component {
         this.props.history.push('/');  
     }
     
+    //need to create some input boxes for edit but only want those to show if I press edit. 
 
-    async editProfile(){
+    async editEdProfile(sch){
         //need to figure out how people will make the actual edits because they need to be able to select the entire values that were mapped over
-        let editedProfile = await axios.put('/profile/edit',{})
+        // console.log(123)
+        // console.log(sch)
+        const {sch_name,major,ed_level,grad_date,sch_loc,sch_logo} = sch
+        // console.log(this.props.education);
+        // console.log(edProfile)
 
+        let editedProfile = await axios.put('/profile/edit',{sch_name,major,ed_level,grad_date,sch_loc,sch_logo})
+    }
+
+    async deleteEdProfile(sch){
+        const {id} = sch;
+        const edProfile = await axios.delete(`/profile/delete/education/${id}`);
+        this.props.updateEducation(edProfile.data);
+        this.setState({
+            education:edProfile.data
+        })
+    }
+
+    async deleteWorkProfile(job){
+        const {id} = job;
+        const workProfile = await axios.delete(`/profile/delete/work/${id}`);
+        this.props.updateWork(workProfile.data);
+        this.setState({
+            work:workProfile.data
+        })
+    }
+
+    async deleteSkillsProfile(skill){
+        const {id} = skill;
+        const skillsProfile = await axios.delete(`/profile/delete/skill/${id}`);
+        this.props.updateSkill(skillsProfile.data);
+        this.setState({
+            skills:skillsProfile.data,
+        })
+    }
+
+    async deleteLangProfile(lang){
+        const {id} = lang;
+        const langProfile = await axios.delete(`/profile/delete/language/${id}`);
+        this.props.updateLang(langProfile.data);
+        this.setState({
+            languages:langProfile.data,
+        })
+    }
+
+    async deleteProjProfile(proj){
+        const {id} = proj;
+        const projProfile = await axios.delete(`/profile/delete/project/${id}`);
+        this.props.updateProject(projProfile.data);
+        this.setState({
+            projects:projProfile.data
+        })
+        console.log(this.state.projects,this.props.projects)
 
     }
 
-    async deleteProfile(){
-        //need to figure out how people will delete the entire/maybe specific values mapped over
-        let removedProfile = axios.delete('/profile/delete',{})
-    }
-
+   
 
     render(){
         console.log(8989,this.props)
@@ -73,67 +124,70 @@ class Profile extends Component {
         const {education,work,skills,languages,projects} = this.props;
         // console.log(22222,education,work,skills,languages,projects)
         
-        let edProfile = education.map(sch => {
+        const edProfile = education.map(sch => {
             // console.log(3333,sch)
             return (
                 <div key={sch.id}>
-                    <h1>{sch.sch_name}</h1>
-                    <h1>{sch.major}</h1>
-                    <h1>{sch.ed_level}</h1>
-                    <h1>{sch.grad_date}</h1>
-                    <h1>{sch.sch_loc}</h1>
-                    <h1>{sch.sch_logo}</h1>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <p>{sch.sch_name}</p>
+                    <p>{sch.major}</p>
+                    <p>{sch.ed_level}</p>
+                    <p>{sch.grad_date}</p>
+                    <p>{sch.sch_loc}</p>
+                    <img src={sch.sch_logo} alt="sch_logo"/>
+                    <button onClick={()=>{this.editEdProfile(sch)}}>Edit</button>
+                    <button onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
                 </div>
             )
         })
 
-        let workProfile = work.map(job =>{
+
+        //if a user session id == user then you can edit that profile but this is already a way to check session
+
+        const workProfile = work.map(job =>{
             // console.log(3333,job)
             return (
-                <div>
-                    <h1>{job.emp_loc}</h1>
-                    <h1>{job.emp_logo}</h1>
-                    <h1>{job.emp_name}</h1>
-                    <h1>{job.position}</h1>
-                    <h1>{job.hire_date}</h1>
-                    <h1>{job.end_date}</h1>
+                <div key={job.id}>
+                    <p>{job.emp_loc}</p>
+                    <img src={job.emp_logo} alt="company logo"/>
+                    <p>{job.emp_name}</p>
+                    <p>{job.position}</p>
+                    <p>{job.hire_date}</p>
+                    <p>{job.end_date}</p>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
                 </div>
             )
         })
 
-        let skillsProfile = skills.map(skill =>{
+        const skillsProfile = skills.map(skill =>{
             // console.log(3333,skill)
             return (
-                <div>
-                    <h1>{skill.skill}</h1>
+                <div key={skill.id}>
+                    <p>{skill.skill}</p>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
                 </div>
             )
         })
 
-        let langProfile = languages.map(lang =>{
+        const langProfile = languages.map(lang =>{
             // console.log(3333,lang)
             return (
-                <div>
-                    <h1>{lang.language}</h1>
+                <div lang={lang.id}>
+                    <p>{lang.language}</p>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={()=>{this.deleteLangProfile(lang)}}>Delete</button>
                 </div>
             )
         })
 
-        let projProfile = projects.map(proj =>{
+        const projProfile = projects.map(proj =>{
             // console.log(3333,proj)
             return (
-                <div>
-                    <h1>{proj.project}</h1>
+                <div key={proj.id}>
+                    <p>{proj.project}</p>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
                 </div>
             )
         })
@@ -142,16 +196,31 @@ class Profile extends Component {
         return (
             <div>
                 <button onClick={()=>this.logout()}>Logout</button>
-                <h1>Hello</h1>
-                <h1>{this.props.firstName}</h1>
-                <h1>{this.props.lastName}</h1>
-                <h1>{this.props.email}</h1>
-                <h1>{this.props.imageUrl}</h1>
-                <h1>{edProfile}</h1>
-                <h1>{workProfile}</h1>
-                <h1>{skillsProfile}</h1>
-                <h1>{langProfile}</h1>
-                <h1>{projProfile}</h1>
+                <h1>Hello {this.props.firstName}</h1>
+                <h1>first:{this.props.firstName}</h1>
+                <h1>last:{this.props.lastName}</h1>
+                <h1>email:{this.props.email}</h1>
+                <img src={this.props.imageUrl}/>
+                
+                <h1>SCHOOL</h1>
+                <p>{edProfile}</p>
+                <button>Add School</button>
+                
+                <h1>WORK</h1>
+                <p>{workProfile}</p>
+                <button>Add Job</button>
+
+                <h1>SKILLS</h1>
+                <p>{skillsProfile}</p>
+                <button>Add Skill</button>
+
+                <h1>LANGUAGES</h1>
+                <p>{langProfile}</p>
+                <button>Add Language</button>
+
+                <h1>PROJECTS</h1>
+                <p>{projProfile}</p>
+                <button>Add Project</button>
 
             </div>
         )
@@ -173,4 +242,4 @@ function mapStateToProps (reduxState){
     }
 }
 
-export default connect(mapStateToProps,{clearUser,updateUser,updateEducation,updateWork,updateSkillAndLang,updateProject})(Profile)
+export default connect(mapStateToProps,{clearUser,updateUser,updateEducation,updateWork,updateSkill,updateLang,updateProject})(Profile)

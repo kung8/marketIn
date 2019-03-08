@@ -42,11 +42,11 @@ module.exports={
             return res.status(401).send('email not found')
         } 
         let authenticated = bcrypt.compareSync(password,user.password);
-        console.log(authenticated)
+        // console.log(authenticated)
         if(authenticated){
             delete user.password;
             req.session.user = user;
-            console.log(req.session.user)
+            // console.log(req.session.user)
             res.status(200).send(req.session.user);
         } else {
             res.status(401).send('password is incorrect');

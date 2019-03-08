@@ -42,9 +42,17 @@ app.post('/auth/logout',userCtrl.logout);
 
 //profileController ENDPOINTS
 app.get('/profile/get',profileCtrl.getProfile);
-app.post('/profile/create',profileCtrl.createProfile);
+
+app.post('/profile/create',profileCtrl.createProfile); //this is only for registration because they can do multiple
+
 app.put('/profile/edit',profileCtrl.editProfile);
-app.delete('/profile/delete',profileCtrl.deleteProfile);
+
+
+app.delete('/profile/delete/education/:id',profileCtrl.deleteEdProfile);
+app.delete('/profile/delete/work/:id',profileCtrl.deleteWorkProfile);
+app.delete('/profile/delete/skill/:id',profileCtrl.deleteSkillsProfile);
+app.delete('/profile/delete/language/:id',profileCtrl.deleteLangProfile);
+app.delete('/profile/delete/project/:id',profileCtrl.deleteProjProfile);
 
 
 

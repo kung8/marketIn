@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {updateSkillAndLang} from '../../ducks/userActions';
+import {updateSkill,updateLang} from '../../ducks/userActions';
 
 class StepFour extends Component {
     constructor(props){
@@ -14,18 +14,6 @@ class StepFour extends Component {
     }
 
     componentDidMount(){
-        // if(this.props.skills[0]){
-        //     let lastIndex = this.props.skills.length - 1;
-        //     this.setState({
-        //         skill:this.props.skills[lastIndex].skill
-        //     })
-        // };
-        // if(this.props.languages[0]){
-        //     let lastIndex = this.props.languages.length - 1;
-        //     this.setState({
-        //         language:this.props.languages[lastIndex].language
-        //     })
-        // }
        
     }
 
@@ -54,26 +42,31 @@ class StepFour extends Component {
 
     handlePrevious(){
         const {skills,skill,languages,language} = this.state;
-        if(skill !== '' || language !==''){
+        if(skill !== '' ){
             skills.push({skill});
-            languages.push({language});
-            this.props.updateSkillAndLang(skills,languages);
-            this.props.history.push('/register/step3')   
-        } else {
-            this.props.history.push('/register/step3')
+            this.props.updateSkill(skills);
         }
+            
+        if(language !== ''){
+            languages.push({language});
+            this.props.updateLang(languages);
+        }
+        this.props.history.push('/register/step3')
+        
     }
 
     handleNext(){
         const {skills,skill,languages,language} = this.state;
-        if(skill !== '' || language !== ''){
-        skills.push({skill});
-        languages.push({language});
-        this.props.updateSkillAndLang(skills,languages);
-        this.props.history.push('/register/step5'); 
-        } else {
-            this.props.history.push('/register/step5')
-        }  
+        if(skill !== '' ){
+            skills.push({skill});
+            this.props.updateSkill(skills);
+        }
+            
+        if(language !== ''){
+            languages.push({language});
+            this.props.updateLang(languages);
+        }
+        this.props.history.push('/register/step5');   
     }
 
     render (){
@@ -125,4 +118,4 @@ function mapStateToProps (reduxState){
     } 
 }
 
-export default connect(mapStateToProps,{updateSkillAndLang})(StepFour)
+export default connect(mapStateToProps,{updateSkill,updateLang})(StepFour)

@@ -26,7 +26,7 @@ class StepFive extends Component {
         this.setState({
             [prop]:value
         })
-        console.log(111,prop,value)
+        // console.log(111,prop,value)
     }
     
     handleAddProject(){
@@ -48,13 +48,16 @@ class StepFive extends Component {
 
     async completeProfile(){
         const {projects,project} = this.state;
-        projects.push({project});
+
+        if(project !== '' ){
+            projects.push({project});
+            this.props.updateProject(projects);
+        }
+        
         const {skills,languages,work,education} = this.props;
-        console.log(education,languages,work,skills)
+        // console.log(education,languages,work,skills)
         let profile = await axios.post('/profile/create',{education,work,skills,languages,projects})
         
-        console.log(88888,profile);
-        this.props.updateProject(profile.data);
         this.props.history.push('/profile')
     }
 

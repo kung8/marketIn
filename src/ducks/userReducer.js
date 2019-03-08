@@ -1,4 +1,4 @@
-import {UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL_AND_LANG,UPDATE_PROJECT,CLEAR_USER} from './constants'
+import {UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT,CLEAR_USER} from './constants'
 
 const initialState = {
     id:0,
@@ -27,9 +27,12 @@ export default function userReducer(state = initialState,action){
         case UPDATE_WORK:
             const {work} = action.payload;
             return {...state,work};
-        case UPDATE_SKILL_AND_LANG:
-            const {skills,languages} = action.payload
-            return {...state,skills,languages}
+        case UPDATE_SKILL:
+            const {skills} = action.payload
+            return {...state,skills};
+        case UPDATE_LANG:
+            const {languages} = action.payload
+            return {...state,languages};    
         case UPDATE_PROJECT:
             const {projects} = action.payload;
             return {...state,projects};
