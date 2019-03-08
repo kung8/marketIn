@@ -4,8 +4,15 @@ module.exports={
     getProfile: async (req,res) => {
         // console.log('running getProfile!')
         const db = req.app.get('db');
-        
-        res.status(200).send('this is working!');
+        const {id} = req.session.user;
+        console.log(id)
+        const edProfile = await db.get_education({user_id:id});
+        const workProfile = await db.get_work({user_id:id});
+        const skillsProfile = await db.get_skills({user_id:id});
+        const langProfile = await db.get_languages({user_id:id});
+        const projProfile = await db.get_projects({user_id:id});
+        console.log(edProfile,workProfile,skillsProfile,langProfile,projProfile)
+        res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile});
     },
 
     register: async (req,res) => {
@@ -84,11 +91,11 @@ module.exports={
         const {education,work,skills,languages,projects} = req.body;
         // console.log(education,work,skills,languages,projects)
         //need to figure out where I would pass the user_id to all of the queries...
-       const edProfile = [];
-       const workProfile = [];
-       const skillsProfile = [];
-       const langProfile = [];
-       const projProfile = [];
+       let edProfile = [];
+       let workProfile = [];
+       let skillsProfile = [];
+       let langProfile = [];
+       let projProfile = [];
 
         //loop through the array one at a time and send that to the db to insert into the table. 
         for(let i=0;i<education.length;i++){
@@ -125,6 +132,12 @@ module.exports={
             let res = await db.create_projects({project,user_id:id});
             projProfile.push(res)
         } 
+
+        edProfile=edProfile.pop();
+        workProfile=workProfile.pop();
+        skillsProfile=skillsProfile.pop();
+        langProfile=langProfile.pop();
+        projProfile=projProfile.pop();
 
         console.log(11111,edProfile,22222,workProfile,33333,skillsProfile,4444,langProfile,55555,projProfile)
 

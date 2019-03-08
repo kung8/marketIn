@@ -47,8 +47,9 @@ class StepFive extends Component {
        }
 
     async completeProfile(){
-        const {projects} = this.state;
-        const {skills,languages,work,education} = this.props
+        const {projects,project} = this.state;
+        projects.push({project});
+        const {skills,languages,work,education} = this.props;
         console.log(education,languages,work,skills)
         let profile = await axios.post('/auth/createProfile',{education,work,skills,languages,projects})
         
@@ -84,7 +85,7 @@ class StepFive extends Component {
 }
 
 function mapStateToProps(reduxState){
-   console.log(reduxState.education)
+//    console.log(reduxState.education)
     return {
         education:reduxState.education,
         skills:reduxState.skills,

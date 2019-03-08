@@ -5,7 +5,6 @@ const initialState = {
     firstName:'',
     lastName:'',
     email:'',
-    password:'',
     imageUrl:'',
     education:[],
     work: [],
@@ -21,9 +20,6 @@ export default function userReducer(state = initialState,action){
         case UPDATE_USER:
             const {first_name:firstName,last_name:lastName,email,image_url:imageUrl,id} = action.payload;
             return {...state,firstName,lastName,email,imageUrl,id};
-        // case UPDATE_PROFILE:
-        //     const {firstName,lastName,email,password,imageUrl} = action.payload;
-        //     return {...state,firstName,lastName,email,password,imageUrl};
         case UPDATE_EDUCATION:
             const {education} = action.payload
             // console.log(4444,schName)

@@ -33,7 +33,7 @@ app.use(session({
 }))
 
 //userController ENDPOINTS
-app.get('/auth/user',userCtrl.getProfile);
+app.get('/auth/getProfile',userCtrl.getProfile);
 app.post('/auth/register',userCtrl.register);
 app.post('/auth/login',userCtrl.login);
 app.get('/auth/current',userCtrl.getUser);
