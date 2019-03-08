@@ -146,11 +146,25 @@ module.exports={
     },
 
     editProfile: async (req,res) => {
-        console.log('way to go, editing is happening soon!')
+        // console.log('way to go, editing is happening soon!');
+        const db = req.app.get('db');
+        /*need to create the edit db file
+
+        
+            Update values in rows:
+            UPDATE table_name
+            SET column_name = value      //new value
+            WHERE column_name = value    //old value
+        */
+        res.status(200).send('edited')
     },
 
     deleteProfile: (req,res) => {
-        console.log('way to go, deleting is happening soon!')
+        // console.log('way to go, deleting is happening soon!');
+        const db = req.app.get('db');
+
+        //need to create the delete db file
+        res.status(200).send('deleted')
     }
 
 }
