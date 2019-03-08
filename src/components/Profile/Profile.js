@@ -56,14 +56,14 @@ class Profile extends Component {
 
     async editProfile(){
         //need to figure out how people will make the actual edits because they need to be able to select the entire values that were mapped over
-        let editedProfile = await axios.put('/auth/editProfile',{})
+        let editedProfile = await axios.put('/profile/edit',{})
 
 
     }
 
     async deleteProfile(){
         //need to figure out how people will delete the entire/maybe specific values mapped over
-        let removedProfile = axios.delete('/auth/deleteProfile',{})
+        let removedProfile = axios.delete('/profile/delete',{})
     }
 
 

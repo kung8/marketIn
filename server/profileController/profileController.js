@@ -1,4 +1,4 @@
-module.export = {
+module.exports = {
     getProfile: async (req,res) => {
         // console.log('running getProfile!')
         const db = req.app.get('db');
