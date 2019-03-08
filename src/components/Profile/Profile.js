@@ -69,6 +69,8 @@ class Profile extends Component {
                     <h1>{sch.grad_date}</h1>
                     <h1>{sch.sch_loc}</h1>
                     <h1>{sch.sch_logo}</h1>
+                    <button>Edit</button>
+                    <button>Delete</button>
                 </div>
             )
         })
@@ -83,6 +85,8 @@ class Profile extends Component {
                     <h1>{job.position}</h1>
                     <h1>{job.hire_date}</h1>
                     <h1>{job.end_date}</h1>
+                    <button>Edit</button>
+                    <button>Delete</button>
                 </div>
             )
         })
@@ -92,6 +96,8 @@ class Profile extends Component {
             return (
                 <div>
                     <h1>{skill.skill}</h1>
+                    <button>Edit</button>
+                    <button>Delete</button>
                 </div>
             )
         })
@@ -101,6 +107,8 @@ class Profile extends Component {
             return (
                 <div>
                     <h1>{lang.language}</h1>
+                    <button>Edit</button>
+                    <button>Delete</button>
                 </div>
             )
         })
@@ -110,6 +118,8 @@ class Profile extends Component {
             return (
                 <div>
                     <h1>{proj.project}</h1>
+                    <button>Edit</button>
+                    <button>Delete</button>
                 </div>
             )
         })
