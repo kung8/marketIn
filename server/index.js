@@ -2,7 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
-const userCtrl = require('./userController')
+const userCtrl = require('./userController/userController')
+const profileCtrl = require('./profileController/profileController');
+
 const {CONNECTION_STRING,SESSION_SECRET,SERVER_PORT} = process.env;
 const pg = require('pg');
 const pgSession = require('connect-pg-simple')(session);
@@ -33,14 +35,16 @@ app.use(session({
 }))
 
 //userController ENDPOINTS
-app.get('/profile/get',userCtrl.getProfile);
 app.post('/auth/register',userCtrl.register);
 app.post('/auth/login',userCtrl.login);
 app.get('/auth/current',userCtrl.getUser);
 app.post('/auth/logout',userCtrl.logout);
-app.post('/profile/create',userCtrl.createProfile);
-app.put('/profile/edit',userCtrl.editProfile);
-app.delete('/profile/delete',userCtrl.deleteProfile);
+
+//profileController ENDPOINTS
+app.get('/profile/get',profileCtrl.getProfile);
+app.post('/profile/create',profileCtrl.createProfile);
+app.put('/profile/edit',profileCtrl.editProfile);
+app.delete('/profile/delete',profileCtrl.deleteProfile);
 
 
 
