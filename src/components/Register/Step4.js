@@ -14,11 +14,18 @@ class StepFour extends Component {
     }
 
     componentDidMount(){
-        // console.log(444,this.props.firstName);
-        const {skills,languages} = this.props;
-        this.props.updateSkillAndLang(skills,languages)
-
-        // console.log(6666,skills,languages)
+        // if(this.props.skills[0]){
+        //     let lastIndex = this.props.skills.length - 1;
+        //     this.setState({
+        //         skill:this.props.skills[lastIndex].skill
+        //     })
+        // };
+        // if(this.props.languages[0]){
+        //     let lastIndex = this.props.languages.length - 1;
+        //     this.setState({
+        //         language:this.props.languages[lastIndex].language
+        //     })
+        // }
        
     }
 
@@ -28,8 +35,6 @@ class StepFour extends Component {
         })
         // console.log(111,prop,value)
     }
-
-    
 
     handleAddSkill (){
         const {skills,skill} = this.state;
@@ -48,36 +53,33 @@ class StepFour extends Component {
     }
 
     handlePrevious(){
-        const {skills,languages} = this.state;
-        this.props.updateSkillAndLang(skills,languages);
-        this.props.history.push('/register/step3')   
+        const {skills,skill,languages,language} = this.state;
+        if(skill !== '' || language !==''){
+            skills.push({skill});
+            languages.push({language});
+            this.props.updateSkillAndLang(skills,languages);
+            this.props.history.push('/register/step3')   
+        } else {
+            this.props.history.push('/register/step3')
+        }
     }
 
     handleNext(){
-        const {skills,languages} = this.state;
+        const {skills,skill,languages,language} = this.state;
+        if(skill !== '' || language !== ''){
+        skills.push({skill});
+        languages.push({language});
         this.props.updateSkillAndLang(skills,languages);
-
-        this.props.history.push('/register/step5')   
+        this.props.history.push('/register/step5'); 
+        } else {
+            this.props.history.push('/register/step5')
+        }  
     }
 
     render (){
         console.log(4444,this.props)
-        // console.log(12,this.state.skills,this.state.languages)
         const {skill,skills,language,languages} = this.state
-        let mappedSkills = skills.map(skill=>{
-            // console.log(skill)
-            return (
-                <div key={skill.id}> {skill['skill']} </div>
-            )
-        });
-
-        let mappedLang = languages.map(lang=>{
-            // console.log(lang)
-            return (
-                <div key={lang.id}> {lang['language']} </div>
-            )
-        })
-        console.log(mappedSkills)
+        
         return (
             <div>
                 <h1>Skills</h1>
@@ -89,8 +91,6 @@ class StepFour extends Component {
                     />
                 <button onClick={()=>this.handleAddSkill(skill)}>Add Another Skill</button>
 
-                <div>{mappedSkills}</div>
-
                 <h1>Languages</h1>
                 <h3>Language</h3>
                 <input 
@@ -100,7 +100,7 @@ class StepFour extends Component {
                     />
 
                 <button onClick={()=>this.handleAddLanguage(language)}>Add Another Language</button>
-                {mappedLang}
+                {/* {mappedLang} */}
                 <br/>
                 <br/>
                 <button onClick={()=>{this.handlePrevious(skill,language)}}>Go back to Work Experience Info</button>
@@ -114,14 +114,14 @@ class StepFour extends Component {
 //get the full array in the reduxState
 
 function mapStateToProps (reduxState){
-    // const {skill,language} = reduxState
-    // console.log(5555,reduxState.skills,reduxState.languages)
-    const {skills,languages,work,education} = reduxState;
+
+    const {skills,languages,work,education,projects} = reduxState;
     return{
         skills,
         languages,
         work,
-        education
+        education,
+        projects
     } 
 }
 

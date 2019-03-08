@@ -17,8 +17,17 @@ class StepThree extends Component {
     }
 
     componentDidMount () {
-        const {work} = this.props;
-        this.props.updateWork(work)
+    //     if(this.props.work[0]){
+    //         let lastIndex = this.props.work.length - 1;
+    //         this.setState({
+    //             empName:this.props.work[lastIndex].empName,
+    //             position:this.props.work[lastIndex].position,
+    //             empLoc:this.props.work[lastIndex].empLoc,
+    //             hireDate:this.props.work[lastIndex].hireDate,
+    //             endDate:this.props.work[lastIndex].endDate,
+    //             empLogo:this.props.work[lastIndex].empLogo
+    //         })
+    //     }
     }
 
     handleInput(prop,value){
@@ -44,18 +53,25 @@ class StepThree extends Component {
 
     handlePrevious=()=>{
         const {work,empName,position,empLoc,hireDate,endDate,empLogo} = this.state;
-        work.push({empName,position,empLoc,hireDate,endDate,empLogo});
-        this.props.updateWork(work);
-        // this.handleAddWork(empName,position,empLoc,hireDate,endDate,empLogo);
-        this.props.history.push('/register/step2')   
+        if(empName!=="" || position!=="" || empLoc !=="" || hireDate !=="" || endDate !=="" || empLogo !==""){
+            work.push({empName,position,empLoc,hireDate,endDate,empLogo});
+            this.props.updateWork(work);
+            this.props.history.push('/register/step2') 
+        } else {
+            this.props.history.push('/register/step2')   
+        }
+        
     }
     
     handleNext=()=>{
         const {work,empName,position,empLoc,hireDate,endDate,empLogo} = this.state;
-        work.push({empName,position,empLoc,hireDate,endDate,empLogo});
-        this.props.updateWork(work);
-        // this.handleAddWork(empName,position,empLoc,hireDate,endDate,empLogo);
-        this.props.history.push('/register/step4')   
+        if(empName!=="" || position!=="" || empLoc !=="" || hireDate !=="" || endDate !=="" || empLogo !==""){
+            work.push({empName,position,empLoc,hireDate,endDate,empLogo});
+            this.props.updateWork(work);
+            this.props.history.push('/register/step4')  
+        } else {
+            this.props.history.push('/register/step4')   
+        } 
     }
 
     render (){

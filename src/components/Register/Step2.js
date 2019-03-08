@@ -16,9 +16,17 @@ class StepTwo extends Component {
         }
     }
     componentDidMount(){
-        // console.log(this.props.firstName)
-        const {education} = this.props;
-        this.props.updateEducation(education)
+        // if(this.props.education[0]){
+        //     let lastIndex = this.props.education.length - 1;
+        //     this.setState({
+        //         schName: this.props.education[lastIndex].schName,
+        //         major: this.props.education[lastIndex].major,
+        //         edLevel: this.props.education[lastIndex].edLevel,
+        //         schLoc: this.props.education[lastIndex].schLoc,
+        //         gradDate: this.props.education[lastIndex].gradDate,
+        //         schLogo: this.props.education[lastIndex].schLogo
+        //     })
+        // }
     }
 
     handleInput(prop,value){
@@ -31,7 +39,7 @@ class StepTwo extends Component {
     handleAddEducation(){
         const {education,schName,major,edLevel,schLoc,gradDate,schLogo} = this.state;
         education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
-        this.props.updateEducation(education);
+        // this.props.updateEducation(education);
         this.setState({
             schName:'',
             major:'',
@@ -45,7 +53,7 @@ class StepTwo extends Component {
     handlePrevious(){
         const {education,schName,major,edLevel,schLoc,gradDate,schLogo} = this.state;
         // if(schName!=="" && major!=="" && schLoc !=="" && gradDate !=="" && schLogo !==""){
-            // education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
+            education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
             this.props.updateEducation(education);
         // }
         // console.log(222,schName,this.props)
@@ -54,13 +62,13 @@ class StepTwo extends Component {
 
     handleNext(){
         const {education,schName,major,edLevel,schLoc,gradDate,schLogo} = this.state;
-        // if(schName!=="" && major!=="" && schLoc !=="" && gradDate !=="" && schLogo !==""){
+        if(schName!=="" || major!=="" || schLoc !=="" || gradDate !=="" || schLogo !==""){
             education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
             this.props.updateEducation(education);
             this.props.history.push('/register/step3')   
-        // } else {
-        //     this.props.history.push('/register/step3')   
-        // }
+        } else {
+            this.props.history.push('/register/step3')   
+        }
         
         // console.log(222,schName,this.props)
         
@@ -69,6 +77,7 @@ class StepTwo extends Component {
 
     render (){
         console.log(2222,this.props)
+        console.log(99999,this.state.schName)
         const {schName,major,edLevel,schLoc,gradDate,schLogo} = this.state
         return (
             <div>
@@ -76,7 +85,7 @@ class StepTwo extends Component {
                 <h3>School</h3>
                 <input 
                     value={schName} 
-                    placeholder="School Name" 
+                    placeholder='School Name'
                     onChange={(e)=>{this.handleInput('schName',e.target.value)}}
                     />
 
@@ -127,10 +136,11 @@ class StepTwo extends Component {
 }
 
 function mapStateToProps (reduxState){
-    const {education,work} = reduxState
+    const {education,work,id} = reduxState
     return {
         education,
-        work
+        work,
+        id
     }
 }
 

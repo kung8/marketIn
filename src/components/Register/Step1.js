@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {updateProfile} from '../../ducks/userActions';
+import {updateUser} from '../../ducks/userActions';
 import axios from 'axios';
 
 class StepOne extends Component {
@@ -17,7 +17,7 @@ class StepOne extends Component {
     
     componentDidMount(){
         const {firstName,lastName,email,password,imageUrl} = this.props;
-        this.props.updateProfile(firstName,lastName,email,password,imageUrl);
+        this.props.updateUser(firstName,lastName,email,password,imageUrl);
     }
 
     handleInput(prop,value){
@@ -31,8 +31,8 @@ class StepOne extends Component {
         const {firstName,lastName,email,password,imageUrl} = this.state;
         try {
             let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})
-            // console.log(user.data);
-            // this.props.updateProfile(user.data);
+            console.log(user.data);
+            this.props.updateUser(user.data);
             this.props.history.push('/register/step2')   
         } catch (err) {
             alert('Sorry this email already exists!')
@@ -65,6 +65,7 @@ class StepOne extends Component {
                     />
                 <input 
                     value={password} 
+                    type="password"
                     placeholder="Password" 
                     onChange={(e)=>this.handleInput('password',e.target.value)}
                     />
@@ -91,4 +92,4 @@ function mapStateToProps(reduxState){
     }
 }
 
-export default connect(mapStateToProps,{updateProfile})(StepOne)
+export default connect(mapStateToProps,{updateUser})(StepOne)

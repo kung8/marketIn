@@ -34,6 +34,7 @@ class Auth extends Component {
     }
 
     render (){
+        console.log(this.props)
         return (
             <div>
                 <input type="text" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>
@@ -45,6 +46,10 @@ class Auth extends Component {
     }
 }
 
+function mapStateToProps(reduxState){
+    return{
+        reduxState
+    }
+}
 
-
-export default connect('',{updateUser})(Auth)
+export default connect(mapStateToProps,{updateUser})(Auth)

@@ -1,29 +1,18 @@
-import {UPDATE_USER,UPDATE_PROFILE,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL_AND_LANG,UPDATE_PROJECT, CLEAR_USER} from './constants'
+import {UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL_AND_LANG,UPDATE_PROJECT, CLEAR_USER} from './constants'
 
-export function updateUser ({first_name,last_name,email,image_url}){
+export function updateUser ({first_name,last_name,email,image_url,id}){
     return {
         type:UPDATE_USER,
         payload:{
             first_name,
             last_name,
             email,
-            image_url
+            image_url,
+            id
         }
     }
 }
 
-export function updateProfile (firstName,lastName,email,password,imageUrl){
-    return {
-        type:UPDATE_PROFILE,
-        payload:{
-            firstName,
-            lastName,
-            email,
-            password,
-            imageUrl
-        }
-    }
-}
 
 export function updateEducation (education){
     return {

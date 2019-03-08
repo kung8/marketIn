@@ -6,6 +6,7 @@ import {clearUser} from '../../ducks/userActions';
 class Profile extends Component {
     async logout(){
         await axios.post('/auth/logout');
+        this.props.clearUser();
         this.props.history.push('/');  
     }
     

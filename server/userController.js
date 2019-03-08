@@ -63,33 +63,72 @@ module.exports={
     getUser: async (req,res) =>{
         // console.log('still there');
         const db = req.app.get('db');
-
-        res.status(200).send('Session Connected!')
+        if(req.session.user){
+            res.status(200).send(req.session.user);
+        } else {
+            res.sendStatus(401);
+        }
     },
 
     logout: (req,res)=>{
         // console.log('logged out connected');
-        req.session.destroy();
-        res.status(200).send('Logged Out Connected!')
+        req.session.destroy(function(){
+            res.status(200).send('Logged Out Connected!')
+        });
     },
 
     createProfile: async (req,res)=>{
-        // console.log('this worked!');
+        console.log('this hit');
         const db = req.app.get('db');
+        const {id} = req.session.user;
+        const {education,work,skills,languages,projects} = req.body;
+        // console.log(education,work,skills,languages,projects)
         //need to figure out where I would pass the user_id to all of the queries...
-        const {schName:sch_Name,major,edLevel:ed_Level,schLoc:sch_Loc,gradDate:grad_Date,schLogo:sch_Logo} = req.body.education;
-        const {empName:emp_Name,position,empLoc:emp_Loc,hireDate:hire_Date,endDate:end_Date,empLogo:emp_Logo} = req.body.work;
-        const {skill} = req.body.skills;
-        const {language} = req.body.languages;
-        const {project} = req.body.projects;
+       const edProfile = [];
+       const workProfile = [];
+       const skillsProfile = [];
+       const langProfile = [];
+       const projProfile = [];
 
-        // let profile = await db.create_profile({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,skill,language,project})
-        let education = await db.create_education({sch_Name,major,ed_Level,sch_Loc,grad_Date,sch_Logo,user_id})
-        let work = await db.create_work({emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,user_id})
-        let skills = await db.create_skills({skill,user_id})
-        let languages = await db.create_languages({language,user_id})
-        let projects = await db.create_projects({project,user_id})
+        //loop through the array one at a time and send that to the db to insert into the table. 
+        for(let i=0;i<education.length;i++){
+            // console.log('sch_name')
+            const {schName:sch_name,major,edLevel:ed_level,schLoc:sch_loc,gradDate:grad_date,schLogo:sch_logo} = education[i];
+            let res = await db.create_education({sch_name,major,ed_level,sch_loc,grad_date,sch_logo,user_id:id})
+            edProfile.push(res);
+        };
         
-        res.status(200).send('hello')
+        for(let i=0;i<work.length;i++){
+            // console.log('emp_name')
+            const {empName:emp_Name,position,empLoc:emp_Loc,hireDate:hire_Date,endDate:end_Date,empLogo:emp_Logo} = work[i];
+            let res = await db.create_work({emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,user_id:id});
+            workProfile.push(res);
+        };
+        
+        for(let i=0;i<skills.length;i++){
+            // console.log('skill')
+            const {skill} = skills[i];
+            let res = await db.create_skills({skill,user_id:id});
+            skillsProfile.push(res);
+        };
+        
+        for(let i=0;i<languages.length;i++){
+            // console.log('language')
+            const {language} = languages[i];
+            let res = await db.create_languages({language,user_id:id});
+            langProfile.push(res);
+        } 
+
+        for(let i=0;i<projects.length;i++){
+            // console.log('project')
+            const {project} = projects[i];
+            let res = await db.create_projects({project,user_id:id});
+            projProfile.push(res)
+        } 
+
+        console.log(11111,edProfile,22222,workProfile,33333,skillsProfile,4444,langProfile,55555,projProfile)
+
+        
+        res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile})
     }
 }
