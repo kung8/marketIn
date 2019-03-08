@@ -51,7 +51,7 @@ class StepFive extends Component {
         projects.push({project});
         const {skills,languages,work,education} = this.props;
         console.log(education,languages,work,skills)
-        let profile = await axios.post('/auth/createProfile',{education,work,skills,languages,projects})
+        let profile = await axios.post('/profile/create',{education,work,skills,languages,projects})
         
         console.log(88888,profile);
         this.props.updateProject(profile.data);

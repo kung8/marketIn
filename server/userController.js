@@ -143,5 +143,14 @@ module.exports={
 
         
         res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile})
+    },
+
+    editProfile: async (req,res) => {
+        console.log('way to go, editing is happening soon!')
+    },
+
+    deleteProfile: (req,res) => {
+        console.log('way to go, deleting is happening soon!')
     }
+
 }

@@ -33,12 +33,14 @@ app.use(session({
 }))
 
 //userController ENDPOINTS
-app.get('/auth/getProfile',userCtrl.getProfile);
+app.get('/profile/get',userCtrl.getProfile);
 app.post('/auth/register',userCtrl.register);
 app.post('/auth/login',userCtrl.login);
 app.get('/auth/current',userCtrl.getUser);
 app.post('/auth/logout',userCtrl.logout);
-app.post('/auth/createProfile',userCtrl.createProfile)
+app.post('/profile/create',userCtrl.createProfile);
+app.put('/profile/edit',userCtrl.editProfile);
+app.delete('/profile/delete',userCtrl.deleteProfile);
 
 
 

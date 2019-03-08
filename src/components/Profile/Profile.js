@@ -38,7 +38,7 @@ class Profile extends Component {
     async getProfile(){
         if(!this.props.id){
             console.log('entered into!')
-            let profile = await axios.get('/auth/getProfile')
+            let profile = await axios.get('/profile/get')
             const {edProfile,workProfile,skillsProfile,langProfile,projProfile} = profile.data;
             this.props.updateEducation(edProfile);
             this.props.updateWork(workProfile);
@@ -53,6 +53,20 @@ class Profile extends Component {
         this.props.history.push('/');  
     }
     
+
+    async editProfile(){
+        //need to figure out how people will make the actual edits because they need to be able to select the entire values that were mapped over
+        let editedProfile = await axios.put('/auth/editProfile',{})
+
+
+    }
+
+    async deleteProfile(){
+        //need to figure out how people will delete the entire/maybe specific values mapped over
+        let removedProfile = axios.delete('/auth/deleteProfile',{})
+    }
+
+
     render(){
         console.log(8989,this.props)
         
@@ -124,6 +138,7 @@ class Profile extends Component {
             )
         })
 
+
         return (
             <div>
                 <button onClick={()=>this.logout()}>Logout</button>
@@ -142,8 +157,6 @@ class Profile extends Component {
         )
     }
 }
-
-
 
 function mapStateToProps (reduxState){
     return {
