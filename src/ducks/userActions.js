@@ -37,8 +37,7 @@ export function updateSkill (skills) {
         type:UPDATE_SKILL,
         payload:{
             skills
-        }
-        
+        }   
     }
 }
 
@@ -47,8 +46,7 @@ export function updateLang (languages) {
         type:UPDATE_LANG,
         payload:{
             languages
-        }
-        
+        }    
     }
 }
 

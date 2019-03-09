@@ -23,7 +23,7 @@ export default function userReducer(state = initialState,action){
         case UPDATE_EDUCATION:
             const {education} = action.payload
             // console.log(4444,schName)
-            return {...state,education};
+            return {...state,...education};
         case UPDATE_WORK:
             const {work} = action.payload;
             return {...state,work};

@@ -44,6 +44,11 @@ app.post('/auth/logout',userCtrl.logout);
 app.get('/profile/get',profileCtrl.getProfile);
 
 app.post('/profile/create',profileCtrl.createProfile); //this is only for registration because they can do multiple
+app.post('/profile/create/education',profileCtrl.addEdProfile); //this is to add ed section to profile
+// app.post('/profile/create/work',profileCtrl.addWorkProfile); //this is to add ed section to profile
+// app.post('/profile/create/skill',profileCtrl.addSkillsProfile); //this is to add ed section to profile
+// app.post('/profile/create/language',profileCtrl.addLangProfile); //this is to add ed section to profile
+// app.post('/profile/create/project',profileCtrl.addProjProfile); //this is to add ed section to profile
 
 app.put('/profile/edit',profileCtrl.editProfile);
 
@@ -53,6 +58,8 @@ app.delete('/profile/delete/work/:id',profileCtrl.deleteWorkProfile);
 app.delete('/profile/delete/skill/:id',profileCtrl.deleteSkillsProfile);
 app.delete('/profile/delete/language/:id',profileCtrl.deleteLangProfile);
 app.delete('/profile/delete/project/:id',profileCtrl.deleteProjProfile);
+
+
 
 
 

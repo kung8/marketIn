@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {clearUser,updateUser,updateEducation,updateWork,updateSkill,updateLang,updateProject} from '../../ducks/userActions';
-import { join } from 'path';
 
 class Profile extends Component {
     constructor(props){
@@ -17,7 +16,20 @@ class Profile extends Component {
             work: this.props.work,
             skills: this.props.skills,
             languages: this.props.languages,
-            projects: this.props.projects
+            projects: this.props.projects,
+            addIsClicked: false,
+            inputBox1:'',
+            inputBox2:'',
+            inputBox3:'',
+            inputBox4:'',
+            inputBox5:'',
+            inputBox6:'',
+            schName:'',
+            major:'',
+            edLevel:'',
+            schLoc:'',
+            gradDate:'',
+            schLogo:''
         }
     }
 
@@ -116,7 +128,50 @@ class Profile extends Component {
 
     }
 
-   
+    handleInput(prop,value){
+        this.setState({
+            [prop]:value
+        })
+        console.log(prop,value)
+    }
+
+    editAddIsClickedState (){
+        this.setState({
+            addIsClicked:true,
+            inputBox1:<input onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
+            inputBox2:<input onChange={(e)=>{this.handleInput('major',e.target.value)}}/>,
+            inputBox3:<input onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
+            inputBox4:<input onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
+            inputBox5:<input onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
+            inputBox6:<input onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>
+        })
+       
+    }
+
+   addToEd(){
+       // console.log('input')
+        const {schName,major,edLevel,schLoc,gradDate,schLogo,education} = this.state
+        education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
+        console.log(33333,education)
+        this.props.updateEducation(education);
+        axios.post('/profile/create/education',{schName,major,edLevel,schLoc,gradDate,schLogo}).then(
+            console.log('connected to back')
+        )
+        this.setState({
+            addIsClicked:false,
+            education:this.props.education,
+            inputBox1:'',
+            inputBox2:'',
+            inputBox3:'',
+            inputBox4:'',
+            inputBox5:'',
+            inputBox6:''
+        })  
+        console.log(2222,this.props.education,this.state.education)     
+   }
+
+
+
 
     render(){
         console.log(8989,this.props)
@@ -204,7 +259,14 @@ class Profile extends Component {
                 
                 <h1>SCHOOL</h1>
                 <p>{edProfile}</p>
-                <button>Add School</button>
+                {this.state.inputBox1}
+                {this.state.inputBox2}
+                {this.state.inputBox3}
+                {this.state.inputBox4}
+                {this.state.inputBox5}
+                {this.state.inputBox6}
+                {this.state.addIsClicked?(<button onClick={()=>this.addToEd()}>Save</button>):
+                <button onClick={()=>this.editAddIsClickedState()}>Add School</button>}
                 
                 <h1>WORK</h1>
                 <p>{workProfile}</p>

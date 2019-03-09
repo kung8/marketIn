@@ -9,7 +9,7 @@ module.exports = {
         const skillsProfile = await db.profiles.getProfiles.get_skills({user_id:id});
         const langProfile = await db.profiles.getProfiles.get_languages({user_id:id});
         const projProfile = await db.profiles.getProfiles.get_projects({user_id:id});
-        console.log(edProfile,workProfile,skillsProfile,langProfile,projProfile)
+        // console.log(edProfile,workProfile,skillsProfile,langProfile,projProfile)
         res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile});
     },
 
@@ -139,7 +139,14 @@ module.exports = {
         const projProfile = await db.profiles.deleteProfiles.delete_project({id, user_id}) 
         //need to create the delete db file
         res.status(202).send(projProfile)
+    },
+
+    addEdProfile: async (req,res) => {
+        const db=req.app.get('db');
+        
+        console.log("connected!")
     }
+
 
 
 } 
