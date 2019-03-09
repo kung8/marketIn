@@ -148,26 +148,30 @@ class Profile extends Component {
        
     }
 
-   addToEd(){
-       // console.log('input')
+   addToEd= async()=>{
         const {schName,major,edLevel,schLoc,gradDate,schLogo,education} = this.state
         education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
         console.log(33333,education)
-        this.props.updateEducation(education);
-        axios.post('/profile/create/education',{schName,major,edLevel,schLoc,gradDate,schLogo}).then(
-            console.log('connected to back')
-        )
-        this.setState({
-            addIsClicked:false,
-            education:this.props.education,
-            inputBox1:'',
-            inputBox2:'',
-            inputBox3:'',
-            inputBox4:'',
-            inputBox5:'',
-            inputBox6:''
-        })  
-        console.log(2222,this.props.education,this.state.education)     
+        // this.props.updateEducation(education);
+        
+            let edProfile = await axios.post('/profile/create/education',{schName,major,edLevel,schLoc,gradDate,schLogo})
+                // edProfile = this.state.education.push(edProfile.data[0])    
+                // console.log(5555,edProfile)
+            this.props.updateEducation(edProfile.data)
+            // console.log({before:this.state.education})
+            this.setState({
+                addIsClicked:false,
+                education:this.props.education,
+                inputBox1:'',
+                inputBox2:'',
+                inputBox3:'',
+                inputBox4:'',
+                inputBox5:'',
+                inputBox6:''
+            })  
+            // console.log({after:this.state.education})
+
+        // console.log(2222,this.props.education,this.state.education)     
    }
 
 
@@ -178,7 +182,7 @@ class Profile extends Component {
         
         const {education,work,skills,languages,projects} = this.props;
         // console.log(22222,education,work,skills,languages,projects)
-        
+        console.log(444,education)
         const edProfile = education.map(sch => {
             // console.log(3333,sch)
             return (

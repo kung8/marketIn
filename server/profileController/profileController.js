@@ -143,8 +143,15 @@ module.exports = {
 
     addEdProfile: async (req,res) => {
         const db=req.app.get('db');
-        
-        console.log("connected!")
+        // console.log(req.body)
+        const {id} = req.session.user
+        // console.log({id})
+        const {schName:sch_name,major,edLevel:ed_level,schLoc:sch_loc,gradDate:grad_date,schLogo:sch_logo} = req.body;
+        // console.log(sch_name,major,ed_level,sch_loc,grad_date,sch_logo)
+        const edProfile = await db.profiles.createProfiles.create_education({sch_name,major,ed_level,sch_loc,grad_date,sch_logo,user_id:id})
+        // console.log("connected!")
+        // console.log(8888,edProfile)
+        res.status(200).send(edProfile)
     }
 
 
