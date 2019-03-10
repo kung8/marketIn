@@ -48,11 +48,11 @@ app.get('/profile/get/languages',profileCtrl.getLangProfile);
 app.get('/profile/get/projects',profileCtrl.getProjProfile);
 
 app.post('/profile/create',profileCtrl.createProfile); //this is only for registration because they can do multiple
-app.post('/profile/create/education',profileCtrl.addEdProfile); //this is to add ed section to profile
-// app.post('/profile/create/work',profileCtrl.addWorkProfile); //this is to add ed section to profile
-// app.post('/profile/create/skill',profileCtrl.addSkillsProfile); //this is to add ed section to profile
-// app.post('/profile/create/language',profileCtrl.addLangProfile); //this is to add ed section to profile
-// app.post('/profile/create/project',profileCtrl.addProjProfile); //this is to add ed section to profile
+app.post('/profile/create/education',profileCtrl.addEdProfile); //this is to add a ed section to profile
+app.post('/profile/create/work',profileCtrl.addWorkProfile); //this is to add a work section to profile
+app.post('/profile/create/skill',profileCtrl.addSkillsProfile); //this is to add a skill section to profile
+app.post('/profile/create/language',profileCtrl.addLangProfile); //this is to add a language section to profile
+app.post('/profile/create/project',profileCtrl.addProjProfile); //this is to add a project section to profile
 
 app.put('/profile/edit',profileCtrl.editProfile);
 

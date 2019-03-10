@@ -45,7 +45,7 @@ handleInput(prop,value){
         })
     }
 
-editEdAddIsClicked (){
+editAddIsClicked (){
     this.setState({
         addIsClicked:true,
         inputBox1:<input onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
@@ -125,7 +125,7 @@ async deleteEdProfile(sch){
                 {this.state.inputBox5}
                 {this.state.inputBox6}
                 {this.state.addIsClicked?(<button onClick={()=>this.addToEd()}>Save</button>):
-                (<button onClick={()=>this.editEdAddIsClicked()}>Add School</button>)}
+                (<button onClick={()=>this.editAddIsClicked()}>Add School</button>)}
             </div>
         )
     }

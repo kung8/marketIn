@@ -9,12 +9,8 @@ class Languages extends Component {
         this.state={
             addIsClicked: false,
             inputBox1:'',
-            inputBox2:'',
-            inputBox3:'',
-            inputBox4:'',
-            inputBox5:'',
-            inputBox6:'',
-            languages:this.props.languages
+            languages:this.props.languages,
+            language:''
         }
     }
 
@@ -31,6 +27,38 @@ class Languages extends Component {
             this.props.updateLang(langProfile);
             this.setState({
                 languages:this.props.languages
+            })
+        }
+    }
+
+    handleInput(prop,value){
+        this.setState({
+            [prop]:value
+        })
+    }
+
+    editAddIsClicked(){
+        this.setState({
+            addIsClicked:true,
+            inputBox1:<input onChange={(e)=>{this.handleInput('language',e.target.value)}}/>,
+        })
+    }
+
+    addToLang=async()=>{
+        const {language,languages} = this.state;
+        if(language !== ''){
+            languages.push({language});
+            let langProfile = await axios.post('/profile/create/language',{language})
+            this.props.updateLang(langProfile.data);
+            this.setState({
+                addIsClicked:false,
+                languages:this.props.languages,
+                inputBox1:''
+            })
+        } else {
+            this.setState({
+                addIsClicked:false,
+                inputBox1:''
             })
         }
     }
@@ -61,6 +89,8 @@ class Languages extends Component {
             <div>
                 <h1>Languages</h1>
                 <p>{langProfile}</p>
+                {this.state.inputBox1}
+                {this.state.addIsClicked?(<button onClick={()=>this.addToLang()}>Save</button>):(<button onClick={()=>this.editAddIsClicked()}>Add Language</button>)}
             </div>
         )
     }

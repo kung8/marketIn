@@ -48,20 +48,20 @@ class Work extends Component {
     editAddIsClicked (){
         this.setState({
             addIsClicked:true,
-            inputBox1:<input onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
-            inputBox2:<input onChange={(e)=>{this.handleInput('major',e.target.value)}}/>,
-            inputBox3:<input onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
-            inputBox4:<input onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
-            inputBox5:<input onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
-            inputBox6:<input onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>
+            inputBox1:<input onChange={(e)=>{this.handleInput('empName',e.target.value)}}/>,
+            inputBox2:<input onChange={(e)=>{this.handleInput('position',e.target.value)}}/>,
+            inputBox3:<input onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>,
+            inputBox4:<input onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}/>,
+            inputBox5:<input onChange={(e)=>{this.handleInput('endDate',e.target.value)}}/>,
+            inputBox6:<input onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>
         })
     }
 
-    addToEd= async()=>{
+    addToWork= async()=>{
         const {empName,position,empLoc,hireDate,endDate,empLogo,work} = this.state;
         if(empName !=='' || position !== '' || empLoc !== '' || hireDate !== '' || endDate !== '' || empLogo !== ''){
             work.push({empName,position,empLoc,hireDate,endDate,empLogo});        
-                let workProfile = await axios.post('/profile/create/education',{empName,position,empLoc,hireDate,endDate,empLogo});
+                let workProfile = await axios.post('/profile/create/work',{empName,position,empLoc,hireDate,endDate,empLogo});
                 this.props.updateWork(workProfile.data);
                 this.setState({
                     addIsClicked:false,
@@ -123,7 +123,7 @@ class Work extends Component {
                 {this.state.inputBox4}
                 {this.state.inputBox5}
                 {this.state.inputBox6}
-                {this.state.addIsClicked?(<button>Save</button>):(<button onClick={()=>this.editAddIsClicked()}>Add Job</button>)}
+                {this.state.addIsClicked?(<button onClick={()=>{this.addToWork()}}>Save</button>):(<button onClick={()=>this.editAddIsClicked()}>Add Job</button>)}
             </div>
         )
     }

@@ -9,12 +9,8 @@ class Projects extends Component {
         this.state={
             addIsClicked: false,
             inputBox1:'',
-            inputBox2:'',
-            inputBox3:'',
-            inputBox4:'',
-            inputBox5:'',
-            inputBox6:'',
             projects:this.props.projects,
+            project:''
         }
     }
 
@@ -42,6 +38,39 @@ class Projects extends Component {
             })
         }
 
+        handleInput(prop,value){
+            this.setState({
+                [prop]:value
+            })
+        }
+
+        editAddIsClicked(){
+            this.setState({
+                addIsClicked:true,
+                inputBox1:<input onChange={(e)=>{this.handleInput('project',e.target.value)}}/>,
+            })
+        }
+    
+        addToProj=async()=>{
+            const {project,projects} = this.state;
+            console.log('hit')
+            if(project !== ''){
+                projects.push({project});
+                let projProfile = await axios.post('/profile/create/project',{project})
+                this.props.updateProject(projProfile.data);
+                this.setState({
+                    addIsClicked:false,
+                    projects:this.props.projects,
+                    inputBox1:''
+                })
+            } else {
+                this.setState({
+                    addIsClicked:false,
+                    inputBox1:''
+                })
+            }
+        }
+
     render () {
         const {projects} = this.props;
         const projProfile = projects.map(proj =>{
@@ -59,6 +88,8 @@ class Projects extends Component {
             <div>
                 <h1>Projects</h1>
                 <p>{projProfile}</p>
+                {this.state.inputBox1}
+                {this.state.addIsClicked?(<button onClick={()=>{this.addToProj()}}>Save</button>):(<button onClick={()=>{this.editAddIsClicked()}}>Add Project</button>)}
             </div>
         )
     }

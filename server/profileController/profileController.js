@@ -173,6 +173,42 @@ module.exports = {
         // console.log("connected!")
         // console.log(8888,edProfile)
         res.status(200).send(edProfile)
+    },
+
+    addWorkProfile: async(req,res)=>{
+        const db=req.app.get('db');
+        const {id} = req.session.user;
+        console.log(req.body)
+        const {empName:emp_name,empLoc:emp_loc,empLogo:emp_logo,hireDate:hire_date,endDate:end_date,position} = req.body;
+        console.log(emp_loc);
+        const workProfile = await db.profiles.createProfiles.create_work({emp_name,emp_loc,emp_logo,hire_date,end_date,position,user_id:id});
+        res.status(200).send(workProfile)
+
+    },
+
+    addSkillsProfile: async(req,res)=>{
+        const db=req.app.get('db');
+        const {id} = req.session.user;
+        const {skill} = req.body;
+        const skillsProfile = await db.profiles.createProfiles.create_skill({skill,user_id:id});
+        res.status(200).send(skillsProfile);
+        
+    },
+
+    addLangProfile: async(req,res)=>{
+        const db=req.app.get('db');
+        const {id} = req.session.user;
+        const {language} = req.body;
+        const langProfile = await db.profiles.createProfiles.create_language({language,user_id:id});
+        res.status(200).send(langProfile);
+    },
+
+    addProjProfile: async(req,res)=>{
+        const db=req.app.get('db');
+        const {id} = req.session.user;
+        const {project} = req.body;
+        const projProfile = await db.profiles.createProfiles.create_project({project,user_id:id}) 
+        res.status(200).send(projProfile);
     }
 
 
