@@ -13,6 +13,13 @@ module.exports = {
         res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile});
     },
 
+    getEdProfile: async (req,res) => {
+        const db = req.app.get('db');
+        const {id} = req.session.user;
+        const edProfile = await db.profiles.getProfiles.get_education({user_id:id});
+        res.status(200).send({edProfile});
+    },
+
     createProfile: async (req,res)=>{
         // console.log('this hit');
         const db = req.app.get('db');

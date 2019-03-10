@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {clearUser,updateUser,updateEducation,updateWork,updateSkill,updateLang,updateProject} from '../../ducks/userActions';
+import Education from './Education';
+import Work from './Work';
+import Skills from './Skills';
+import Languages from './Languages';
+import Projects from './Projects';
 
 class Profile extends Component {
     constructor(props){
@@ -18,18 +23,6 @@ class Profile extends Component {
             languages: this.props.languages,
             projects: this.props.projects,
             addIsClicked: false,
-            inputBox1:'',
-            inputBox2:'',
-            inputBox3:'',
-            inputBox4:'',
-            inputBox5:'',
-            inputBox6:'',
-            schName:'',
-            major:'',
-            edLevel:'',
-            schLoc:'',
-            gradDate:'',
-            schLogo:''
         }
     }
 
@@ -49,11 +42,10 @@ class Profile extends Component {
     }
 
     getProfile(){
-        if(!this.props.id){
+        if(this.props.id){
             // console.log('entered into!')
             axios.get('/profile/get').then(profile =>{
-                const {edProfile,workProfile,skillsProfile,langProfile,projProfile} = profile.data;
-                this.props.updateEducation(edProfile);
+                const {workProfile,skillsProfile,langProfile,projProfile} = profile.data;
                 this.props.updateWork(workProfile);
                 this.props.updateSkill(skillsProfile);
                 this.props.updateLang(langProfile);
@@ -70,34 +62,7 @@ class Profile extends Component {
     
     //need to create some input boxes for edit but only want those to show if I press edit. 
 
-    async editEdProfile(sch){
-        //need to figure out how people will make the actual edits because they need to be able to select the entire values that were mapped over
-        // console.log(123)
-        // console.log(sch)
-        const {sch_name,major,ed_level,grad_date,sch_loc,sch_logo} = sch
-        // console.log(this.props.education);
-        // console.log(edProfile)
 
-        let editedProfile = await axios.put('/profile/edit',{sch_name,major,ed_level,grad_date,sch_loc,sch_logo})
-    }
-
-    async deleteEdProfile(sch){
-        const {id} = sch;
-        const edProfile = await axios.delete(`/profile/delete/education/${id}`);
-        this.props.updateEducation(edProfile.data);
-        this.setState({
-            education:edProfile.data
-        })
-    }
-
-    async deleteWorkProfile(job){
-        const {id} = job;
-        const workProfile = await axios.delete(`/profile/delete/work/${id}`);
-        this.props.updateWork(workProfile.data);
-        this.setState({
-            work:workProfile.data
-        })
-    }
 
     async deleteSkillsProfile(skill){
         const {id} = skill;
@@ -125,98 +90,15 @@ class Profile extends Component {
             projects:projProfile.data
         })
         console.log(this.state.projects,this.props.projects)
-
     }
-
-    handleInput(prop,value){
-        this.setState({
-            [prop]:value
-        })
-        console.log(prop,value)
-    }
-
-    editAddIsClickedState (){
-        this.setState({
-            addIsClicked:true,
-            inputBox1:<input onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
-            inputBox2:<input onChange={(e)=>{this.handleInput('major',e.target.value)}}/>,
-            inputBox3:<input onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
-            inputBox4:<input onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
-            inputBox5:<input onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
-            inputBox6:<input onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>
-        })
-       
-    }
-
-   addToEd= async()=>{
-        const {schName,major,edLevel,schLoc,gradDate,schLogo,education} = this.state
-        education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
-        console.log(33333,education)
-        // this.props.updateEducation(education);
-        
-            let edProfile = await axios.post('/profile/create/education',{schName,major,edLevel,schLoc,gradDate,schLogo})
-                // edProfile = this.state.education.push(edProfile.data[0])    
-                // console.log(5555,edProfile)
-            this.props.updateEducation(edProfile.data)
-            // console.log({before:this.state.education})
-            this.setState({
-                addIsClicked:false,
-                education:this.props.education,
-                inputBox1:'',
-                inputBox2:'',
-                inputBox3:'',
-                inputBox4:'',
-                inputBox5:'',
-                inputBox6:''
-            })  
-            // console.log({after:this.state.education})
-
-        // console.log(2222,this.props.education,this.state.education)     
-   }
-
-
-
 
     render(){
         console.log(8989,this.props)
-        
         const {education,work,skills,languages,projects} = this.props;
-        // console.log(22222,education,work,skills,languages,projects)
-        console.log(444,education)
-        const edProfile = education.map(sch => {
-            // console.log(3333,sch)
-            return (
-                <div key={sch.id}>
-                    <p>{sch.sch_name}</p>
-                    <p>{sch.major}</p>
-                    <p>{sch.ed_level}</p>
-                    <p>{sch.grad_date}</p>
-                    <p>{sch.sch_loc}</p>
-                    <img src={sch.sch_logo} alt="sch_logo"/>
-                    <button onClick={()=>{this.editEdProfile(sch)}}>Edit</button>
-                    <button onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
-                </div>
-            )
-        })
-
 
         //if a user session id == user then you can edit that profile but this is already a way to check session
 
-        const workProfile = work.map(job =>{
-            // console.log(3333,job)
-            return (
-                <div key={job.id}>
-                    <p>{job.emp_loc}</p>
-                    <img src={job.emp_logo} alt="company logo"/>
-                    <p>{job.emp_name}</p>
-                    <p>{job.position}</p>
-                    <p>{job.hire_date}</p>
-                    <p>{job.end_date}</p>
-                    <button>Edit</button>
-                    <button onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
-                </div>
-            )
-        })
+        
 
         const skillsProfile = skills.map(skill =>{
             // console.log(3333,skill)
@@ -261,20 +143,10 @@ class Profile extends Component {
                 <h1>email:{this.props.email}</h1>
                 <img src={this.props.imageUrl}/>
                 
-                <h1>SCHOOL</h1>
-                <p>{edProfile}</p>
-                {this.state.inputBox1}
-                {this.state.inputBox2}
-                {this.state.inputBox3}
-                {this.state.inputBox4}
-                {this.state.inputBox5}
-                {this.state.inputBox6}
-                {this.state.addIsClicked?(<button onClick={()=>this.addToEd()}>Save</button>):
-                <button onClick={()=>this.editAddIsClickedState()}>Add School</button>}
+    
+                <Education />
+                <Work />
                 
-                <h1>WORK</h1>
-                <p>{workProfile}</p>
-                <button>Add Job</button>
 
                 <h1>SKILLS</h1>
                 <p>{skillsProfile}</p>
