@@ -41,7 +41,6 @@ app.get('/auth/current',userCtrl.getUser);
 app.post('/auth/logout',userCtrl.logout);
 
 //profileController ENDPOINTS
-app.get('/profile/get',profileCtrl.getProfile);
 app.get('/profile/get/education',profileCtrl.getEdProfile);
 app.get('/profile/get/work',profileCtrl.getWorkProfile);
 app.get('/profile/get/skills',profileCtrl.getSkillsProfile);

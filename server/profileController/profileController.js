@@ -1,15 +1,4 @@
 module.exports = {
-    getProfile: async (req,res) => {
-        const db = req.app.get('db');
-        const {id} = req.session.user;
-        const edProfile = await db.profiles.getProfiles.get_education({user_id:id});
-        const workProfile = await db.profiles.getProfiles.get_work({user_id:id});
-        const skillsProfile = await db.profiles.getProfiles.get_skills({user_id:id});
-        const langProfile = await db.profiles.getProfiles.get_languages({user_id:id});
-        const projProfile = await db.profiles.getProfiles.get_projects({user_id:id});
-        res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile});
-    },
-
     getEdProfile: async (req,res) => {
         const db = req.app.get('db');
         const {id} = req.session.user;

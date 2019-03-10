@@ -33,16 +33,41 @@ class Projects extends Component {
         }
     }
 
+    async deleteProjProfile(proj){
+            const {id} = proj;
+            const projProfile = await axios.delete(`/profile/delete/project/${id}`);
+            this.props.updateProject(projProfile.data);
+            this.setState({
+                projects:projProfile.data
+            })
+        }
+
     render () {
+        const {projects} = this.props;
+        const projProfile = projects.map(proj =>{
+            // console.log(3333,proj)
+            return (
+                <div key={proj.id}>
+                    <p>{proj.project}</p>
+                    <button>Edit</button>
+                    <button onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
+                </div>
+            )
+        })
+
         return (
-            <div>Work</div>
+            <div>
+                <h1>Projects</h1>
+                <p>{projProfile}</p>
+            </div>
         )
     }
 }
 
 function mapStateToProps(reduxState){
     return{            
-        projects:reduxState.projects
+        projects:reduxState.projects,
+        id:reduxState.id
     }
 }
         
