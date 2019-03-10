@@ -30,10 +30,8 @@ componentDidMount(){
 
 async getEdProfile(){
     if(this.props.id){
-        // console.log('entered into!')
         const profile = await axios.get('/profile/get/education')
         const {edProfile} = profile.data;
-        console.log(555,edProfile)
         this.props.updateEducation(edProfile);
         this.setState({
             education:this.props.education

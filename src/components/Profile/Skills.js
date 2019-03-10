@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {updateWork} from '../../ducks/userActions';
+import {updateSkill} from '../../ducks/userActions';
 
 class Skills extends Component {
     constructor(props){
@@ -18,6 +18,21 @@ class Skills extends Component {
         }
     }
 
+    componentDidMount(){
+        this.getSkillsProfile()
+    }
+    
+    async getSkillsProfile(){
+        if(this.props.id){
+            const profile = await axios.get('/profile/get/skills')
+            const {skillProfile} = profile.data;
+            this.props.updateSkill(skillProfile);
+            this.setState({
+                skills:this.props.skills
+            })
+        }
+    }
+
     render () {
         return (
             <div>Skills</div>
@@ -31,4 +46,4 @@ function mapStateToProps(reduxState){
     }
 }
         
-export default connect(mapStateToProps,{updateWork})(Skills)
+export default connect(mapStateToProps,{updateSkill})(Skills)

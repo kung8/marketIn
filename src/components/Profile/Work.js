@@ -24,6 +24,21 @@ class Work extends Component {
         }
     }
 
+    componentDidMount(){
+        this.getWorkProfile()
+    }
+    
+    async getWorkProfile(){
+        if(this.props.id){
+            const profile = await axios.get('/profile/get/work')
+            const {workProfile} = profile.data;
+            this.props.updateWork(workProfile);
+            this.setState({
+                work:this.props.work
+            })
+        }
+    }
+
     handleInput(prop,value){
         this.setState({
             [prop]:value
@@ -116,7 +131,8 @@ class Work extends Component {
 
 function mapStateToProps(reduxState){
     return{            
-        work:reduxState.work
+        work:reduxState.work,
+        id:reduxState.id
     }
 }
         

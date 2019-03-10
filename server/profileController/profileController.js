@@ -1,15 +1,12 @@
 module.exports = {
     getProfile: async (req,res) => {
-        // console.log('running getProfile!')
         const db = req.app.get('db');
         const {id} = req.session.user;
-        // console.log(id)
         const edProfile = await db.profiles.getProfiles.get_education({user_id:id});
         const workProfile = await db.profiles.getProfiles.get_work({user_id:id});
         const skillsProfile = await db.profiles.getProfiles.get_skills({user_id:id});
         const langProfile = await db.profiles.getProfiles.get_languages({user_id:id});
         const projProfile = await db.profiles.getProfiles.get_projects({user_id:id});
-        // console.log(edProfile,workProfile,skillsProfile,langProfile,projProfile)
         res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile});
     },
 
@@ -18,6 +15,34 @@ module.exports = {
         const {id} = req.session.user;
         const edProfile = await db.profiles.getProfiles.get_education({user_id:id});
         res.status(200).send({edProfile});
+    },
+
+    getWorkProfile: async (req,res) => {
+        const db = req.app.get('db');
+        const {id} = req.session.user;
+        const workProfile = await db.profiles.getProfiles.get_work({user_id:id});
+        res.status(200).send({workProfile});
+    },
+
+    getSkillsProfile: async (req,res) => {
+        const db = req.app.get('db');
+        const {id} = req.session.user;
+        const skillsProfile = await db.profiles.getProfiles.get_skills({user_id:id});
+        res.status(200).send({skillsProfile});
+    },
+
+    getLangProfile: async (req,res) => {
+        const db = req.app.get('db');
+        const {id} = req.session.user;
+        const langProfile = await db.profiles.getProfiles.get_languages({user_id:id});
+        res.status(200).send({langProfile});
+    },
+
+    getProjProfile: async (req,res) => {
+        const db = req.app.get('db');
+        const {id} = req.session.user;
+        const projProfile = await db.profiles.getProfiles.get_projects({user_id:id});
+        res.status(200).send({projProfile});
     },
 
     createProfile: async (req,res)=>{

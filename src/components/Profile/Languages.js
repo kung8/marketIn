@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {updateWork} from '../../ducks/userActions';
+import {updateLang} from '../../ducks/userActions';
 
 class Languages extends Component {
     constructor(props){
@@ -14,7 +14,23 @@ class Languages extends Component {
             inputBox4:'',
             inputBox5:'',
             inputBox6:'',
-            education:this.props.education,
+            languages:this.props.languages,
+        }
+    }
+
+    componentDidMount(){
+        this.getLangProfile()
+    }
+    
+    async getLangProfile(){
+        if(this.props.id){
+            const profile = await axios.get('/profile/get/languages')
+            const {langProfile} = profile.data;
+            console.log(2344,langProfile)
+            this.props.updateLang(langProfile);
+            this.setState({
+                languages:this.props.languages
+            })
         }
     }
 
@@ -27,8 +43,9 @@ class Languages extends Component {
 
 function mapStateToProps(reduxState){
     return{            
-        Languages:reduxState.Languages
+        Languages:reduxState.Languages,
+        id:reduxState.id
     }
 }
         
-export default connect(mapStateToProps,{updateWork})(Languages)
+export default connect(mapStateToProps,{updateLang})(Languages)

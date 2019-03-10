@@ -43,6 +43,10 @@ app.post('/auth/logout',userCtrl.logout);
 //profileController ENDPOINTS
 app.get('/profile/get',profileCtrl.getProfile);
 app.get('/profile/get/education',profileCtrl.getEdProfile);
+app.get('/profile/get/work',profileCtrl.getWorkProfile);
+app.get('/profile/get/skills',profileCtrl.getSkillsProfile);
+app.get('/profile/get/languages',profileCtrl.getLangProfile);
+app.get('/profile/get/projects',profileCtrl.getProjProfile);
 
 app.post('/profile/create',profileCtrl.createProfile); //this is only for registration because they can do multiple
 app.post('/profile/create/education',profileCtrl.addEdProfile); //this is to add ed section to profile

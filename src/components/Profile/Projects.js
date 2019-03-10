@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {updateWork} from '../../ducks/userActions';
+import {updateProject} from '../../ducks/userActions';
 
 class Projects extends Component {
     constructor(props){
@@ -14,7 +14,22 @@ class Projects extends Component {
             inputBox4:'',
             inputBox5:'',
             inputBox6:'',
-            education:this.props.education,
+            projects:this.props.projects,
+        }
+    }
+
+    componentDidMount(){
+        this.getProjProfile()
+    }
+    
+    async getProjProfile(){
+        if(this.props.id){
+            const profile = await axios.get('/profile/get/projects');
+            const {projProfile} = profile.data;
+            this.props.updateProject(projProfile);
+            this.setState({
+                projects:this.props.projects
+            })
         }
     }
 
@@ -31,4 +46,4 @@ function mapStateToProps(reduxState){
     }
 }
         
-export default connect(mapStateToProps,{updateWork})(Projects)
+export default connect(mapStateToProps,{updateProject})(Projects)

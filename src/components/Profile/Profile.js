@@ -30,7 +30,7 @@ class Profile extends Component {
     //check if user is still here (need to render all the information)
     componentDidMount () {
         this.checkUser();
-        this.getProfile()
+        // this.getProfile()
     }
 
     async checkUser(){
@@ -41,18 +41,18 @@ class Profile extends Component {
         }
     }
 
-    getProfile(){
-        if(this.props.id){
-            // console.log('entered into!')
-            axios.get('/profile/get').then(profile =>{
-                const {workProfile,skillsProfile,langProfile,projProfile} = profile.data;
-                this.props.updateWork(workProfile);
-                this.props.updateSkill(skillsProfile);
-                this.props.updateLang(langProfile);
-                this.props.updateProject(projProfile);
-            })
-        }
-    }
+    // getProfile(){
+    //     if(this.props.id){
+    //         // console.log('entered into!')
+    //         axios.get('/profile/get').then(profile =>{
+    //             const {workProfile,skillsProfile,langProfile,projProfile} = profile.data;
+    //             this.props.updateWork(workProfile);
+    //             this.props.updateSkill(skillsProfile);
+    //             this.props.updateLang(langProfile);
+    //             this.props.updateProject(projProfile);
+    //         })
+    //     }
+    // }
 
     async logout(){
         await axios.post('/auth/logout');
@@ -146,8 +146,10 @@ class Profile extends Component {
     
                 <Education />
                 <Work />
+                <Skills/>
+                <Languages/>
+                <Projects/>
                 
-
                 <h1>SKILLS</h1>
                 <p>{skillsProfile}</p>
                 <button>Add Skill</button>
