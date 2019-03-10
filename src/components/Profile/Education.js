@@ -96,6 +96,7 @@ async deleteEdProfile(sch){
 }
 
 
+
     render(){
         console.log(this.props.education,this.props.id)
         const {education} = this.props;

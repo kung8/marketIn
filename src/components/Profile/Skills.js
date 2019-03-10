@@ -10,7 +10,9 @@ class Skills extends Component {
             addIsClicked: false,
             inputBox1:'',
             skills:this.props.skills,
-            skill:''
+            skill:'',
+            edit:false,
+            editBox:''
         }
     }
 
@@ -72,6 +74,14 @@ class Skills extends Component {
         }
     }
 
+    handleEdit(skill){
+        this.setState({
+            edit:true,
+            editBox:<input value={this.props.skills[skill.id]}/>
+
+        })
+    }
+
     render () {
         // console.log(1234,this.props.skills,this.props.id)
         const {skills}  = this.props;
@@ -80,7 +90,8 @@ class Skills extends Component {
             return (
                 <div key={skill.id}>
                     <p>{skill.skill}</p>
-                    <button>Edit</button>
+                    {this.state.editBox}
+                    <button onClick={()=>{this.handleEdit(skill)}}>Edit</button>
                     <button onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
                 </div>
             )
