@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {updateEducation} from '../../ducks/userActions';
+import {updateEducation} from '../../../ducks/userActions';
 import School from './School';
 
 class Education extends Component {
@@ -49,12 +49,12 @@ handleInput(prop,value){
 editAddIsClicked (){
     this.setState({
         addIsClicked:true,
-        inputBox1:<input onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
-        inputBox2:<input onChange={(e)=>{this.handleInput('major',e.target.value)}}/>,
-        inputBox3:<input onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
-        inputBox4:<input onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
-        inputBox5:<input onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
-        inputBox6:<input onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>
+        inputBox1:<input placeholder="School Name" onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
+        inputBox2:<input placeholder="Major" onChange={(e)=>{this.handleInput('major',e.target.value)}}/>,
+        inputBox3:<input placeholder="Education Level" onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
+        inputBox4:<input placeholder="School Location" onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
+        inputBox5:<input placeholder="Graduation Date" onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
+        inputBox6:<input placeholder="School Logo" onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>
     })
 }
 

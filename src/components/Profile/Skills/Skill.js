@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {updateSkill} from '../../ducks/userActions';
+import {updateSkill} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
 
 class Skill extends Component {
@@ -60,7 +60,6 @@ class Skill extends Component {
             <p>{skill.skill}</p>
             {this.state.editBox}
             {this.state.edit?(<button onClick={()=>this.edit(skill)}>Save</button>):<button onClick={()=>{this.handleEditToggle(skill)}}>Edit</button>}
-            <br/>
             <button onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
         </div>
         )

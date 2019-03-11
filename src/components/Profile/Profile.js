@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {clearUser,updateUser} from '../../ducks/userActions';
-import Education from './Education';
-import Work from './Work';
-import Skills from './Skills';
-import Languages from './Languages';
-import Projects from './Projects';
+import Education from './Education/Education';
+import Work from './Work/Work';
+import Skills from './Skills/Skills';
+import Languages from './Languages/Languages';
+import Projects from './Projects/Projects';
 
 class Profile extends Component {
     constructor(props){

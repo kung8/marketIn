@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {updateLang} from '../../ducks/userActions';
+import {updateLang} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
 
 class Language extends Component {

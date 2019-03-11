@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {updateSkill} from '../../ducks/userActions';
+import {updateSkill} from '../../../ducks/userActions';
 import Skill from './Skill';
 
 class Skills extends Component {

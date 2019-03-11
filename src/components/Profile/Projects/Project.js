@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {updateProject} from '../../ducks/userActions';
+import {updateProject} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
 
 class Project extends Component {

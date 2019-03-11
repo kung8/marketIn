@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {updateEducation} from '../../ducks/userActions';
+import {updateEducation} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
 
 class School extends Component {
@@ -43,12 +43,12 @@ class School extends Component {
     handleEditToggle=()=>{
         this.setState({
             edit:true,
-            editBox1:<input onChange={(e)=>this.handleInput('schName',e.target.value)}/>,
-            editBox2:<input onChange={(e)=>this.handleInput('major',e.target.value)}/>,
-            editBox3:<input onChange={(e)=>this.handleInput('edLevel',e.target.value)}/>,
-            editBox4:<input onChange={(e)=>this.handleInput('schLoc',e.target.value)}/>,
-            editBox5:<input onChange={(e)=>this.handleInput('gradDate',e.target.value)}/>,
-            editBox6:<input onChange={(e)=>this.handleInput('schLogo',e.target.value)}/>
+            editBox1:<input placeholder="School Name" onChange={(e)=>this.handleInput('schName',e.target.value)}/>,
+            editBox2:<input placeholder="Major" onChange={(e)=>this.handleInput('major',e.target.value)}/>,
+            editBox3:<input placeholder="Education Level" onChange={(e)=>this.handleInput('edLevel',e.target.value)}/>,
+            editBox4:<input placeholder="School Location" onChange={(e)=>this.handleInput('schLoc',e.target.value)}/>,
+            editBox5:<input placeholder="Graduation Date" onChange={(e)=>this.handleInput('gradDate',e.target.value)}/>,
+            editBox6:<input placeholder="School Logo" onChange={(e)=>this.handleInput('schLogo',e.target.value)}/>
         })
     }
 
@@ -98,8 +98,8 @@ class School extends Component {
                     <p>{sch.sch_name}</p>
                     <p>{sch.major}</p>
                     <p>{sch.ed_level}</p>
-                    <p>{sch.grad_date}</p>
                     <p>{sch.sch_loc}</p>
+                    <p>{sch.grad_date}</p>
                     <img src={sch.sch_logo} alt="sch_logo"/>
                     {this.state.editBox1}
                     {this.state.editBox2}
@@ -107,6 +107,7 @@ class School extends Component {
                     {this.state.editBox4}
                     {this.state.editBox5}
                     {this.state.editBox6}
+                    <br/>
                     {this.state.edit?(<button onClick={()=>this.edit(sch)}>Save</button>):<button onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
                     <button onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
                 </div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {updateWork} from '../../ducks/userActions';
+import {updateWork} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
 
 class Job extends Component {
@@ -42,12 +42,12 @@ class Job extends Component {
     handleEditToggle=()=>{
         this.setState({
             edit:true,
-            editBox1:<input onChange={(e)=>this.handleInput('empName',e.target.value)}/>,
-            editBox2:<input onChange={(e)=>this.handleInput('position',e.target.value)}/>,
-            editBox3:<input onChange={(e)=>this.handleInput('hireDate',e.target.value)}/>,
-            editBox4:<input onChange={(e)=>this.handleInput('empLoc',e.target.value)}/>,
-            editBox5:<input onChange={(e)=>this.handleInput('endDate',e.target.value)}/>,
-            editBox6:<input onChange={(e)=>this.handleInput('empLogo',e.target.value)}/>
+            editBox1:<input placeholder="Employer Name" onChange={(e)=>this.handleInput('empName',e.target.value)}/>,
+            editBox2:<input placeholder="Position" onChange={(e)=>this.handleInput('position',e.target.value)}/>,
+            editBox3:<input placeholder="Employer Location" onChange={(e)=>this.handleInput('empLoc',e.target.value)}/>,
+            editBox4:<input placeholder="Hire Date" onChange={(e)=>this.handleInput('hireDate',e.target.value)}/>,
+            editBox5:<input placeholder="End Date" onChange={(e)=>this.handleInput('endDate',e.target.value)}/>,
+            editBox6:<input placeholder="Employer Logo" onChange={(e)=>this.handleInput('empLogo',e.target.value)}/>
         })
     }
 
@@ -96,17 +96,18 @@ class Job extends Component {
         return (
             <div key={job.id}>
                     <p>{job.emp_loc}</p>
-                    <img src={job.emp_logo} alt="company logo"/>
                     <p>{job.emp_name}</p>
                     <p>{job.position}</p>
                     <p>{job.hire_date}</p>
                     <p>{job.end_date}</p>
+                    <img src={job.emp_logo} alt="company logo"/>
                     {this.state.editBox1}
                     {this.state.editBox2}
                     {this.state.editBox3}
                     {this.state.editBox4}
                     {this.state.editBox5}
                     {this.state.editBox6}
+                    <br/>
                     {this.state.edit?(<button onClick={()=>this.edit(job)}>Save</button>):<button onClick={()=>{this.handleEditToggle(job)}}>Edit</button>}                    
                     <button onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
                 </div>

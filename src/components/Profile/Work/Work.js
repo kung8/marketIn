@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {updateWork} from '../../ducks/userActions';
+import {updateWork} from '../../../ducks/userActions';
 import Job from './Job';
 
 class Work extends Component {
@@ -49,12 +49,12 @@ class Work extends Component {
     editAddIsClicked (){
         this.setState({
             addIsClicked:true,
-            inputBox1:<input onChange={(e)=>{this.handleInput('empName',e.target.value)}}/>,
-            inputBox2:<input onChange={(e)=>{this.handleInput('position',e.target.value)}}/>,
-            inputBox3:<input onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>,
-            inputBox4:<input onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}/>,
-            inputBox5:<input onChange={(e)=>{this.handleInput('endDate',e.target.value)}}/>,
-            inputBox6:<input onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>
+            inputBox1:<input placeholder="Employer Name" onChange={(e)=>{this.handleInput('empName',e.target.value)}}/>,
+            inputBox2:<input placeholder="Position" onChange={(e)=>{this.handleInput('position',e.target.value)}}/>,
+            inputBox3:<input placeholder="Employer Location" onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>,
+            inputBox4:<input placeholder="Hire Date" onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}/>,
+            inputBox5:<input placeholder="End Date" onChange={(e)=>{this.handleInput('endDate',e.target.value)}}/>,
+            inputBox6:<input placeholder="Employer Logo" onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>
         })
     }
 
