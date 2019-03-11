@@ -36,6 +36,33 @@ class Project extends Component {
         })
     }
 
+    async edit(proj){
+        const {project} = this.state;
+        try {
+            if(project !=='' ){
+                const {id,user_id} = proj;
+                // console.log(user_id)
+                const projProfile = await axios.put('/profile/edit/project',{project,id,user_id})
+                // console.log(444,workProfile.data[0])
+                this.props.updateProject(projProfile.data)
+                this.setState({
+                    edit:false,
+                    editBox:'',
+                    skill:''
+                    
+                }) 
+            }   else {
+                    this.setState({
+                        edit:false,
+                        editBox:'',
+                        skill:''
+                    })
+                }
+        } catch (err){
+            alert(err)
+        }
+    }
+
     render (){
         const {proj} = this.props;
         

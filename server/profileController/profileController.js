@@ -135,7 +135,7 @@ module.exports = {
 
         const {id,language,user_id} = req.body;
         // console.log(id,language,user_id)
-        const langProfile = await db.profiles.edProfile.edit_language({id,language,user_id})
+        const langProfile = await db.profiles.editProfiles.edit_language({id,language,user_id})
         // console.log(langProfile)
         res.status(200).send(langProfile)
     },
@@ -146,7 +146,7 @@ module.exports = {
 
         const {id,project,user_id} = req.body;
         // console.log(id,project,user_id)
-        const projProfile = await db.profiles.edProfile.edit_project({id,project,user_id})
+        const projProfile = await db.profiles.editProfiles.edit_project({id,project,user_id})
         // console.log(projProfile)
         res.status(200).send(projProfile)
     },

@@ -36,6 +36,33 @@ class Language extends Component {
         })
     }
 
+    async edit(lang){
+        const {language} = this.state;
+        try {
+            if(language !=='' ){
+                const {id,user_id} = lang;
+                // console.log(user_id)
+                const langProfile = await axios.put('/profile/edit/language',{language,id,user_id})
+                // console.log(444,workProfile.data[0])
+                this.props.updateLang(langProfile.data)
+                this.setState({
+                    edit:false,
+                    editBox:'',
+                    language:''
+                    
+                }) 
+            }   else {
+                    this.setState({
+                        edit:false,
+                        editBox:'',
+                        skill:''
+                    })
+                }
+        } catch (err){
+            alert(err)
+        }
+    }
+
     render (){
         const {lang} = this.props;
         return (
