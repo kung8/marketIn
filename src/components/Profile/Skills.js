@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateSkill} from '../../ducks/userActions';
+import Skill from './Skill';
 
 class Skills extends Component {
     constructor(props){
@@ -11,8 +12,7 @@ class Skills extends Component {
             inputBox1:'',
             skills:this.props.skills,
             skill:'',
-            edit:false,
-            editBox:''
+            
         }
     }
 
@@ -31,15 +31,6 @@ class Skills extends Component {
                 skills:this.props.skills
             })
         }
-    }
-
-    async deleteSkillsProfile(skill){
-        const {id} = skill;
-        const skillsProfile = await axios.delete(`/profile/delete/skill/${id}`);
-        this.props.updateSkill(skillsProfile.data);
-        this.setState({
-            skills:skillsProfile.data,
-        })
     }
 
     handleInput(prop,value){
@@ -74,35 +65,27 @@ class Skills extends Component {
         }
     }
 
-    handleEdit(skill){
-        this.setState({
-            edit:true,
-            editBox:<input value={this.props.skills[skill.id]}/>
-
-        })
-    }
-
     render () {
         // console.log(1234,this.props.skills,this.props.id)
         const {skills}  = this.props;
         const skillsProfile = skills.map(skill =>{
             // console.log(3333,skill)
             return (
-                <div key={skill.id}>
-                    <p>{skill.skill}</p>
-                    {this.state.editBox}
-                    <button onClick={()=>{this.handleEdit(skill)}}>Edit</button>
-                    <button onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
-                </div>
+                <Skill 
+                    key={skill.id}
+                    skill={skill} 
+                    />
             )
         })
 
         return (
             <div>
                 <h1>Skills</h1>
-                <p>{skillsProfile}</p>
+                {skillsProfile}
                 {this.state.inputBox1}
                 {this.state.addIsClicked?(<button onClick={()=>{this.addToSkills()}}>Save</button>):(<button onClick={()=>{this.editAddIsClicked()}}>Add Skill</button>)}
+
+                
             </div>
         )
     }

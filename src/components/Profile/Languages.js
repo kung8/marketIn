@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateLang} from '../../ducks/userActions';
+import Language from './Language';
 
 class Languages extends Component {
     constructor(props){
@@ -63,25 +64,17 @@ class Languages extends Component {
         }
     }
 
-    async deleteLangProfile(lang){
-        const {id} = lang;
-        const langProfile = await axios.delete(`/profile/delete/language/${id}`);
-        this.props.updateLang(langProfile.data);
-        this.setState({
-            languages:langProfile.data,
-        })
-    }
+    
 
     render () {
         const {languages} = this.props 
         const langProfile = languages.map(lang =>{
             // console.log(3333,lang)
             return (
-                <div lang={lang.id}>
-                    <p>{lang.language}</p>
-                    <button>Edit</button>
-                    <button onClick={()=>{this.deleteLangProfile(lang)}}>Delete</button>
-                </div>
+                <Language 
+                    key={lang.id}
+                    lang={lang}
+                    />
             )
         })
 

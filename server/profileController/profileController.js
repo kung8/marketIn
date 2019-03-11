@@ -95,19 +95,60 @@ module.exports = {
         res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile})
     },
 
-    editProfile: async (req,res) => {
-        // console.log('way to go, editing is happening soon!');
+    editEdProfile: async (req,res) => {
         const db = req.app.get('db');
         // console.log(req.body)
-        const {sch_name,sch_loc,grad_date,sch_logo,ed_level,major,id} = req.body;
-
-        const edProfile = await db.profiles.editProfiles.edit_education({sch_name,sch_loc,grad_date,sch_logo,ed_level,major,id});
-        // const workProfile = await db.profiles.editProfiles.edit_work();
-        // const skillsProfile = await db.profiles.editProfiles.edit_skills();
-        // const langProfile = await db.profiles.editProfiles.edit_languages();
-        // const projProfile = await db.profiles.editProfiles.edit_projects();
-
+        const {sch_name,sch_loc,grad_date,sch_logo,ed_level,major,id,user_id} = req.body;
+        // console.log(sch_name,sch_loc,grad_date,sch_logo,ed_level,major,id,user_id)
+        const edProfile = await db.profiles.editProfiles.edit_education({sch_name,sch_loc,grad_date,sch_logo,ed_level,major,id,user_id});
+        // console.log(edProfile)
         res.status(200).send(edProfile)
+    },
+
+    editWorkProfile: async (req,res) => {
+        const db = req.app.get('db');
+        console.log(req.body)
+        // var {id} = req.session.user;
+        // let user_id = id
+        // console.log(user_id)
+        const {empName:emp_name,empLoc:emp_loc,empLogo:emp_logo,hireDate:hire_date,endDate:end_date,position,id,user_id} = req.body;
+        // console.log('hit')
+        console.log(777,emp_name,emp_loc,emp_logo,hire_date,end_date,position,id,user_id)
+        const workProfile = await db.profiles.editProfiles.edit_work({emp_name,emp_loc,emp_logo,hire_date,end_date,position,id,user_id});
+        console.log(333,workProfile)
+        res.status(200).send(workProfile)
+    },
+
+    editSkillsProfile: async (req,res) => {
+        const db = req.app.get('db');
+        // console.log(req.body)
+        const {skill,user_id,id} =req.body;
+        // console.log(id,skill,user_id);
+        const skillsProfile = await db.profiles.editProfiles.edit_skill({skill,id,user_id});
+        // console.log(2222,skillsProfile)
+        res.status(200).send(skillsProfile)
+    },
+    
+    editLangProfile: async (req,res) => {
+        const db = req.app.get('db');
+        // console.log(req.body)
+
+        const {id,language,user_id} = req.body;
+        // console.log(id,language,user_id)
+        const langProfile = await db.profiles.edProfile.edit_language({id,language,user_id})
+        // console.log(langProfile)
+        res.status(200).send(langProfile)
+    },
+
+    editProjProfile: async (req,res) => {
+        const db = req.app.get('db');
+        // console.log(req.body)
+
+        const {id,project,user_id} = req.body;
+        // console.log(id,project,user_id)
+        const projProfile = await db.profiles.edProfile.edit_project({id,project,user_id})
+        // console.log(projProfile)
+        res.status(200).send(projProfile)
     },
 
     deleteEdProfile: async (req,res) => {
@@ -178,9 +219,9 @@ module.exports = {
     addWorkProfile: async(req,res)=>{
         const db=req.app.get('db');
         const {id} = req.session.user;
-        console.log(req.body)
+        // console.log(req.body)
         const {empName:emp_name,empLoc:emp_loc,empLogo:emp_logo,hireDate:hire_date,endDate:end_date,position} = req.body;
-        console.log(emp_loc);
+        // console.log(emp_loc);
         const workProfile = await db.profiles.createProfiles.create_work({emp_name,emp_loc,emp_logo,hire_date,end_date,position,user_id:id});
         res.status(200).send(workProfile)
 

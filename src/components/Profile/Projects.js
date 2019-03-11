@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateProject} from '../../ducks/userActions';
+import Project from './Project';
 
 class Projects extends Component {
     constructor(props){
@@ -29,14 +30,7 @@ class Projects extends Component {
         }
     }
 
-    async deleteProjProfile(proj){
-            const {id} = proj;
-            const projProfile = await axios.delete(`/profile/delete/project/${id}`);
-            this.props.updateProject(projProfile.data);
-            this.setState({
-                projects:projProfile.data
-            })
-        }
+    
 
         handleInput(prop,value){
             this.setState({
@@ -76,11 +70,10 @@ class Projects extends Component {
         const projProfile = projects.map(proj =>{
             // console.log(3333,proj)
             return (
-                <div key={proj.id}>
-                    <p>{proj.project}</p>
-                    <button>Edit</button>
-                    <button onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
-                </div>
+                <Project 
+                    key={proj.id}
+                    proj={proj}
+                    />
             )
         })
 

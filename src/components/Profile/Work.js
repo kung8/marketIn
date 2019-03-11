@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateWork} from '../../ducks/userActions';
+import Job from './Job';
 
 class Work extends Component {
     constructor(props){
@@ -86,30 +87,17 @@ class Work extends Component {
         }
     }
 
-    async deleteWorkProfile(job){
-        const {id} = job;
-        const workProfile = await axios.delete(`/profile/delete/work/${id}`);
-        this.props.updateWork(workProfile.data);
-        this.setState({
-            work:workProfile.data
-        })
-    }
+    
 
     render () {
         const {work} = this.props;
         const workProfile = work.map(job =>{
             // console.log(3333,job)
             return (
-                <div key={job.id}>
-                    <p>{job.emp_loc}</p>
-                    <img src={job.emp_logo} alt="company logo"/>
-                    <p>{job.emp_name}</p>
-                    <p>{job.position}</p>
-                    <p>{job.hire_date}</p>
-                    <p>{job.end_date}</p>
-                    <button>Edit</button>
-                    <button onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
-                </div>
+                <Job
+                    key={job.id}
+                    job={job}
+                />
             )
         })
 

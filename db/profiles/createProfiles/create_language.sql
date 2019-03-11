@@ -5,4 +5,4 @@ SELECT u.id, l.id, language
 FROM users u 
 JOIN languages l ON l.user_id = u.id
 WHERE u.id = ${user_id}
-ORDER BY l.id DESC;
+-- ORDER BY l.id DESC;

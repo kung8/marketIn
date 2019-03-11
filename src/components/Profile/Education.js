@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateEducation} from '../../ducks/userActions';
+import School from './School';
 
 class Education extends Component {
 constructor(props){
@@ -86,14 +87,7 @@ addToEd= async()=>{
     }
 }
 
-async deleteEdProfile(sch){
-    const {id} = sch;
-    const edProfile = await axios.delete(`/profile/delete/education/${id}`);
-    this.props.updateEducation(edProfile.data);
-    this.setState({
-        education:edProfile.data
-    })
-}
+
 
 
 
@@ -102,16 +96,10 @@ async deleteEdProfile(sch){
         const {education} = this.props;
         const edProfile = education.map(sch => {
             return (
-                <div key={sch.id}>
-                    <p>{sch.sch_name}</p>
-                    <p>{sch.major}</p>
-                    <p>{sch.ed_level}</p>
-                    <p>{sch.grad_date}</p>
-                    <p>{sch.sch_loc}</p>
-                    <img src={sch.sch_logo} alt="sch_logo"/>
-                    <button onClick={()=>{this.editEdProfile(sch)}}>Edit</button>
-                    <button onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
-                </div>
+                <School
+                    key={sch.id}
+                    sch={sch} 
+                />
             )
         })
     
