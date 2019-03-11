@@ -98,7 +98,7 @@ module.exports = {
     editEdProfile: async (req,res) => {
         const db = req.app.get('db');
         // console.log(req.body)
-        const {sch_name,sch_loc,grad_date,sch_logo,ed_level,major,id,user_id} = req.body;
+        const {schName:sch_name,schLoc:sch_loc,gradDate:grad_date,schLogo:sch_logo,edLevel:ed_level,major,id,user_id} = req.body;
         // console.log(sch_name,sch_loc,grad_date,sch_logo,ed_level,major,id,user_id)
         const edProfile = await db.profiles.editProfiles.edit_education({sch_name,sch_loc,grad_date,sch_logo,ed_level,major,id,user_id});
         // console.log(edProfile)

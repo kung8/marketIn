@@ -37,6 +37,7 @@ class School extends Component {
         this.setState({
             [prop]:value
         })
+        console.log(prop,value)
     }
 
     handleEditToggle=()=>{
@@ -49,6 +50,44 @@ class School extends Component {
             editBox5:<input onChange={(e)=>this.handleInput('gradDate',e.target.value)}/>,
             editBox6:<input onChange={(e)=>this.handleInput('schLogo',e.target.value)}/>
         })
+    }
+
+    async edit(sch){
+        const {schName,schLoc,major,schLogo,gradDate,edLevel} = this.state;
+        if(schName !== '' || schLoc !== '' || major !== '' || schLogo !== '' || gradDate !== '' || edLevel !=='' ){
+            const {id,user_id} = sch;
+            // console.log(user_id)
+            // console.log(333,this.state.skill,id,user_id);
+            const edProfile = await axios.put('/profile/edit/education',{schName,schLoc,major,schLogo,gradDate,edLevel,id,user_id})
+            // console.log(444,workProfile.data[0])
+            this.props.updateEducation(edProfile.data)
+            this.setState({
+                edit:false,
+                editBox1:'',
+                editBox2:'',
+                editBox3:'',
+                editBox4:'',
+                editBox5:'',
+                editBox6:'',
+                schName:'',
+                schLoc:'',
+                schLogo:'',
+                gradDate:'',
+                edLevel:'',
+                major:''
+                
+            }) 
+        }   else {
+                this.setState({
+                    edit:false,
+                    editBox1:'',
+                    editBox2:'',
+                    editBox3:'',
+                    editBox4:'',
+                    editBox5:'',
+                    editBox6:''
+                })
+            }
     }
 
     render (){
