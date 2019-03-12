@@ -21,7 +21,8 @@ class Work extends Component {
             empLogo:'',
             hireDate:'',
             endDate:'',
-            position:''
+            position:'',
+            addDivIsOpened:false
         }
     }
 
@@ -49,12 +50,13 @@ class Work extends Component {
     editAddIsClicked (){
         this.setState({
             addIsClicked:true,
-            inputBox1:<input placeholder="Employer Name" onChange={(e)=>{this.handleInput('empName',e.target.value)}}/>,
-            inputBox2:<input placeholder="Position" onChange={(e)=>{this.handleInput('position',e.target.value)}}/>,
-            inputBox3:<input placeholder="Employer Location" onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>,
-            inputBox4:<input placeholder="Hire Date" onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}/>,
-            inputBox5:<input placeholder="End Date" onChange={(e)=>{this.handleInput('endDate',e.target.value)}}/>,
-            inputBox6:<input placeholder="Employer Logo" onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>
+            inputBox1:<input className="edit-input-box" placeholder="Employer" onChange={(e)=>{this.handleInput('empName',e.target.value)}}/>,
+            inputBox2:<input className="edit-input-box" placeholder="Position" onChange={(e)=>{this.handleInput('position',e.target.value)}}/>,
+            inputBox3:<input className="edit-input-box" placeholder="Location" onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>,
+            inputBox4:<input className="edit-input-box" placeholder="Hire Date" onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}/>,
+            inputBox5:<input className="edit-input-box" placeholder="End Date" onChange={(e)=>{this.handleInput('endDate',e.target.value)}}/>,
+            inputBox6:<input className="edit-input-box" placeholder="Emp Logo" onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>,
+            addDivIsOpened:true
         })
     }
 
@@ -72,7 +74,8 @@ class Work extends Component {
                     inputBox3:'',
                     inputBox4:'',
                     inputBox5:'',
-                    inputBox6:''
+                    inputBox6:'',
+                    addDivIsOpened:false
                 })  
         } else {
             this.setState({
@@ -82,7 +85,8 @@ class Work extends Component {
                 inputBox3:'',
                 inputBox4:'',
                 inputBox5:'',
-                inputBox6:''
+                inputBox6:'',
+                addDivIsOpened:false
             })
         }
     }
@@ -103,15 +107,29 @@ class Work extends Component {
 
         return (
             <div>
-                <h1>WORK</h1>
+                <div className="section-header-holder">
+                    <h1 className="section-header">WORK</h1>
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToWork()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                </div>
                 <p>{workProfile}</p>
-                {this.state.inputBox1}
-                {this.state.inputBox2}
-                {this.state.inputBox3}
-                {this.state.inputBox4}
-                {this.state.inputBox5}
-                {this.state.inputBox6}
-                {this.state.addIsClicked?(<button onClick={()=>{this.addToWork()}}>Save</button>):(<button onClick={()=>this.editAddIsClicked()}>Add Job</button>)}
+                {this.state.addDivIsOpened?(
+                    <div className="add-large-input-box-container">
+                        {this.state.inputBox1}
+                        {this.state.inputBox2}
+                        {this.state.inputBox3}
+                        {this.state.inputBox4}
+                        {this.state.inputBox5}
+                        {this.state.inputBox6}
+                    </div>) : 
+                    (<div>
+                        {this.state.inputBox1}
+                        {this.state.inputBox2}
+                        {this.state.inputBox3}
+                        {this.state.inputBox4}
+                        {this.state.inputBox5}
+                        {this.state.inputBox6}
+                    </div>)
+                }
             </div>
         )
     }

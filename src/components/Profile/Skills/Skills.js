@@ -12,7 +12,7 @@ class Skills extends Component {
             inputBox1:'',
             skills:this.props.skills,
             skill:'',
-            
+            addDivIsOpened:false
         }
     }
 
@@ -42,7 +42,8 @@ class Skills extends Component {
     editAddIsClicked(){
         this.setState({
             addIsClicked:true,
-            inputBox1:<input onChange={(e)=>{this.handleInput('skill',e.target.value)}}/>,
+            inputBox1:<input className="add-input-box" onChange={(e)=>{this.handleInput('skill',e.target.value)}}/>,
+            addDivIsOpened:true
         })
     }
 
@@ -55,12 +56,14 @@ class Skills extends Component {
             this.setState({
                 addIsClicked:false,
                 skills:this.props.skills,
-                inputBox1:''
+                inputBox1:'',
+                addDivIsOpened:false
             })
         } else {
             this.setState({
                 addIsClicked:false,
-                inputBox1:''
+                inputBox1:'',
+                addDivIsOpened:false
             })
         }
     }
@@ -80,10 +83,16 @@ class Skills extends Component {
 
         return (
             <div>
-                <h1>Skills</h1>
-                {skillsProfile}
-                {this.state.inputBox1}
-                {this.state.addIsClicked?(<button onClick={()=>{this.addToSkills()}}>Save</button>):(<button onClick={()=>{this.editAddIsClicked()}}>Add Skill</button>)}
+                <div className="section-header-holder">
+                    <h1 className="section-header">SKILLS</h1>
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToSkills()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>{this.editAddIsClicked()}}>ADD</button>)}
+                </div>
+                <p>{skillsProfile}</p>
+                {this.state.addDivIsOpened?
+                (<div className="add-small-input-box-container">
+                    {this.state.inputBox1}
+                </div>):(this.state.inputBox1)
+                }
 
                 
             </div>

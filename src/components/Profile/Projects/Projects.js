@@ -11,7 +11,8 @@ class Projects extends Component {
             addIsClicked: false,
             inputBox1:'',
             projects:this.props.projects,
-            project:''
+            project:'',
+            addDivIsOpened:false
         }
     }
 
@@ -41,7 +42,8 @@ class Projects extends Component {
         editAddIsClicked(){
             this.setState({
                 addIsClicked:true,
-                inputBox1:<input onChange={(e)=>{this.handleInput('project',e.target.value)}}/>,
+                inputBox1:<input className="add-input-box" onChange={(e)=>{this.handleInput('project',e.target.value)}}/>,
+                addDivIsOpened:true
             })
         }
     
@@ -55,12 +57,14 @@ class Projects extends Component {
                 this.setState({
                     addIsClicked:false,
                     projects:this.props.projects,
-                    inputBox1:''
+                    inputBox1:'',
+                    addDivIsOpened:false
                 })
             } else {
                 this.setState({
                     addIsClicked:false,
-                    inputBox1:''
+                    inputBox1:'',
+                    addDivIsOpened:false
                 })
             }
         }
@@ -79,10 +83,16 @@ class Projects extends Component {
 
         return (
             <div>
-                <h1>Projects</h1>
+                <div className="section-header-holder">
+                    <h1 className="section-header">PROJECTS</h1>
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToProj()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>{this.editAddIsClicked()}}>ADD</button>)}
+                </div>
                 <p>{projProfile}</p>
-                {this.state.inputBox1}
-                {this.state.addIsClicked?(<button onClick={()=>{this.addToProj()}}>Save</button>):(<button onClick={()=>{this.editAddIsClicked()}}>Add Project</button>)}
+                {this.state.addDivIsOpened?
+                (<div className="add-small-input-box-container">
+                    {this.state.inputBox1}
+                </div>):(this.state.inputBox1)
+                }
             </div>
         )
     }

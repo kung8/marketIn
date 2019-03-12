@@ -32,7 +32,7 @@ class Project extends Component {
     handleEditToggle=()=>{
         this.setState({
             edit:true,
-            editBox:<input onChange={(e)=>this.handleInput('project',e.target.value)}/>
+            editBox:<input className="edit-input-box" onChange={(e)=>this.handleInput('project',e.target.value)}/>
         })
     }
 
@@ -67,11 +67,15 @@ class Project extends Component {
         const {proj} = this.props;
         
         return (
-            <div key={proj.id}>
-                <p>{proj.project}</p>
-                {this.state.editBox}
-                {this.state.edit?(<button onClick={()=>this.edit(proj)}>Save</button>):<button onClick={()=>{this.handleEditToggle(proj)}}>Edit</button>}
-                <button onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
+            <div className="small-experience-section-box" key={proj.id}>
+                <div className="small-experience-box">
+                    <p>{proj.project}</p>
+                </div>    
+                <div className="input-edit-delete-container">
+                    {this.state.editBox}
+                    {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(proj)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(proj)}}>Edit</button>}
+                    <button className="small-section-delete-button" onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
+                </div>    
             </div>        
         )
     }

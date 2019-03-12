@@ -46,20 +46,32 @@ class Profile extends Component {
         //if a user session id == user then you can edit that profile but this is already a way to check session
 
         return (
-            <div>
-                <button onClick={()=>this.logout()}>Logout</button>
-                <h1>Hello {this.props.firstName}</h1>
-                <h1>first:{this.props.firstName}</h1>
-                <h1>last:{this.props.lastName}</h1>
-                <h1>email:{this.props.email}</h1>
-                <img src={this.props.imageUrl}/>
-    
-                <Education />
-                <Work />
-                <Skills/>
-                <Languages/>
-                <Projects/>
-
+            
+            <div className="profile-container">
+                
+                <div className="profile-basic-info-container">
+                    <img className="profile-picture" src={this.props.imageUrl}/>
+                    <div>
+                        <h1>{this.props.firstName} {this.props.lastName}</h1>
+                        <h1>{this.props.email}@gmail.com</h1>
+                    </div>
+                </div>    
+                <div className="section-container">
+                    <Education /> 
+                </div>
+                <div className="section-container">
+                    <Work />
+                </div>
+                <div className="section-container">
+                    <Skills/>
+                </div>
+                <div className="section-container">
+                    <Languages/>
+                </div>
+                <div className="section-container">
+                    <Projects/>
+                </div>
+                
             </div>
         )
     }

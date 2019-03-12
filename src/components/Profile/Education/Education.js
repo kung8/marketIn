@@ -21,7 +21,8 @@ constructor(props){
         edLevel:'',
         schLoc:'',
         gradDate:'',
-        schLogo:''
+        schLogo:'',
+        addDivIsOpened:false
     }
 }
 
@@ -49,12 +50,13 @@ handleInput(prop,value){
 editAddIsClicked (){
     this.setState({
         addIsClicked:true,
-        inputBox1:<input placeholder="School Name" onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
-        inputBox2:<input placeholder="Major" onChange={(e)=>{this.handleInput('major',e.target.value)}}/>,
-        inputBox3:<input placeholder="Education Level" onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
-        inputBox4:<input placeholder="School Location" onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
-        inputBox5:<input placeholder="Graduation Date" onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
-        inputBox6:<input placeholder="School Logo" onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>
+        inputBox1:<input className="edit-input-box" placeholder="School" onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
+        inputBox2:<input className="edit-input-box" placeholder="Major" onChange={(e)=>{this.handleInput('major',e.target.value)}}/>,
+        inputBox3:<input className="edit-input-box" placeholder="Ed Level" onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
+        inputBox4:<input className="edit-input-box" placeholder="Location" onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
+        inputBox5:<input className="edit-input-box" placeholder="Grad Date" onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
+        inputBox6:<input className="edit-input-box" placeholder="School Logo" onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>,
+        addDivIsOpened:true
     })
 }
 
@@ -72,7 +74,8 @@ addToEd= async()=>{
                 inputBox3:'',
                 inputBox4:'',
                 inputBox5:'',
-                inputBox6:''
+                inputBox6:'',
+                addDivIsOpened:false
             })  
     } else {
         this.setState({
@@ -82,7 +85,8 @@ addToEd= async()=>{
             inputBox3:'',
             inputBox4:'',
             inputBox5:'',
-            inputBox6:''
+            inputBox6:'',
+            addDivIsOpened:false
         })
     }
 }
@@ -105,16 +109,31 @@ addToEd= async()=>{
     
         return (
             <div>
-                Education
+                <div className="section-header-holder">
+                    <h1 className="section-header">EDUCATION</h1>
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToEd()}>SAVE</button>):
+                    (<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                </div>
                 <p>{edProfile}</p>
-                {this.state.inputBox1}
-                {this.state.inputBox2}
-                {this.state.inputBox3}
-                {this.state.inputBox4}
-                {this.state.inputBox5}
-                {this.state.inputBox6}
-                {this.state.addIsClicked?(<button onClick={()=>this.addToEd()}>Save</button>):
-                (<button onClick={()=>this.editAddIsClicked()}>Add School</button>)}
+                {this.state.addDivIsOpened?(
+                    <div className="add-large-input-box-container">
+                        {this.state.inputBox1}
+                        {this.state.inputBox2}
+                        {this.state.inputBox3}
+                        {this.state.inputBox4}
+                        {this.state.inputBox5}
+                        {this.state.inputBox6}
+                    </div>) : 
+                    (<div>
+                        {this.state.inputBox1}
+                        {this.state.inputBox2}
+                        {this.state.inputBox3}
+                        {this.state.inputBox4}
+                        {this.state.inputBox5}
+                        {this.state.inputBox6}
+                    </div>)
+                }
+                
             </div>
         )
     }

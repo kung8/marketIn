@@ -32,7 +32,7 @@ class Language extends Component {
     handleEditToggle=()=>{
         this.setState({
             edit:true,
-            editBox:<input onChange={(e)=>this.handleInput('language',e.target.value)}/>
+            editBox:<input className="edit-input-box" onChange={(e)=>this.handleInput('language',e.target.value)}/>
         })
     }
 
@@ -66,13 +66,16 @@ class Language extends Component {
     render (){
         const {lang} = this.props;
         return (
-            <div lang={lang.id}>
+            <div className="small-experience-section-box" lang={lang.id}>
+                <div className="small-experience-box">
                     <p>{lang.language}</p>
-                    {this.state.editBox}
-                    {this.state.edit?(<button onClick={()=>this.edit(lang)}>Save</button>):<button onClick={()=>{this.handleEditToggle(lang)}}>Edit</button>}
-                    <button onClick={()=>{this.deleteLangProfile(lang)}}>Delete</button>
                 </div>
-            
+                <div className="input-edit-delete-container">
+                    {this.state.editBox}
+                    {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(lang)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(lang)}}>Edit</button>}
+                    <button className="small-section-delete-button" onClick={()=>{this.deleteLangProfile(lang)}}>Delete</button>
+                </div>
+            </div>
         )
     }
 }

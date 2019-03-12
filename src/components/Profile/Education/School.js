@@ -43,12 +43,13 @@ class School extends Component {
     handleEditToggle=()=>{
         this.setState({
             edit:true,
-            editBox1:<input placeholder="School Name" onChange={(e)=>this.handleInput('schName',e.target.value)}/>,
-            editBox2:<input placeholder="Major" onChange={(e)=>this.handleInput('major',e.target.value)}/>,
-            editBox3:<input placeholder="Education Level" onChange={(e)=>this.handleInput('edLevel',e.target.value)}/>,
-            editBox4:<input placeholder="School Location" onChange={(e)=>this.handleInput('schLoc',e.target.value)}/>,
-            editBox5:<input placeholder="Graduation Date" onChange={(e)=>this.handleInput('gradDate',e.target.value)}/>,
-            editBox6:<input placeholder="School Logo" onChange={(e)=>this.handleInput('schLogo',e.target.value)}/>
+            editBox1:<input className="edit-input-box" placeholder="School Name" onChange={(e)=>this.handleInput('schName',e.target.value)}/>,
+            editBox2:<input className="edit-input-box" placeholder="Major" onChange={(e)=>this.handleInput('major',e.target.value)}/>,
+            editBox3:<input className="edit-input-box" placeholder="Education Level" onChange={(e)=>this.handleInput('edLevel',e.target.value)}/>,
+            editBox4:<input className="edit-input-box" placeholder="School Location" onChange={(e)=>this.handleInput('schLoc',e.target.value)}/>,
+            editBox5:<input className="edit-input-box" placeholder="Graduation Date" onChange={(e)=>this.handleInput('gradDate',e.target.value)}/>,
+            editBox6:<input className="edit-input-box" placeholder="School Logo" onChange={(e)=>this.handleInput('schLogo',e.target.value)}/>,
+            addDivIsOpened:true
         })
     }
 
@@ -74,7 +75,8 @@ class School extends Component {
                 schLogo:'',
                 gradDate:'',
                 edLevel:'',
-                major:''
+                major:'',
+                addDivIsOpened:false
                 
             }) 
         }   else {
@@ -85,7 +87,8 @@ class School extends Component {
                     editBox3:'',
                     editBox4:'',
                     editBox5:'',
-                    editBox6:''
+                    editBox6:'',
+                    addDivIsOpened:false
                 })
             }
     }
@@ -94,22 +97,41 @@ class School extends Component {
         const {sch} = this.props;
 
         return (
-            <div key={sch.id}>
-                    <p>{sch.sch_name}</p>
-                    <p>{sch.major}</p>
-                    <p>{sch.ed_level}</p>
-                    <p>{sch.sch_loc}</p>
-                    <p>{sch.grad_date}</p>
-                    <img src={sch.sch_logo} alt="sch_logo"/>
-                    {this.state.editBox1}
-                    {this.state.editBox2}
-                    {this.state.editBox3}
-                    {this.state.editBox4}
-                    {this.state.editBox5}
-                    {this.state.editBox6}
-                    <br/>
-                    {this.state.edit?(<button onClick={()=>this.edit(sch)}>Save</button>):<button onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
-                    <button onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
+            <div className="large-experience-section-box" key={sch.id}>
+                <div class="large-experience-box-top">
+                    <div className="school-work-logo-container">
+                        <img className="school-work-logo" src={sch.sch_logo} alt="sch_logo"/>
+                    </div>
+                    <div className="large-experience-box">
+                        <p>{sch.sch_name}</p>
+                        <p>{sch.major}</p>
+                        <p>{sch.ed_level}</p>
+                        <p>{sch.sch_loc}</p>
+                        <p>{sch.grad_date}</p>
+                    </div>
+                    <div className="edit-delete-button-container">
+                        {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(sch)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
+                        <button className="large-section-delete-button" onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
+                    </div>
+                </div>
+                <div>
+                    {this.state.addDivIsOpened?
+                    (<div className="add-large-input-box-container">
+                        {this.state.editBox1}
+                        {this.state.editBox2}
+                        {this.state.editBox3}
+                        {this.state.editBox4}
+                        {this.state.editBox5}
+                        {this.state.editBox6}
+                    </div>):(<div>{this.state.editBox1}
+                        {this.state.editBox2}
+                        {this.state.editBox3}
+                        {this.state.editBox4}
+                        {this.state.editBox5}
+                        {this.state.editBox6}
+                        </div>)
+                    }
+                </div>    
                 </div>
 
         )

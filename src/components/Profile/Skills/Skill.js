@@ -33,7 +33,7 @@ class Skill extends Component {
     handleEditToggle=()=>{
         this.setState({
             edit:true,
-            editBox:<input onChange={(e)=>this.handleInput('skill',e.target.value)}/>
+            editBox:<input className="edit-input-box" onChange={(e)=>this.handleInput('skill',e.target.value)}/>
         })
     }
 
@@ -56,11 +56,15 @@ class Skill extends Component {
     render(){
         const {skill} = this.props
         return(
-        <div>
-            <p>{skill.skill}</p>
-            {this.state.editBox}
-            {this.state.edit?(<button onClick={()=>this.edit(skill)}>Save</button>):<button onClick={()=>{this.handleEditToggle(skill)}}>Edit</button>}
-            <button onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
+        <div className="small-experience-section-box">
+            <div className="small-experience-box">
+                <p>{skill.skill}</p>
+            </div>
+            <div className="input-edit-delete-container">
+                {this.state.editBox}
+                {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(skill)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(skill)}}>Edit</button>}
+                <button className="small-section-delete-button" onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
+            </div>
         </div>
         )
     }

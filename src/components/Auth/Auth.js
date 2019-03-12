@@ -36,12 +36,12 @@ class Auth extends Component {
     render (){
         console.log(this.props)
         return (
-            <div>
-                <input type="text" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>
-                <input type="password" placeholder="Password" onChange={(e)=>this.handleInput('password',e.target.value)}/>
-                <button onClick={this.login}>Login</button>
+            <div className="login-page">
+                <input className="login-input" type="text" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>
+                <input className="login-input" type="password" placeholder="Password" onChange={(e)=>this.handleInput('password',e.target.value)}/>
+                <button className="login-button" onClick={this.login}>Login</button>
                 <Link to='/register/step1'>Create an Account</Link>
-            </div>
+            </div> 
         )
     }
 }

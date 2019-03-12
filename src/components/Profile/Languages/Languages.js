@@ -11,7 +11,8 @@ class Languages extends Component {
             addIsClicked: false,
             inputBox1:'',
             languages:this.props.languages,
-            language:''
+            language:'',
+            addDivIsOpened:false
         }
     }
 
@@ -41,7 +42,8 @@ class Languages extends Component {
     editAddIsClicked(){
         this.setState({
             addIsClicked:true,
-            inputBox1:<input onChange={(e)=>{this.handleInput('language',e.target.value)}}/>,
+            inputBox1:<input className="add-input-box" onChange={(e)=>{this.handleInput('language',e.target.value)}}/>,
+            addDivIsOpened:true
         })
     }
 
@@ -54,12 +56,14 @@ class Languages extends Component {
             this.setState({
                 addIsClicked:false,
                 languages:this.props.languages,
-                inputBox1:''
+                inputBox1:'',
+                addDivIsOpened:false
             })
         } else {
             this.setState({
                 addIsClicked:false,
-                inputBox1:''
+                inputBox1:'',
+                addDivIsOpened:false
             })
         }
     }
@@ -80,10 +84,16 @@ class Languages extends Component {
 
         return (
             <div>
-                <h1>Languages</h1>
+                <div className="section-header-holder">
+                    <h1 className="section-header">LANGUAGES</h1>
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToLang()}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                </div>
                 <p>{langProfile}</p>
-                {this.state.inputBox1}
-                {this.state.addIsClicked?(<button onClick={()=>this.addToLang()}>Save</button>):(<button onClick={()=>this.editAddIsClicked()}>Add Language</button>)}
+                {this.state.addDivIsOpened?
+                (<div className="add-small-input-box-container">
+                    {this.state.inputBox1}
+                </div>):(this.state.inputBox1)
+                }
             </div>
         )
     }
