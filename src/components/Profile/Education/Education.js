@@ -93,6 +93,7 @@ addToEd= async()=>{
 
 
 
+    
 
 
     render(){
@@ -109,6 +110,7 @@ addToEd= async()=>{
     
         return (
             <div>
+                
                 <div className="section-header-holder">
                     <h1 className="section-header">EDUCATION</h1>
                     {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToEd()}>SAVE</button>):

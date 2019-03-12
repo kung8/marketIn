@@ -110,7 +110,8 @@ class School extends Component {
                         <p>{sch.grad_date}</p>
                     </div>
                     <div className="edit-delete-button-container">
-                        {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(sch)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
+                    {/* <button className="button-test"  type="button" onClick={()=>this.changeHeight()}> Click Me!</button> */}
+                        {this.state.edit?(<button type="button" className="edit-save-button" onClick={()=>this.edit(sch)}>Save</button>):<button type="button" className="edit-save-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
                         <button className="large-section-delete-button" onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
                     </div>
                 </div>

@@ -5,14 +5,13 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 
 class Header extends Component {
-    constructor(props) {
-        super(props)
-    }
+
     
-    async logout(){
+    logout =async () => {
         await axios.post('/auth/logout');
         this.props.clearUser();
-        // this.props.history.push('/');  
+        // this.props.history.push('/'); 
+
     }
     render(){
         console.log(this.props)
@@ -24,7 +23,8 @@ class Header extends Component {
                 </div>
                 {this.props.id?
                     (<div className="logout-button-container">
-                        <Link to='/'><button className="logout-button" onClick={()=>this.logout()}>Logout</button></Link>
+                        <Link to='/'><button className="logout-button" onClick={this.logout}>Logout</button></Link>
+                        {/* <button className="logout-button" onClick={()=>this.logout()}>Logout</button> */}
                     </div>):null
                 }
             </div>

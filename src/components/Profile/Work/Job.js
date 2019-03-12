@@ -43,12 +43,12 @@ class Job extends Component {
     handleEditToggle=()=>{
         this.setState({
             edit:true,
-            editBox1:<input className="edit-input-box" placeholder="Employer Name" onChange={(e)=>this.handleInput('empName',e.target.value)}/>,
+            editBox1:<input className="edit-input-box" placeholder="Employer" onChange={(e)=>this.handleInput('empName',e.target.value)}/>,
             editBox2:<input className="edit-input-box" placeholder="Position" onChange={(e)=>this.handleInput('position',e.target.value)}/>,
-            editBox3:<input className="edit-input-box" placeholder="Employer Location" onChange={(e)=>this.handleInput('empLoc',e.target.value)}/>,
+            editBox3:<input className="edit-input-box" placeholder="Location" onChange={(e)=>this.handleInput('empLoc',e.target.value)}/>,
             editBox4:<input className="edit-input-box" placeholder="Hire Date" onChange={(e)=>this.handleInput('hireDate',e.target.value)}/>,
             editBox5:<input className="edit-input-box" placeholder="End Date" onChange={(e)=>this.handleInput('endDate',e.target.value)}/>,
-            editBox6:<input className="edit-input-box" placeholder="Employer Logo" onChange={(e)=>this.handleInput('empLogo',e.target.value)}/>,
+            editBox6:<input className="edit-input-box" placeholder="Emp Logo" onChange={(e)=>this.handleInput('empLogo',e.target.value)}/>,
             addDivIsOpened:true
         })
     }

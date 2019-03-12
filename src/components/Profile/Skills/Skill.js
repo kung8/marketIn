@@ -43,14 +43,23 @@ class Skill extends Component {
         const {id,user_id} = oldSkill;
         // console.log(333,this.state.skill,id,user_id);
         const {skill} = this.state;
-        const skillsProfile = await axios.put('/profile/edit/skill',{skill,id,user_id})
-        // console.log(444,skillsProfile.data[0].skill)
-        this.props.updateSkill(skillsProfile.data)
-        this.setState({
-            edit:false,
-            editBox:'',
-            skill:''
-        })
+        if(skill !==""){
+            const skillsProfile = await axios.put('/profile/edit/skill',{skill,id,user_id})
+            // console.log(444,skillsProfile.data[0].skill)
+            this.props.updateSkill(skillsProfile.data)
+            this.setState({
+                edit:false,
+                editBox:'',
+                skill:''
+            })
+        } else {
+            this.setState({
+                edit:false,
+                editBox:'',
+                skill:''
+            })
+        }
+        
     }
 
     render(){
