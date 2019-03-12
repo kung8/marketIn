@@ -12,7 +12,8 @@ class Languages extends Component {
             inputBox1:'',
             languages:this.props.languages,
             language:'',
-            addDivIsOpened:false
+            addDivIsOpened:false,
+            isMinimized:false
         }
     }
 
@@ -68,7 +69,17 @@ class Languages extends Component {
         }
     }
 
-    
+    minimize(){
+        this.setState({
+            isMinimized:true
+        })
+    }
+
+    maximize(){
+        this.setState({
+            isMinimized:false
+        })
+    }
 
     render () {
         const {languages} = this.props 
@@ -86,7 +97,8 @@ class Languages extends Component {
             <div>
                 <div className="section-header-holder">
                     <h1 className="section-header">LANGUAGES</h1>
-                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToLang()}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                    {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>}
+
                 </div>
                 <p>{langProfile}</p>
                 {this.state.addDivIsOpened?
@@ -94,6 +106,9 @@ class Languages extends Component {
                     {this.state.inputBox1}
                 </div>):(this.state.inputBox1)
                 }
+                <div className="add-button-container">
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToLang()}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                </div>
             </div>
         )
     }

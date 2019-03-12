@@ -22,7 +22,8 @@ class Work extends Component {
             hireDate:'',
             endDate:'',
             position:'',
-            addDivIsOpened:false
+            addDivIsOpened:false,
+            isMinimized:false
         }
     }
 
@@ -91,7 +92,17 @@ class Work extends Component {
         }
     }
 
-    
+    minimize(){
+        this.setState({
+            isMinimized:true
+        })
+    }
+
+    maximize(){
+        this.setState({
+            isMinimized:false
+        })
+    }
 
     render () {
         const {work} = this.props;
@@ -109,7 +120,8 @@ class Work extends Component {
             <div>
                 <div className="section-header-holder">
                     <h1 className="section-header">WORK</h1>
-                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToWork()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                    {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>}
+
                 </div>
                 <p>{workProfile}</p>
                 {this.state.addDivIsOpened?(
@@ -130,6 +142,9 @@ class Work extends Component {
                         {this.state.inputBox6}
                     </div>)
                 }
+                <div className="add-button-container">
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToWork()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                </div>
             </div>
         )
     }

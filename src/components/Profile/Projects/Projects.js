@@ -12,7 +12,8 @@ class Projects extends Component {
             inputBox1:'',
             projects:this.props.projects,
             project:'',
-            addDivIsOpened:false
+            addDivIsOpened:false,
+            isMinimized:false
         }
     }
 
@@ -68,6 +69,19 @@ class Projects extends Component {
                 })
             }
         }
+        
+        minimize(){
+            this.setState({
+                isMinimized:true
+            })
+        }
+    
+        maximize(){
+            this.setState({
+                isMinimized:false
+            })
+        }
+
 
     render () {
         const {projects} = this.props;
@@ -85,7 +99,7 @@ class Projects extends Component {
             <div>
                 <div className="section-header-holder">
                     <h1 className="section-header">PROJECTS</h1>
-                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToProj()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>{this.editAddIsClicked()}}>ADD</button>)}
+                    {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>}
                 </div>
                 <p>{projProfile}</p>
                 {this.state.addDivIsOpened?
@@ -93,6 +107,10 @@ class Projects extends Component {
                     {this.state.inputBox1}
                 </div>):(this.state.inputBox1)
                 }
+
+                <div className="add-button-container">
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToProj()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>{this.editAddIsClicked()}}>ADD</button>)}
+                </div>
             </div>
         )
     }

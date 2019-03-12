@@ -53,6 +53,8 @@
     margin-right: 20px; 
 }
 
+/*if view is in mobile view we will need to use the MI header. Need to have a condition check for the size to show logout.*/
+
 .logout-button {
     font-size:16px;
     margin:5px auto;
@@ -119,7 +121,9 @@
 
 .section-header-holder {
     display:flex;
-    justify-content: space-between
+    justify-content: space-between;
+    margin-right:5px;
+    margin-top:5px;
 }
 
 .section-header {
@@ -141,7 +145,6 @@
     justify-content: space-between;
     width:520px;
     margin: 20px auto;
-
 }
 
 .school-work-logo-container {
@@ -158,6 +161,15 @@
 .edit-delete-button-container {
     display:flex;
     flex-direction: column;
+}
+
+.add-button-container {
+    display:flex;
+    /* background:red; */
+    justify-content:center;
+    /* align-items: center; */
+    margin-bottom:5px;
+    margin-top:-5px;
 }
 
 

@@ -68,6 +68,18 @@ class Skills extends Component {
         }
     }
 
+    minimize(){
+        this.setState({
+            isMinimized:true
+        })
+    }
+
+    maximize(){
+        this.setState({
+            isMinimized:false
+        })
+    }
+
     render () {
         // console.log(1234,this.props.skills,this.props.id)
         const {skills}  = this.props;
@@ -85,7 +97,7 @@ class Skills extends Component {
             <div>
                 <div className="section-header-holder">
                     <h1 className="section-header">SKILLS</h1>
-                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToSkills()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>{this.editAddIsClicked()}}>ADD</button>)}
+                    {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>}
                 </div>
                 <p>{skillsProfile}</p>
                 {this.state.addDivIsOpened?
@@ -93,7 +105,9 @@ class Skills extends Component {
                     {this.state.inputBox1}
                 </div>):(this.state.inputBox1)
                 }
-
+                <div className="add-button-container">
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToSkills()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>{this.editAddIsClicked()}}>ADD</button>)}
+                </div>
                 
             </div>
         )

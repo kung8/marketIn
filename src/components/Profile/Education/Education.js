@@ -22,7 +22,8 @@ constructor(props){
         schLoc:'',
         gradDate:'',
         schLogo:'',
-        addDivIsOpened:false
+        addDivIsOpened:false,
+        isMinimized:false
     }
 }
 
@@ -92,9 +93,17 @@ addToEd= async()=>{
 }
 
 
+    minimize(){
+        this.setState({
+            isMinimized:true
+        })
+    }
 
-    
-
+    maximize(){
+        this.setState({
+            isMinimized:false
+        })
+    }
 
     render(){
         console.log(this.props.education,this.props.id)
@@ -113,8 +122,7 @@ addToEd= async()=>{
                 
                 <div className="section-header-holder">
                     <h1 className="section-header">EDUCATION</h1>
-                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToEd()}>SAVE</button>):
-                    (<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                    {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>}
                 </div>
                 <p>{edProfile}</p>
                 {this.state.addDivIsOpened?(
@@ -135,7 +143,10 @@ addToEd= async()=>{
                         {this.state.inputBox6}
                     </div>)
                 }
-                
+                <div className="add-button-container">
+                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToEd()}>SAVE</button>):
+                    (<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                </div>
             </div>
         )
     }
