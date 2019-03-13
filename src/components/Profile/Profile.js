@@ -56,7 +56,7 @@ class Profile extends Component {
                         <h1>{this.props.email}@gmail.com</h1>
                     </div>
                 </div>    
-                <div className="section-container">
+                <div id="education" className="section-container">
                     <Education /> 
                 </div>
                 <div className="section-container">

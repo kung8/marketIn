@@ -4,22 +4,20 @@
     margin:0;
 }
 
-/*Overall App*/
 .App {
     /* text-align: center; */
     /* height:960px; */
-    width:320px;
+    width:540px;
     background:white;
     display:flex;
     flex-direction: column;
     
 }
 
-/**************************************Header**************************************/
 .header-container {
     background:navy;
-    width:320px;
-    height:80px; 
+    width:540px;
+    height:90px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,7 +27,7 @@
 .header{
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .marketin-logo {
@@ -45,14 +43,14 @@
 
 .marketin-name {
     letter-spacing: 0.05em;
-    margin-right:5px;
+    padding-left: 120px;
     font-size:40px;
     color:white;
     /* background:blue;  */
 }
 
 .logout-button-container {
-    /* margin-right: 20px;  */
+    margin-right: 20px; 
 }
 
 /*if view is in mobile view we will need to use the MI header. Need to have a condition check for the size to show logout.*/
@@ -67,33 +65,11 @@
     width:65px;
 }
 
-/**************************************Sidebar*************************************/
-.sidebar-container {
-    display: flex;
-    flex-direction: column;
-    position:fixed;
-    top:80px;
-    left:0px;
-    /* z-index:1; */
-    overflow:hidden;
-    background-color:black;
-    height:100%;
-    width:300px;
-    transition:0.5s;
-}
-
-.sidebar-container a {
-    text-decoration: none;
-    color:white;
-    padding:10px;
-    font-size:35px;
-}
-
-/*************************************Profile**************************************/
-
-/*************************************Profile Info*********************************/
 .profile-container {
-    margin-top:85px;
+    margin-top:95px;
+    padding-left:5px;
+    padding-right:5px;
+
 }
 
 .profile-basic-info-container {
@@ -200,8 +176,8 @@
 .small-experience-section-box {
     margin-top:5px;
     background:silver;
-    /* margin-right:5px; */
-    /* margin-left:5px; */
+    margin-right:5px;
+    margin-left:5px;
     display:flex;
     height:60px;
     justify-content: space-between;
