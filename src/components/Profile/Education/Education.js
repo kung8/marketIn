@@ -95,7 +95,8 @@ addToEd= async()=>{
 
     minimize(){
         this.setState({
-            isMinimized:true
+            isMinimized:true,
+
         })
     }
 
@@ -117,36 +118,37 @@ addToEd= async()=>{
             )
         })
     
+        // const {isMinimized} = this.state;
+
         return (
             <div>
-                
-                <div className="section-header-holder">
-                    <h1 className="section-header">EDUCATION</h1>
-                    {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>}
-                </div>
-                <p>{edProfile}</p>
-                {this.state.addDivIsOpened?(
-                    <div className="add-large-input-box-container">
-                        {this.state.inputBox1}
-                        {this.state.inputBox2}
-                        {this.state.inputBox3}
-                        {this.state.inputBox4}
-                        {this.state.inputBox5}
-                        {this.state.inputBox6}
-                    </div>) : 
-                    (<div>
-                        {this.state.inputBox1}
-                        {this.state.inputBox2}
-                        {this.state.inputBox3}
-                        {this.state.inputBox4}
-                        {this.state.inputBox5}
-                        {this.state.inputBox6}
-                    </div>)
-                }
-                <div className="add-button-container">
-                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToEd()}>SAVE</button>):
-                    (<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
-                </div>
+                    <div className="section-header-holder">
+                        <h1 className="section-header">EDUCATION</h1>
+                        {/* {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>} */}
+                    </div>
+                    <p>{edProfile}</p>
+                    {this.state.addDivIsOpened?(
+                        <div className="add-large-input-box-container">
+                            {this.state.inputBox1}
+                            {this.state.inputBox2}
+                            {this.state.inputBox3}
+                            {this.state.inputBox4}
+                            {this.state.inputBox5}
+                            {this.state.inputBox6}
+                        </div>) : 
+                        (<div>
+                            {this.state.inputBox1}
+                            {this.state.inputBox2}
+                            {this.state.inputBox3}
+                            {this.state.inputBox4}
+                            {this.state.inputBox5}
+                            {this.state.inputBox6}
+                        </div>)
+                    }
+                    <div className="add-button-container">
+                        {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToEd()}>SAVE</button>):
+                        (<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                    </div>
             </div>
         )
     }
