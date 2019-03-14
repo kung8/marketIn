@@ -1,4 +1,4 @@
-import {UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT,CLEAR_USER} from './constants'
+import {UPDATE_VIEWED_USER,UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT,CLEAR_USER} from './constants'
 
 const initialState = {
     id:0,
@@ -10,13 +10,21 @@ const initialState = {
     work: [],
     skills: [],
     languages: [],
-    projects: []
+    projects: [],
+    viewedUserId:0,
+    userFirstName:'',
+    userLastName:'',
+    userEmail:'',
+    userImageUrl:''
 }
 
 export default function userReducer(state = initialState,action){
     console.log(1111,action.payload)
     
     switch(action.type){
+        case UPDATE_VIEWED_USER:
+            const {first_name:userFirstName,last_name:userLastName,email:userEmail,image_url:userImageUrl,id:viewedUserId} = action.payload;
+            return {...state,viewedUserId,userFirstName,userLastName,userEmail,userImageUrl}
         case UPDATE_USER:
             const {first_name:firstName,last_name:lastName,email,image_url:imageUrl,id} = action.payload;
             return {...state,firstName,lastName,email,imageUrl,id};

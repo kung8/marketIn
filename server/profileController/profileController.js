@@ -1,4 +1,13 @@
 module.exports = {
+    getUser: async (req,res) => {
+        const db = req.app.get('db');
+        // console.log('hit!')
+        const {userId} = req.params;
+        // console.log(userId)
+        const user = await db.profiles.getProfiles.get_user({id:userId});
+        res.status(200).send(user);
+    },
+    
     getEdProfile: async (req,res) => {
         const db = req.app.get('db');
         const {userId} = req.params;

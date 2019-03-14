@@ -1,4 +1,4 @@
-import {UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT, CLEAR_USER} from './constants'
+import {UPDATE_VIEWED_USER,UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT, CLEAR_USER} from './constants'
 
 export function updateUser ({first_name,last_name,email,image_url,id}){
     return {
@@ -13,6 +13,19 @@ export function updateUser ({first_name,last_name,email,image_url,id}){
     }
 }
 
+
+export function updateViewedUser ({first_name,last_name,email,image_url,id}){
+    return{
+        type:UPDATE_VIEWED_USER,
+        payload:{
+            first_name,
+            last_name,
+            email,
+            image_url,
+            id
+        }
+    }
+}
 
 export function updateEducation (education){
     return {

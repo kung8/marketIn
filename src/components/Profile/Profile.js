@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {clearUser,updateUser} from '../../ducks/userActions';
+import {clearUser,updateUser,updateViewedUser} from '../../ducks/userActions';
 import Education from './Education/Education';
 import Work from './Work/Work';
 import Skills from './Skills/Skills';
@@ -21,6 +21,7 @@ class Profile extends Component {
     }
 
     componentDidMount () {
+        this.getUser();
         this.checkUser();
     }
 
@@ -30,6 +31,14 @@ class Profile extends Component {
             let user = await axios.get('/auth/current')
                 this.props.updateUser(user.data)
         }
+    }
+
+    async getUser(){
+        console.log('hit!',this.props.match.params.userId)
+        const userProfile = await axios.get('/profile/get/user/'+this.props.match.params.userId);
+        console.log(7777,userProfile.data);
+        this.props.updateViewedUser(userProfile.data[0])
+
     }
 
     async logout(){
@@ -50,10 +59,10 @@ class Profile extends Component {
             <div className="profile-container">
                 
                 <div className="profile-basic-info-container">
-                    <img className="profile-picture" src={this.props.imageUrl}/>
+                    <img className="profile-picture" src={this.props.userImageUrl}/>
                     <div>
-                        <h1>{this.props.firstName} {this.props.lastName}</h1>
-                        <h1>{this.props.email}</h1>
+                        <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
+                        <h1>{this.props.userEmail}</h1>
                     </div>
                 </div>    
                 <div id="education" className="section-container">
@@ -84,7 +93,13 @@ function mapStateToProps (reduxState){
         lastName:reduxState.lastName,
          email:reduxState.email,
         imageUrl:reduxState.imageUrl,
+        // userId:reduxState.id,
+        userFirstName:reduxState.userFirstName,
+        userLastName:reduxState.userLastName,
+        userEmail:reduxState.userEmail,
+        userImageUrl:reduxState.userImageUrl,
+        viewedUserId:reduxState.viewedUserId
     }
 }
 
-export default connect(mapStateToProps,{clearUser,updateUser})(Profile)
+export default connect(mapStateToProps,{clearUser,updateUser,updateViewedUser})(Profile)
