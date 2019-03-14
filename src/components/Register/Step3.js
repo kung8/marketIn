@@ -79,42 +79,42 @@ class StepThree extends Component {
         const {empName,position,empLoc,hireDate,endDate,empLogo} = this.state
 
         return (
-            <div>
+            <div className="work-info-register-container">
                 <h1>Work Experience</h1>
-                <h3>Employer</h3>
+                {/* <h3>Employer</h3> */}
                 <input 
                     placeholder="Employer Name" 
                     value={empName} 
                     onChange={(e)=>{this.handleInput('empName',e.target.value)}}
                     />
-                <h3>Position</h3>
+                {/* <h3>Position</h3> */}
                 <input 
                     placeholder="Position" 
                     value={position} 
                     onChange={(e)=>{this.handleInput('position',e.target.value)}}
                     />
-                <h3>empLoc</h3>
+                {/* <h3>Location</h3> */}
                 <input 
-                    placeholder="empLoc" 
+                    placeholder="Location" 
                     value={empLoc} 
                     onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}
                     />
 
-                <h3>Hire Date</h3>
+                {/* <h3>Hire Date</h3> */}
                 <input 
                     placeholder="Hire Date" 
                     value={hireDate} 
                     onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}
                     />
 
-                <h3>End Date</h3>
+                {/* <h3>End Date</h3> */}
                 <input 
                     placeholder="End Date" 
                     value={endDate} 
                     onChange={(e)=>{this.handleInput('endDate',e.target.value)}}
                     />
 
-                <h3>Employer Logo</h3>
+                {/* <h3>Employer Logo</h3> */}
                 <input 
                     placeholder="Employer Logo" 
                     value={empLogo} 
@@ -126,8 +126,10 @@ class StepThree extends Component {
                 <button onClick={this.handleAddWork}>Add Another Work Experience</button>
                 <br/>
                 <br/>
-                <button onClick={this.handlePrevious}>Previous</button>
-                <button onClick={this.handleNext}>Next</button>
+                <div className="next-button-register-container">
+                    <button onClick={this.handlePrevious}>Previous</button>
+                    <button onClick={this.handleNext}>Next</button>
+                </div>
             </div>
         )
     }

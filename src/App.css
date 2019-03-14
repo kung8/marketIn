@@ -335,9 +335,15 @@
 footer {
     display:flex;
     justify-content: space-around;
-    height:20px;
+    align-items: center;
+    height:25px;
     background:navy;
     color:white;
+    margin-bottom:0;
+    font-size:20px;
+    /* position:absolute; */
+    /* bottom: 0px; */
+    width:100%;
     
 }
 
@@ -366,4 +372,112 @@ footer {
     background: navy;
     color:white;
     border:white solid;
+}
+
+/*************************************Register******************************************/
+/****************Step 1****************/
+.basic-info-register-container {
+    display:flex; 
+    flex-direction:column;
+    min-height:467px;
+    width:100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.basic-info-container input {
+    height:40px;
+    font-size:20px;
+    width:160px;
+}
+
+/****************Step 2****************/
+.education-info-register-container {
+    display:flex; 
+    flex-direction:column;
+    width:100%;
+    min-height:467px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.education-info-register-container input {
+    height:40px;
+    font-size:20px;
+    width:200px;
+    border:black solid;
+    margin:5px;
+}
+
+.education-info-register-container > button {
+    height:30px;
+    background:black;
+    color:white;
+    margin-top:10px;
+    width:200px;
+    font-size:20px;
+    border:black solid;
+}
+
+.next-button-register-container {
+    background:red;
+    width:90%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom:10px;
+    margin-top:0;
+}
+
+.next-button-register-container button {
+    width:100px;
+    height:40px;
+    background:black;
+    font-size:30px;
+    color:white;
+}
+
+/****************Step 3****************/
+.work-info-register-container {
+    display:flex; 
+    flex-direction:column;
+    width:100%;
+    min-height:467px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.work-info-register-container input {
+    height:40px;
+    font-size:20px;
+    width:200px;
+    border:black solid;
+    margin:5px;
+}
+
+.work-info-register-container > button {
+    height:30px;
+    background:black;
+    color:white;
+    /* margin-top:10px; */
+    width:200px;
+    font-size:20px;
+    border:black solid;
+}
+
+/****************Step 4****************/
+.skills-and-lang-info-register-container {
+    display:flex; 
+    flex-direction:column;
+    width:100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/****************Step 5****************/
+.projects-info-register-container {
+    display:flex; 
+    flex-direction:column;
+    width:100%;
+    justify-content: space-evenly;
+    align-items: center;
 }

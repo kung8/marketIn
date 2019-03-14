@@ -24,8 +24,8 @@ class Auth extends Component {
         try{
             let user = await axios.post('/auth/login',{email,password})
             // console.log(user.data);
-            this.props.updateUser(user.data)
-            this.props.history.push('/profile')
+            await this.props.updateUser(user.data)
+            // await this.props.history.push('/profile')
         } 
         catch (err){
             alert(err)
@@ -39,7 +39,8 @@ class Auth extends Component {
             <div className="login-page">
                 <input className="login-input" type="text" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>
                 <input className="login-input" type="password" placeholder="Password" onChange={(e)=>this.handleInput('password',e.target.value)}/>
-                <button className="login-button" onClick={this.login}>Login</button>
+                {/* <button className="login-button" onClick={this.login}>Login</button> */}
+                <Link to='/profile'><button className="login-button" onClick={this.login}>Login</button></Link>
                 <Link to='/register/step1'>Create an Account</Link>
             </div> 
         )

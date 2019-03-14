@@ -7,11 +7,11 @@ class StepOne extends Component {
     constructor(props){
         super(props);
         this.state = {
-            firstName:this.props.firstName,
-            lastName:this.props.lastName,
-            email:this.props.email,
-            password:this.props.password,
-            imageUrl:this.props.imageUrl
+            firstName:'',
+            lastName:'',
+            email:'',
+            password:'',
+            imageUrl:''
         }
     };
     
@@ -42,9 +42,8 @@ class StepOne extends Component {
     render (){
         const {firstName,lastName,email,password,imageUrl} = this.state;
         return (
-            <div>
+            <div className="basic-info-register-container">
                 <h1>Basic Info</h1>
-
                 <input 
                     value={firstName} 
                     placeholder="First Name" 

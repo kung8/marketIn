@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateProject} from '../../../ducks/userActions';
 import Project from './Project';
+import {withRouter} from 'react-router-dom';
 
 class Projects extends Component {
     constructor(props){
@@ -23,7 +24,7 @@ class Projects extends Component {
     
     async getProjProfile(){
         if(this.props.id){
-            const profile = await axios.get('/profile/get/projects');
+            const profile = await axios.get('/profile/get/projects'+this.props.match.params.userId);
             const {projProfile} = profile.data;
             this.props.updateProject(projProfile);
             this.setState({
@@ -54,7 +55,7 @@ class Projects extends Component {
             if(project !== ''){
                 projects.push({project});
                 let projProfile = await axios.post('/profile/create/project',{project})
-                this.props.updateProject(projProfile.data);
+                 await this.props.updateProject(projProfile.data);
                 this.setState({
                     addIsClicked:false,
                     projects:this.props.projects,
@@ -108,9 +109,9 @@ class Projects extends Component {
                 </div>):(this.state.inputBox1)
                 }
 
-                <div className="add-button-container">
+                {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
                     {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToProj()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>{this.editAddIsClicked()}}>ADD</button>)}
-                </div>
+                </div>):null}
             </div>
         )
     }
@@ -123,4 +124,4 @@ function mapStateToProps(reduxState){
     }
 }
         
-export default connect(mapStateToProps,{updateProject})(Projects)
+export default withRouter(connect(mapStateToProps,{updateProject})(Projects))

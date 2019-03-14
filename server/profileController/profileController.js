@@ -1,36 +1,36 @@
 module.exports = {
     getEdProfile: async (req,res) => {
         const db = req.app.get('db');
-        const {id} = req.session.user;
-        const edProfile = await db.profiles.getProfiles.get_education({user_id:id});
+        const {userId} = req.params;
+        const edProfile = await db.profiles.getProfiles.get_education({user_id:userId});
         res.status(200).send({edProfile});
     },
 
     getWorkProfile: async (req,res) => {
         const db = req.app.get('db');
-        const {id} = req.session.user;
-        const workProfile = await db.profiles.getProfiles.get_work({user_id:id});
+        const {userId} = req.params;
+        const workProfile = await db.profiles.getProfiles.get_work({user_id:userId});
         res.status(200).send({workProfile});
     },
 
     getSkillsProfile: async (req,res) => {
         const db = req.app.get('db');
-        const {id} = req.session.user;
-        const skillsProfile = await db.profiles.getProfiles.get_skills({user_id:id});
+        const {userId} = req.params;
+        const skillsProfile = await db.profiles.getProfiles.get_skills({user_id:userId});
         res.status(200).send({skillsProfile});
     },
 
     getLangProfile: async (req,res) => {
         const db = req.app.get('db');
-        const {id} = req.session.user;
-        const langProfile = await db.profiles.getProfiles.get_languages({user_id:id});
+        const {userId} = req.params;
+        const langProfile = await db.profiles.getProfiles.get_languages({user_id:userId});
         res.status(200).send({langProfile});
     },
 
     getProjProfile: async (req,res) => {
         const db = req.app.get('db');
-        const {id} = req.session.user;
-        const projProfile = await db.profiles.getProfiles.get_projects({user_id:id});
+        const {userId} = req.params;
+        const projProfile = await db.profiles.getProfiles.get_projects({user_id:useId});
         res.status(200).send({projProfile});
     },
 

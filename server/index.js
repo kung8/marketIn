@@ -41,11 +41,11 @@ app.get('/auth/current',userCtrl.getUser);
 app.post('/auth/logout',userCtrl.logout);
 
 //profileController ENDPOINTS
-app.get('/profile/get/education',profileCtrl.getEdProfile);
-app.get('/profile/get/work',profileCtrl.getWorkProfile);
-app.get('/profile/get/skills',profileCtrl.getSkillsProfile);
-app.get('/profile/get/languages',profileCtrl.getLangProfile);
-app.get('/profile/get/projects',profileCtrl.getProjProfile);
+app.get('/profile/get/education/:userId',profileCtrl.getEdProfile);
+app.get('/profile/get/work/:userId',profileCtrl.getWorkProfile);
+app.get('/profile/get/skills/:userId',profileCtrl.getSkillsProfile);
+app.get('/profile/get/languages/:userId',profileCtrl.getLangProfile);
+app.get('/profile/get/projects/:userId',profileCtrl.getProjProfile);
 
 app.post('/profile/create',profileCtrl.createProfile); //this is only for registration because they can do multiple
 app.post('/profile/create/education',profileCtrl.addEdProfile); //this is to add a ed section to profile

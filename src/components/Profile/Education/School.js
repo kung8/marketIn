@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {updateEducation} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 class School extends Component {
     constructor(props){ 
@@ -109,10 +110,11 @@ class School extends Component {
                         <p>{sch.sch_loc}</p>
                         <p>{sch.grad_date}</p>
                     </div>
+                    {this.props.match.params.userId==this.props.id?(
                     <div className="edit-delete-button-container">
                         {this.state.edit?(<button type="button" className="edit-save-button" onClick={()=>this.edit(sch)}>Save</button>):<button type="button" className="edit-save-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
                         <button className="large-section-delete-button" onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
-                    </div>
+                    </div>):null} 
                 </div>
                 <div>
                     {this.state.addDivIsOpened?
@@ -131,7 +133,7 @@ class School extends Component {
                         {this.state.editBox6}
                         </div>)
                     }
-                </div>    
+                </div>   
                 </div>
 
         )
@@ -139,7 +141,8 @@ class School extends Component {
     }
     function mapStateToProps (reduxState){
         return {
-            education:reduxState.education
+            education:reduxState.education,
+            id:reduxState.id
         }
     }
-    export default connect(mapStateToProps,{updateEducation})(School)
+    export default withRouter(connect(mapStateToProps,{updateEducation})(School))

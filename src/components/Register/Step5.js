@@ -66,7 +66,7 @@ class StepFive extends Component {
         const {project,projects} = this.state
         const {education,work,skills,languages,id} = this.props;
         return (
-            <div>
+            <div className="projects-info-register-container">
                 <h1>Projects</h1>
                 <h3>Project</h3>
                 <input 
@@ -80,7 +80,7 @@ class StepFive extends Component {
                 <br/>
                 <br/>
 
-                <button onClick={()=>this.handlePrevious(project)}>Go back to Skills/Languages Section</button>
+                <button onClick={()=>this.handlePrevious(project)}>Previous</button>
                 <button onClick={()=>this.completeProfile(projects,education,work,skills,languages,id)}>Complete Profile</button>
             </div>
         )

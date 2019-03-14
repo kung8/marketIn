@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateLang} from '../../../ducks/userActions';
 import Language from './Language';
+import {withRouter} from 'react-router-dom';
 
 class Languages extends Component {
     constructor(props){
@@ -24,7 +25,7 @@ class Languages extends Component {
     async getLangProfile(){
         if(this.props.id){
             console.log('hit')
-            const profile = await axios.get('/profile/get/languages')
+            const profile = await axios.get('/profile/get/languages'+this.props.match.params.userId)
             const {langProfile} = profile.data;
             console.log(2344,langProfile)
             this.props.updateLang(langProfile);
@@ -106,9 +107,9 @@ class Languages extends Component {
                     {this.state.inputBox1}
                 </div>):(this.state.inputBox1)
                 }
-                <div className="add-button-container">
+                {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
                     {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToLang()}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
-                </div>
+                </div>):null}
             </div>
         )
     }
@@ -121,4 +122,4 @@ function mapStateToProps(reduxState){
     }
 }
         
-export default connect(mapStateToProps,{updateLang})(Languages)
+export default withRouter(connect(mapStateToProps,{updateLang})(Languages))

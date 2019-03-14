@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateWork} from '../../../ducks/userActions';
 import Job from './Job';
+import {withRouter} from 'react-router-dom';
 
 class Work extends Component {
     constructor(props){
@@ -33,7 +34,7 @@ class Work extends Component {
     
     async getWorkProfile(){
         if(this.props.id){
-            const profile = await axios.get('/profile/get/work')
+            const profile = await axios.get('/profile/get/work'+this.props.match.params.userId)
             const {workProfile} = profile.data;
             this.props.updateWork(workProfile);
             this.setState({
@@ -142,9 +143,10 @@ class Work extends Component {
                         {this.state.inputBox6}
                     </div>)
                 }
-                <div className="add-button-container">
+
+                {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
                     {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToWork()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
-                </div>
+                </div>):null}
             </div>
         )
     }
@@ -157,4 +159,4 @@ function mapStateToProps(reduxState){
     }
 }
         
-export default connect(mapStateToProps,{updateWork})(Work)
+export default withRouter(connect(mapStateToProps,{updateWork})(Work))

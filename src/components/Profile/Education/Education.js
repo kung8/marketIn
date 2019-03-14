@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateEducation} from '../../../ducks/userActions';
 import School from './School';
+import { withRouter } from 'react-router-dom';
 
 class Education extends Component {
 constructor(props){
@@ -32,8 +33,9 @@ componentDidMount(){
 }
 
 async getEdProfile(){
+    console.log(this.props)
     if(this.props.id){
-        const profile = await axios.get('/profile/get/education')
+        const profile = await axios.get('/profile/get/education/' + this.props.match.params.userId)
         const {edProfile} = profile.data;
         this.props.updateEducation(edProfile);
         this.setState({
@@ -145,10 +147,11 @@ addToEd= async()=>{
                             {this.state.inputBox6}
                         </div>)
                     }
-                    <div className="add-button-container">
+                    {this.props.match.params.userId==this.props.id?
+                    (<div className="add-button-container">
                         {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToEd()}>SAVE</button>):
                         (<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
-                    </div>
+                    </div>):null}
             </div>
         )
     }
@@ -162,4 +165,4 @@ function mapStateToProps(reduxState){
     }
 }
 
-export default connect(mapStateToProps,{updateEducation})(Education)
+export default withRouter(connect(mapStateToProps,{updateEducation})(Education))

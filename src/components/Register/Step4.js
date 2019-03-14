@@ -74,7 +74,7 @@ class StepFour extends Component {
         const {skill,skills,language,languages} = this.state
         
         return (
-            <div>
+            <div className="skills-and-lang-info-register-container">
                 <h1>Skills</h1>
                 <h3>Skill</h3>
                 <input 
@@ -96,8 +96,10 @@ class StepFour extends Component {
                 {/* {mappedLang} */}
                 <br/>
                 <br/>
-                <button onClick={()=>{this.handlePrevious(skill,language)}}>Go back to Work Experience Info</button>
-                <button onClick={()=>{this.handleNext(skill,language)}}>Go to Add Projects Info</button>
+                <div>
+                    <button onClick={()=>{this.handlePrevious(skill,language)}}>Previous</button>
+                    <button onClick={()=>{this.handleNext(skill,language)}}>Next</button>
+                </div>
             </div>
         )
     }

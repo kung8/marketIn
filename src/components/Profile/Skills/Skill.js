@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {updateSkill} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
+import {withRouter} from 'react-router-dom';
+import { red } from 'ansi-colors';
 
 class Skill extends Component {
     constructor(props){
@@ -69,13 +71,14 @@ class Skill extends Component {
             <div className="small-experience-box">
                 <p>{skill.skill}</p>
             </div>
-            <div className="input-edit-delete-container">
+
+            {this.props.match.params.userId==this.props.id?(<div className="input-edit-delete-container">
                 {this.state.editBox}
                 <div>
                     {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(skill)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(skill)}}>Edit</button>}
                     <button className="small-section-delete-button" onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
                 </div>
-            </div>
+            </div>):null}
         </div>
         )
     }
@@ -83,8 +86,9 @@ class Skill extends Component {
 
 function mapStateToProps (reduxState){
     return{
-        skills:reduxState.skills
+        skills:reduxState.skills,
+        id:reduxState.id
     }
 }
 
-export default connect(mapStateToProps,{updateSkill})(Skill)
+export default withRouter(connect(mapStateToProps,{updateSkill})(Skill))

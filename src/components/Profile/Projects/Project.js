@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {updateProject} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
+import {withRouter} from 'react-router-dom';
 
 class Project extends Component {
     constructor(props){ 
@@ -70,14 +71,14 @@ class Project extends Component {
             <div className="small-experience-section-box" key={proj.id}>
                 <div className="small-experience-box">
                     <p>{proj.project}</p>
-                </div>    
-                <div className="input-edit-delete-container">
+                </div>   
+                {this.props.match.params.userId==this.props.id?(<div className="input-edit-delete-container">
                     {this.state.editBox}
                     <div>
                         {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(proj)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(proj)}}>Edit</button>}
                         <button className="small-section-delete-button" onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
                     </div>
-                </div>    
+                </div>):null}    
             </div>        
         )
     }
@@ -85,7 +86,8 @@ class Project extends Component {
 
     function mapStateToProps (reduxState){
         return {
-            projects:reduxState.projects
+            projects:reduxState.projects,
+            id:reduxState.id
         }
     }
-    export default connect(mapStateToProps,{updateProject})(Project)
+    export default withRouter(connect(mapStateToProps,{updateProject})(Project))

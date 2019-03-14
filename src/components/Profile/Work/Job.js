@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {updateWork} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
+import {withRouter} from 'react-router-dom';
 
 class Job extends Component {
     constructor(props){ 
@@ -110,10 +111,11 @@ class Job extends Component {
                         <p>{job.hire_date}</p>
                         <p>{job.end_date}</p>
                     </div>
-                    <div className="edit-delete-button-container">
+                    {this.props.match.params.userId==this.props.id?
+                    (<div className="edit-delete-button-container">
                         {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(job)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(job)}}>Edit</button>}                    
                         <button className="large-section-delete-button" onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
-                    </div>
+                    </div>):null}
                 </div>
                 <div>
                 {this.state.addDivIsOpened?
@@ -144,7 +146,8 @@ class Job extends Component {
 
     function mapStateToProps (reduxState){
         return {
-            work:reduxState.work
+            work:reduxState.work,
+            id:reduxState.id
         }
     }
-    export default connect(mapStateToProps,{updateWork}) (Job)
+    export default withRouter(connect(mapStateToProps,{updateWork}) (Job))

@@ -46,7 +46,7 @@ class Profile extends Component {
         //if a user session id == user then you can edit that profile but this is already a way to check session
 
         return (
-            
+            // if(this.props.id ===)
             <div className="profile-container">
                 
                 <div className="profile-basic-info-container">

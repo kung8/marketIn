@@ -3,6 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {updateSkill} from '../../../ducks/userActions';
 import Skill from './Skill';
+import {withRouter} from 'react-router-dom';
 
 class Skills extends Component {
     constructor(props){
@@ -23,7 +24,7 @@ class Skills extends Component {
     async getSkillsProfile(){
         if(this.props.id){
             // console.log('hit')
-            const profile = await axios.get('/profile/get/skills')
+            const profile = await axios.get('/profile/get/skills'+this.props.match.params.userId)
             // console.log(123,profile)
             const {skillsProfile} = profile.data;
             this.props.updateSkill(skillsProfile);
@@ -105,9 +106,9 @@ class Skills extends Component {
                     {this.state.inputBox1}
                 </div>):(this.state.inputBox1)
                 }
-                <div className="add-button-container">
+                {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
                     {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToSkills()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>{this.editAddIsClicked()}}>ADD</button>)}
-                </div>
+                </div>):null}
                 
             </div>
         )
@@ -121,4 +122,4 @@ function mapStateToProps(reduxState){
     }
 }
         
-export default connect(mapStateToProps,{updateSkill})(Skills)
+export default withRouter(connect(mapStateToProps,{updateSkill})(Skills))
