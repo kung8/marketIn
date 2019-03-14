@@ -55,7 +55,7 @@
     /* margin-right: 20px;  */
 }
 
-/*if view is in mobile view we will need to use the MI header. Need to have a condition check for the size to show logout.*/
+/*if mobile view put in header*/
 
 .logout-button {
     font-size:16px;
@@ -89,18 +89,21 @@
     font-size:35px;
 }
 
-/*************************************Profile**************************************/
-
-/*************************************Profile Info*********************************/
+/*************************************Entire Profile**************************************/
 .profile-container {
     margin-top:85px;
 }
 
+/*************************************Profile Info*********************************/
 .profile-basic-info-container {
     display: flex;
+    flex-direction: column;
     background:silver;
-    width:530px;
+    width:320px;
     border:navy solid 5px;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 .profile-picture {
@@ -112,35 +115,13 @@
     /* padding-left:10px; */
 }
 
+/*************************************Other Sections*********************************/
+
 .section-container {
     margin-top:5px;
     padding-bottom:2px;
     margin-bottom:5px;
     background:navy;
-}
-
-.large-experience-section-box {
-    margin:5px 5px 10px;
-    background:silver;
-    min-height:250px;
-    display:flex;
-    justify-content:space-between;
-    align-items: center;
-    flex-direction: column;
-}
-
-.button-test {
-    background:white;
-}
-/* @media () */
-
-.small-experience-section-box {
-    margin:5px 5px 10px;
-    background:silver;
-    height:140px;
-    display:flex;
-    justify-content:space-between;
-    align-items: center;   
 }
 
 .section-header-holder {
@@ -156,21 +137,39 @@
     color:white;
 }
 
-.small-experience-box-top {
-    display:flex;
-    flex-direction: row;
-    align-items:center;
-    justify-content: space-around;
+.edit-save-button {
+    font-size: 25px;
+    width:60px;
+    height:40px;
+    background:black;
+    color:white;
+    border-radius: 25%;
+    margin-right:5px;
 }
 
+/************************Education and Work**************************/
+/*************************Section********************/
+.large-experience-section-box {
+    margin:5px;
+    background:silver;
+    min-height:400px;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+/**************************Header********************/
 .large-experience-box-top {
     display:flex;
+    flex-direction: column;
     align-items:center;
     justify-content: space-between;
-    width:520px;
+    width:320px;
     margin: 20px auto;
 }
 
+/************************Logo************************/
 .school-work-logo-container {
     margin-left:10px;
 }
@@ -182,20 +181,72 @@
     border:solid black;
 }
 
-.edit-delete-button-container {
+/***************Experience**********************/
+.large-experience-box {
+    font-size: 35px;
     display:flex;
     flex-direction: column;
+    text-align: left;
+    margin-right:15px;
+    padding-left:25px;
 }
 
-.add-button-container {
+/***************Add Functionality***************/
+.add-large-input-box-container {
+    margin:5px 5px 10px;
+    background:silver;
+    height:260px;
     display:flex;
-    /* background:red; */
-    justify-content:center;
-    /* align-items: center; */
-    margin-bottom:5px;
-    margin-top:-5px;
+    justify-content:space-evenly;
+    align-items: center;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
 }
 
+/*************************Delete Functionality***************/
+.large-section-delete-button {
+    font-size:25px;
+    width:80px;
+    height: 40px;
+    background:black;
+    color:white;
+    border-radius:25%;
+    margin-right:5px;
+}
+
+/*********************Edit Functionality********************/
+.edit-delete-button-container {
+    display:flex;
+    padding-top:5px;
+    /* flex-direction: column; */
+}
+
+/*add an additional section for when you click edit for work*/
+.add-edit-box-container {
+    background:silver;
+    display:flex;
+    height:280px;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+/*************************Skills,Languages,Projects*******************/
+/************Header************************/
+.small-experience-box-top {
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-around;
+}
+/****************Experiences***************/
+.small-experience-section-box {
+    margin:5px 5px 10px;
+    background:silver;
+    height:140px;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;   
+}
 
 .small-experience-section-box {
     margin-top:5px;
@@ -208,54 +259,20 @@
     align-items: center;
 }
 
-.add-small-input-box-container {
-    margin-top:5px;
-    background:silver;
-    margin-right:5px;
-    margin-left:5px;
-    display:flex;
-    height:60px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-.add-large-input-box-container {
-    margin:5px 5px 10px;
-    background:silver;
-    height:180px;
-    display:flex;
-    justify-content:space-evenly;
-    align-items: center;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-}
-/*the one below is meant to be able to add an additional section for when you click edit*/
-
-.add-edit-box-container {
-    /* margin-top:-200px; */
-    background:silver;
-    margin-right:5px;
-    margin-left:5px;
-    display:flex;
-    height:180px;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
 .small-experience-box {
     margin-left:15px;
     font-size: 35px;
 }
 
-.large-experience-box {
-    font-size: 35px;
-    display:flex;
-    flex-direction: column;
-    text-align: left;
-    margin-right:15px;
-    padding-left:25px;
+/***************Edit and Delete Button****************/
+.small-section-delete-button {
+    font-size:25px;
+    width:80px;
+    height: 40px;
+    background:black;
+    color:white;
+    border-radius:25%;
+    /* margin-right:5px; */
 }
 
 .input-edit-delete-container {
@@ -271,14 +288,14 @@
     font-size:35px;
 }
 
-.edit-save-button {
-    font-size: 25px;
-    width:60px;
-    height:40px;
-    background:black;
-    color:white;
-    border-radius: 25%;
-    margin-right:5px;
+/**********Add button***************************/
+.add-button-container {
+    display:flex;
+    /* background:red; */
+    justify-content:center;
+    /* align-items: center; */
+    margin-bottom:5px;
+    margin-top:-5px;
 }
 
 .add-save-button {
@@ -292,6 +309,17 @@
     margin-top:5px;
 }
 
+.add-small-input-box-container {
+    margin-top:5px;
+    background:silver;
+    margin-right:5px;
+    margin-left:5px;
+    display:flex;
+    height:60px;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .add-input-box {
     width:200px;
     height:40px;
@@ -300,26 +328,7 @@
     margin-left:5px;
 }
 
-.small-section-delete-button {
-    font-size:25px;
-    width:80px;
-    height: 40px;
-    background:black;
-    color:white;
-    border-radius:25%;
-    /* margin-right:5px; */
-}
-
-.large-section-delete-button {
-    font-size:25px;
-    width:80px;
-    height: 40px;
-    background:black;
-    color:white;
-    border-radius:25%;
-    margin-right:5px;
-}
-
+/*************************************Footer*****************************************/
 footer {
     display:flex;
     justify-content: space-around;
@@ -329,11 +338,7 @@ footer {
     
 }
 
-/* @media {
-
-}  */
-
-
+/*************************************Login******************************************/
 .login-page {
     margin-top:140px;
     height:429px;

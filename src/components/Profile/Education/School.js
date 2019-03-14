@@ -43,11 +43,11 @@ class School extends Component {
     handleEditToggle=()=>{
         this.setState({
             edit:true,
-            editBox1:<input className="edit-input-box" placeholder="School Name" onChange={(e)=>this.handleInput('schName',e.target.value)}/>,
+            editBox1:<input className="edit-input-box" placeholder="School" onChange={(e)=>this.handleInput('schName',e.target.value)}/>,
             editBox2:<input className="edit-input-box" placeholder="Major" onChange={(e)=>this.handleInput('major',e.target.value)}/>,
-            editBox3:<input className="edit-input-box" placeholder="Education Level" onChange={(e)=>this.handleInput('edLevel',e.target.value)}/>,
-            editBox4:<input className="edit-input-box" placeholder="School Location" onChange={(e)=>this.handleInput('schLoc',e.target.value)}/>,
-            editBox5:<input className="edit-input-box" placeholder="Graduation Date" onChange={(e)=>this.handleInput('gradDate',e.target.value)}/>,
+            editBox3:<input className="edit-input-box" placeholder="Ed Level" onChange={(e)=>this.handleInput('edLevel',e.target.value)}/>,
+            editBox4:<input className="edit-input-box" placeholder="Location" onChange={(e)=>this.handleInput('schLoc',e.target.value)}/>,
+            editBox5:<input className="edit-input-box" placeholder="Grad Date" onChange={(e)=>this.handleInput('gradDate',e.target.value)}/>,
             editBox6:<input className="edit-input-box" placeholder="School Logo" onChange={(e)=>this.handleInput('schLogo',e.target.value)}/>,
             addDivIsOpened:true
         })
@@ -110,14 +110,13 @@ class School extends Component {
                         <p>{sch.grad_date}</p>
                     </div>
                     <div className="edit-delete-button-container">
-                    {/* <button className="button-test"  type="button" onClick={()=>this.changeHeight()}> Click Me!</button> */}
                         {this.state.edit?(<button type="button" className="edit-save-button" onClick={()=>this.edit(sch)}>Save</button>):<button type="button" className="edit-save-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
                         <button className="large-section-delete-button" onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
                     </div>
                 </div>
                 <div>
                     {this.state.addDivIsOpened?
-                    (<div className="add-large-input-box-container">
+                    (<div className="add-edit-box-container">
                         {this.state.editBox1}
                         {this.state.editBox2}
                         {this.state.editBox3}

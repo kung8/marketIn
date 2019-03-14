@@ -123,7 +123,7 @@ class Work extends Component {
                     {/* {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>} */}
 
                 </div>
-                <p>{workProfile}</p>
+                <p>{workProfile}</p> 
                 {this.state.addDivIsOpened?(
                     <div className="add-large-input-box-container">
                         {this.state.inputBox1}
