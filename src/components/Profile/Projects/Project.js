@@ -73,8 +73,10 @@ class Project extends Component {
                 </div>    
                 <div className="input-edit-delete-container">
                     {this.state.editBox}
-                    {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(proj)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(proj)}}>Edit</button>}
-                    <button className="small-section-delete-button" onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
+                    <div>
+                        {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(proj)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(proj)}}>Edit</button>}
+                        <button className="small-section-delete-button" onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
+                    </div>
                 </div>    
             </div>        
         )

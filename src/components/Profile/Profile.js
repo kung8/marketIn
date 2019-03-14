@@ -53,7 +53,7 @@ class Profile extends Component {
                     <img className="profile-picture" src={this.props.imageUrl}/>
                     <div>
                         <h1>{this.props.firstName} {this.props.lastName}</h1>
-                        <h1>{this.props.email}@gmail.com</h1>
+                        <h1>{this.props.email}</h1>
                     </div>
                 </div>    
                 <div id="education" className="section-container">

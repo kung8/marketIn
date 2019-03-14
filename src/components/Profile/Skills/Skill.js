@@ -71,8 +71,10 @@ class Skill extends Component {
             </div>
             <div className="input-edit-delete-container">
                 {this.state.editBox}
-                {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(skill)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(skill)}}>Edit</button>}
-                <button className="small-section-delete-button" onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
+                <div>
+                    {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(skill)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(skill)}}>Edit</button>}
+                    <button className="small-section-delete-button" onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
+                </div>
             </div>
         </div>
         )

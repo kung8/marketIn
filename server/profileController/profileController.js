@@ -39,6 +39,7 @@ module.exports = {
         const db = req.app.get('db');
         const {id} = req.session.user;
         const {education,work,skills,languages,projects} = req.body;
+        
         // console.log(education,work,skills,languages,projects)
         //need to figure out where I would pass the user_id to all of the queries...
        let edProfile = [];
@@ -57,29 +58,29 @@ module.exports = {
         
         for(let i=0;i<work.length;i++){
             // console.log('emp_name')
-            const {empName:emp_Name,position,empLoc:emp_Loc,hireDate:hire_Date,endDate:end_Date,empLogo:emp_Logo} = work[i];
-            let res = await db.profiles.createProfiles.create_work({emp_Name,position,emp_Loc,hire_Date,end_Date,emp_Logo,user_id:id});
+            const {empName:emp_name,position,empLoc:emp_loc,hireDate:hire_date,endDate:end_date,empLogo:emp_logo} = work[i];
+            let res = await db.profiles.createProfiles.create_work({emp_name,position,emp_loc,hire_date,end_date,emp_logo,user_id:id});
             workProfile.push(res);
         };
         
         for(let i=0;i<skills.length;i++){
             // console.log('skill')
             const {skill} = skills[i];
-            let res = await db.profiles.createProfiles.create_skills({skill,user_id:id});
+            let res = await db.profiles.createProfiles.create_skill({skill,user_id:id});
             skillsProfile.push(res);
         };
         
         for(let i=0;i<languages.length;i++){
             // console.log('language')
             const {language} = languages[i];
-            let res = await db.profiles.createProfiles.create_languages({language,user_id:id});
+            let res = await db.profiles.createProfiles.create_language({language,user_id:id});
             langProfile.push(res);
         } 
 
         for(let i=0;i<projects.length;i++){
             // console.log('project')
             const {project} = projects[i];
-            let res = await db.profiles.createProfiles.create_projects({project,user_id:id});
+            let res = await db.profiles.createProfiles.create_project({project,user_id:id});
             projProfile.push(res)
         } 
 

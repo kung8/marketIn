@@ -78,8 +78,8 @@
     overflow:hidden;
     background-color:black;
     height:100%;
-    width:300px;
-    transition:0.5s;
+    /* width:300px; */
+    transition:0.2s;
 }
 
 .sidebar-container a {
@@ -242,8 +242,10 @@
 .small-experience-section-box {
     margin:5px 5px 10px;
     background:silver;
-    height:140px;
+    /* height:140px; */
     display:flex;
+    flex-direction:column;
+    flex-wrap: flex;
     justify-content:space-between;
     align-items: center;   
 }
@@ -254,7 +256,7 @@
     /* margin-right:5px; */
     /* margin-left:5px; */
     display:flex;
-    height:60px;
+    min-height:80px;
     justify-content: space-between;
     align-items: center;
 }
@@ -277,6 +279,7 @@
 
 .input-edit-delete-container {
     display: flex;
+    flex-direction: column;
     margin-right:5px;
     align-items:center;
 }
@@ -315,8 +318,8 @@
     margin-right:5px;
     margin-left:5px;
     display:flex;
-    height:60px;
-    justify-content: space-between;
+    height:50px;
+    justify-content: center;
     align-items: center;
 }
 

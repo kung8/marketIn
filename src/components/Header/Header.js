@@ -18,12 +18,12 @@ class Header extends Component {
         const {isNavBarOpened} = this.state;
         if(isNavBarOpened===false){
             this.setState({
-                isNavBarOpened:!isNavBarOpened,
+                isNavBarOpened:true,
                 navBar:0
             })
         } else {
             this.setState({
-                isNavBarOpened:!isNavBarOpened,
+                isNavBarOpened:false,
                 navBar:200
             })
         }
@@ -31,6 +31,10 @@ class Header extends Component {
 
     logout =async () => {
         await axios.post('/auth/logout');
+        this.setState({
+            isNavBarOpened:false,
+            navBar:0
+        })
         this.props.clearUser();
         // this.props.history.push('/'); 
 
@@ -56,7 +60,7 @@ class Header extends Component {
                                 </div>
                             
                             ):(
-                                <div className="sidebar-container">
+                                <div className="sidebar-container" style={{width:this.state.navBar}}>
                                     <a href="mailto:ung.kevin78@gmail.com" style={{fontSize:"24px",color:"white",textDecoration:"none"}}>Contact</a>
                                 </div>
                             )}
