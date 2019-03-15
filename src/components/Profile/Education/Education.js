@@ -29,6 +29,7 @@ constructor(props){
 }
 
 componentDidMount(){
+    // this._isMount = true;
     this.getEdProfile()
 }
 
@@ -38,9 +39,11 @@ async getEdProfile(){
         const profile = await axios.get('/profile/get/education/' + this.props.match.params.userId)
         const {edProfile} = profile.data;
         this.props.updateEducation(edProfile);
-        this.setState({
-            education:this.props.education
-        })
+        // if(this._isMount){
+            this.setState({
+                education:this.props.education
+            })
+        // }
     }
 }
 

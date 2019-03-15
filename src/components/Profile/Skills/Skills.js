@@ -18,19 +18,23 @@ class Skills extends Component {
     }
 
     componentDidMount(){
+        this._isMount = true;
         this.getSkillsProfile()
     }
     
     async getSkillsProfile(){
-        if(this.props.id){
+        console.log(this.props)
+        if(this.props.userId){
             // console.log('hit')
-            const profile = await axios.get('/profile/get/skills'+this.props.match.params.userId)
+            const profile = await axios.get('/profile/get/skills/'+this.props.match.params.userId)
             // console.log(123,profile)
             const {skillsProfile} = profile.data;
             this.props.updateSkill(skillsProfile);
-            this.setState({
-                skills:this.props.skills
-            })
+            if(this._isMount){
+                this.setState({
+                    skills:this.props.skills
+                })
+            }
         }
     }
 
@@ -118,7 +122,8 @@ class Skills extends Component {
 function mapStateToProps(reduxState){
     return{            
         skills:reduxState.skills,
-        id:reduxState.id
+        id:reduxState.id,
+        userId:reduxState
     }
 }
         

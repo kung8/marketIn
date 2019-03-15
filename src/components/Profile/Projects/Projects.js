@@ -19,17 +19,20 @@ class Projects extends Component {
     }
 
     componentDidMount(){
+        this._isMount = true;
         this.getProjProfile()
     }
     
     async getProjProfile(){
         if(this.props.id){
-            const profile = await axios.get('/profile/get/projects'+this.props.match.params.userId);
+            const profile = await axios.get('/profile/get/projects/'+this.props.match.params.userId);
             const {projProfile} = profile.data;
             this.props.updateProject(projProfile);
-            this.setState({
-                projects:this.props.projects
-            })
+            if(this._isMount){
+                this.setState({
+                    projects:this.props.projects
+                })
+            }
         }
     }
 

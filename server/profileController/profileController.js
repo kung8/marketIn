@@ -39,7 +39,7 @@ module.exports = {
     getProjProfile: async (req,res) => {
         const db = req.app.get('db');
         const {userId} = req.params;
-        const projProfile = await db.profiles.getProfiles.get_projects({user_id:useId});
+        const projProfile = await db.profiles.getProfiles.get_projects({user_id:userId});
         res.status(200).send({projProfile});
     },
 

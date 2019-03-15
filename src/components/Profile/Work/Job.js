@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {updateWork} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class Job extends Component {
     constructor(props){ 
@@ -96,8 +96,8 @@ class Job extends Component {
 
     render (){
         const {job} = this.props
-        console.log(job.user_id)
-        console.log(job)
+        console.log(this.props.match.params.userId,this.props.id)
+        // console.log(job)
         return (
             <div className="large-experience-section-box" key={job.id}>
                 <div class="large-experience-box-top">

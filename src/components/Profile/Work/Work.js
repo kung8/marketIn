@@ -29,17 +29,21 @@ class Work extends Component {
     }
 
     componentDidMount(){
+        this._isMount = true;
         this.getWorkProfile()
     }
     
     async getWorkProfile(){
+        console.log(this.props)
         if(this.props.id){
-            const profile = await axios.get('/profile/get/work'+this.props.match.params.userId)
+            const profile = await axios.get('/profile/get/work/'+this.props.match.params.userId)
             const {workProfile} = profile.data;
             this.props.updateWork(workProfile);
-            this.setState({
-                work:this.props.work
-            })
+            if(this._isMount){
+                this.setState({
+                    work:this.props.work
+                })
+            }
         }
     }
 
