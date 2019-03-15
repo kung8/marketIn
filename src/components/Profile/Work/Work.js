@@ -62,7 +62,7 @@ class Work extends Component {
             inputBox3:<input className="edit-input-box" placeholder="Location" onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>,
             inputBox4:<input className="edit-input-box" placeholder="Hire Date" onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}/>,
             inputBox5:<input className="edit-input-box" placeholder="End Date" onChange={(e)=>{this.handleInput('endDate',e.target.value)}}/>,
-            inputBox6:<input className="edit-input-box" placeholder="Emp Logo" onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>,
+            inputBox6:<input className="edit-input-box-last" placeholder="Emp Logo" onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>,
             addDivIsOpened:true
         })
     }

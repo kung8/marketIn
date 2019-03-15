@@ -75,30 +75,32 @@ class StepFour extends Component {
         
         return (
             <div className="skills-and-lang-info-register-container">
-                <h1>Skills</h1>
-                <h3>Skill</h3>
-                <input 
-                    placeholder="Skill" 
-                    value={skill} 
-                    onChange={(e)=>{this.handleInput('skill',e.target.value)}}
-                    />
-                <button onClick={()=>this.handleAddSkill(skill)}>Add Another Skill</button>
+                <div className="skills-info-register-container">
+                    <h1>Skills</h1>
+                    <input 
+                        placeholder="Skill" 
+                        value={skill} 
+                        onChange={(e)=>{this.handleInput('skill',e.target.value)}}
+                        />
+                    <button onClick={()=>this.handleAddSkill(skill)}>Add Another Skill</button>
+                </div>
 
-                <h1>Languages</h1>
-                <h3>Language</h3>
-                <input 
-                    placeholder="Language" 
-                    value={language} 
-                    onChange={(e)=>{this.handleInput('language',e.target.value)}}
-                    />
+                <div className="lang-info-register-container">
+                    <h1>Languages</h1>
+                    <input 
+                        placeholder="Language" 
+                        value={language} 
+                        onChange={(e)=>{this.handleInput('language',e.target.value)}}
+                        />
 
-                <button onClick={()=>this.handleAddLanguage(language)}>Add Another Language</button>
+                    <button onClick={()=>this.handleAddLanguage(language)}>Add Another Language</button>
+                </div>
                 {/* {mappedLang} */}
                 <br/>
                 <br/>
-                <div>
-                    <button onClick={()=>{this.handlePrevious(skill,language)}}>Previous</button>
-                    <button onClick={()=>{this.handleNext(skill,language)}}>Next</button>
+                <div className="previous-next-button-register-container">
+                    <button className="previous-button" onClick={()=>{this.handlePrevious(skill,language)}}>Previous</button>
+                    <button className="next-button" onClick={()=>{this.handleNext(skill,language)}}>Next</button>
                 </div>
             </div>
         )

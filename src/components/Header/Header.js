@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {clearUser} from '../../ducks/userActions';
 import axios from 'axios';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 // import '../../App.css'
 
@@ -31,13 +31,13 @@ class Header extends Component {
     }
 
     logout = async () => {
-        await axios.post('/auth/logout');
+        axios.post('/auth/logout');
         this.setState({
             isNavBarOpened:false,
             navBar:0
         })
-        await this.props.clearUser();
-        await this.props.history.push('/'); 
+        this.props.clearUser();
+        this.props.history.push('/'); 
 
     }
     render(){
@@ -51,15 +51,16 @@ class Header extends Component {
                     {this.props.id?
                             (
                                 <div className="sidebar-container" style={{width:this.state.navBar}}>
-                                    <a style={{color:'white'}}>{this.props.firstName} {this.props.lastName}</a>
-                                    <a href="#/services">Services</a>
+                                    <span style={{color:'white'}}>{this.props.firstName} {this.props.lastName}</span>
+                                    <span style={{color: 'white'}} href="#/services">Services</span>
                                     <a href={`mailto:${this.props.userEmail}`}>Contact</a>
-                                    <a href="#/" onClick={this.logout}>Logout</a>
+                                    <span style={{color: 'white'}} onClick={this.logout}>Logout</span>
+                                    {/* <Link to="/"><span style={{color: 'white'}} onClick={this.logout}>Logout</span></Link> */}
                                 </div>
                             
                             ):(
                                 <div className="sidebar-container" style={{width:this.state.navBar}}>
-                                    <a href="mailto:ung.kevin78@gmail.com" style={{fontSize:"24px",color:"white",textDecoration:"none"}}>Contact</a>
+                                    <a href="mailto:ung.kevin78@gmail.com">Contact</a>
                                 </div>
                             )}
                 {/* {this.props.id?

@@ -4,7 +4,7 @@
     margin:0;
 }
 
-/*Overall App*/
+/********************Overall App*************/
 .App {
     /* text-align: center; */
     /* height:960px; */
@@ -12,7 +12,6 @@
     background:white;
     display:flex;
     flex-direction: column;
-    
 }
 
 /**************************************Header**************************************/
@@ -82,7 +81,14 @@
     transition:0.2s;
 }
 
-.sidebar-container a {
+.sidebar-container > a {
+    text-decoration: none;
+    color:white;
+    padding:10px;
+    font-size:35px;
+}
+
+.sidebar-container span {
     text-decoration: none;
     color:white;
     padding:10px;
@@ -113,6 +119,35 @@
     border-radius: 150%;
     border:black 5px solid;
     /* padding-left:10px; */
+}
+
+
+.edit-profile-input-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.edit-profile-input-boxes {
+    display:flex;
+    flex-direction: column;
+    min-height:40px;
+    width:260px;
+    border:solid black;
+    font-size: 35px;
+    margin-bottom:5px;
+}
+
+.edit-profile-input-button-container button {
+    font-size: 25px;
+    width:60px;
+    height:40px;
+    background:black;
+    color:white;
+    border-radius: 25%;
+    margin-right:5px;
 }
 
 /*************************************Other Sections*********************************/
@@ -195,7 +230,7 @@
 .add-large-input-box-container {
     margin:5px 5px 10px;
     background:silver;
-    height:260px;
+    min-height:260px;
     display:flex;
     justify-content:space-evenly;
     align-items: center;
@@ -217,18 +252,36 @@
 /*********************Edit Functionality********************/
 .edit-delete-button-container {
     display:flex;
-    padding-top:5px;
-    /* flex-direction: column; */
+    margin-top:5px;
 }
 
 /*add an additional section for when you click edit for work*/
 .add-edit-box-container {
-    background:silver;
     display:flex;
     height:280px;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom:5px;
+}
+
+.edit-input-box {
+    width:260px;
+    height:40px;
+    margin-right:5px;
+    font-size:35px;
+    margin-top:5px;
+    border:black solid;
+}
+
+.edit-input-box-last {
+    width:260px;
+    height:40px;
+    margin-right:5px;
+    font-size:35px;
+    margin-top:5px;
+    margin-bottom:5px;
+    border:black solid;
 }
 /*************************Skills,Languages,Projects*******************/
 /************Header************************/
@@ -284,12 +337,7 @@
     align-items:center;
 }
 
-.edit-input-box {
-    width:200px;
-    height:40px;
-    margin-right:5px;
-    font-size:35px;
-}
+
 
 /**********Add button***************************/
 .add-button-container {
@@ -324,11 +372,12 @@
 }
 
 .add-input-box {
-    width:200px;
+    width:260px;
     height:40px;
     margin-right:5px;
     font-size:35px;
     margin-left:5px;
+    border:black solid;
 }
 
 /*************************************Footer*****************************************/
@@ -356,10 +405,11 @@ footer {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .login-input {
-    height:50px;
+    min-height:50px;
     width:250px;
     font-size:35px;
     border:solid black;
@@ -383,12 +433,22 @@ footer {
     width:100%;
     justify-content: space-evenly;
     align-items: center;
+    background:lightblue;
 }
 
-.basic-info-container input {
+.basic-info-register-container input {
     height:40px;
     font-size:20px;
-    width:160px;
+    width:260px;
+    border:solid black;
+}
+
+.basic-info-register-container button {
+    width:140px;
+    height:40px;
+    background:black;
+    font-size:30px;
+    color:white;
 }
 
 /****************Step 2****************/
@@ -399,14 +459,15 @@ footer {
     min-height:467px;
     justify-content: space-evenly;
     align-items: center;
+    background:lightblue;
 }
 
 .education-info-register-container input {
     height:40px;
     font-size:20px;
-    width:200px;
+    width:260px;
     border:black solid;
-    margin:5px;
+    margin-top:5px;
 }
 
 .education-info-register-container > button {
@@ -420,7 +481,6 @@ footer {
 }
 
 .next-button-register-container {
-    background:red;
     width:90%;
     display: flex;
     justify-content: flex-end;
@@ -441,17 +501,18 @@ footer {
     display:flex; 
     flex-direction:column;
     width:100%;
-    min-height:467px;
-    justify-content: space-evenly;
+    min-height:300px;
+    /* justify-content: space-evenly; */
     align-items: center;
+    background:lightblue;
 }
 
-.work-info-register-container input {
+.work-info-register-container > input {
     height:40px;
     font-size:20px;
-    width:200px;
+    width:260px;
     border:black solid;
-    margin:5px;
+    margin-top:5px;
 }
 
 .work-info-register-container > button {
@@ -462,7 +523,33 @@ footer {
     width:200px;
     font-size:20px;
     border:black solid;
+    margin-top:0;
 }
+
+.previous-next-button-register-container {
+    width:90%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:10px;
+    margin-top:0;
+}
+
+.previous-button {
+    width:140px;
+    height:40px;
+    background:black;
+    font-size:30px;
+    color:white;
+}
+
+.next-button {
+    width:100px;
+    height:40px;
+    background:black;
+    font-size:30px;
+    color:white;
+}
+
 
 /****************Step 4****************/
 .skills-and-lang-info-register-container {
@@ -471,6 +558,65 @@ footer {
     width:100%;
     justify-content: space-evenly;
     align-items: center;
+    background:lightblue;
+}
+
+.skills-info-register-container {
+    margin-top:5px;
+    display:flex; 
+    flex-direction:column;
+    width:100%;
+    min-height:188px;
+    align-items: center;
+    /* background:purple; */
+}
+
+.skills-info-register-container > input {
+    height:40px;
+    font-size:35px;
+    width:260px;
+    border:black solid;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.skills-info-register-container > button {
+    height:30px;
+    background:black;
+    color:white;
+    /* margin-top:10px; */
+    width:200px;
+    font-size:20px;
+    border:black solid;
+    margin-top:0;
+}
+
+.lang-info-register-container {
+    display:flex; 
+    flex-direction:column;
+    width:100%;
+    min-height:188px;
+    align-items: center;
+    /* background:yellow; */
+}
+
+.lang-info-register-container > input {
+    height:40px;
+    font-size:35px;
+    width:260px;
+    border:black solid;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.lang-info-register-container > button {
+    height:30px;
+    background:black;
+    color:white;
+    width:260px;
+    font-size:20px;
+    border:black solid;
+    margin-top:0;
 }
 
 /****************Step 5****************/
@@ -478,10 +624,39 @@ footer {
     display:flex; 
     flex-direction:column;
     width:100%;
-    justify-content: space-evenly;
+    min-height:460px;
+    /* justify-content: space-evenly; */
     align-items: center;
+    margin-top:5px;
+    background:lightblue;
 }
 
+.projects-info-register-container > input {
+    height:40px;
+    font-size:35px;
+    width:260px;
+    border:black solid;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.projects-info-register-container > button {
+    height:30px;
+    background:black;
+    color:white;
+    width:200px;
+    font-size:20px;
+    border:black solid;
+    margin-top:0;
+}
+
+.complete-button {
+    width:140px;
+    height:40px;
+    background:black;
+    font-size:30px;
+    color:white;
+}
 
 /*****************Loader****************/
 .loader {

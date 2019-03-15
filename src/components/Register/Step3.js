@@ -123,12 +123,12 @@ class StepThree extends Component {
                 <br/>
                 <br/>
 
-                <button onClick={this.handleAddWork}>Add Another Work Experience</button>
+                <button onClick={this.handleAddWork}>Add Another Job</button>
                 <br/>
                 <br/>
-                <div className="next-button-register-container">
-                    <button onClick={this.handlePrevious}>Previous</button>
-                    <button onClick={this.handleNext}>Next</button>
+                <div className="previous-next-button-register-container">
+                    <button className="previous-button" onClick={this.handlePrevious}>Previous</button>
+                    <button className="next-button" onClick={this.handleNext}>Next</button>
                 </div>
             </div>
         )

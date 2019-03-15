@@ -5,9 +5,10 @@ module.exports={
         // console.log('this worked!');
         const db = req.app.get('db');
         // console.log(req.body);
-        const {firstName:first_name,lastName:last_name,email,password,imageUrl:image_url} = req.body;
-        if(first_name=='',last_name=='',email,password==''){
-            return 
+        const {firstName:first_name,lastName:last_name,email,password} = req.body;
+        let {imageUrl:image_url} = req.body;
+        if(image_url===''){
+            image_url = 'https://vignette.wikia.nocookie.net/harrypotter/images/1/18/DOBBY2.jpg/revision/latest?cb=20161215055153'
         }
 
         let user = await db.users.check_user({email});

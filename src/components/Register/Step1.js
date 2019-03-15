@@ -29,15 +29,21 @@ class StepOne extends Component {
     
     async register(){
         const {firstName,lastName,email,password,imageUrl} = this.state;
-        try {
-            let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})
-            // console.log(user.data);
-            this.props.updateUser(user.data);
-            this.props.history.push('/register/step2')   
-        } catch (err) {
-            alert('Sorry this email already exists!')
+        if(email!='' && firstName!='' && lastName!='' && password!=''){
+            try {
+                let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})
+                // console.log(user.data);
+                this.props.updateUser(user.data);
+                this.props.history.push('/register/step2')   
+            } catch (err) {
+                alert('Sorry this email already exists!')
+            }
+         } 
+         else {
+                alert('Please complete all the boxes')
+            }
         }
-    }
+    
     
     render (){
         const {firstName,lastName,email,password,imageUrl} = this.state;

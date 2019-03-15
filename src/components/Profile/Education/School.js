@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {updateEducation} from '../../../ducks/userActions';
+import {updateEducation} from '../../../ducks/userActions'
 import { connect  } from "react-redux";
 import { withRouter } from 'react-router-dom';
 

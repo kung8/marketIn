@@ -68,7 +68,6 @@ class StepFive extends Component {
         return (
             <div className="projects-info-register-container">
                 <h1>Projects</h1>
-                <h3>Project</h3>
                 <input 
                     placeholder="Project"
                     value={project} 
@@ -79,9 +78,10 @@ class StepFive extends Component {
 
                 <br/>
                 <br/>
-
-                <button onClick={()=>this.handlePrevious(project)}>Previous</button>
-                <button onClick={()=>this.completeProfile(projects,education,work,skills,languages,id)}>Complete Profile</button>
+                <div className="previous-next-button-register-container">
+                    <button className="previous-button" onClick={()=>this.handlePrevious(project)}>Previous</button>
+                    <button className="complete-button" onClick={()=>this.completeProfile(projects,education,work,skills,languages,id)}>Complete</button>
+                </div>
             </div>
         )
     }

@@ -30,7 +30,7 @@ constructor(props){
 }
 
 componentDidMount(){
-    // this._isMount = true;
+    this._isMount = true;
     this.getEdProfile()
 }
 
@@ -40,11 +40,11 @@ async getEdProfile(){
         const profile = await axios.get('/profile/get/education/' + this.props.match.params.userId)
         const {edProfile} = profile.data;
         this.props.updateEducation(edProfile);
-        // if(this._isMount){
+        if(this._isMount){
             this.setState({
                 education:this.props.education
             })
-        // }
+        }
     }
 }
 
@@ -62,7 +62,7 @@ editAddIsClicked (){
         inputBox3:<input className="edit-input-box" placeholder="Ed Level" onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
         inputBox4:<input className="edit-input-box" placeholder="Location" onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
         inputBox5:<input className="edit-input-box" placeholder="Grad Date" onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
-        inputBox6:<input className="edit-input-box" placeholder="School Logo" onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>,
+        inputBox6:<input className="edit-input-box-last" placeholder="School Logo" onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>,
         addDivIsOpened:true
     })
 }

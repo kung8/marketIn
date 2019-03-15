@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
 import {clearUser,updateUser,updateViewedUser} from '../../ducks/userActions';
 import Education from './Education/Education';
 import Work from './Work/Work';
@@ -12,11 +13,11 @@ class Profile extends Component {
     constructor(props){
         super(props);
         this.state={
-            id:'',
-            firstName:'',
-            lastName:'',
-            email:'',
-            imageUrl:'',
+            id:this.props.id,
+            firstName:this.props.firstName,
+            lastName:this.props.lastName,
+            email:this.props.email,
+            imageUrl:this.props.imageUrl,
             isLoaded:false,
             isEditing:false,
             inputBox1:'',
@@ -27,7 +28,7 @@ class Profile extends Component {
     }
 
     componentDidMount () {
-        this._isMount=true;
+        // this._isMount=true;
         this.getUser();
         this.checkUser();
     }
@@ -64,10 +65,10 @@ class Profile extends Component {
     createEditBoxes(){
         this.setState({
             isEditing:true,
-            inputBox1:<input placeholder="First Name" onChange={(e)=>this.handleInput('firstName',e.target.value)}/>,
-            inputBox2:<input placeholder="Last Name" onChange={(e)=>this.handleInput('lastName',e.target.value)}/>,
-            inputBox3:<input placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>,
-            inputBox4:<input placeholder="Profile Pic" onChange={(e)=>this.handleInput('imageUrl',e.target.value)}/>,
+            inputBox1:<input className="edit-profile-input-boxes" placeholder="First Name" onChange={(e)=>this.handleInput('firstName',e.target.value)}/>,
+            inputBox2:<input className="edit-profile-input-boxes" placeholder="Last Name" onChange={(e)=>this.handleInput('lastName',e.target.value)}/>,
+            inputBox3:<input className="edit-profile-input-boxes" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>,
+            inputBox4:<input className="edit-profile-input-boxes" placeholder="Profile Pic" onChange={(e)=>this.handleInput('imageUrl',e.target.value)}/>,
         })
     }
 
@@ -118,13 +119,14 @@ class Profile extends Component {
                         <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
                         <h1>{this.props.userEmail}</h1>
                     </div>
-                    {this.state.inputBox1}
-                    {this.state.inputBox2}
-                    {this.state.inputBox3}
-                    {this.state.inputBox4}
-                    {/* {this.props.match.params.userId != this.props.id?(null):(<div>Same</div>)?(<button onClick={()=>this.editProfile()}>Edit</button>):(<div>No</div>)} */}
+                    <div className="edit-profile-input-button-container">
+                        {this.state.inputBox1}
+                        {this.state.inputBox2}
+                        {this.state.inputBox3}
+                        {this.state.inputBox4}
+
                         {this.props.match.params.userId!=this.props.id?(null):(this.state.isEditing?(<button onClick={()=>this.editProfile()}>Save</button>):(<button onClick={()=>this.createEditBoxes()}>Edit</button>))}
-                        {/* :(null)} */}
+                    </div>
                 </div>    
                 <div className="section-container">
                     <Education /> 
@@ -141,7 +143,7 @@ class Profile extends Component {
                 <div className="section-container">
                     <Projects/>
                 </div>
-                
+                <Link to="/"><button>Home</button></Link>
             </div>
         )
     }
