@@ -14,7 +14,8 @@ class Projects extends Component {
             projects:'',
             project:'',
             addDivIsOpened:false,
-            isMinimized:false
+            isMinimized:false,
+            isLoaded:false
         }
     }
 

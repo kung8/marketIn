@@ -25,6 +25,10 @@ class School extends Component {
         }
     }
     
+    componentDidMount(){
+        this._isMount = true;
+    }
+
     async deleteEdProfile(sch){
         const {id} = sch;
         const edProfile = await axios.delete(`/profile/delete/education/${id}`);
@@ -63,23 +67,24 @@ class School extends Component {
             const edProfile = await axios.put('/profile/edit/education',{schName,schLoc,major,schLogo,gradDate,edLevel,id,user_id})
             // console.log(444,workProfile.data[0])
             this.props.updateEducation(edProfile.data)
-            this.setState({
-                edit:false,
-                editBox1:'',
-                editBox2:'',
-                editBox3:'',
-                editBox4:'',
-                editBox5:'',
-                editBox6:'',
-                schName:'',
-                schLoc:'',
-                schLogo:'',
-                gradDate:'',
-                edLevel:'',
-                major:'',
-                addDivIsOpened:false
-                
-            }) 
+            if(this._isMount){
+                this.setState({
+                    edit:false,
+                    editBox1:'',
+                    editBox2:'',
+                    editBox3:'',
+                    editBox4:'',
+                    editBox5:'',
+                    editBox6:'',
+                    schName:'',
+                    schLoc:'',
+                    schLogo:'',
+                    gradDate:'',
+                    edLevel:'',
+                    major:'',
+                    addDivIsOpened:false 
+                }) 
+            }
         }   else {
                 this.setState({
                     edit:false,

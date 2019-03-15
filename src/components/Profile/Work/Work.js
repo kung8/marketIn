@@ -24,7 +24,8 @@ class Work extends Component {
             endDate:'',
             position:'',
             addDivIsOpened:false,
-            isMinimized:false
+            isMinimized:false,
+            isLoaded:false
         }
     }
 

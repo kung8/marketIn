@@ -105,6 +105,16 @@ module.exports = {
         res.status(200).send({edProfile,workProfile,skillsProfile,langProfile,projProfile})
     },
 
+    editUserProfile:async (req,res)=>{
+        const db = req.app.get('db');
+        // console.log('hit!')
+        const {id,firstName:first_name,lastName:last_name,email,imageUrl:image_url} = req.body;
+        // console.log(id,first_name,last_name,email,image_url)
+        const userProfile = await db.profiles.editProfiles.edit_user({id,first_name,last_name,email,image_url})
+        // console.log(userProfile);
+        res.status(200).send(userProfile)
+    },
+
     editEdProfile: async (req,res) => {
         const db = req.app.get('db');
         // console.log(req.body)
@@ -117,15 +127,15 @@ module.exports = {
 
     editWorkProfile: async (req,res) => {
         const db = req.app.get('db');
-        console.log(req.body)
+        // console.log(req.body)
         // var {id} = req.session.user;
         // let user_id = id
         // console.log(user_id)
         const {empName:emp_name,empLoc:emp_loc,empLogo:emp_logo,hireDate:hire_date,endDate:end_date,position,id,user_id} = req.body;
         // console.log('hit')
-        console.log(777,emp_name,emp_loc,emp_logo,hire_date,end_date,position,id,user_id)
+        // console.log(777,emp_name,emp_loc,emp_logo,hire_date,end_date,position,id,user_id)
         const workProfile = await db.profiles.editProfiles.edit_work({emp_name,emp_loc,emp_logo,hire_date,end_date,position,id,user_id});
-        console.log(333,workProfile)
+        // console.log(333,workProfile)
         res.status(200).send(workProfile)
     },
 

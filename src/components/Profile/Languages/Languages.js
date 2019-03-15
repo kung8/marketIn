@@ -14,7 +14,8 @@ class Languages extends Component {
             languages:'',
             language:'',
             addDivIsOpened:false,
-            isMinimized:false
+            isMinimized:false,
+            isLoaded:false
         }
     }
 

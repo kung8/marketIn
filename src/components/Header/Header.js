@@ -25,7 +25,7 @@ class Header extends Component {
         } else {
             this.setState({
                 isNavBarOpened:false,
-                navBar:200
+                navBar:250
             })
         }
     }
@@ -51,6 +51,7 @@ class Header extends Component {
                     {this.props.id?
                             (
                                 <div className="sidebar-container" style={{width:this.state.navBar}}>
+                                    <a style={{color:'white'}}>{this.props.firstName} {this.props.lastName}</a>
                                     <a href="#/services">Services</a>
                                     <a href={`mailto:${this.props.userEmail}`}>Contact</a>
                                     <a href="#/" onClick={this.logout}>Logout</a>
@@ -75,7 +76,11 @@ class Header extends Component {
 function mapStateToProps(reduxState){
     return{
         id:reduxState.id,
-        userEmail:reduxState.userEmail
+        userEmail:reduxState.userEmail,
+        userFirstName:reduxState.userFirstName,
+        userLastName:reduxState.userLastName,
+        firstName:reduxState.firstName,
+        lastName:reduxState.lastName
     }
 }
 

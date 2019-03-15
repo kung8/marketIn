@@ -24,7 +24,8 @@ constructor(props){
         gradDate:'',
         schLogo:'',
         addDivIsOpened:false,
-        isMinimized:false
+        isMinimized:false,
+        isLoaded:false
     }
 }
 

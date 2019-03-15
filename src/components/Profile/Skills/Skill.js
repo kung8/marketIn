@@ -15,6 +15,10 @@ class Skill extends Component {
         }
     }
 
+    componentDidMount(){
+        this._isMount = true;
+    }
+
     async deleteSkillsProfile(skill){
         const {id} = skill;
         const skillsProfile = await axios.delete(`/profile/delete/skill/${id}`);
@@ -48,11 +52,13 @@ class Skill extends Component {
             const skillsProfile = await axios.put('/profile/edit/skill',{skill,id,user_id})
             // console.log(444,skillsProfile.data[0].skill)
             this.props.updateSkill(skillsProfile.data)
-            this.setState({
-                edit:false,
-                editBox:'',
-                skill:''
-            })
+            if(this._isMount){
+                this.setState({
+                    edit:false,
+                    editBox:'',
+                    skill:''
+                })
+            }
         } else {
             this.setState({
                 edit:false,

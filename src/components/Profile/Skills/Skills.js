@@ -13,7 +13,8 @@ class Skills extends Component {
             inputBox1:'',
             skills:'',
             skill:'',
-            addDivIsOpened:false
+            addDivIsOpened:false,
+            isLoaded:false
         }
     }
 

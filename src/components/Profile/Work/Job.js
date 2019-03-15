@@ -26,6 +26,10 @@ class Job extends Component {
         }
     }
 
+    componentDidMount(){
+        this._isMount = true;
+    }
+
     async deleteWorkProfile(job){
         const {id} = job;
         const workProfile = await axios.delete(`/profile/delete/work/${id}`);
@@ -63,23 +67,24 @@ class Job extends Component {
             const workProfile = await axios.put('/profile/edit/work',{empName,empLoc,position,empLogo,hireDate,endDate,id,user_id})
             // console.log(444,workProfile.data[0])
             this.props.updateWork(workProfile.data)
-            this.setState({
-                edit:false,
-                editBox1:'',
-                editBox2:'',
-                editBox3:'',
-                editBox4:'',
-                editBox5:'',
-                editBox6:'',
-                empName:'',
-                empLoc:'',
-                empLogo:'',
-                hireDate:'',
-                endDate:'',
-                position:'',
-                addDivIsOpened:false
-                
-            }) 
+            if(this._isMount){
+                this.setState({
+                    edit:false,
+                    editBox1:'',
+                    editBox2:'',
+                    editBox3:'',
+                    editBox4:'',
+                    editBox5:'',
+                    editBox6:'',
+                    empName:'',
+                    empLoc:'',
+                    empLogo:'',
+                    hireDate:'',
+                    endDate:'',
+                    position:'',
+                    addDivIsOpened:false 
+                }) 
+            }
         }   else {
                 this.setState({
                     edit:false,

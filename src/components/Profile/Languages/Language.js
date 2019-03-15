@@ -15,6 +15,11 @@ class Language extends Component {
         }
     }
 
+    componentDidMount(){
+        this._isMount = true;
+    }
+
+
     async deleteLangProfile(lang){
         const {id} = lang;
         const langProfile = await axios.delete(`/profile/delete/language/${id}`);
@@ -46,12 +51,13 @@ class Language extends Component {
                 const langProfile = await axios.put('/profile/edit/language',{language,id,user_id})
                 // console.log(444,workProfile.data[0])
                 this.props.updateLang(langProfile.data)
-                this.setState({
-                    edit:false,
-                    editBox:'',
-                    language:''
-                    
-                }) 
+                if(this._isMount){
+                    this.setState({
+                        edit:false,
+                        editBox:'',
+                        language:''
+                    }) 
+                }
             }   else {
                     this.setState({
                         edit:false,

@@ -55,6 +55,7 @@ app.post('/profile/create/skill',profileCtrl.addSkillsProfile); //this is to add
 app.post('/profile/create/language',profileCtrl.addLangProfile); //this is to add a language section to profile
 app.post('/profile/create/project',profileCtrl.addProjProfile); //this is to add a project section to profile
 
+app.put('/profile/edit/user',profileCtrl.editUserProfile);
 app.put('/profile/edit/education',profileCtrl.editEdProfile);
 app.put('/profile/edit/work',profileCtrl.editWorkProfile);
 app.put('/profile/edit/skill',profileCtrl.editSkillsProfile);

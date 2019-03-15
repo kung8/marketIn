@@ -14,6 +14,9 @@ class Project extends Component {
             project:''
         }
     }
+    componentDidMount(){
+        this._isMount = true;
+    }
 
     async deleteProjProfile(proj){
         const {id} = proj;
@@ -46,12 +49,13 @@ class Project extends Component {
                 const projProfile = await axios.put('/profile/edit/project',{project,id,user_id})
                 // console.log(444,workProfile.data[0])
                 this.props.updateProject(projProfile.data)
-                this.setState({
-                    edit:false,
-                    editBox:'',
-                    skill:''
-                    
-                }) 
+                if(this._isMount){
+                    this.setState({
+                        edit:false,
+                        editBox:'',
+                        skill:'' 
+                    }) 
+                }
             }   else {
                     this.setState({
                         edit:false,
