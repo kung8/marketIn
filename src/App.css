@@ -152,7 +152,7 @@
 .large-experience-section-box {
     margin:5px;
     background:silver;
-    min-height:400px;
+    min-height:350px;
     display:flex;
     justify-content:space-between;
     align-items: center;
@@ -256,7 +256,7 @@
     /* margin-right:5px; */
     /* margin-left:5px; */
     display:flex;
-    min-height:80px;
+    min-height:40px;
     justify-content: space-between;
     align-items: center;
 }
