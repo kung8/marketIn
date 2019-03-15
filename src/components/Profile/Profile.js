@@ -107,7 +107,6 @@ class Profile extends Component {
     render(){
         // console.log(8989,this.props)
         console.log(this.props)
-
         //if a user session id == user then you can edit that profile but this is already a way to check session
 
         return (
@@ -124,8 +123,7 @@ class Profile extends Component {
                     {this.state.inputBox3}
                     {this.state.inputBox4}
                     {/* {this.props.match.params.userId != this.props.id?(null):(<div>Same</div>)?(<button onClick={()=>this.editProfile()}>Edit</button>):(<div>No</div>)} */}
-                    {/* {this.props.match.params.userId == this.props.id? */}
-                        {this.state.isEditing?(<button onClick={()=>this.editProfile()}>Save</button>):(<button onClick={()=>this.createEditBoxes()}>Edit</button>)}
+                        {this.props.match.params.userId!=this.props.id?(null):(this.state.isEditing?(<button onClick={()=>this.editProfile()}>Save</button>):(<button onClick={()=>this.createEditBoxes()}>Edit</button>))}
                         {/* :(null)} */}
                 </div>    
                 <div className="section-container">
