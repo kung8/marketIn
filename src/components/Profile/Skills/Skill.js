@@ -3,7 +3,6 @@ import axios from 'axios';
 import {updateSkill} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
 import {withRouter} from 'react-router-dom';
-import { red } from 'ansi-colors';
 
 class Skill extends Component {
     constructor(props){
@@ -26,7 +25,7 @@ class Skill extends Component {
     }
 
     handleInput(prop,value){
-        console.log(555,prop,value)
+        // console.log(555,prop,value)
         this.setState({
             [prop]:value
         })

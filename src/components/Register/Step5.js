@@ -56,13 +56,13 @@ class StepFive extends Component {
         
         const {skills,languages,work,education} = this.props;
         // console.log(education,languages,work,skills)
-        let profile = await axios.post('/profile/create',{education,work,skills,languages,projects})
+        await axios.post('/profile/create',{education,work,skills,languages,projects})
         
         this.props.history.push('/profile')
     }
 
     render (){
-        console.log(5555,this.props)
+        // console.log(5555,this.props)
         const {project,projects} = this.state
         const {education,work,skills,languages,id} = this.props;
         return (

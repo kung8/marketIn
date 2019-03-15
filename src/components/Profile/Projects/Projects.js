@@ -11,7 +11,7 @@ class Projects extends Component {
         this.state={
             addIsClicked: false,
             inputBox1:'',
-            projects:this.props.projects,
+            projects:'',
             project:'',
             addDivIsOpened:false,
             isMinimized:false

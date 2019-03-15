@@ -75,7 +75,7 @@ class StepThree extends Component {
     }
 
     render (){
-        console.log(3333,this.props,this.state)
+        // console.log(3333,this.props,this.state)
         const {empName,position,empLoc,hireDate,endDate,empLogo} = this.state
 
         return (

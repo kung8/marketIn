@@ -11,7 +11,7 @@ class Languages extends Component {
         this.state={
             addIsClicked: false,
             inputBox1:'',
-            languages:this.props.languages,
+            languages:'',
             language:'',
             addDivIsOpened:false,
             isMinimized:false
@@ -24,10 +24,10 @@ class Languages extends Component {
     
     async getLangProfile(){
         if(this.props.id){
-            console.log('hit')
+            // console.log('hit')
             const profile = await axios.get('/profile/get/languages/'+this.props.match.params.userId)
             const {langProfile} = profile.data;
-            console.log(2344,langProfile)
+            // console.log(2344,langProfile)
             this.props.updateLang(langProfile);
             this.setState({
                 languages:this.props.languages

@@ -31,7 +31,7 @@ class StepOne extends Component {
         const {firstName,lastName,email,password,imageUrl} = this.state;
         try {
             let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})
-            console.log(user.data);
+            // console.log(user.data);
             this.props.updateUser(user.data);
             this.props.history.push('/register/step2')   
         } catch (err) {

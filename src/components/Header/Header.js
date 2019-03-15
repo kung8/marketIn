@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {clearUser} from '../../ducks/userActions';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 // import '../../App.css'
 
 class Header extends Component {
@@ -29,34 +30,30 @@ class Header extends Component {
         }
     }
 
-    logout =async () => {
+    logout = async () => {
         await axios.post('/auth/logout');
         this.setState({
             isNavBarOpened:false,
             navBar:0
         })
-        this.props.clearUser();
-        // this.props.history.push('/'); 
+        await this.props.clearUser();
+        await this.props.history.push('/'); 
 
     }
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         return(
             <div className="header-container">
                 <div className="header">
-                    <a className="marketin-logo" onClick={()=>{this.toggleNavBar()}}>MI</a>
+                    <button className="marketin-logo" onClick={()=>{this.toggleNavBar()}}>MI</button>
                 </div>
                 <h1 className="marketin-name">MarketIn</h1>
                     {this.props.id?
                             (
                                 <div className="sidebar-container" style={{width:this.state.navBar}}>
+                                    <a href="#/services">Services</a>
+                                    <a href={`mailto:${this.props.userEmail}`}>Contact</a>
                                     <a href="#/" onClick={this.logout}>Logout</a>
-                                    <a>Education</a>
-                                    <a>Work</a>
-                                    <a>Skills</a>
-                                    <a>Languages</a>
-                                    <a>Projects</a>
-                                    <a>Services</a>
                                 </div>
                             
                             ):(
@@ -77,8 +74,9 @@ class Header extends Component {
 
 function mapStateToProps(reduxState){
     return{
-        id:reduxState.id
+        id:reduxState.id,
+        userEmail:reduxState.userEmail
     }
 }
 
-export default connect(mapStateToProps,{clearUser})(Header)
+export default withRouter(connect(mapStateToProps,{clearUser})(Header))

@@ -96,7 +96,7 @@ class Job extends Component {
 
     render (){
         const {job} = this.props
-        console.log(this.props.match.params.userId,this.props.id)
+        // console.log(this.props.match.params.userId,this.props.id)
         // console.log(job)
         return (
             <div className="large-experience-section-box" key={job.id}>

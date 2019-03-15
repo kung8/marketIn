@@ -70,8 +70,8 @@ class StepFour extends Component {
     }
 
     render (){
-        console.log(4444,this.props)
-        const {skill,skills,language,languages} = this.state
+        // console.log(4444,this.props)
+        const {skill,language} = this.state
         
         return (
             <div className="skills-and-lang-info-register-container">

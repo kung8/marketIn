@@ -11,7 +11,7 @@ class Skills extends Component {
         this.state={
             addIsClicked: false,
             inputBox1:'',
-            skills:this.props.skills,
+            skills:'',
             skill:'',
             addDivIsOpened:false
         }
@@ -23,7 +23,7 @@ class Skills extends Component {
     }
     
     async getSkillsProfile(){
-        console.log(this.props)
+        // console.log(this.props)
         if(this.props.userId){
             // console.log('hit')
             const profile = await axios.get('/profile/get/skills/'+this.props.match.params.userId)

@@ -350,8 +350,8 @@ footer {
 /*************************************Login******************************************/
 .login-page {
     margin-top:140px;
-    height:429px;
-    width:540px;
+    height:403px;
+    width:320px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

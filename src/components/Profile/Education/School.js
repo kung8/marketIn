@@ -38,7 +38,7 @@ class School extends Component {
         this.setState({
             [prop]:value
         })
-        console.log(prop,value)
+        // console.log(prop,value)
     }
 
     handleEditToggle=()=>{
@@ -99,17 +99,17 @@ class School extends Component {
 
         return (
             <div className="large-experience-section-box" key={sch.id}>
-                <div class="large-experience-box-top">
+                <div className="large-experience-box-top">
                     <div className="school-work-logo-container">
                         <img className="school-work-logo" src={sch.sch_logo} alt="sch_logo"/>
                     </div>
-                    <div className="large-experience-box">
+                    <span className="large-experience-box">
                         <p>{sch.sch_name}</p>
                         <p>{sch.major}</p>
                         <p>{sch.ed_level}</p>
                         <p>{sch.sch_loc}</p>
                         <p>{sch.grad_date}</p>
-                    </div>
+                    </span>
                     {this.props.match.params.userId==this.props.id?(
                     <div className="edit-delete-button-container">
                         {this.state.edit?(<button type="button" className="edit-save-button" onClick={()=>this.edit(sch)}>Save</button>):<button type="button" className="edit-save-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}

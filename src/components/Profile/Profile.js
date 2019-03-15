@@ -34,9 +34,9 @@ class Profile extends Component {
     }
 
     async getUser(){
-        console.log('hit!',this.props.match.params.userId)
+        // console.log('hit!',this.props.match.params.userId)
         const userProfile = await axios.get('/profile/get/user/'+this.props.match.params.userId);
-        console.log(7777,userProfile.data);
+        // console.log(7777,userProfile.data);
         this.props.updateViewedUser(userProfile.data[0])
 
     }
@@ -50,7 +50,7 @@ class Profile extends Component {
     //need to create some input boxes for edit but only want those to show if I press edit. 
 
     render(){
-        console.log(8989,this.props)
+        // console.log(8989,this.props)
 
         //if a user session id == user then you can edit that profile but this is already a way to check session
 
@@ -59,13 +59,13 @@ class Profile extends Component {
             <div className="profile-container">
                 
                 <div className="profile-basic-info-container">
-                    <img className="profile-picture" src={this.props.userImageUrl}/>
+                    <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic"/>
                     <div>
                         <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
                         <h1>{this.props.userEmail}</h1>
                     </div>
                 </div>    
-                <div id="education" className="section-container">
+                <div className="section-container">
                     <Education /> 
                 </div>
                 <div className="section-container">
