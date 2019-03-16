@@ -26,9 +26,18 @@ class StepOne extends Component {
         });
         // console.log(123,prop,value)
     }
-    
+
     async register(){
         const {firstName,lastName,email,password,imageUrl} = this.state;
+        if(imageUrl===''){
+            axios.get(`http://hp-api.herokuapp.com/api/characters/`
+            ).then(character =>{
+                let char = character.data[Math.floor(Math.random()*character.data.length)]
+                this.setState({
+                    imageUrl:char.image
+                })
+            })
+        }
         if(email!='' && firstName!='' && lastName!='' && password!=''){
             try {
                 let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})

@@ -16,7 +16,7 @@ constructor(props){
         inputBox4:'',
         inputBox5:'',
         inputBox6:'',
-        education:'',
+        education:this.props.education,
         schName:'',
         major:'',
         edLevel:'',
@@ -25,18 +25,18 @@ constructor(props){
         schLogo:'',
         addDivIsOpened:false,
         isMinimized:false,
-        isLoaded:false
     }
 }
 
 componentDidMount(){
     this._isMount = true;
     this.getEdProfile()
+    
 }
 
 async getEdProfile(){
     // console.log(this.props)
-    if(this.props.id){
+    if(this.props.match.params.userId){
         const profile = await axios.get('/profile/get/education/' + this.props.match.params.userId)
         const {edProfile} = profile.data;
         this.props.updateEducation(edProfile);
@@ -178,7 +178,7 @@ function mapStateToProps(reduxState){
     // console.log(reduxState)
     return{
         education:reduxState.education,
-        id:reduxState.id
+        id:reduxState.id,
     }
 }
 

@@ -7,9 +7,10 @@ module.exports={
         // console.log(req.body);
         const {firstName:first_name,lastName:last_name,email,password} = req.body;
         let {imageUrl:image_url} = req.body;
-        if(image_url===''){
-            image_url = 'https://vignette.wikia.nocookie.net/harrypotter/images/1/18/DOBBY2.jpg/revision/latest?cb=20161215055153'
-        }
+        // if(image_url===''){
+            
+        //     image_url = 'https://vignette.wikia.nocookie.net/harrypotter/images/1/18/DOBBY2.jpg/revision/latest?cb=20161215055153'
+        // }
 
         let user = await db.users.check_user({email});
         // console.log(1111, user)

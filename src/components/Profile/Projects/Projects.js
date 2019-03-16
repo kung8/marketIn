@@ -25,7 +25,7 @@ class Projects extends Component {
     }
     
     async getProjProfile(){
-        if(this.props.id){
+        if(this.props.match.params.userId){
             const profile = await axios.get('/profile/get/projects/'+this.props.match.params.userId);
             const {projProfile} = profile.data;
             this.props.updateProject(projProfile);

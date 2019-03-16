@@ -36,7 +36,7 @@ class Work extends Component {
     
     async getWorkProfile(){
         // console.log(this.props)
-        if(this.props.id){
+        if(this.props.match.params.userId){
             const profile = await axios.get('/profile/get/work/'+this.props.match.params.userId)
             const {workProfile} = profile.data;
             this.props.updateWork(workProfile);

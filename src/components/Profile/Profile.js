@@ -18,17 +18,17 @@ class Profile extends Component {
             lastName:this.props.lastName,
             email:this.props.email,
             imageUrl:this.props.imageUrl,
-            isLoaded:false,
             isEditing:false,
             inputBox1:'',
             inputBox2:'',
             inputBox3:'',
             inputBox4:'',
+            count:0
         }
     }
 
     componentDidMount () {
-        // this._isMount=true;
+        this._isMount=true;
         this.getUser();
         this.checkUser();
     }
@@ -38,15 +38,23 @@ class Profile extends Component {
         if(!this.props.id){
             let user = await axios.get('/auth/current')
                 this.props.updateUser(user.data)
+        } else {
+
         }
     }
 
     async getUser(){
         // console.log('hit!',this.props.match.params.userId)
-        const userProfile = await axios.get('/profile/get/user/'+this.props.match.params.userId);
-        // console.log(7777,userProfile.data);
-        this.props.updateViewedUser(userProfile.data[0])
-
+        if(this._isMount){
+            if(this.props.match.params.userId){
+                const userProfile = await axios.get('/profile/get/user/'+this.props.match.params.userId);
+                // console.log(7777,userProfile.data);
+                this.props.updateViewedUser(userProfile.data[0])
+                this.setState({
+                    count:this.state.count++
+                })
+            }
+        }
     }
 
     logout=async()=>{
@@ -59,7 +67,6 @@ class Profile extends Component {
         this.setState({
             [prop]:value
         })
-        console.log(prop,value)
     }
 
     createEditBoxes(){
@@ -80,19 +87,21 @@ class Profile extends Component {
             //need to create a call to edit the user's email, first and last name, and picture
             let userProfile = await axios.put('/profile/edit/user',{firstName,lastName,email,imageUrl,id});
             console.log(userProfile)
-            this.props.updateUser(userProfile.data)
-            this.setState({
-                isEditing:false,
-                inputBox1:'',
-                inputBox2:'',
-                inputBox3:'',
-                inputBox4:'',
-                firstName:this.props.firstName,
-                lastName:this.props.lastName,
-                email:this.props.email,
-                imageUrl:this.props.imageUrl
-
-            })
+            if(this._isMount){
+                this.props.updateUser(userProfile.data[0])
+                this.setState({
+                    isEditing:false,
+                    inputBox1:'',
+                    inputBox2:'',
+                    inputBox3:'',
+                    inputBox4:'',
+                    firstName:this.props.firstName,
+                    lastName:this.props.lastName,
+                    email:this.props.email,
+                    imageUrl:this.props.imageUrl,
+                    id:this.props.id
+                })
+            }
         }
             this.setState({
                 isEditing:false,
@@ -106,13 +115,12 @@ class Profile extends Component {
     //need to create some input boxes for edit but only want those to show if I press edit. 
 
     render(){
-        // console.log(8989,this.props)
         console.log(this.props)
         //if a user session id == user then you can edit that profile but this is already a way to check session
 
         return (
             <div className="profile-container">
-                {this.state.isLoaded?(<div className="loader"></div>):null}
+                {this.state.isLoaded?(<div className="loader"></div>):(null)}
                 <div className="profile-basic-info-container">
                     <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic"/>
                     <div>
@@ -129,7 +137,7 @@ class Profile extends Component {
                     </div>
                 </div>    
                 <div className="section-container">
-                    <Education /> 
+                    <Education />
                 </div>
                 <div className="section-container">
                     <Work />
@@ -143,25 +151,25 @@ class Profile extends Component {
                 <div className="section-container">
                     <Projects/>
                 </div>
-                <Link to="/"><button>Home</button></Link>
             </div>
         )
     }
 }
 
 function mapStateToProps (reduxState){
+    console.log(222,reduxState)
     return {
         id:reduxState.id,
         firstName:reduxState.firstName,
         lastName:reduxState.lastName,
-         email:reduxState.email,
+        email:reduxState.email,
         imageUrl:reduxState.imageUrl,
         userFirstName:reduxState.userFirstName,
         userLastName:reduxState.userLastName,
         userEmail:reduxState.userEmail,
         userImageUrl:reduxState.userImageUrl,
         viewedUserId:reduxState.viewedUserId,
-        education:reduxState.education
+        education:reduxState.education,
     }
 }
 

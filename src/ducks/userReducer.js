@@ -1,5 +1,6 @@
 import {UPDATE_VIEWED_USER,UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT,CLEAR_USER} from './constants'
 
+
 const initialState = {
     id:0,
     firstName:'',
@@ -15,7 +16,7 @@ const initialState = {
     userFirstName:'',
     userLastName:'',
     userEmail:'',
-    userImageUrl:''
+    userImageUrl:'',
 }
 
 export default function userReducer(state = initialState,action){
@@ -44,6 +45,7 @@ export default function userReducer(state = initialState,action){
         case UPDATE_PROJECT:
             const {projects} = action.payload;
             return {...state,projects};
+
         case CLEAR_USER:
             // console.log(7777,state); 
             return {...state,firstName:'',lastName:'',email:'',imageUrl:'',id:0,education:[],work:[],skills:[],languages:[],projects:[],userEmail:'',userFirstName:'',userLastName:'',userImageUrl:'',viewedUserId:''}

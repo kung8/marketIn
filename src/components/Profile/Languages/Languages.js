@@ -24,7 +24,7 @@ class Languages extends Component {
     }
     
     async getLangProfile(){
-        if(this.props.id){
+        if(this.props.match.params.userId){
             // console.log('hit')
             const profile = await axios.get('/profile/get/languages/'+this.props.match.params.userId)
             const {langProfile} = profile.data;

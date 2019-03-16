@@ -4,10 +4,11 @@ const session = require('express-session');
 const massive = require('massive');
 const userCtrl = require('./userController/userController')
 const profileCtrl = require('./profileController/profileController');
-
-const {CONNECTION_STRING,SESSION_SECRET,SERVER_PORT} = process.env;
 const pg = require('pg');
 const pgSession = require('connect-pg-simple')(session);
+
+const aws = require('aws-sdk');
+const {CONNECTION_STRING,SESSION_SECRET,SERVER_PORT,S3_BUCKET,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY} = process.env;
 
 const app = express();
 app.use(express.json());
@@ -34,8 +35,44 @@ app.use(session({
     }
 }))
 
+//AWS
+app.get('/sign-s3', (req, res) => {
+    aws.config = {
+      region: 'us-west-1',
+      accessKeyId: AWS_ACCESS_KEY_ID,
+      secretAccessKey: AWS_SECRET_ACCESS_KEY,
+    };
+  
+    const s3 = new aws.S3();
+    const fileName = req.query['file-name'];
+    const fileType = req.query['file-type'];
+    const s3Params = {
+      Bucket: S3_BUCKET,
+      Key: fileName,
+      Expires: 60,
+      ContentType: fileType,
+      ACL: 'public-read',
+    };
+  
+    s3.getSignedUrl('putObject', s3Params, (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.end();
+      }
+      const returnData = {
+        signedRequest: data,
+        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+      };
+  
+      return res.send(returnData);
+    });
+  });
+
+
+
 //userController ENDPOINTS
 app.post('/auth/register',userCtrl.register);
+// app.get('https://www.potterapi.com/v1/sortingHat')
 app.post('/auth/login',userCtrl.login);
 app.get('/auth/current',userCtrl.getUser);
 app.post('/auth/logout',userCtrl.logout);

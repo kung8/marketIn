@@ -25,7 +25,7 @@ class Skills extends Component {
     
     async getSkillsProfile(){
         // console.log(this.props)
-        if(this.props.userId){
+        if(this.props.match.params.userId){
             // console.log('hit')
             const profile = await axios.get('/profile/get/skills/'+this.props.match.params.userId)
             // console.log(123,profile)
