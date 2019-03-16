@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 import {clearUser,updateUser,updateViewedUser} from '../../ducks/userActions';
 import Education from './Education/Education';
 import Work from './Work/Work';
@@ -165,4 +165,4 @@ function mapStateToProps (reduxState){
     }
 }
 
-export default connect(mapStateToProps,{clearUser,updateUser,updateViewedUser})(Profile)
+export default withRouter(connect(mapStateToProps,{clearUser,updateUser,updateViewedUser})(Profile))

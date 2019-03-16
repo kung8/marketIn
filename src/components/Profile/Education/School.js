@@ -94,6 +94,12 @@ class School extends Component {
                     editBox4:'',
                     editBox5:'',
                     editBox6:'',
+                    schName:'',
+                    schLoc:'',
+                    schLogo:'',
+                    gradDate:'',
+                    edLevel:'',
+                    major:'',
                     addDivIsOpened:false
                 })
             }

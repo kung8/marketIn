@@ -12,12 +12,6 @@ class Auth extends Component {
             password:''
         }
     }
-
-    // componentDidMount(){
-    //     window.onhashchange = function () {
-    //         window.location.reload()
-    //     }
-    // }
     
     handleInput(prop,value){
         this.setState({
@@ -39,7 +33,6 @@ class Auth extends Component {
                 // alert("Please enter a valid combination.")
         }    
     }
-
 
     render (){
         console.log(1111,this.props)

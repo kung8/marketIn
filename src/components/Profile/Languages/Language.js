@@ -26,6 +26,7 @@ class Language extends Component {
         this.props.updateLang(langProfile.data);
         this.setState({
             languages:langProfile.data,
+            language:''
         })
     }
     
@@ -50,19 +51,21 @@ class Language extends Component {
                 // console.log(user_id)
                 const langProfile = await axios.put('/profile/edit/language',{language,id,user_id})
                 // console.log(444,workProfile.data[0])
-                this.props.updateLang(langProfile.data)
                 if(this._isMount){
+                    this.props.updateLang(langProfile.data)
                     this.setState({
                         edit:false,
                         editBox:'',
-                        language:''
+                        language:'',
+                        languages:this.props.languages
                     }) 
                 }
             }   else {
                     this.setState({
                         edit:false,
                         editBox:'',
-                        skill:''
+                        language:'',
+                        languages:this.props.languages
                     })
                 }
         } catch (err){

@@ -81,7 +81,14 @@ class Work extends Component {
                     inputBox3:'',
                     inputBox4:'',
                     inputBox5:'',
-                    inputBox6:'',
+                    inputBox6:'', 
+                    work:this.props.work,
+                    empName:'',
+                    empLoc:'',
+                    empLogo:'',
+                    hireDate:'',
+                    endDate:'',
+                    position:'',
                     addDivIsOpened:false
                 })  
         } else {
@@ -93,6 +100,13 @@ class Work extends Component {
                 inputBox4:'',
                 inputBox5:'',
                 inputBox6:'',
+                work:this.props.work,
+                empName:'',
+                empLoc:'',
+                empLogo:'',
+                hireDate:'',
+                endDate:'',
+                position:'',
                 addDivIsOpened:false
             })
         }

@@ -82,7 +82,13 @@ addToEd= async()=>{
                 inputBox4:'',
                 inputBox5:'',
                 inputBox6:'',
-                addDivIsOpened:false
+                addDivIsOpened:false,
+                schName:'',
+                major:'',
+                edLevel:'',
+                schLoc:'',
+                gradDate:'',
+                schLogo:''
             })  
     } else {
         this.setState({
@@ -93,7 +99,14 @@ addToEd= async()=>{
             inputBox4:'',
             inputBox5:'',
             inputBox6:'',
-            addDivIsOpened:false
+            addDivIsOpened:false,
+            schName:'',
+            major:'',
+            edLevel:'',
+            schLoc:'',
+            gradDate:'',
+            schLogo:'',
+            education:this.props.education
         })
     }
 }

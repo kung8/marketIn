@@ -23,7 +23,8 @@ class Project extends Component {
         const projProfile = await axios.delete(`/profile/delete/project/${id}`);
         this.props.updateProject(projProfile.data);
         this.setState({
-            projects:projProfile.data
+            projects:projProfile.data,
+            project:''
         })
     }
 
@@ -42,25 +43,28 @@ class Project extends Component {
 
     async edit(proj){
         const {project} = this.state;
+        
         try {
             if(project !=='' ){
                 const {id,user_id} = proj;
                 // console.log(user_id)
                 const projProfile = await axios.put('/profile/edit/project',{project,id,user_id})
                 // console.log(444,workProfile.data[0])
-                this.props.updateProject(projProfile.data)
                 if(this._isMount){
+                    this.props.updateProject(projProfile.data)
                     this.setState({
                         edit:false,
                         editBox:'',
-                        skill:'' 
+                        project:'',
+                        projects:this.props.projects 
                     }) 
                 }
             }   else {
                     this.setState({
                         edit:false,
                         editBox:'',
-                        skill:''
+                        project:'',
+                        projects:this.props.projects
                     })
                 }
         } catch (err){
@@ -70,7 +74,7 @@ class Project extends Component {
 
     render (){
         const {proj} = this.props;
-        
+        console.log(this.props)
         return (
             <div className="small-experience-section-box" key={proj.id}>
                 <div className="small-experience-box">
@@ -79,7 +83,8 @@ class Project extends Component {
                 {this.props.match.params.userId==this.props.id?(<div className="input-edit-delete-container">
                     {this.state.editBox}
                     <div>
-                        {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(proj)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(proj)}}>Edit</button>}
+                        {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(proj)}>Save</button>):(<button className="edit-save-button" onClick={()=>{this.handleEditToggle(proj)}}>Edit</button>)}
+                        
                         <button className="small-section-delete-button" onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
                     </div>
                 </div>):null}    

@@ -16,8 +16,8 @@ class StepOne extends Component {
     };
     
     componentDidMount(){
-        const {firstName,lastName,email,password,imageUrl} = this.props;
-        this.props.updateUser(firstName,lastName,email,password,imageUrl);
+        // const {firstName,lastName,email,password,imageUrl} = this.props;
+        // this.props.updateUser(firstName,lastName,email,password,imageUrl);
     }
 
     handleInput(prop,value){
@@ -44,6 +44,16 @@ class StepOne extends Component {
             }
         }
     
+    cancel=()=>{
+        this.setState({
+            firstName:'',
+            lastName:'',
+            email:'',
+            password:'',
+            imageUrl:''
+        });
+        this.props.history.push('/')
+    }
     
     render (){
         const {firstName,lastName,email,password,imageUrl} = this.state;
@@ -79,8 +89,10 @@ class StepOne extends Component {
                     placeholder="Image URL" 
                     onChange={(e)=>this.handleInput('imageUrl',e.target.value)}
                     />
-                    
-                <button onClick={()=>{this.register(firstName,lastName,email,password,imageUrl)}}>Register</button>
+                <div className="cancel-register-button-container">
+                    <button className="cancel-button" onClick={this.cancel}>Cancel</button>  
+                    <button className="register-button" onClick={()=>{this.register(firstName,lastName,email,password,imageUrl)}}>Register</button>
+                </div>
             </div>
         )
     }

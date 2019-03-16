@@ -31,7 +31,7 @@ class Header extends Component {
     }
 
     logout = async () => {
-        axios.post('/auth/logout');
+        await axios.post('/auth/logout');
         this.setState({
             isNavBarOpened:false,
             navBar:0
@@ -41,7 +41,6 @@ class Header extends Component {
 
     }
     render(){
-        // console.log(this.props)
         return(
             <div className="header-container">
                 <div className="header">
@@ -49,25 +48,18 @@ class Header extends Component {
                 </div>
                 <h1 className="marketin-name">MarketIn</h1>
                     {this.props.id?
-                            (
-                                <div className="sidebar-container" style={{width:this.state.navBar}}>
-                                    <span style={{color:'white'}}>{this.props.firstName} {this.props.lastName}</span>
-                                    <span style={{color: 'white'}} href="#/services">Services</span>
-                                    <a href={`mailto:${this.props.userEmail}`}>Contact</a>
-                                    <span style={{color: 'white'}} onClick={this.logout}>Logout</span>
-                                    {/* <Link to="/"><span style={{color: 'white'}} onClick={this.logout}>Logout</span></Link> */}
-                                </div>
-                            
-                            ):(
-                                <div className="sidebar-container" style={{width:this.state.navBar}}>
-                                    <a href="mailto:ung.kevin78@gmail.com">Contact</a>
-                                </div>
-                            )}
-                {/* {this.props.id?
-                    (<div className="logout-button-container">
-                        <Link to='/'><button className="logout-button" onClick={this.logout}>Logout</button></Link>
-                    </div>):null
-                } */}
+                        (<div className="sidebar-container" style={{width:this.state.navBar}}>
+                                <span style={{color:'white'}}>{this.props.firstName} {this.props.lastName}</span>
+                                <span style={{color: 'white'}} href="#/services">Services</span>
+                                <a href={`mailto:${this.props.userEmail}`}>Contact</a>
+                                <span style={{color: 'white'}} onClick={this.logout}>Logout</span>
+                                {/* <Link to="/"><span style={{color: 'white'}} onClick={this.logout}>Logout</span></Link> */}
+                        </div>
+                        ) : (<div className="sidebar-container" style={{width:this.state.navBar}}>
+                                <a href="mailto:ung.kevin78@gmail.com">Contact</a>
+                            </div>
+                        )
+                    }
             </div>
             
         )

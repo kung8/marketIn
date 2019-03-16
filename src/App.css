@@ -86,6 +86,7 @@
     color:white;
     padding:10px;
     font-size:35px;
+    /* text-transform: uppercase; */
 }
 
 .sidebar-container span {
@@ -443,7 +444,25 @@ footer {
     border:solid black;
 }
 
-.basic-info-register-container button {
+
+
+.cancel-register-button-container {
+    width:90%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:10px;
+    margin-top:0;
+}
+
+.cancel-button {
+    width:100px;
+    height:40px;
+    background:black;
+    font-size:30px;
+    color:white;
+}
+
+.register-button {
     width:140px;
     height:40px;
     background:black;

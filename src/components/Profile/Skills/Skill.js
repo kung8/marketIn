@@ -51,19 +51,21 @@ class Skill extends Component {
         if(skill !==""){
             const skillsProfile = await axios.put('/profile/edit/skill',{skill,id,user_id})
             // console.log(444,skillsProfile.data[0].skill)
-            this.props.updateSkill(skillsProfile.data)
             if(this._isMount){
+                this.props.updateSkill(skillsProfile.data)
                 this.setState({
                     edit:false,
                     editBox:'',
-                    skill:''
+                    skill:'',
+                    skills:this.props.skills
                 })
             }
         } else {
             this.setState({
                 edit:false,
                 editBox:'',
-                skill:''
+                skill:'',
+                skills:this.props.skills
             })
         }
         

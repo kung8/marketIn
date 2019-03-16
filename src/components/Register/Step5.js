@@ -47,6 +47,7 @@ class StepFive extends Component {
        }
 
     async completeProfile(){
+        console.log(this.props.id)
         const {projects,project} = this.state;
 
         if(project !== '' ){
@@ -54,11 +55,10 @@ class StepFive extends Component {
             this.props.updateProject(projects);
         }
         
-        const {skills,languages,work,education} = this.props;
+        const {skills,languages,work,education,id} = this.props;
         // console.log(education,languages,work,skills)
         await axios.post('/profile/create',{education,work,skills,languages,projects})
-        
-        this.props.history.push('/profile')
+        this.props.history.push(`/profile/${id}`)
     }
 
     render (){
@@ -93,7 +93,8 @@ function mapStateToProps(reduxState){
         education:reduxState.education,
         skills:reduxState.skills,
         languages:reduxState.languages,
-        work:reduxState.work
+        work:reduxState.work,
+        id:reduxState.id
     }
 } 
 

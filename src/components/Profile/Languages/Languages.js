@@ -60,12 +60,14 @@ class Languages extends Component {
                 addIsClicked:false,
                 languages:this.props.languages,
                 inputBox1:'',
-                addDivIsOpened:false
+                addDivIsOpened:false,
+                language:''
             })
         } else {
             this.setState({
                 addIsClicked:false,
                 inputBox1:'',
+                language:'',
                 addDivIsOpened:false
             })
         }

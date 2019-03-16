@@ -37,7 +37,6 @@ class Projects extends Component {
         }
     }
 
-    
 
         handleInput(prop,value){
             this.setState({
@@ -55,21 +54,26 @@ class Projects extends Component {
     
         addToProj=async()=>{
             const {project,projects} = this.state;
-            console.log('hit')
+            // console.log('hit')
             if(project !== ''){
                 projects.push({project});
                 let projProfile = await axios.post('/profile/create/project',{project})
-                 await this.props.updateProject(projProfile.data);
-                this.setState({
-                    addIsClicked:false,
-                    projects:this.props.projects,
-                    inputBox1:'',
-                    addDivIsOpened:false
-                })
+                console.log(5555,projProfile)
+                if(this._isMount){
+                    await this.props.updateProject(projProfile.data);
+                    this.setState({
+                        addIsClicked:false,
+                        projects:this.props.projects,
+                        inputBox1:'',
+                        addDivIsOpened:false,
+                        project:''
+                    })
+                }
             } else {
                 this.setState({
                     addIsClicked:false,
                     inputBox1:'',
+                    project:'',
                     addDivIsOpened:false
                 })
             }
@@ -91,7 +95,7 @@ class Projects extends Component {
     render () {
         const {projects} = this.props;
         const projProfile = projects.map(proj =>{
-            // console.log(3333,proj)
+            console.log(3333,proj)
             return (
                 <Project 
                     key={proj.id}

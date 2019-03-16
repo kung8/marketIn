@@ -63,13 +63,15 @@ class Skills extends Component {
                 addIsClicked:false,
                 skills:this.props.skills,
                 inputBox1:'',
-                addDivIsOpened:false
+                addDivIsOpened:false,
+                skill:''
             })
         } else {
             this.setState({
                 addIsClicked:false,
                 inputBox1:'',
-                addDivIsOpened:false
+                addDivIsOpened:false,
+                skill:''
             })
         }
     }
