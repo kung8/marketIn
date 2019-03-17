@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import Service from './Service';
 
 class ServiceList extends Component {
     constructor(props){
@@ -11,7 +12,7 @@ class ServiceList extends Component {
             service:'',
             userId:'',
             price:'',
-            services:[],
+            services:this.props.services,
             isAdded:false,
             inputBox1:'',
             inputBox2:'',
@@ -69,7 +70,10 @@ class ServiceList extends Component {
                 inputBox1:'',
                 inputBox2:'',
                 inputBox3:'',
-                isAddOpened:false
+                isAddOpened:false,
+                price:'',
+                image:'',
+                service:''
             })
         } else {
             this.setState({
@@ -77,7 +81,10 @@ class ServiceList extends Component {
                 inputBox1:'',
                 inputBox2:'',
                 inputBox3:'',
-                isAddOpened:false
+                isAddOpened:false,
+                image:'',
+                service:'',
+                price:''
             })
         }
     }
@@ -85,23 +92,46 @@ class ServiceList extends Component {
     handleEditToggle(){
         this.setState({
             isEditing:true,
-            editBox1:<input onChange={(e)=>this.handleInput('Service',e.target.value)}/>,
-            editBox2:<input onChange={(e)=>this.handleInput('Price',e.target.value)}/>,
-            editBox3:<input onChange={(e)=>this.handleInput('Image',e.target.value)}/>
+            editBox1:<input placeholder="Service" onChange={(e)=>this.handleInput('service',e.target.value)}/>,
+            editBox2:<input placeholder="Price" onChange={(e)=>this.handleInput('price',e.target.value)}/>,
+            editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
         })
     }
 
-    edit(){
-        this.setState({
-            isEditing:false,
-            editBox1:'',
-            editBox2:'',
-            editBox3:''
-        })
+    async edit(serv){
+        const {price,image,service} = this.state;
+        const {id} = serv;
+        console.log(service,price,image,price,id)
+        if(price !=='' && image !=='' && service !==''){
+            const services = await axios.put(`/service/update/${id}`,{price,image,service})
+            console.log(services)
+            // this.props.updateServices(services.data)
+            this.setState({
+                isEditing:false,
+                editBox1:'',
+                editBox2:'',
+                editBox3:'',
+                services:services.data,
+                service:'',
+                image:'',
+                price:''
+            })
+        } else {
+            this.setState({
+                isEditing:false,
+                editBox1:'',
+                editBox2:'',
+                editBox3:'',
+                service:'',
+                image:'',
+                price:''
+            })
+        }
     }
 
-    delete = async(service)=>{
-        const {id} = service;
+    delete = async(serv)=>{
+        console.log(serv)
+        const {id} = serv;
         // console.log(id)
         const services = await axios.delete(`/service/delete/${id}`)
         this.setState({
@@ -110,15 +140,15 @@ class ServiceList extends Component {
     }
 
     render(){
-        console.log(this.state.services)
+        console.log(this.props)
         const {services} = this.state;
-        const servArray = services.map(service =>{
+        const servArray = services.map(serv =>{
             return (
-                <div className="service-section-box" key={service.id}>
+                <div className="service-section-box">
                         <div className="service-mapped-items">
-                            <img src={service.image} alt="service"/>
-                            <p>{service.service}</p>
-                            <p>{service.price}</p>
+                            <img src={serv.image} alt="service"/>
+                            <p>{serv.service}</p>
+                            <p>{serv.price}</p>
                         </div>
                         
                         <div className="edit-service-input-box-container">
@@ -130,17 +160,24 @@ class ServiceList extends Component {
                         {this.props.id==this.props.match.params.userId?(
                             <div className="edit-delete-service-buttons-container">
                                 {this.state.isEditing?
-                                    (<button onClick={()=>{this.edit()}} className="edit-service-button">Save</button>)
+                                    (<button onClick={()=>{this.edit(serv)}} className="edit-service-button">Save</button>)
                                         :(<button onClick={()=>{this.handleEditToggle()}} className="edit-service-button">Edit</button>)}
-                                <button className="delete-service-button" onClick={()=>{this.delete(service)}}>Delete</button>  
+                                <button className="delete-service-button" onClick={()=>{this.delete(serv)}}>Delete</button>  
                             </div>):
                             (<div className='purchase-chat-buttons-container'>
                                 <button className="purchase-service-button">Purchase</button>
                                 <button className="add-save-edit-button">Chat</button>
                             </div>)}
-                            
-                    
                 </div>)
+            
+                        // <Service 
+                        // key={serv.id}
+                        // serv={serv}
+                        // delete={this.delete}
+                        // edit={this.edit}
+                        // handleEditToggle={this.handleEditToggle}
+                        // />
+                    
         })
         console.log(this.props)
         return(
@@ -171,7 +208,8 @@ function mapStateToProps(reduxState){
     return{
         id:reduxState.id,
         viewedUserId:reduxState.viewedUserId,
-        userId:reduxState.userId
+        userId:reduxState.userId,
+        services:reduxState.services
     }
 }
 

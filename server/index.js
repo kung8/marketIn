@@ -110,7 +110,7 @@ app.delete('/profile/delete/project/:id',profileCtrl.deleteProjProfile);
 //serviceController ENDPOINTS
 app.get('/services/get/:userId',serviceCtrl.getServices);
 app.post('/service/add',serviceCtrl.addService);
-app.put('/service/update',serviceCtrl.updateService);
+app.put('/service/update/:id',serviceCtrl.updateService);
 app.delete('/service/delete/:id',serviceCtrl.deleteService);
 app.get('/services/getAll',serviceCtrl.getAllServices);
 

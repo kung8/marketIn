@@ -7,3 +7,4 @@ export const UPDATE_SKILL = 'UPDATE_SKILL';
 export const UPDATE_LANG = 'UPDATE_LANG';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 export const CLEAR_USER = 'CLEAR_USER';
+export const UPDATE_SERVICES = 'UPDATE_SERVICES';

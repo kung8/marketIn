@@ -76,7 +76,7 @@ class Language extends Component {
     render (){
         const {lang} = this.props;
         return (
-            <div className="small-experience-section-box" lang={lang.id}>
+            <div className="small-experience-section-box">
                 <div className="small-experience-box">
                     <p>{lang.language}</p>
                 </div>

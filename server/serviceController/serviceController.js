@@ -23,8 +23,15 @@ module.exports={
 
     updateService:async(req,res)=>{
         const db = req.app.get('db');
+        console.log(req.body,req.params,req.session.user)
+        const {image,price,service} = req.body;
+        const {id} = req.params;
+        const user_id = req.session.user.id;
+        console.log(image,price,service,id,user_id)
+        const services = await db.services.update_service({image,price,service,id,user_id})
         //send in new price, new service, new image, id, user_id from session
-        console.log('connected');
+        console.log(services);
+        res.status(200).send(services)
         
     },
 
