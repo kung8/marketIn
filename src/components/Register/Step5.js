@@ -43,7 +43,7 @@ class StepFive extends Component {
         
         projects.push({project});
         this.props.updateProject(projects)
-        this.props.history.push('/register/step4')   
+        this.props.history.push('/MarketIn/register/step4')   
        }
 
     async completeProfile(){
@@ -58,7 +58,7 @@ class StepFive extends Component {
         const {skills,languages,work,education,id} = this.props;
         // console.log(education,languages,work,skills)
         await axios.post('/profile/create',{education,work,skills,languages,projects})
-        this.props.history.push(`/profile/${id}`)
+        this.props.history.push(`/MarketIn/profile/${id}`)
     }
 
     render (){

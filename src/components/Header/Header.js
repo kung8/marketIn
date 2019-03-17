@@ -24,7 +24,7 @@ class Header extends Component {
         } else {
             this.setState({
                 isNavBarOpened:false,
-                navBar:250
+                navBar:270
             })
         }
     }
@@ -36,7 +36,7 @@ class Header extends Component {
             navBar:0
         })
         this.props.clearUser();
-        this.props.history.push('/'); 
+        this.props.history.push('/MarketIn/'); 
 
     }
     render(){
@@ -49,18 +49,21 @@ class Header extends Component {
                     {this.props.id?
                         (<div className="sidebar-container" style={{width:this.state.navBar}}>
                                 <p style={{color:'white'}}>Signed in as:</p>
-                                <Link to={`/profile/${this.props.id}`} onClick={()=>this.toggleNavBar()}>{this.props.firstName} {this.props.lastName}</Link>
+                                <Link to={`/MarketIn/profile/${this.props.id}`} onClick={()=>this.toggleNavBar()}>{this.props.firstName} {this.props.lastName}</Link>
                                 
                                 <p style={{color:'white'}}>Viewing</p>
-                                <Link to={`/profile/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>{this.props.userFirstName} {this.props.userLastName}</Link>
+                                <Link to={`/MarketIn/profile/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>{this.props.userFirstName} {this.props.userLastName}</Link>
 
-                                <Link to={`/services/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>Services</Link>
+                                <Link to={`/MarketIn/services/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>Services</Link>
                                 <a href={`mailto:${this.props.userEmail}`} onClick={()=>this.toggleNavBar()}>Contact</a>
                                 <span style={{color: 'white'}} onClick={this.logout}>Logout</span>
                                 {/* <Link to="/"><span style={{color: 'white'}} onClick={this.logout}>Logout</span></Link> */}
                         </div>
                         ) : (<div className="sidebar-container" style={{width:this.state.navBar}}>
-                                <Link to='/' onClick={()=>this.toggleNavBar()}>Login</Link>
+                                <Link to='/MarketIn/' onClick={()=>this.toggleNavBar()}>Login</Link>
+                                <Link to='/MarketIn/about' style={{color:'white'}} onClick={()=>this.toggleNavBar()}>About MarketIn</Link>
+                                <Link to={`/MarketIn/services/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>Services</Link>
+                                
                                 <a href="mailto:ung.kevin78@gmail.com" onClick={()=>this.toggleNavBar()}>Contact</a>
                             </div>
                         )

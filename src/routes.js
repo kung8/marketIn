@@ -6,9 +6,9 @@ import Register from './components/Register/Register';
 import Services from './components/Services/Services'
 export default  (
         <Switch>
-            <Route exact path='/' component={Auth}/>
-            <Route path='/register' component={Register}/>
-            <Route path='/profile/:userId' component={Profile}/>
-            <Route path='/services/:userId' component={Services}/>
+            <Route exact path='/MarketIn/' component={Auth}/>
+            <Route path='/MarketIn/register' component={Register}/>
+            <Route path='/MarketIn/profile/:userId' component={Profile}/>
+            <Route path='/MarketIn/services/:userId' component={Services}/>
         </Switch>
 )

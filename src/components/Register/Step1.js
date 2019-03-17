@@ -29,10 +29,11 @@ class StepOne extends Component {
 
     async register(){
         const {firstName,lastName,email,password,imageUrl} = this.state;
-        if(imageUrl===''){
-            axios.get(`http://hp-api.herokuapp.com/api/characters/`
+        if(imageUrl==''){
+            await axios.get(`http://hp-api.herokuapp.com/api/characters/`
             ).then(character =>{
-                let char = character.data[Math.floor(Math.random()*character.data.length)]
+                const char = character.data[Math.floor(Math.random()*character.data.length)]
+                console.log(char.image)
                 this.setState({
                     imageUrl:char.image
                 })
@@ -40,10 +41,11 @@ class StepOne extends Component {
         }
         if(email!='' && firstName!='' && lastName!='' && password!=''){
             try {
+                console.log(imageUrl)
                 let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})
                 // console.log(user.data);
                 this.props.updateUser(user.data);
-                this.props.history.push('/register/step2')   
+                this.props.history.push('/MarketIn/register/step2')   
             } catch (err) {
                 alert('Sorry this email already exists!')
             }
@@ -61,7 +63,7 @@ class StepOne extends Component {
             password:'',
             imageUrl:''
         });
-        this.props.history.push('/')
+        this.props.history.push('/MarketIn/')
     }
     
     render (){

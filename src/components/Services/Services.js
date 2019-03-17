@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import '../../App.css';
+// import '../../App.css';
 import axios from 'axios';
 import { v4 as randomString } from 'uuid';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import { DirectConnect, IoT1ClickDevicesService } from 'aws-sdk';
-import {HP_API_KEY} from 'dotenv';
+import ServiceList from './ServiceList';
 
 class Services extends Component {
   constructor() {
@@ -66,43 +66,43 @@ class Services extends Component {
     //   });
 //   };
 
-    handleInput (value){
-        this.setState({
-            house:value
-        })
-        console.log(value)
-    }
+    // handleInput (value){
+    //     this.setState({
+    //         house:value
+    //     })
+    //     console.log(value)
+    // }
 
-    handleClick (){
-        if(this.state.house === ''){
-            // axios.get('https://www.potterapi.com/v1/characters','$2a$10$MQnGphpJPwYsUlYiSWt8b.gxxCZ/9uZiyoEJKL4yAnYkAn4ax8h22'
-            axios.get(`http://hp-api.herokuapp.com/api/characters/`
-            ).then(character =>{
-                let char = character.data[Math.floor(Math.random()*character.data.length)]
-                console.log(char.image)
-            })
-        } else {
-            console.log('it did not work')
-        }
-    }
+    // handleClick (){
+    //     if(this.state.house === ''){
+    //         // axios.get('https://www.potterapi.com/v1/characters','$2a$10$MQnGphpJPwYsUlYiSWt8b.gxxCZ/9uZiyoEJKL4yAnYkAn4ax8h22'
+    //         axios.get(`http://hp-api.herokuapp.com/api/characters/`
+    //         ).then(character =>{
+    //             let char = character.data[Math.floor(Math.random()*character.data.length)]
+    //             console.log(char.image)
+    //         })
+    //     } else {
+    //         console.log('it did not work')
+    //     }
+    // }
 
   render() {
     const { url, isUploading } = this.state;
     return (
       <div 
-        style={{marginTop:100,width:320,background:'red',display:'flex',flexDirection:'column'}}
+        style={{marginTop:90,width:320,background:'lightblue',display:'flex',flexDirection:'column',alignItems:'center'}}
         >
-        <p>Upload</p>
-        <input value={this.state.house} onChange={(e)=>this.handleInput(e.target.value)}/>
-        <button onClick={()=>this.handleClick()}>House Sorter</button>
-        <p>{url}</p>
+        {/* <p>Upload</p> */}
+        {/* <input value={this.state.house} onChange={(e)=>this.handleInput(e.target.value)}/>
+        <button onClick={()=>this.handleClick()}>House Sorter</button> */}
+        {/* <p>{url}</p> */}
         <img src={url} alt="" width="200px" />
         <Dropzone onDropAccepted={this.getSignedRequest} >
             {({getRootProps, getInputProps}) => (
-                <section>
+                // <section>
                     <div {...getRootProps()}>
                         <input {...getInputProps()} style={{
-                            position: 'relative',
+                            // position: 'relative',
                             width: 200,
                             height: 200,
                             borderWidth: 7,
@@ -118,10 +118,10 @@ class Services extends Component {
                         }}/>
                         {isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}
                     </div>
-                </section>
+                // </section>
   )}
 </Dropzone>
-
+<ServiceList/>
 
         {/* <div
           onDropAccepted={this.getSignedRequest}

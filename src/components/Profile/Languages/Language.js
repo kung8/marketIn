@@ -84,7 +84,7 @@ class Language extends Component {
                 <div className="input-edit-delete-container">
                     {this.state.editBox}
                     <div>
-                        {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(lang)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(lang)}}>Edit</button>}
+                        {this.state.edit?(<button className="add-save-edit-button" onClick={()=>this.edit(lang)}>Save</button>):<button className="add-save-edit-button" onClick={()=>{this.handleEditToggle(lang)}}>Edit</button>}
                         <button className="small-section-delete-button" onClick={()=>{this.deleteLangProfile(lang)}}>Delete</button>
                     </div>
                 </div>):null}

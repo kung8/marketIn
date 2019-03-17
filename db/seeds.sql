@@ -51,3 +51,14 @@ id SERIAL PRIMARY KEY,
 project VARCHAR(255),
 user_id INT
 );
+
+CREATE TABLE services (
+id SERIAL PRIMARY KEY,
+user_id INT REFERENCES users(id),
+price  VARCHAR(10),
+service VARCHAR(255),
+image TEXT
+);
+
+insert into services (user_id,price,service,image)
+values (50,'$1000/hr','Destroy Horcruxes','https://s3-us-west-1.amazonaws.com/marketin/Horcrux.jpeg')

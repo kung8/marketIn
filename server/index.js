@@ -4,6 +4,8 @@ const session = require('express-session');
 const massive = require('massive');
 const userCtrl = require('./userController/userController')
 const profileCtrl = require('./profileController/profileController');
+const serviceCtrl = require('./serviceController/serviceController');
+
 const pg = require('pg');
 const pgSession = require('connect-pg-simple')(session);
 
@@ -105,7 +107,12 @@ app.delete('/profile/delete/skill/:id',profileCtrl.deleteSkillsProfile);
 app.delete('/profile/delete/language/:id',profileCtrl.deleteLangProfile);
 app.delete('/profile/delete/project/:id',profileCtrl.deleteProjProfile);
 
-
+//serviceController ENDPOINTS
+app.get('/services/get/:userId',serviceCtrl.getServices);
+app.post('/service/add',serviceCtrl.addService);
+app.put('/service/update',serviceCtrl.updateService);
+app.delete('/service/delete/:id',serviceCtrl.deleteService);
+app.get('/services/getAll',serviceCtrl.getAllServices);
 
 
 

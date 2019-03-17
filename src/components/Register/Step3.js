@@ -56,9 +56,9 @@ class StepThree extends Component {
         if(empName!=="" || position!=="" || empLoc !=="" || hireDate !=="" || endDate !=="" || empLogo !==""){
             work.push({empName,position,empLoc,hireDate,endDate,empLogo});
             this.props.updateWork(work);
-            this.props.history.push('/register/step2') 
+            this.props.history.push('/MarketIn/register/step2') 
         } else {
-            this.props.history.push('/register/step2')   
+            this.props.history.push('/MarketIn/register/step2')   
         }
         
     }
@@ -68,9 +68,9 @@ class StepThree extends Component {
         if(empName!=="" || position!=="" || empLoc !=="" || hireDate !=="" || endDate !=="" || empLogo !==""){
             work.push({empName,position,empLoc,hireDate,endDate,empLogo});
             this.props.updateWork(work);
-            this.props.history.push('/register/step4')  
+            this.props.history.push('/MarketIn/register/step4')  
         } else {
-            this.props.history.push('/register/step4')   
+            this.props.history.push('/MarketIn/register/step4')   
         } 
     }
 

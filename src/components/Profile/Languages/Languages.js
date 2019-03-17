@@ -111,7 +111,7 @@ class Languages extends Component {
                 </div>):(this.state.inputBox1)
                 }
                 {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>this.addToLang()}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                    {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>this.addToLang()}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
                 </div>):null}
             </div>
         )

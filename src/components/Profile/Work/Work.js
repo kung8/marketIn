@@ -164,7 +164,7 @@ class Work extends Component {
                 }
 
                 {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                    {this.state.addIsClicked?(<button className="add-save-button" onClick={()=>{this.addToWork()}}>SAVE</button>):(<button className="add-save-button" onClick={()=>this.editAddIsClicked()}>ADD</button>)}
+                    {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToWork()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
                 </div>):null}
             </div>
         )

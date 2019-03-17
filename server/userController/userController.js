@@ -4,9 +4,10 @@ module.exports={
     register: async (req,res) => {
         // console.log('this worked!');
         const db = req.app.get('db');
-        // console.log(req.body);
-        const {firstName:first_name,lastName:last_name,email,password} = req.body;
-        let {imageUrl:image_url} = req.body;
+        console.log(req.body);
+        const {firstName:first_name,lastName:last_name,email,password,imageUrl:image_url} = req.body;
+        // let {imageUrl:image_url} = req.body;
+        console.log(111,image_Url)
         // if(image_url===''){
             
         //     image_url = 'https://vignette.wikia.nocookie.net/harrypotter/images/1/18/DOBBY2.jpg/revision/latest?cb=20161215055153'

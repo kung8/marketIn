@@ -123,7 +123,7 @@ class School extends Component {
                     </span>
                     {this.props.match.params.userId==this.props.id?(
                     <div className="edit-delete-button-container">
-                        {this.state.edit?(<button type="button" className="edit-save-button" onClick={()=>this.edit(sch)}>Save</button>):<button type="button" className="edit-save-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
+                        {this.state.edit?(<button type="button" className="large-section-add-save-edit-button" onClick={()=>this.edit(sch)}>Save</button>):<button type="button" className="large-section-add-save-edit-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
                         <button className="large-section-delete-button" onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
                     </div>):null} 
                 </div>

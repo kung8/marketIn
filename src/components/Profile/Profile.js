@@ -120,7 +120,11 @@ class Profile extends Component {
 
         return (
             <div className="profile-container">
-                {this.state.isLoaded?(<div className="loader"></div>):(null)}
+                {/* {this.state.isLoaded?(<div className="loader"></div>):(null)} */}
+                {/* <div style={{display:'flex',height:80, width:'100%', flexDirection:'column', alignItems:'center', justifyContent:'space-evenly'}}>
+                    <input style={{width:260, border:'solid navy',height:40, marginLeft:5, fontSize:35}}/>
+                    <button style={{width:100,border:'black solid',background:'navy',color:'white', height:30,fontSize:20,textAlign:'center'}}>SEARCH</button>
+                </div> */}
                 <div className="profile-basic-info-container">
                     <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic"/>
                     <div>

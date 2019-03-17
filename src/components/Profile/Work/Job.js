@@ -118,7 +118,7 @@ class Job extends Component {
                     </div>
                     {this.props.match.params.userId==this.props.id?
                     (<div className="edit-delete-button-container">
-                        {this.state.edit?(<button className="edit-save-button" onClick={()=>this.edit(job)}>Save</button>):<button className="edit-save-button" onClick={()=>{this.handleEditToggle(job)}}>Edit</button>}                    
+                        {this.state.edit?(<button className="large-section-add-save-edit-button" onClick={()=>this.edit(job)}>Save</button>):<button className="large-section-add-save-edit-button" onClick={()=>{this.handleEditToggle(job)}}>Edit</button>}                    
                         <button className="large-section-delete-button" onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
                     </div>):null}
                 </div>
