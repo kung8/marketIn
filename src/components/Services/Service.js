@@ -45,44 +45,17 @@ class Service extends Component {
         const {id} = serv;
         console.log(55,service,price,image,id);
         this.props.edit(service,price,image,id)
-        // if(price !=='' && image !=='' && service !==''){
-        //     const services = await axios.put(`/service/update/${id}`,{price,image,service})
-        //     console.log(services)
-        //     // this.props.updateServices(services.data)
-        //     if(this._isMount){
                 this.setState({
                     isEditing:false,
                     editBox1:'',
                     editBox2:'',
                     editBox3:'',
-                    // services:services.data,
                     service:'',
                     image:'',
                     price:''
                 })
-        //     }
-        // } else {
-        //     this.setState({
-        //         isEditing:false,
-        //         editBox1:'',
-        //         editBox2:'',
-        //         editBox3:'',
-        //         service:'',
-        //         image:'',
-        //         price:''
-        //     })
-        // }
     }
 
-    // delete = async(serv)=>{
-    //     console.log(serv)
-    //     const {id} = serv;
-    //     // console.log(id)
-    //     const services = await axios.delete(`/service/delete/${id}`)
-    //     this.setState({
-    //         services:services.data
-    //     })
-    // }
 
     render() {
         const {serv} = this.props;

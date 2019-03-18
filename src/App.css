@@ -189,8 +189,9 @@
 /*************************Section********************/
 .large-experience-section-box {
     margin:5px;
-    background:silver;
-    min-height:350px;
+    background:navy;
+    min-height:300px;
+    width:310px;
     display:flex;
     justify-content:space-between;
     align-items: center;
@@ -203,13 +204,14 @@
     flex-direction: column;
     align-items:center;
     justify-content: space-between;
-    width:320px;
-    margin: 20px auto;
+    width:310px;
+    /* margin: 20px auto; */
+    background:silver;
 }
 
 /************************Logo************************/
 .school-work-logo-container {
-    margin-left:10px;
+    margin-top:5px;
 }
 
 .school-work-logo {
@@ -238,6 +240,7 @@
     align-items: center;
     /* flex-direction: column; */
     flex-wrap: wrap;
+    width:310px;
 }
 
 /*************************Delete Functionality***************/
@@ -250,8 +253,6 @@
     border-radius:25%;
     margin-right:5px;
 }
-
-
 
 /*********************Edit Functionality********************/
 .edit-delete-button-container {
@@ -308,8 +309,10 @@
 }
 /****************Experiences***************/
 .small-experience-section-box {
-    margin:5px 5px 10px;
-    background:silver;
+    margin-top:5px;
+    margin-bottom:5px;
+    width:95%;
+    background:navy;
     /* height:140px; */
     display:flex;
     flex-direction:column;
@@ -318,17 +321,20 @@
     align-items: center;   
 }
 
-.small-experience-section-box {
+.small-experience-box {
     margin-top:5px;
     background:silver;
     display:flex;
+    flex-direction: column;
     min-height:40px;
     justify-content: space-between;
     align-items: center;
     text-align:center;
+    width:310px;
+    word-wrap: break-word
 }
 
-.small-experience-box {
+.small-experience-box p{
     font-size: 35px;
 }
 
@@ -380,6 +386,7 @@
     margin-left:5px;
     display:flex;
     height:50px;
+    width:310px;
     justify-content: center;
     align-items: center;
 }
@@ -694,8 +701,8 @@ footer {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     animation: spin 2s linear infinite;
   }
   
@@ -744,6 +751,12 @@ footer {
     width:100%;
     min-height:280px;
     margin-bottom:5px;
+}
+
+.service-mapped-items {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .service-mapped-items > img {

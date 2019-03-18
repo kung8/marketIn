@@ -8,6 +8,7 @@ import Work from './Work/Work';
 import Skills from './Skills/Skills';
 import Languages from './Languages/Languages';
 import Projects from './Projects/Projects';
+import LoadingWrapper from '../Util/LoadingWrapper';
 
 class Profile extends Component {
     constructor(props){
@@ -23,7 +24,8 @@ class Profile extends Component {
             inputBox2:'',
             inputBox3:'',
             inputBox4:'',
-            count:0
+            count:0,
+            isLoaded:false
         }
     }
 
@@ -51,7 +53,7 @@ class Profile extends Component {
                 // console.log(7777,userProfile.data);
                 this.props.updateViewedUser(userProfile.data[0])
                 this.setState({
-                    count:this.state.count++
+                    isLoaded:true
                 })
             }
         }
@@ -125,21 +127,23 @@ class Profile extends Component {
                     <input style={{width:260, border:'solid navy',height:40, marginLeft:5, fontSize:35}}/>
                     <button style={{width:100,border:'black solid',background:'navy',color:'white', height:30,fontSize:20,textAlign:'center'}}>SEARCH</button>
                 </div> */}
+                    <LoadingWrapper loaded={this.state.isLoaded}>
                 <div className="profile-basic-info-container">
-                    <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic"/>
-                    <div>
-                        <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
-                        <h1><a href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></h1>
-                    </div>
-                    <div className="edit-profile-input-button-container">
-                        {this.state.inputBox1}
-                        {this.state.inputBox2}
-                        {this.state.inputBox3}
-                        {this.state.inputBox4}
+                        <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic"/>
+                        <div>
+                            <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
+                            <h1><a href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></h1>
+                        </div>
+                        <div className="edit-profile-input-button-container">
+                            {this.state.inputBox1}
+                            {this.state.inputBox2}
+                            {this.state.inputBox3}
+                            {this.state.inputBox4}
 
-                        {this.props.match.params.userId!=this.props.id?(null):(this.state.isEditing?(<button onClick={()=>this.editProfile()}>Save</button>):(<button onClick={()=>this.createEditBoxes()}>Edit</button>))}
-                    </div>
+                            {this.props.match.params.userId!=this.props.id?(null):(this.state.isEditing?(<button onClick={()=>this.editProfile()}>Save</button>):(<button onClick={()=>this.createEditBoxes()}>Edit</button>))}
+                        </div>
                 </div>    
+                    </LoadingWrapper>
                 <div className="section-container">
                     <Education />
                 </div>

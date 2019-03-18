@@ -18,10 +18,6 @@ class ServiceList extends Component {
             inputBox2:'',
             inputBox3:'',
             isAddOpened:false,
-            // isEditing:false,
-            editBox1:'',
-            editBox2:'',
-            editBox3:''
         }
 
     }
@@ -33,7 +29,7 @@ class ServiceList extends Component {
     getService=async()=>{
         const {userId} = this.props.match.params;
         const services = await axios.get(`/services/get/${userId}`)
-        console.log(services.data);
+        // console.log(services.data);
         this.setState({
             services:services.data
         })
@@ -89,33 +85,17 @@ class ServiceList extends Component {
         }
     }
 
-    // handleEditToggle(){
-    //     this.setState({
-    //         isEditing:true,
-    //         editBox1:<input placeholder="Service" onChange={(e)=>this.handleInput('service',e.target.value)}/>,
-    //         editBox2:<input placeholder="Price" onChange={(e)=>this.handleInput('price',e.target.value)}/>,
-    //         editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
-    //     })
-    // }
-
-    async edit(service,price,image,id){
-        // const {price,image,service} = this.state;
-        // const {id,price,image,service} = serv;
-        console.log(77,service,price,image,id)
+    edit= async(service,price,image,id)=>{
+        // console.log(77,service,price,image,id)
         if(price !=='' && image !=='' && service !==''){
-            console.log('hit!')
+            // console.log('hit!')
             const services = await axios.put(`/service/update/${id}`,{price,image,service})
-            console.log(services)
-            // this.props.updateServices(services.data)
-            // this.setState({
-            //     // isEditing:false,
-            //     // editBox1:'',
-            //     // editBox2:'',
-            //     // editBox3:'',
-            //     services:services.data
-            // })
+            // console.log(services)
+            this.setState({
+                services:services.data
+            })
         } else {
-            console.log('not making it in!')
+            // console.log('not making it in!')
             this.setState({
                 isEditing:false,
                 editBox1:'',

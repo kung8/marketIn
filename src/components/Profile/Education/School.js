@@ -109,24 +109,19 @@ class School extends Component {
         const {sch} = this.props;
 
         return (
-            <div className="large-experience-section-box" key={sch.id}>
-                <div className="large-experience-box-top">
+            <div className="large-experience-box-top">
+                <div className="large-experience-box">
                     <div className="school-work-logo-container">
                         <img className="school-work-logo" src={sch.sch_logo} alt="sch_logo"/>
                     </div>
-                    <span className="large-experience-box">
+                    <div >
                         <p>{sch.sch_name}</p>
                         <p>{sch.major}</p>
                         <p>{sch.ed_level}</p>
                         <p>{sch.sch_loc}</p>
                         <p>{sch.grad_date}</p>
-                    </span>
-                    {this.props.match.params.userId==this.props.id?(
-                    <div className="edit-delete-button-container">
-                        {this.state.edit?(<button type="button" className="large-section-add-save-edit-button" onClick={()=>this.edit(sch)}>Save</button>):<button type="button" className="large-section-add-save-edit-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
-                        <button className="large-section-delete-button" onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
-                    </div>):null} 
-                </div>
+                    </div>
+                
                 <div>
                     {this.state.addDivIsOpened?
                     (<div className="add-edit-box-container">
@@ -144,8 +139,14 @@ class School extends Component {
                         {this.state.editBox6}
                         </div>)
                     }
+                    </div>
+                    {this.props.match.params.userId==this.props.id?(
+                    <div className="edit-delete-button-container">
+                        {this.state.edit?(<button type="button" className="large-section-add-save-edit-button" onClick={()=>this.edit(sch)}>Save</button>):<button type="button" className="large-section-add-save-edit-button" onClick={()=>{this.handleEditToggle(sch)}}>Edit</button>}
+                        <button className="large-section-delete-button" onClick={()=>{this.deleteEdProfile(sch)}}>Delete</button>
+                    </div>):null} 
                 </div>   
-                </div>
+            </div>
 
         )
     }

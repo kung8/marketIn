@@ -30,7 +30,6 @@ async getUser(){
     // console.log('hit!',this.props.match.params.userId)
     // if(this._isMount){
         if(this.props.match.params.userId){
-            console.log('hit!')
             const userProfile = await axios.get('/profile/get/user/'+this.props.match.params.userId);
             // console.log(7777,userProfile.data);
             this.props.updateViewedUser(userProfile.data[0])

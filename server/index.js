@@ -5,6 +5,7 @@ const massive = require('massive');
 const userCtrl = require('./userController/userController')
 const profileCtrl = require('./profileController/profileController');
 const serviceCtrl = require('./serviceController/serviceController');
+const meCtrl = require('./meController/meController');
 
 const pg = require('pg');
 const pgSession = require('connect-pg-simple')(session);
@@ -81,6 +82,7 @@ app.post('/auth/logout',userCtrl.logout);
 
 //profileController ENDPOINTS
 app.get('/profile/get/user/:userId',profileCtrl.getUser);
+app.get('/profile/get/contact/:userId',profileCtrl.getContact);
 app.get('/profile/get/education/:userId',profileCtrl.getEdProfile);
 app.get('/profile/get/work/:userId',profileCtrl.getWorkProfile);
 app.get('/profile/get/skills/:userId',profileCtrl.getSkillsProfile);
@@ -114,5 +116,8 @@ app.put('/service/update/:id',serviceCtrl.updateService);
 app.delete('/service/delete/:id',serviceCtrl.deleteService);
 app.get('/services/getAll',serviceCtrl.getAllServices);
 
-
+//meController ENDPOINTS
+// app.get('/profile/:id',meCtrl.getMeProfile);
+// app.get('/profile/:id',meCtrl.getMeContact);
+// app.get('/profile/:id',meCtrl.getMeServices);
 

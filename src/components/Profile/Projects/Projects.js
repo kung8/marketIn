@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {updateProject} from '../../../ducks/userActions';
 import Project from './Project';
 import {withRouter} from 'react-router-dom';
+import LoadingWrapper from '../../Util/LoadingWrapper';
 
 class Projects extends Component {
     constructor(props){
@@ -31,7 +32,8 @@ class Projects extends Component {
             this.props.updateProject(projProfile);
             if(this._isMount){
                 this.setState({
-                    projects:this.props.projects
+                    projects:this.props.projects,
+                    isLoaded:true
                 })
             }
         }
@@ -110,16 +112,20 @@ class Projects extends Component {
                     <h1 className="section-header">PROJECTS</h1>
                     {/* {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>} */}
                 </div>
-                <p>{projProfile}</p>
-                {this.state.addDivIsOpened?
-                (<div className="add-small-input-box-container">
-                    {this.state.inputBox1}
-                </div>):(this.state.inputBox1)
-                }
+                <LoadingWrapper loaded={this.state.isLoaded}>
+                    <div className="small-experience-section-box">
+                        <p>{projProfile}</p>
+                        {this.state.addDivIsOpened?
+                        (<div className="add-small-input-box-container">
+                            {this.state.inputBox1}
+                        </div>):(this.state.inputBox1)
+                        }
+                    </div>
 
-                {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                    {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToProj()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>{this.editAddIsClicked()}}>Add</button>)}
-                </div>):null}
+                    {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
+                        {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToProj()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>{this.editAddIsClicked()}}>Add</button>)}
+                    </div>):null}
+                </LoadingWrapper>
             </div>
         )
     }

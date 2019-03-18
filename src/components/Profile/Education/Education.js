@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {updateEducation} from '../../../ducks/userActions';
 import School from './School';
 import { withRouter } from 'react-router-dom';
+import LoadingWrapper from '../../Util/LoadingWrapper';
 
 class Education extends Component {
 constructor(props){
@@ -25,6 +26,7 @@ constructor(props){
         schLogo:'',
         addDivIsOpened:false,
         isMinimized:false,
+        isLoaded:false
     }
 }
 
@@ -42,7 +44,8 @@ async getEdProfile(){
         this.props.updateEducation(edProfile);
         if(this._isMount){
             this.setState({
-                education:this.props.education
+                education:this.props.education,
+                isLoaded:true
             })
         }
     }
@@ -106,7 +109,8 @@ addToEd= async()=>{
             schLoc:'',
             gradDate:'',
             schLogo:'',
-            education:this.props.education
+            education:this.props.education,
+            isloaded:false
         })
     }
 }
@@ -145,30 +149,34 @@ addToEd= async()=>{
                         <h1 className="section-header">EDUCATION</h1>
                         {/* {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>} */}
                     </div>
-                    <p>{edProfile}</p>
-                    {this.state.addDivIsOpened?(
-                        <div className="add-large-input-box-container">
-                            {this.state.inputBox1}
-                            {this.state.inputBox2}
-                            {this.state.inputBox3}
-                            {this.state.inputBox4}
-                            {this.state.inputBox5}
-                            {this.state.inputBox6}
-                        </div>) : 
-                        (<div>
-                            {this.state.inputBox1}
-                            {this.state.inputBox2}
-                            {this.state.inputBox3}
-                            {this.state.inputBox4}
-                            {this.state.inputBox5}
-                            {this.state.inputBox6}
-                        </div>)
-                    }
-                    {this.props.match.params.userId==this.props.id?
-                    (<div className="add-button-container">
-                        {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>this.addToEd()}>Save</button>):
-                        (<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
-                    </div>):null}
+                    <LoadingWrapper loaded={this.state.isLoaded}>
+                        <div className="large-experience-section-box">
+                            <p>{edProfile}</p>
+                            {this.state.addDivIsOpened?(
+                                 <div className="add-large-input-box-container">
+                                    {this.state.inputBox1}
+                                    {this.state.inputBox2}
+                                    {this.state.inputBox3}
+                                    {this.state.inputBox4}
+                                    {this.state.inputBox5}
+                                    {this.state.inputBox6}
+                                </div>) : 
+                                (<div>
+                                    {this.state.inputBox1}
+                                    {this.state.inputBox2}
+                                    {this.state.inputBox3}
+                                    {this.state.inputBox4}
+                                    {this.state.inputBox5}
+                                    {this.state.inputBox6}
+                                </div>)
+                            }
+                        </div>
+                        {this.props.match.params.userId==this.props.id?
+                        (<div className="add-button-container">
+                            {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>this.addToEd()}>Save</button>):
+                            (<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
+                        </div>):null}
+                    </LoadingWrapper>
             </div>
         )
     }

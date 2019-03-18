@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {updateLang} from '../../../ducks/userActions';
 import Language from './Language';
 import {withRouter} from 'react-router-dom';
+import LoadingWrapper from '../../Util/LoadingWrapper';
 
 class Languages extends Component {
     constructor(props){
@@ -28,10 +29,11 @@ class Languages extends Component {
             // console.log('hit')
             const profile = await axios.get('/profile/get/languages/'+this.props.match.params.userId)
             const {langProfile} = profile.data;
-            // console.log(2344,langProfile)
+            console.log(2344,langProfile)
             this.props.updateLang(langProfile);
             this.setState({
-                languages:this.props.languages
+                languages:this.props.languages,
+                isLoaded:true
             })
         }
     }
@@ -104,15 +106,19 @@ class Languages extends Component {
                     {/* {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>} */}
 
                 </div>
-                <p>{langProfile}</p>
-                {this.state.addDivIsOpened?
-                (<div className="add-small-input-box-container">
-                    {this.state.inputBox1}
-                </div>):(this.state.inputBox1)
-                }
-                {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                    {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>this.addToLang()}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
-                </div>):null}
+                <LoadingWrapper loaded={this.state.isLoaded}>
+                    <div className="small-experience-section-box">
+                        <p>{langProfile}</p>
+                        {this.state.addDivIsOpened?
+                        (<div className="add-small-input-box-container">
+                            {this.state.inputBox1}
+                        </div>):(this.state.inputBox1)
+                        }
+                    </div>
+                    {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
+                        {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>this.addToLang()}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
+                    </div>):null}
+                </LoadingWrapper>
             </div>
         )
     }

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {updateWork} from '../../../ducks/userActions';
 import Job from './Job';
 import {withRouter} from 'react-router-dom';
+import LoadingWrapper from '../../Util/LoadingWrapper';
 
 class Work extends Component {
     constructor(props){
@@ -42,7 +43,8 @@ class Work extends Component {
             this.props.updateWork(workProfile);
             if(this._isMount){
                 this.setState({
-                    work:this.props.work
+                    work:this.props.work,
+                    isLoaded:true
                 })
             }
         }
@@ -143,29 +145,33 @@ class Work extends Component {
                     {/* {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>} */}
 
                 </div>
-                <p>{workProfile}</p> 
-                {this.state.addDivIsOpened?(
-                    <div className="add-large-input-box-container">
-                        {this.state.inputBox1}
-                        {this.state.inputBox2}
-                        {this.state.inputBox3}
-                        {this.state.inputBox4}
-                        {this.state.inputBox5}
-                        {this.state.inputBox6}
-                    </div>) : 
-                    (<div>
-                        {this.state.inputBox1}
-                        {this.state.inputBox2}
-                        {this.state.inputBox3}
-                        {this.state.inputBox4}
-                        {this.state.inputBox5}
-                        {this.state.inputBox6}
-                    </div>)
-                }
+                <LoadingWrapper loaded={this.state.isLoaded}>
+                    <div className="large-experience-section-box">
+                        <p>{workProfile}</p> 
+                        {this.state.addDivIsOpened?(
+                            <div className="add-large-input-box-container">
+                                {this.state.inputBox1}
+                                {this.state.inputBox2}
+                                {this.state.inputBox3}
+                                {this.state.inputBox4}
+                                {this.state.inputBox5}
+                                {this.state.inputBox6}
+                            </div>) : 
+                            (<div>
+                                {this.state.inputBox1}
+                                {this.state.inputBox2}
+                                {this.state.inputBox3}
+                                {this.state.inputBox4}
+                                {this.state.inputBox5}
+                                {this.state.inputBox6}
+                            </div>)
+                        }
+                    </div>
 
-                {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                    {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToWork()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
-                </div>):null}
+                    {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
+                        {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToWork()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
+                        </div>):null}
+                </LoadingWrapper>
             </div>
         )
     }

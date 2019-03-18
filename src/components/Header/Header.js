@@ -63,9 +63,10 @@ class Header extends Component {
                         ) : (<div className="sidebar-container" style={{width:this.state.navBar}}>
                                 <Link to='/' onClick={()=>this.toggleNavBar()}>Login</Link>
                                 <Link to='/about' style={{color:'white'}} onClick={()=>this.toggleNavBar()}>About MarketIn</Link>
-                                <Link to={`/services/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>Services</Link>
-                                
-                                <a href="mailto:ung.kevin78@gmail.com" onClick={()=>this.toggleNavBar()}>Contact</a>
+                                <Link to='/profile/70'onClick={()=>this.toggleNavBar()}>About the Dev</Link>
+                                <Link to={`/services/70`} onClick={()=>this.toggleNavBar()}>Dev Services</Link>
+                                <Link to={`/contact/70`} onClick={()=>this.toggleNavBar()}>Contact the Dev</Link> 
+                                {/* <a href="mailto:ung.kevin78@gmail.com" onClick={()=>this.toggleNavBar()}>Contact</a> */}
                             </div>
                         )
                     }

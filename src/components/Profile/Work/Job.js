@@ -104,8 +104,8 @@ class Job extends Component {
         // console.log(this.props.match.params.userId,this.props.id)
         // console.log(job)
         return (
-            <div className="large-experience-section-box" key={job.id}>
-                <div class="large-experience-box-top">
+            <div>
+                <div className="large-experience-box-top">
                     <div className="school-work-logo-container">
                         <img className="school-work-logo" src={job.emp_logo} alt="company logo"/>
                     </div>
@@ -116,34 +116,34 @@ class Job extends Component {
                         <p>{job.hire_date}</p>
                         <p>{job.end_date}</p>
                     </div>
+                    <div>
+                    {this.state.addDivIsOpened?
+                        (<div 
+                            className="add-edit-box-container">
+                            {this.state.editBox1}
+                            {this.state.editBox2}
+                            {this.state.editBox3}
+                            {this.state.editBox4}
+                            {this.state.editBox5}
+                            {this.state.editBox6}
+                        </div>
+                            ):(
+                        <div>{this.state.editBox1}
+                            {this.state.editBox2}
+                            {this.state.editBox3}
+                            {this.state.editBox4}
+                            {this.state.editBox5}
+                            {this.state.editBox6}
+                        </div>
+                    )}
+                </div>
                     {this.props.match.params.userId==this.props.id?
                     (<div className="edit-delete-button-container">
                         {this.state.edit?(<button className="large-section-add-save-edit-button" onClick={()=>this.edit(job)}>Save</button>):<button className="large-section-add-save-edit-button" onClick={()=>{this.handleEditToggle(job)}}>Edit</button>}                    
                         <button className="large-section-delete-button" onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
                     </div>):null}
                 </div>
-                <div>
-                {this.state.addDivIsOpened?
-                    (<div 
-                        className="add-edit-box-container">
-                        {this.state.editBox1}
-                        {this.state.editBox2}
-                        {this.state.editBox3}
-                        {this.state.editBox4}
-                        {this.state.editBox5}
-                        {this.state.editBox6}
-                    </div>
-                        ):(
-                    <div>{this.state.editBox1}
-                        {this.state.editBox2}
-                        {this.state.editBox3}
-                        {this.state.editBox4}
-                        {this.state.editBox5}
-                        {this.state.editBox6}
-                    </div>
-                )}
             </div>
-        </div>
 
         )
     }

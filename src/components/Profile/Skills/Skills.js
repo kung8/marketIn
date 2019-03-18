@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {updateSkill} from '../../../ducks/userActions';
 import Skill from './Skill';
 import {withRouter} from 'react-router-dom';
+import LoadingWrapper from '../../Util/LoadingWrapper';
 
 class Skills extends Component {
     constructor(props){
@@ -33,7 +34,8 @@ class Skills extends Component {
             this.props.updateSkill(skillsProfile);
             if(this._isMount){
                 this.setState({
-                    skills:this.props.skills
+                    skills:this.props.skills,
+                    isLoaded:true
                 })
             }
         }
@@ -107,16 +109,19 @@ class Skills extends Component {
                     <h1 className="section-header">SKILLS</h1>
                     {/* {this.state.isMinimized?<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.maximize()}>+</button>:<button style={{background:"black", color:"white", height:"40px", width:"40px"}} onClick={()=>this.minimize()}>-</button>} */}
                 </div>
-                <p>{skillsProfile}</p>
-                {this.state.addDivIsOpened?
-                (<div className="add-small-input-box-container">
-                    {this.state.inputBox1}
-                </div>):(this.state.inputBox1)
-                }
-                {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                    {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToSkills()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>{this.editAddIsClicked()}}>Add</button>)}
-                </div>):null}
-                
+                <LoadingWrapper loaded={this.state.isLoaded}>
+                    <div className="small-experience-section-box">
+                        <p>{skillsProfile}</p>
+                        {this.state.addDivIsOpened?
+                        (<div className="add-small-input-box-container">
+                            {this.state.inputBox1}
+                        </div>):(this.state.inputBox1)
+                        }
+                    </div>
+                </LoadingWrapper>
+                        {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
+                            {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToSkills()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>{this.editAddIsClicked()}}>Add</button>)}
+                        </div>):null}
             </div>
         )
     }

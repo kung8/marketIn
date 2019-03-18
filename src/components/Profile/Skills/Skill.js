@@ -74,8 +74,8 @@ class Skill extends Component {
     render(){
         const {skill} = this.props
         return(
-        <div className="small-experience-section-box">
-            <div className="small-experience-box">
+        <div className="small-experience-box">
+            <div>
                 <p>{skill.skill}</p>
             </div>
 

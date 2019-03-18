@@ -76,8 +76,8 @@ class Project extends Component {
         const {proj} = this.props;
         console.log(this.props)
         return (
-            <div className="small-experience-section-box" key={proj.id}>
-                <div className="small-experience-box">
+            <div className="small-experience-box">
+                <div>
                     <p>{proj.project}</p>
                 </div>   
                 {this.props.match.params.userId==this.props.id?(<div className="input-edit-delete-container">

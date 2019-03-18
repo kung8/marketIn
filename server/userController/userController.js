@@ -7,7 +7,7 @@ module.exports={
         console.log(req.body);
         const {firstName:first_name,lastName:last_name,email,password,imageUrl:image_url} = req.body;
         // let {imageUrl:image_url} = req.body;
-        console.log(111,image_Url)
+        console.log(111,image_url)
         // if(image_url===''){
             
         //     image_url = 'https://vignette.wikia.nocookie.net/harrypotter/images/1/18/DOBBY2.jpg/revision/latest?cb=20161215055153'
