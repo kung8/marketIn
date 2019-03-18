@@ -12,11 +12,11 @@ class Register extends Component {
         return (
             <div>
                 <h1>Registration Form for MarketIn</h1>
-                <Route path='/MarketIn/register/step1' component={StepOne} />
-                <Route path='/MarketIn/register/step2' component={StepTwo} />
-                <Route path='/MarketIn/register/step3' component={StepThree} />
-                <Route path='/MarketIn/register/step4' component={StepFour} />
-                <Route path='/MarketIn/register/step5' component={StepFive} />
+                <Route path='/register/step1' component={StepOne} />
+                <Route path='/register/step2' component={StepTwo} />
+                <Route path='/register/step3' component={StepThree} />
+                <Route path='/register/step4' component={StepFour} />
+                <Route path='/register/step5' component={StepFive} />
             </div>
         )
     }

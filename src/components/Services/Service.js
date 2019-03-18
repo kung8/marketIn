@@ -20,11 +20,15 @@ class Service extends Component {
         }
     }
 
+    componentDidMount(){
+        this._isMount=true
+    }
 
     handleInput (prop,value){
         this.setState({
             [prop]:value
         })
+        console.log(prop,value)
     }
 
     handleEditToggle(){
@@ -35,6 +39,50 @@ class Service extends Component {
             editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
         })
     }
+
+    edit= async (serv)=>{
+        const {price,image,service} = this.state;
+        const {id} = serv;
+        console.log(55,service,price,image,id);
+        this.props.edit(service,price,image,id)
+        // if(price !=='' && image !=='' && service !==''){
+        //     const services = await axios.put(`/service/update/${id}`,{price,image,service})
+        //     console.log(services)
+        //     // this.props.updateServices(services.data)
+        //     if(this._isMount){
+                this.setState({
+                    isEditing:false,
+                    editBox1:'',
+                    editBox2:'',
+                    editBox3:'',
+                    // services:services.data,
+                    service:'',
+                    image:'',
+                    price:''
+                })
+        //     }
+        // } else {
+        //     this.setState({
+        //         isEditing:false,
+        //         editBox1:'',
+        //         editBox2:'',
+        //         editBox3:'',
+        //         service:'',
+        //         image:'',
+        //         price:''
+        //     })
+        // }
+    }
+
+    // delete = async(serv)=>{
+    //     console.log(serv)
+    //     const {id} = serv;
+    //     // console.log(id)
+    //     const services = await axios.delete(`/service/delete/${id}`)
+    //     this.setState({
+    //         services:services.data
+    //     })
+    // }
 
     render() {
         const {serv} = this.props;
@@ -55,7 +103,7 @@ class Service extends Component {
                 {this.props.id==this.props.match.params.userId?(
                     <div className="edit-delete-service-buttons-container">
                         {this.state.isEditing?
-                            (<button onClick={()=>{this.props.edit(serv)}} className="edit-service-button">Save</button>)
+                            (<button onClick={()=>this.edit(serv)} className="edit-service-button">Save</button>)
                                 :(<button onClick={()=>{this.handleEditToggle()}} className="edit-service-button">Edit</button>)}
                         <button className="delete-service-button" onClick={()=>{this.props.delete(serv)}}>Delete</button>  
                     </div>):

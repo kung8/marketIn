@@ -35,7 +35,8 @@
 .marketin-logo {
     height:42px;
     width: 50px;
-    /* background:navy; */
+    border:navy;
+    background:navy;
     color:white;
     font-size:40px;
     font-weight:700;
@@ -727,7 +728,7 @@ footer {
     flex-direction:column;
     align-items:center;
     /* background:blue;  */
-    min-height:320px;
+    /* min-height:320px; */
     width:calc(100%-20px); 
     margin-top:10px;
     /* margin-bottom:20px; */

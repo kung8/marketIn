@@ -65,9 +65,9 @@ class StepTwo extends Component {
         if(schName!=="" || major!=="" || schLoc !=="" || gradDate !=="" || schLogo !==""){
             education.push({schName,major,edLevel,schLoc,gradDate,schLogo});
             this.props.updateEducation(education);
-            this.props.history.push('/MarketIn/register/step3')   
+            this.props.history.push('/register/step3')   
         } else {
-            this.props.history.push('/MarketIn/register/step3')   
+            this.props.history.push('/register/step3')   
         }
         
         // console.log(222,schName,this.props)

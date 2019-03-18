@@ -50,7 +50,7 @@ class StepFour extends Component {
             languages.push({language});
             this.props.updateLang(languages);
         }
-        this.props.history.push('/MarketIn/register/step3')
+        this.props.history.push('/register/step3')
     }
 
     handleNext(){
@@ -64,7 +64,7 @@ class StepFour extends Component {
             languages.push({language});
             this.props.updateLang(languages);
         }
-        this.props.history.push('/MarketIn/register/step5');   
+        this.props.history.push('/register/step5');   
     }
 
     render (){

@@ -27,7 +27,7 @@ class Auth extends Component {
             this.props.updateUser(user.data)
             const {id} = user.data
             console.log(id)
-            this.props.history.push(`/MarketIn/profile/${id}`)
+            this.props.history.push(`/profile/${id}`)
             } catch (err){
                 alert(err)
                 // alert("Please enter a valid combination.")
@@ -43,7 +43,7 @@ class Auth extends Component {
                 <button className="login-button" onClick={this.login}>Login</button>
                 {/* <Link to='/profile/'><button className="login-button" onClick={this.login}>Login</button></Link> */}
                 {/* <Link to={`/profile/${user.data.id}`}><button className="login-button" onClick={this.login}>Login</button></Link> */}
-                <Link to='/MarketIn/register/step1'>Create an Account</Link>
+                <Link to='/register/step1'>Create an Account</Link>
             </div> 
         )
     }

@@ -129,7 +129,7 @@ class Profile extends Component {
                     <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic"/>
                     <div>
                         <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
-                        <h1>{this.props.userEmail}</h1>
+                        <h1><a href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></h1>
                     </div>
                     <div className="edit-profile-input-button-container">
                         {this.state.inputBox1}

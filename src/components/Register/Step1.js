@@ -45,7 +45,7 @@ class StepOne extends Component {
                 let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})
                 // console.log(user.data);
                 this.props.updateUser(user.data);
-                this.props.history.push('/MarketIn/register/step2')   
+                this.props.history.push('/register/step2')   
             } catch (err) {
                 alert('Sorry this email already exists!')
             }
@@ -63,7 +63,7 @@ class StepOne extends Component {
             password:'',
             imageUrl:''
         });
-        this.props.history.push('/MarketIn/')
+        this.props.history.push('/')
     }
     
     render (){

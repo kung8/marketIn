@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 // import '../../App.css';
+import {connect} from 'react-redux';
+import {updateViewedUser} from '../../ducks/userActions';
 import axios from 'axios';
 import { v4 as randomString } from 'uuid';
 import Dropzone from 'react-dropzone';
@@ -18,6 +20,26 @@ class Services extends Component {
       house:''
     };
   }
+
+  componentDidMount(){
+    // this.isMount=true;
+    this.getUser();
+}
+
+async getUser(){
+    // console.log('hit!',this.props.match.params.userId)
+    // if(this._isMount){
+        if(this.props.match.params.userId){
+            console.log('hit!')
+            const userProfile = await axios.get('/profile/get/user/'+this.props.match.params.userId);
+            // console.log(7777,userProfile.data);
+            this.props.updateViewedUser(userProfile.data[0])
+            // this.setState({
+            //     count:this.state.count++
+            // })
+        // }
+    }
+}
 
   getSignedRequest = async ([file]) => {
     this.setState({ isUploading: true });
@@ -153,4 +175,4 @@ class Services extends Component {
   }
 }
 
-export default Services;
+export default connect('',{updateViewedUser})(Services);

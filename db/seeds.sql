@@ -62,3 +62,10 @@ image TEXT
 
 insert into services (user_id,price,service,image)
 values (50,'$1000/hr','Destroy Horcruxes','https://s3-us-west-1.amazonaws.com/marketin/Horcrux.jpeg')
+
+create table contacts (
+id SERIAL PRIMARY KEY,
+phone VARCHAR,
+linkedIn TEXT,
+user_id INT REFERENCES users(id)
+)

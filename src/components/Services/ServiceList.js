@@ -18,7 +18,7 @@ class ServiceList extends Component {
             inputBox2:'',
             inputBox3:'',
             isAddOpened:false,
-            isEditing:false,
+            // isEditing:false,
             editBox1:'',
             editBox2:'',
             editBox3:''
@@ -89,34 +89,33 @@ class ServiceList extends Component {
         }
     }
 
-    handleEditToggle(){
-        this.setState({
-            isEditing:true,
-            editBox1:<input placeholder="Service" onChange={(e)=>this.handleInput('service',e.target.value)}/>,
-            editBox2:<input placeholder="Price" onChange={(e)=>this.handleInput('price',e.target.value)}/>,
-            editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
-        })
-    }
+    // handleEditToggle(){
+    //     this.setState({
+    //         isEditing:true,
+    //         editBox1:<input placeholder="Service" onChange={(e)=>this.handleInput('service',e.target.value)}/>,
+    //         editBox2:<input placeholder="Price" onChange={(e)=>this.handleInput('price',e.target.value)}/>,
+    //         editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
+    //     })
+    // }
 
-    async edit(serv){
-        const {price,image,service} = this.state;
-        const {id} = serv;
-        console.log(service,price,image,price,id)
+    async edit(service,price,image,id){
+        // const {price,image,service} = this.state;
+        // const {id,price,image,service} = serv;
+        console.log(77,service,price,image,id)
         if(price !=='' && image !=='' && service !==''){
+            console.log('hit!')
             const services = await axios.put(`/service/update/${id}`,{price,image,service})
             console.log(services)
             // this.props.updateServices(services.data)
-            this.setState({
-                isEditing:false,
-                editBox1:'',
-                editBox2:'',
-                editBox3:'',
-                services:services.data,
-                service:'',
-                image:'',
-                price:''
-            })
+            // this.setState({
+            //     // isEditing:false,
+            //     // editBox1:'',
+            //     // editBox2:'',
+            //     // editBox3:'',
+            //     services:services.data
+            // })
         } else {
+            console.log('not making it in!')
             this.setState({
                 isEditing:false,
                 editBox1:'',
@@ -144,39 +143,40 @@ class ServiceList extends Component {
         const {services} = this.state;
         const servArray = services.map(serv =>{
             return (
-                <div className="service-section-box">
-                        <div className="service-mapped-items">
-                            <img src={serv.image} alt="service"/>
-                            <p>{serv.service}</p>
-                            <p>{serv.price}</p>
-                        </div>
+
+                // <div className="service-section-box">
+                //         <div className="service-mapped-items">
+                //             <img src={serv.image} alt="service"/>
+                //             <p>{serv.service}</p>
+                //             <p>{serv.price}</p>
+                //         </div>
                         
-                        <div className="edit-service-input-box-container">
-                            {this.state.editBox1}
-                            {this.state.editBox2}
-                            {this.state.editBox3}
-                        </div>
+                //         <div className="edit-service-input-box-container">
+                //             {this.state.editBox1}
+                //             {this.state.editBox2}
+                //             {this.state.editBox3}
+                //         </div>
                         
-                        {this.props.id==this.props.match.params.userId?(
-                            <div className="edit-delete-service-buttons-container">
-                                {this.state.isEditing?
-                                    (<button onClick={()=>{this.edit(serv)}} className="edit-service-button">Save</button>)
-                                        :(<button onClick={()=>{this.handleEditToggle()}} className="edit-service-button">Edit</button>)}
-                                <button className="delete-service-button" onClick={()=>{this.delete(serv)}}>Delete</button>  
-                            </div>):
-                            (<div className='purchase-chat-buttons-container'>
-                                <button className="purchase-service-button">Purchase</button>
-                                <button className="add-save-edit-button">Chat</button>
-                            </div>)}
-                </div>)
+                //         {this.props.id==this.props.match.params.userId?(
+                //             <div className="edit-delete-service-buttons-container">
+                //                 {this.state.isEditing?
+                //                     (<button onClick={()=>{this.edit(serv)}} className="edit-service-button">Save</button>)
+                //                         :(<button onClick={()=>{this.handleEditToggle()}} className="edit-service-button">Edit</button>)}
+                //                 <button className="delete-service-button" onClick={()=>{this.delete(serv)}}>Delete</button>  
+                //             </div>):
+                //             (<div className='purchase-chat-buttons-container'>
+                //                 <button className="purchase-service-button">Purchase</button>
+                //                 <button className="add-save-edit-button">Chat</button>
+                //             </div>)}
+                // </div>)
             
-                        // <Service 
-                        // key={serv.id}
-                        // serv={serv}
-                        // delete={this.delete}
-                        // edit={this.edit}
+                        <Service 
+                        key={serv.id}
+                        serv={serv}
+                        delete={this.delete}
+                        edit={this.edit}
                         // handleEditToggle={this.handleEditToggle}
-                        // />
+                        />)
                     
         })
         console.log(this.props)
@@ -208,7 +208,6 @@ function mapStateToProps(reduxState){
     return{
         id:reduxState.id,
         viewedUserId:reduxState.viewedUserId,
-        userId:reduxState.userId,
         services:reduxState.services
     }
 }
