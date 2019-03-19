@@ -7,11 +7,11 @@ import { v4 as randomString } from 'uuid';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import { DirectConnect, IoT1ClickDevicesService } from 'aws-sdk';
-import ServiceList from './ServiceList';
+import Service from './Service';
 
 class Services extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
         isUploading: false,
         url: 'http://via.placeholder.com/200x200',
@@ -21,29 +21,36 @@ class Services extends Component {
         service:'',
         userId:'',
         price:'',
-        services:[],
+        services:this.props.services,
         isAdded:false,
         inputBox1:'',
         inputBox2:'',
         inputBox3:'',
         isAddOpened:false,
-
         };
     }
 
     componentDidMount(){
-        // this.isMount=true;
         this.getUser();
+        this.getService();
     }
 
     async getUser(){
         // console.log('hit!',this.props.match.params.userId)
-        // if(this._isMount){
         if(this.props.match.params.userId){
             const userProfile = await axios.get('/profile/get/user/'+this.props.match.params.userId);
             // console.log(7777,userProfile.data);
             this.props.updateViewedUser(userProfile.data[0])
         }
+    }
+
+    getService=async()=>{
+        const {userId} = this.props.match.params;
+        const services = await axios.get(`/services/get/${userId}`)
+        // console.log(services.data);
+        this.setState({
+            services:services.data
+        })
     }
 
     getSignedRequest = async ([file]) => {
@@ -94,21 +101,127 @@ class Services extends Component {
           });
       };
 
-    // handleInput (value){
-    //     this.setState({
-    //         house:value
-    //     })
-    //     console.log(value)
-    // }
+    handleInput (prop,value){
+        this.setState({
+            [prop]:value
+        })
+    }
+
+    toggleAdd(){
+        this.setState({
+            isAdded:true,
+            isAddOpened:true,
+            inputBox1:<input className="add-service-input-box" placeholder="Service" onChange={(e)=>{this.handleInput('service',e.target.value)}}/>,
+            inputBox2:<input className="add-service-input-box" placeholder="Price" onChange={(e)=>{this.handleInput('price',e.target.value)}}/>,
+            inputBox3:<input className="add-service-input-box" placeholder="Image" onChange={(e)=>{this.handleInput('image',e.target.value)}}/>,
+        })
+    }
+
+    async saveAdd(){
+        const {price,service,image} = this.state;
+        console.log(333,price,service,image)
+        const {id} = this.props;
+        if(price!==''&& service!=='' && image!==''){
+            console.log('hit!')
+            console.log(111,price,service,image,id)
+            const services = await axios.post('/service/add',{price,service,image,id})
+            console.log(22222,services.data)
+            this.setState({
+                services:services.data,
+                isAdded:false,
+                inputBox1:'',
+                inputBox2:'',
+                inputBox3:'',
+                isAddOpened:false,
+                price:'',
+                image:'',
+                service:''
+            })
+        } else {
+            this.setState({
+                isAdded:false,
+                inputBox1:'',
+                inputBox2:'',
+                inputBox3:'',
+                isAddOpened:false,
+                image:'',
+                service:'',
+                price:''
+            })
+        }
+    }
+
+    edit= async(service,price,image,id)=>{
+        // console.log(77,service,price,image,id)
+        if(price !=='' && image !=='' && service !==''){
+            // console.log('hit!')
+            const services = await axios.put(`/service/update/${id}`,{price,image,service})
+            // console.log(services)
+            this.setState({
+                services:services.data
+            })
+        } else {
+            // console.log('not making it in!')
+            this.setState({
+                isEditing:false,
+                editBox1:'',
+                editBox2:'',
+                editBox3:'',
+                service:'',
+                image:'',
+                price:''
+            })
+        }
+    }
+
+    delete = async(serv)=>{
+        console.log(serv)
+        const {id} = serv;
+        // console.log(id)
+        const services = await axios.delete(`/service/delete/${id}`)
+        this.setState({
+            services:services.data
+        })
+    }
 
     render() {
-        console.log(this.props)
+        console.log(this.props,this.props.services,this.state.services)
         const { url, isUploading } = this.state;
+        const {services} = this.state;
+        const servArray = services.map(serv =>{
+            return (
+                <Service 
+                key={serv.id}
+                serv={serv}
+                delete={this.delete}
+                edit={this.edit}
+                // handleEditToggle={this.handleEditToggle}
+                />
+            )
+                    
+        })
         return (
 
             //if add is clicked it needs to open the 
           <div style={{marginTop:90,maxWidth:320,background:'red',display:'flex',flexDirection:'column',alignItems:'center'}}>
-            <ServiceList/>
+            <div className="services-container">
+                <h1 >SERVICES</h1>
+                <div className="service-section-container">
+                    {servArray}
+                </div>
+                {this.state.isAddOpened?
+                (<div className="add-box-container">
+                    {this.state.inputBox1}
+                    {this.state.inputBox2}
+                    {this.state.inputBox3}
+                </div>):null
+                }
+                {this.state.isAdded?(
+                    <button className="add-services-button" onClick={()=>this.saveAdd()}>Save</button>)
+                    :
+                    (<button className="add-services-button" onClick={()=>this.toggleAdd()}>Add</button>)}
+            </div>
+
             <br/>
             <h1>Upload</h1>
             <p style={{maxWidth:300}}>{url}</p>
@@ -146,7 +259,9 @@ class Services extends Component {
     function mapStateToProps(reduxState){
         console.log(111,reduxState)
         return{
-            services:reduxState.services
+            services:reduxState.services,
+            id:reduxState.id,
+            viewedUserId:reduxState.viewedUserId,
         }
     }
 
