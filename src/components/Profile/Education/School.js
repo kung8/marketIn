@@ -109,12 +109,12 @@ class School extends Component {
         const {sch} = this.props;
 
         return (
-            <div className="large-experience-box-top">
-                <div className="large-experience-box">
+            <div >
+                <div className="large-experience-box-top">
                     <div className="school-work-logo-container">
                         <img className="school-work-logo" src={sch.sch_logo} alt="sch_logo"/>
                     </div>
-                    <div >
+                    <div className="large-experience-box">
                         <p>{sch.sch_name}</p>
                         <p>{sch.major}</p>
                         <p>{sch.ed_level}</p>
