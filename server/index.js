@@ -4,8 +4,8 @@ const session = require('express-session');
 const massive = require('massive');
 const userCtrl = require('./userController/userController')
 const profileCtrl = require('./profileController/profileController');
+
 const serviceCtrl = require('./serviceController/serviceController');
-const meCtrl = require('./meController/meController');
 
 const pg = require('pg');
 const pgSession = require('connect-pg-simple')(session);
@@ -39,7 +39,7 @@ app.use(session({
 }))
 
 //AWS
-app.get('/sign-s3', (req, res) => {
+app.get('/api/signs3', (req, res) => {
     aws.config = {
       region: 'us-west-1',
       accessKeyId: AWS_ACCESS_KEY_ID,
@@ -75,7 +75,6 @@ app.get('/sign-s3', (req, res) => {
 
 //userController ENDPOINTS
 app.post('/auth/register',userCtrl.register);
-// app.get('https://www.potterapi.com/v1/sortingHat')
 app.post('/auth/login',userCtrl.login);
 app.get('/auth/current',userCtrl.getUser);
 app.post('/auth/logout',userCtrl.logout);
@@ -115,9 +114,4 @@ app.post('/service/add',serviceCtrl.addService);
 app.put('/service/update/:id',serviceCtrl.updateService);
 app.delete('/service/delete/:id',serviceCtrl.deleteService);
 app.get('/services/getAll',serviceCtrl.getAllServices);
-
-//meController ENDPOINTS
-// app.get('/profile/:id',meCtrl.getMeProfile);
-// app.get('/profile/:id',meCtrl.getMeContact);
-// app.get('/profile/:id',meCtrl.getMeServices);
 

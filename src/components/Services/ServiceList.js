@@ -12,7 +12,7 @@ class ServiceList extends Component {
             service:'',
             userId:'',
             price:'',
-            services:this.props.services,
+            services:[],
             isAdded:false,
             inputBox1:'',
             inputBox2:'',
@@ -119,47 +119,21 @@ class ServiceList extends Component {
     }
 
     render(){
-        console.log(this.props)
+        console.log(typeof this.props.services, this.props.services)
         const {services} = this.state;
         const servArray = services.map(serv =>{
             return (
-
-                // <div className="service-section-box">
-                //         <div className="service-mapped-items">
-                //             <img src={serv.image} alt="service"/>
-                //             <p>{serv.service}</p>
-                //             <p>{serv.price}</p>
-                //         </div>
-                        
-                //         <div className="edit-service-input-box-container">
-                //             {this.state.editBox1}
-                //             {this.state.editBox2}
-                //             {this.state.editBox3}
-                //         </div>
-                        
-                //         {this.props.id==this.props.match.params.userId?(
-                //             <div className="edit-delete-service-buttons-container">
-                //                 {this.state.isEditing?
-                //                     (<button onClick={()=>{this.edit(serv)}} className="edit-service-button">Save</button>)
-                //                         :(<button onClick={()=>{this.handleEditToggle()}} className="edit-service-button">Edit</button>)}
-                //                 <button className="delete-service-button" onClick={()=>{this.delete(serv)}}>Delete</button>  
-                //             </div>):
-                //             (<div className='purchase-chat-buttons-container'>
-                //                 <button className="purchase-service-button">Purchase</button>
-                //                 <button className="add-save-edit-button">Chat</button>
-                //             </div>)}
-                // </div>)
-            
-                        <Service 
-                        key={serv.id}
-                        serv={serv}
-                        delete={this.delete}
-                        edit={this.edit}
-                        // handleEditToggle={this.handleEditToggle}
-                        />)
+                <Service 
+                key={serv.id}
+                serv={serv}
+                delete={this.delete}
+                edit={this.edit}
+                // handleEditToggle={this.handleEditToggle}
+                />
+            )
                     
         })
-        console.log(this.props)
+        
         return(
             <div className="services-container">
                 <h1 >SERVICES</h1>
