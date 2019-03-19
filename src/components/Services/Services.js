@@ -203,7 +203,7 @@ class Services extends Component {
 
     render() {
         console.log(this.props.services,this.state.services)
-        const { url, isUploading } = this.state;
+        const { url, isUploading,picLoaded } = this.state;
         const {services} = this.state;
         const servArray = services.map(serv =>{
             return (
@@ -212,6 +212,8 @@ class Services extends Component {
                 serv={serv}
                 delete={this.delete}
                 edit={this.edit}
+                // getSignedRequest={this.getSignedRequest}
+                // uploadFile={this.uploadFile}
                 // handleEditToggle={this.handleEditToggle}
                 />
             )
@@ -250,7 +252,7 @@ class Services extends Component {
                     accept="image/*"
                     multiple={false}
                     >
-                    {this.state.picLoaded?<div>{this.state.img}</div>:<div>{isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}</div>}
+                    {picLoaded?<div>{this.state.img}</div>:<div>{isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}</div>}
                     </Dropzone>
                     {this.state.inputBox1}
                     {this.state.inputBox2}
