@@ -22,7 +22,7 @@ class Services extends Component {
         service:'',
         userId:'',
         price:'',
-        services:[],
+        services:this.props.services,
         isAdded:false,
         inputBox1:'',
         inputBox2:'',
@@ -36,7 +36,7 @@ class Services extends Component {
 
     componentDidMount(){
         this.getUser();
-        this.getService();
+        this.getServices();
     }
 
     async getUser(){
@@ -48,11 +48,12 @@ class Services extends Component {
         }
     }
 
-    getService=async()=>{
+    getServices=async()=>{
         const {userId} = this.props.match.params;
         const services = await axios.get(`/services/get/${userId}`)
         console.log(111111,services.data);
         this.props.updateServices(services.data)
+        console.log(this.props.services)
         this.setState({
             services:services.data,
             isLoaded:true
