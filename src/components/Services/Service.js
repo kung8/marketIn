@@ -32,11 +32,12 @@ class Service extends Component {
     }
 
     handleEditToggle(){
+        console.log(444,this.state.services,this.props.services)
         this.setState({
             isEditing:true,
             editBox1:<input placeholder="Service" onChange={(e)=>this.handleInput('service',e.target.value)}/>,
             editBox2:<input placeholder="Price" onChange={(e)=>this.handleInput('price',e.target.value)}/>,
-            editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
+            // editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
         })
     }
 

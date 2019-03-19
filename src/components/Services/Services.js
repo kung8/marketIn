@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 // import '../../App.css';
 import {connect} from 'react-redux';
-import {updateViewedUser} from '../../ducks/userActions';
+import {updateViewedUser,updateServices} from '../../ducks/userActions';
 import axios from 'axios';
 import { v4 as randomString } from 'uuid';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import { DirectConnect, IoT1ClickDevicesService } from 'aws-sdk';
 import Service from './Service';
+import LoadingWrapper from '../Util/LoadingWrapper';
 
 class Services extends Component {
     constructor(props) {
@@ -21,12 +22,15 @@ class Services extends Component {
         service:'',
         userId:'',
         price:'',
-        services:this.props.services,
+        services:[],
         isAdded:false,
         inputBox1:'',
         inputBox2:'',
         inputBox3:'',
         isAddOpened:false,
+        img:'',
+        isLoaded:false,
+        picLoaded:false
         };
     }
 
@@ -47,10 +51,13 @@ class Services extends Component {
     getService=async()=>{
         const {userId} = this.props.match.params;
         const services = await axios.get(`/services/get/${userId}`)
-        // console.log(services.data);
+        console.log(111111,services.data);
+        this.props.updateServices(services.data)
         this.setState({
-            services:services.data
+            services:services.data,
+            isLoaded:true
         })
+
     }
 
     getSignedRequest = async ([file]) => {
@@ -82,7 +89,12 @@ class Services extends Component {
         axios
           .put(signedRequest, file, options)
           .then(response => {
-            this.setState({ isUploading: false, url });
+              let imgUrl = response.config.url;
+              imgUrl = imgUrl.substring(0,imgUrl.indexOf('?'))
+              console.log(77777,response,response.config.url,imgUrl)
+            this.setState({ isUploading: false, url,picLoaded:true,img:<img style={{width:200,height:200}} src={`${imgUrl}`} alt="uploaded image"/>,image:imgUrl});
+            console.log(888,this.state.img,this.state.url)
+
             // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
           })
           .catch(err => {
@@ -113,11 +125,12 @@ class Services extends Component {
             isAddOpened:true,
             inputBox1:<input className="add-service-input-box" placeholder="Service" onChange={(e)=>{this.handleInput('service',e.target.value)}}/>,
             inputBox2:<input className="add-service-input-box" placeholder="Price" onChange={(e)=>{this.handleInput('price',e.target.value)}}/>,
-            inputBox3:<input className="add-service-input-box" placeholder="Image" onChange={(e)=>{this.handleInput('image',e.target.value)}}/>,
+            // inputBox3:<input className="add-service-input-box" placeholder="Image" onChange={(e)=>{this.handleInput('image',e.target.value)}}/>,
+            img:<img src={this.state.url} alt="" width="200px"/>
         })
     }
 
-    async saveAdd(){
+    saveAdd = async ()=>{
         const {price,service,image} = this.state;
         console.log(333,price,service,image)
         const {id} = this.props;
@@ -125,6 +138,7 @@ class Services extends Component {
             console.log('hit!')
             console.log(111,price,service,image,id)
             const services = await axios.post('/service/add',{price,service,image,id})
+            this.props.updateServices(services)
             console.log(22222,services.data)
             this.setState({
                 services:services.data,
@@ -135,7 +149,8 @@ class Services extends Component {
                 isAddOpened:false,
                 price:'',
                 image:'',
-                service:''
+                service:'',
+                img:''
             })
         } else {
             this.setState({
@@ -146,7 +161,8 @@ class Services extends Component {
                 isAddOpened:false,
                 image:'',
                 service:'',
-                price:''
+                price:'',
+                img:''
             })
         }
     }
@@ -185,7 +201,7 @@ class Services extends Component {
     }
 
     render() {
-        console.log(this.props,this.props.services,this.state.services)
+        console.log(this.props.services,this.state.services)
         const { url, isUploading } = this.state;
         const {services} = this.state;
         const servArray = services.map(serv =>{
@@ -206,51 +222,48 @@ class Services extends Component {
           <div style={{marginTop:90,maxWidth:320,background:'red',display:'flex',flexDirection:'column',alignItems:'center'}}>
             <div className="services-container">
                 <h1 >SERVICES</h1>
+                <LoadingWrapper loaded={this.state.isLoaded}>
                 <div className="service-section-container">
                     {servArray}
                 </div>
                 {this.state.isAddOpened?
                 (<div className="add-box-container">
+                    
+                    <Dropzone
+                    onDropAccepted={this.getSignedRequest}
+                    style={{
+                        position: 'relative',
+                        width: 200,
+                        height: 200,
+                        borderWidth: 7,
+                        marginTop: 10,
+                        marginBottom:10,
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'dashed',
+                        borderRadius: 5,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        fontSize: 28,
+                    }}
+                    accept="image/*"
+                    multiple={false}
+                    >
+                    {this.state.picLoaded?<div>{this.state.img}</div>:<div>{isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}</div>}
+                    </Dropzone>
                     {this.state.inputBox1}
                     {this.state.inputBox2}
                     {this.state.inputBox3}
+                    <br/>
                 </div>):null
                 }
                 {this.state.isAdded?(
                     <button className="add-services-button" onClick={()=>this.saveAdd()}>Save</button>)
                     :
                     (<button className="add-services-button" onClick={()=>this.toggleAdd()}>Add</button>)}
-            </div>
-
-            <br/>
-            <h1>Upload</h1>
-            <p style={{maxWidth:300}}>{url}</p>
-            <img src={url} alt="" width="200px" />
-    
-            
-
-            <Dropzone
-              onDropAccepted={this.getSignedRequest}
-              style={{
-                position: 'relative',
-                width: 200,
-                height: 200,
-                borderWidth: 7,
-                marginTop: 100,
-                borderColor: 'rgb(102, 102, 102)',
-                borderStyle: 'dashed',
-                borderRadius: 5,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: 28,
-              }}
-              accept="image/*"
-              multiple={false}
-            >
-              {isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}
-            </Dropzone>
-            
+                    </LoadingWrapper>
+            </div>            
+        
           </div>
         );
       }
@@ -265,4 +278,4 @@ class Services extends Component {
         }
     }
 
-    export default connect(mapStateToProps,{updateViewedUser})(Services);
+    export default connect(mapStateToProps,{updateViewedUser,updateServices})(Services);
