@@ -35,6 +35,7 @@ class Services extends Component {
     }
 
     componentDidMount(){
+        this._isMount=true
         this.getUser();
         this.getServices();
     }
@@ -54,10 +55,12 @@ class Services extends Component {
         console.log(111111,services.data);
         this.props.updateServices(services.data)
         console.log(this.props.services)
-        this.setState({
-            services:services.data,
-            isLoaded:true
-        })
+        if(this._isMount){
+            this.setState({
+                services:services.data,
+                isLoaded:true
+            })
+        }
 
     }
 
@@ -139,7 +142,7 @@ class Services extends Component {
             console.log('hit!')
             console.log(111,price,service,image,id)
             const services = await axios.post('/service/add',{price,service,image,id})
-            this.props.updateServices(services)
+            this.props.updateServices(services.data)
             console.log(22222,services.data)
             this.setState({
                 services:services.data,
@@ -173,7 +176,7 @@ class Services extends Component {
         if(price !=='' && image !=='' && service !==''){
             // console.log('hit!')
             const services = await axios.put(`/service/update/${id}`,{price,image,service})
-            // console.log(services)
+            this.props.updateServices(services.data)
             this.setState({
                 services:services.data
             })
@@ -196,6 +199,7 @@ class Services extends Component {
         const {id} = serv;
         // console.log(id)
         const services = await axios.delete(`/service/delete/${id}`)
+        this.props.updateServices(services.data)
         this.setState({
             services:services.data
         })
