@@ -27,33 +27,41 @@ class StepOne extends Component {
         // console.log(123,prop,value)
     }
 
-    async register(){
+        register =async()=>{
         const {firstName,lastName,email,password,imageUrl} = this.state;
-        if(imageUrl==''){
-            await axios.get(`http://hp-api.herokuapp.com/api/characters/`
-            ).then(character =>{
-                const char = character.data[Math.floor(Math.random()*character.data.length)]
-                console.log(char.image)
-                this.setState({
-                    imageUrl:char.image
-                })
-            })
-        }
-        if(email!='' && firstName!='' && lastName!='' && password!=''){
-            try {
-                console.log(imageUrl)
-                let user = await axios.post('/auth/register',{firstName,lastName,email,password,imageUrl})
-                // console.log(user.data);
+        
+        try {
+            if(email!=='' && firstName!=='' && lastName!=='' && password!==''){
+                if(imageUrl===''){
+                    await axios.get(`http://hp-api.herokuapp.com/api/characters/`
+                    ).then(character =>{
+                        const char = character.data[Math.floor(Math.random()*character.data.length)]
+                        console.log(5555,char.image, char)
+                        this.setState({
+                            imageUrl:char.image
+                        })
+                    })
+                }
+                console.log(6666,imageUrl)
+                const userInfo = {
+                    firstName: firstName,
+                    lastName: lastName, 
+                    email: email,
+                    password: password,
+                    imageUrl: this.state.imageUrl
+                }
+                let user = await axios.post('/auth/register', userInfo)
+                console.log(user.data);
                 this.props.updateUser(user.data);
                 this.props.history.push('/register/step2')   
+            }   else {
+                   return alert('Please complete all the boxes')
+               }
             } catch (err) {
                 alert('Sorry this email already exists!')
             }
          } 
-         else {
-                alert('Please complete all the boxes')
-            }
-        }
+        
     
     cancel=()=>{
         this.setState({

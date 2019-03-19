@@ -9,6 +9,7 @@ import Skills from './Skills/Skills';
 import Languages from './Languages/Languages';
 import Projects from './Projects/Projects';
 import LoadingWrapper from '../Util/LoadingWrapper';
+import ScaleText from 'react-scale-text';
 
 class Profile extends Component {
     constructor(props){
@@ -130,7 +131,7 @@ class Profile extends Component {
                     <LoadingWrapper loaded={this.state.isLoaded}>
                 <div className="profile-basic-info-container">
                         <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic"/>
-                        <div>
+                        <div style={{width:'100%'}}>
                             <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
                             <h1><a href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></h1>
                         </div>
