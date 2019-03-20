@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {updateEducation} from '../../../ducks/userActions';
 import School from './School';
 import { withRouter } from 'react-router-dom';
-import LoadingWrapper from '../../Util/LoadingWrapper';
+import LoadingWrapper from '../../Loader/LoadingWrapper';
 
 class Education extends Component {
 constructor(props){

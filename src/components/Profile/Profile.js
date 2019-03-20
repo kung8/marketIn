@@ -8,7 +8,7 @@ import Work from './Work/Work';
 import Skills from './Skills/Skills';
 import Languages from './Languages/Languages';
 import Projects from './Projects/Projects';
-import LoadingWrapper from '../Util/LoadingWrapper';
+import LoadingWrapper from '../Loader/LoadingWrapper';
 import Search from '../Search/Search';
 
 class Profile extends Component {

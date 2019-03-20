@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {updateViewedUser,updatePhone,updateLinkedIn} from '../../ducks/userActions'
-import Info from './Info';
 import axios from 'axios';
-import LoadingWrapper from '../Util/LoadingWrapper';
+import LoadingWrapper from '../Loader/LoadingWrapper';
 import '../../index.css'
 
 class Contact extends Component {

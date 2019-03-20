@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {updateLang} from '../../../ducks/userActions';
 import Language from './Language';
 import {withRouter} from 'react-router-dom';
-import LoadingWrapper from '../../Util/LoadingWrapper';
+import LoadingWrapper from '../../Loader/LoadingWrapper';
 
 class Languages extends Component {
     constructor(props){

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {updateProject} from '../../../ducks/userActions';
 import Project from './Project';
 import {withRouter} from 'react-router-dom';
-import LoadingWrapper from '../../Util/LoadingWrapper';
+import LoadingWrapper from '../../Loader/LoadingWrapper';
 
 class Projects extends Component {
     constructor(props){

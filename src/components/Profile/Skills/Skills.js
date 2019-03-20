@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {updateSkill} from '../../../ducks/userActions';
 import Skill from './Skill';
 import {withRouter} from 'react-router-dom';
-import LoadingWrapper from '../../Util/LoadingWrapper';
+import LoadingWrapper from '../../Loader/LoadingWrapper';
 
 class Skills extends Component {
     constructor(props){

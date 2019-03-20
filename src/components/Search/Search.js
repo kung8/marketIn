@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
- 
+import LoadingWrapper from '../../components/Loader/LoadingWrapper';
+
 class Search extends Component {
     constructor(){
         super();
         this.state = {
             search:'',
-            usersArr:[]
+            usersArr:[],
+            isLoaded:false,
         }
     }
 
@@ -34,7 +36,8 @@ class Search extends Component {
             // console.log(users)
             this.setState({
                 usersArr:users.data,
-                search:''
+                search:'',
+                isLoaded:true,
             })
         }
 
@@ -58,7 +61,9 @@ class Search extends Component {
                 <button className="search-button" onClick={this.handleSearchClick}>SEARCH</button>
             </div>
             <div className="search-box-output-container">
-                {users}
+                <LoadingWrapper loaded={this.state.isLoaded}>
+                    {users}
+                </LoadingWrapper>
             </div>
         </div>
     )
