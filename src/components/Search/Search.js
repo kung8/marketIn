@@ -9,7 +9,7 @@ class Search extends Component {
         this.state = {
             search:'',
             usersArr:[],
-            isLoaded:false,
+            isLoaded:true,
         }
     }
 
@@ -30,6 +30,9 @@ class Search extends Component {
 
     handleSearchClick=async()=>{
         // console.log('hit!')
+        this.setState({
+            isLoaded:false
+        })
         const {search} = this.state;
         if(search!==''){
             const users = await axios.get(`/profile/get/users?search=${search}`)
@@ -39,6 +42,11 @@ class Search extends Component {
                 search:'',
                 isLoaded:true,
             })
+        } else {
+            this.setState({
+                isLoaded:true
+            })
+            return alert('please enter something in the search')
         }
 
     }

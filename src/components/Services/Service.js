@@ -6,6 +6,7 @@ import {updateServices} from '../../ducks/userActions';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import { v4 as randomString } from 'uuid';
+import {Link} from 'react-router-dom';
 
 class Service extends Component {
     constructor(props){
@@ -172,7 +173,7 @@ class Service extends Component {
                     </div>):
                     (<div className='purchase-chat-buttons-container'>
                         <button className="purchase-service-button">Purchase</button>
-                        <button className="add-save-edit-button">Chat</button>
+                        <Link to='/chat'><button className="add-save-edit-button">Chat</button></Link>
                     </div>)}
         </div>)
     }

@@ -8,7 +8,7 @@ import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import { DirectConnect, IoT1ClickDevicesService } from 'aws-sdk';
 import Service from './Service';
-import LoadingWrapper from '../Util/LoadingWrapper';
+import LoadingWrapper from '../Loader/LoadingWrapper';
 
 class Services extends Component {
     constructor(props) {

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {updateWork} from '../../../ducks/userActions';
 import Job from './Job';
 import {withRouter} from 'react-router-dom';
-import LoadingWrapper from '../../Util/LoadingWrapper';
+import LoadingWrapper from '../../Loader/LoadingWrapper';
 
 class Work extends Component {
     constructor(props){
