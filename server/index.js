@@ -120,5 +120,5 @@ app.get('/services/getAll',serviceCtrl.getAllServices);
 app.get('/contact/get/:userId',contactCtrl.getContact);
 app.post('/contact/add/phone/:id',contactCtrl.addPhone);
 app.post('/contact/add/linkedin/:id',contactCtrl.addLinkedIn);
-app.put('/contact/update/phone',contactCtrl.updatePhone);
-app.put('/contact/update/linkedin',contactCtrl.updateLinkedIn);
+app.put('/contact/update/phone/:id',contactCtrl.updatePhone);
+app.put('/contact/update/linkedin/:id',contactCtrl.updateLinkedIn);

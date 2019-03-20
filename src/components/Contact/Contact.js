@@ -18,7 +18,11 @@ class Contact extends Component {
             addLinkedInBox:'',
             isLoaded:false,
             isTypingPhone:true,
-            isTypingLinkedIn:true
+            isTypingLinkedIn:true,
+            editBox1:'',
+            editBox2:'',
+            isEditing1:false,
+            isEditing2:false
         }
     }
     
@@ -62,24 +66,6 @@ class Contact extends Component {
             }
         }
         
-    // async getContact(){
-    //     // console.log('connected!')
-    //     const contactInfo = await axios.get(`/profile/get/contact/${this.props.match.params.userId}`);
-    //     console.log(999,contactInfo.data[0])
-    //     this.props.updatePhone(contactInfo.data[0].phone)
-    //     this.props.updateLinkedIn(contactInfo.data[0].linkedin)
-        // if(contactInfo.data[0] !== undefined){
-        //     this.setState({
-        //         phone:contactInfo.data[0].phone,
-        //         linkedIn:contactInfo.data[0].linkedin
-        //     })  
-        // } else {
-        //     this.setState({
-        //         phone:'',
-        //         linkedIn:''
-        //     })
-        // }
-    // }
 
     handleInput(prop,value){
         this.setState({
@@ -118,11 +104,46 @@ class Contact extends Component {
         }
     }
     
-    async updatePhone(){
-        const phone = await axios.put('/contact/update/phone')
+    handleUpdatePhoneToggle(){
+        this.setState({
+            editBox1:<input placeholder="Phone" onChange={(e)=>this.handleInput('phone',e.target.value)}/>,
+            isEditing1:true
+        })
     }
+    
+    handleUpdateLinkedInToggle(){
+        this.setState({
+            editBox2:<input placeholder="LinkedIn" onChange={(e)=>this.handleInput('linkedIn',e.target.value)}/>,
+            isEditing2:true
+        })
+    }
+
+    async updatePhone(){
+        const {id} = this.props;
+        const {phone} = this.state;
+        console.log('entered',phone,id)
+        const phoneNum = await axios.put(`/contact/update/phone/${id}`,{phone})
+        console.log(phoneNum)
+        this.props.updatePhone(phoneNum.data[0].phone)
+        this.setState({
+            isEditing1:false,
+            editBox1:'',
+            phone:''
+        })
+    }
+
     async updateLinkedIn(){
-        const LinkedIn = await axios.put('/contact/update/linkedin')
+        const {id} = this.props;
+        const {linkedIn} = this.state;
+        console.log(linkedIn);
+        const linked = await axios.put(`/contact/update/linkedin/${id}`,{linkedIn})
+        console.log(333,linked)
+        this.props.updateLinkedIn(linked.data[0].linkedin)
+        this.setState({
+            isEditing2:false,
+            editBox2:'',
+            linkedIn:''
+        })
     }
 
     render(){
@@ -149,7 +170,8 @@ class Contact extends Component {
                                     <div className="social-media-logo-and-link-container">
                                         <i class="fas fa-phone-square"></i>
                                         <a href={`tel:${this.state.phone}`}><p>{this.props.phone}</p></a>
-                                        <button className="add-contact-button">Update</button>    
+                                        {this.state.editBox1}
+                                        {this.state.isEditing1?<button className="add-contact-button" onClick={()=>this.updatePhone()}>Save</button>:<button className="add-contact-button" onClick={()=>this.handleUpdatePhoneToggle()}>Update</button> }   
                                     </div>
                                 </div>
                             </div>)
@@ -169,9 +191,7 @@ class Contact extends Component {
                                 </div>
                             </div>)
                             :
-                            <div className="social-media-logo-and-link-container">
-                            </div>
-                            )
+                            null)
                     }
 
                     {this.props.viewedUserId==this.props.id?
@@ -181,7 +201,8 @@ class Contact extends Component {
                                     <div className="social-media-logo-and-link-container">
                                         <i class="fab fa-linkedin"></i>
                                         <a href={`${this.state.linkedIn}`}><p>{this.props.linkedIn}</p></a>
-                                        <button className="add-contact-button">Update</button>    
+                                        {this.state.editBox2}
+                                        {this.state.isEditing2?<button className="add-contact-button" onClick={()=>this.updateLinkedIn()}>Save</button>:<button className="add-contact-button" onClick={()=>this.handleUpdateLinkedInToggle()}>Update</button>}    
                                     </div>
                                 </div>
                             </div>)
@@ -202,25 +223,9 @@ class Contact extends Component {
                         </div>)
 
                             :
-                            <div className="social-media-logo-and-link-container">
-                            </div>
-                            )
+                            null)
                     }
                     
-
-
-                    {/* {this.state.linkedIn !== ''?(
-                        <div className="social-media-holder">
-                            <div className="social-media-logo-and-link-container">
-                                <a href={`${this.state.linkedIn}`}><i class="fab fa-linkedin"></i></a>
-                                <p>{this.state.linkedIn}</p>    
-                            </div>
-                            {this.props.viewedUserId==this.props.id?(<button className="add-contact-button">Update</button>):(
-                            <div className="add-contact-button-holder">
-                                <input className="add-contact-input-box" placeholder="LinkedIn" value={this.state.linkedIn} onChange={(e)=>this.handleInput('linkedIn',e.target.value)}/>
-                                <button className="add-contact-button" onClick={()=>this.addLinkedIn()}>Add LinkedIn</button>
-                            </div>)}
-                        </div>):null} */}
 
                     {/* <div className="social-media-holder">
                         <div className="social-media-logo-and-link-container">

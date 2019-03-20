@@ -53,11 +53,25 @@ module.exports = {
 
     updatePhone: async (req,res) =>{
         const db = req.app.get('db');
-        
+        console.log(req.body);
+        const {phone} = req.body;
+        console.log(phone);
+        const user_id = req.params.id;
+        console.log(user_id);
+        const phoneNum = await db.contact.update_phone({phone,user_id});
+        console.log(phoneNum);
+        res.status(200).send(phoneNum);
     },
 
     updateLinkedIn: async (req,res) =>{
         const db = req.app.get('db');
-
+        console.log(req.body)
+        const {linkedIn} = req.body;
+        console.log(linkedIn)
+        const user_id = req.params.id;
+        console.log(user_id);
+        const linked = await db.contact.update_linkedin({linkedin:linkedIn,user_id})
+        console.log(linked)
+        res.status(200).send(linked);
     }
 }
