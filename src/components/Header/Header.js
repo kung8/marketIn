@@ -40,6 +40,7 @@ class Header extends Component {
 
     }
     render(){
+        console.log(this.props.id)
         return(
             <div className="header-container">
                 <div className="header">
@@ -50,10 +51,9 @@ class Header extends Component {
                         (<div className="sidebar-container" style={{width:this.state.navBar}}>
                                 <p style={{color:'white'}}>Signed in as:</p>
                                 <Link to={`/profile/${this.props.id}`} onClick={()=>this.toggleNavBar()}>{this.props.firstName} {this.props.lastName}</Link>
-                                
+                                <Link to='/search' onClick={()=>this.toggleNavBar()}>Search</Link>
                                 <p style={{color:'white'}}>Viewing</p>
                                 <Link to={`/profile/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>{this.props.userFirstName} {this.props.userLastName}</Link>
-
                                 <Link to={`/services/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>Services</Link>
                                 {/* <a href={`mailto:${this.props.userEmail}`} onClick={()=>this.toggleNavBar()}>Contact</a> */}
                                 <Link to={`/contact/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>Contact</Link>
@@ -62,6 +62,7 @@ class Header extends Component {
                         </div>
                         ) : (<div className="sidebar-container" style={{width:this.state.navBar}}>
                                 <Link to='/' onClick={()=>this.toggleNavBar()}>Login</Link>
+                                <Link to='/search' onClick={()=>this.toggleNavBar()}>Search</Link>
                                 <Link to='/about' style={{color:'white'}} onClick={()=>this.toggleNavBar()}>About MarketIn</Link>
                                 <Link to='/profile/70'onClick={()=>this.toggleNavBar()}>About the Dev</Link>
                                 <Link to={`/services/70`} onClick={()=>this.toggleNavBar()}>Dev Services</Link>

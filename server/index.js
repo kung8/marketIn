@@ -80,6 +80,7 @@ app.get('/auth/current',userCtrl.getUser);
 app.post('/auth/logout',userCtrl.logout);
 
 //profileController ENDPOINTS
+app.get('/profile/get/users',profileCtrl.getUsers);
 app.get('/profile/get/user/:userId',profileCtrl.getUser);
 app.get('/profile/get/contact/:userId',profileCtrl.getContact);
 app.get('/profile/get/education/:userId',profileCtrl.getEdProfile);

@@ -6,11 +6,13 @@ import Register from './components/Register/Register';
 import Services from './components/Services/Services';
 import Contact from './components/Contact/Contact';
 import About from './components/Kevin/About';
+import Search from './components/Search/Search';
 
 export default  (
         <Switch>
             <Route exact path='/' component={Auth}/>
             <Route path='/register' component={Register}/>
+            <Route path='/search' component={Search}/>
             <Route path='/profile/:userId' component={Profile}/>
             <Route path='/services/:userId' component={Services}/>
             <Route path='/contact/:userId' component={Contact}/>
