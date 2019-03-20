@@ -70,34 +70,54 @@ class Contact extends Component {
         }
     }
 
+    //Need to make the add button work
+    
+
+
     render(){
         console.log(this.props)
         return(
-            <div style={{marginTop:90}}>
+            <div className="entire-contact-section">
                 <LoadingWrapper loaded={this.state.isLoaded}>
-                    <h1>Contact</h1> 
-                    <p><i className="far fa-envelope" style={{}}></i> <a href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></p> 
-                    <br/>
-                    <br/>
-                    <p><i class="fas fa-phone-square"></i> <a href={`tel:${this.state.phone}`}>{this.state.phone}</a></p>
+                <div className="contact-header-holder">
+                    <h1 className="contact-heading">CONTACT</h1> 
+                </div>
+                <div className="contact-info-holder">
+                    <div className="social-media-holder">
+                        <div className="social-media-logo-and-link-container">
+                            <a href={`mailto:${this.props.userEmail}`}><i className="far fa-envelope" style={{}}></i></a>
+                            <p>{this.props.userEmail}</p>
+                        </div>
+                    </div>
                     
-                    {this.props.viewedUserId==this.props.id?(<div>
-                        {this.state.phone===''?<button>Add</button>:
-                        <button>Update</button>}
-    </div>):null}
-                    
-                    <br/>
-                    <br/>
-                    <p><i class="fab fa-linkedin"></i><a href='/'>{this.state.linkedIn}</a></p>
-                    
-                    {this.props.viewedUserId==this.props.id?(<div>
-                        {this.state.linkedIn===''?(<button>Add</button>):
-                        (<button>Update</button>)}
-                    </div>):null}
-                    
-                    <br/>
-                    <br/>
-                    <p>Chat: <a href='/'>Set up Socket.io?</a></p>
+                    {this.state.phone != '' ?(
+                        <div className="social-media-holder">
+                            <div className="social-media-logo-and-link-container">
+                                <a href={`tel:${this.state.phone}`}><i class="fas fa-phone-square"></i></a> 
+                                <p>{this.state.phone}</p>
+                            </div>
+                            {this.props.viewedUserId==this.props.id?(<button className="add-contact-button">Update</button>):(null)}
+                        </div>)
+                        :
+                        (this.props.viewedUserId==this.props.id?(<div className="add-contact-button-holder"><button className="add-contact-button">Add Phone</button></div>):null)}
+
+                    {this.state.linkedIn !== '' ?(
+                        <div className="social-media-holder">
+                            <div className="social-media-logo-and-link-container">
+                                <a href={`${this.state.linkedIn}`}><i class="fab fa-linkedin"></i></a>
+                                <p>{this.state.linkedIn}</p>    
+                            </div>
+                            {this.props.viewedUserId==this.props.id?(<button className="add-contact-button">Update</button>):null}
+                        </div >)
+                        :
+                        (this.props.viewedUserId==this.props.id?(<div className="add-contact-button-holder"><button className="add-contact-button">Add LinkedIn</button></div>):null)}
+
+                    {/* <div className="social-media-holder">
+                        <div className="social-media-logo-and-link-container">
+                            <p>Chat: <a href='/'>Set up Socket.io?</a></p>
+                        </div>
+                    </div> */}
+                </div>
                 </LoadingWrapper>
             </div>
         )

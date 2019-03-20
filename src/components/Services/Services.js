@@ -206,8 +206,8 @@ class Services extends Component {
     }
 
     render() {
-        console.log(this.props.services,this.state.services)
-        const { url, isUploading,picLoaded } = this.state;
+        console.log(this.props.services,this.state.services,this.props)
+        const { url, isUploading,picLoaded,isAdded } = this.state;
         const {services} = this.state;
         const servArray = services.map(serv =>{
             return (
@@ -228,7 +228,9 @@ class Services extends Component {
             //if add is clicked it needs to open the 
           <div className="entire-services-section">
             <div className="services-container">
-                <h1 >SERVICES</h1>
+                <div className="services-header-holder">
+                    <h1>SERVICES</h1>
+                </div>
                 <LoadingWrapper loaded={this.state.isLoaded}>
                 <div className="service-section-container">
                     {servArray}
@@ -256,7 +258,7 @@ class Services extends Component {
                     accept="image/*"
                     multiple={false}
                     >
-                    {picLoaded?<div>{this.state.img}</div>:<div>{isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}</div>}
+                    {picLoaded?<div>{this.state.img}</div>:<div>{isUploading ? <GridLoader /> : <p style={{textAlign:'center'}}>Drop File or Click Here</p>}</div>}
                     </Dropzone>
                     {this.state.inputBox1}
                     {this.state.inputBox2}
@@ -264,10 +266,11 @@ class Services extends Component {
                     <br/>
                 </div>):null
                 }
-                {this.state.isAdded?(
+                {this.props.id == this.props.match.params.userId?
+                (isAdded?(
                     <button className="add-services-button" onClick={()=>this.saveAdd()}>Save</button>)
                     :
-                    (<button className="add-services-button" onClick={()=>this.toggleAdd()}>Add</button>)}
+                    (<button className="add-services-button" onClick={()=>this.toggleAdd()}>Add</button>)):null}
                     </LoadingWrapper>
             </div>            
         

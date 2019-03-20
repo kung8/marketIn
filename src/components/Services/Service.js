@@ -144,7 +144,7 @@ class Service extends Component {
                         borderWidth: 7,
                         marginTop: 10,
                         marginBottom:10,
-                        borderColor: 'rgb(102, 102, 102)',
+                        borderColor: 'navy',
                         borderStyle: 'dashed',
                         borderRadius: 5,
                         display: 'flex',
@@ -155,7 +155,7 @@ class Service extends Component {
                     accept="image/*"
                     multiple={false}
                     >
-                    {picLoaded?<div>{this.state.img}</div>:<div>{isLoaded ? <GridLoader /> : <p>Drop File or Click Here</p>}</div>}
+                    {picLoaded?<div>{this.state.img}</div>:<div>{isLoaded ? <GridLoader /> : <p style={{textAlign:'center'}}>Drop File or Click Here</p>}</div>}
                     </Dropzone>
                     {this.state.editBox1}
                     {this.state.editBox2}
