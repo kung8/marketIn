@@ -20,16 +20,6 @@ module.exports = {
         res.status(200).send(user);
     },
     
-    getContact: async (req,res) => {
-        const db = req.app.get('db')
-        console.log('hit!')
-        const {userId} = req.params;
-        console.log(userId)
-        const contact = await db.contact.get_contact({user_id:userId});
-        console.log(contact)
-        res.status(200).send(contact);
-    },
-    
     getEdProfile: async (req,res) => {
         const db = req.app.get('db');
         const {userId} = req.params;

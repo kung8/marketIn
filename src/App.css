@@ -418,17 +418,20 @@ footer {
 
 /*************************************Login******************************************/
 .login-page {
-    margin-top:140px;
-    height:403px;
+    margin-top:80px;
+    height:435px;
     width:320px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
+    background:silver;
+    font-size:30px;
 }
 
 .login-input {
+    margin-top:40px;
     min-height:50px;
     width:250px;
     font-size:35px;
@@ -437,23 +440,25 @@ footer {
 
 .login-button {
     height:40px;
-    width:100px;
-    font-size:16px;
-    background: navy;
+    width:160px;
+    font-size:35px;
+    background: black;
     color:white;
-    border:white solid;
+    border:black;
 }
+
+
 
 /*************************************Register******************************************/
 /****************Step 1****************/
 .basic-info-register-container {
     display:flex; 
     flex-direction:column;
-    min-height:467px;
+    min-height:440px;
     width:100%;
     justify-content: space-evenly;
     align-items: center;
-    background:lightblue;
+    background:silver;
 }
 
 .basic-info-register-container input {
@@ -462,8 +467,6 @@ footer {
     width:260px;
     border:solid black;
 }
-
-
 
 .cancel-register-button-container {
     width:90%;
@@ -494,10 +497,10 @@ footer {
     display:flex; 
     flex-direction:column;
     width:100%;
-    min-height:467px;
+    min-height:440px;
     justify-content: space-evenly;
     align-items: center;
-    background:lightblue;
+    background:silver;
 }
 
 .education-info-register-container input {
@@ -539,10 +542,10 @@ footer {
     display:flex; 
     flex-direction:column;
     width:100%;
-    min-height:300px;
+    min-height:260px;
     /* justify-content: space-evenly; */
     align-items: center;
-    background:lightblue;
+    background:silver;
 }
 
 .work-info-register-container > input {
@@ -557,19 +560,18 @@ footer {
     height:30px;
     background:black;
     color:white;
-    /* margin-top:10px; */
     width:200px;
     font-size:20px;
     border:black solid;
-    margin-top:0;
+    margin-top:-10px;
 }
 
 .previous-next-button-register-container {
-    width:90%;
+    width:290px;
     display: flex;
     justify-content: space-between;
     margin-bottom:10px;
-    margin-top:0;
+    margin-top:-10px;
 }
 
 .previous-button {
@@ -596,7 +598,8 @@ footer {
     width:100%;
     justify-content: space-evenly;
     align-items: center;
-    background:lightblue;
+    background:silver;
+    height:440px;
 }
 
 .skills-info-register-container {
@@ -604,7 +607,7 @@ footer {
     display:flex; 
     flex-direction:column;
     width:100%;
-    min-height:188px;
+    min-height:170px;
     align-items: center;
     /* background:purple; */
 }
@@ -633,7 +636,7 @@ footer {
     display:flex; 
     flex-direction:column;
     width:100%;
-    min-height:188px;
+    min-height:170px;
     align-items: center;
     /* background:yellow; */
 }
@@ -662,11 +665,16 @@ footer {
     display:flex; 
     flex-direction:column;
     width:100%;
-    min-height:460px;
+    min-height:434px;
     /* justify-content: space-evenly; */
     align-items: center;
     margin-top:5px;
-    background:lightblue;
+    background:silver;
+}
+
+.projects-info-register-container {
+    height:200px;
+    background: silver;
 }
 
 .projects-info-register-container > input {
@@ -685,7 +693,7 @@ footer {
     width:200px;
     font-size:20px;
     border:black solid;
-    margin-top:0;
+    margin-bottom:230px;
 }
 
 .complete-button {
@@ -885,7 +893,7 @@ footer {
 
 /*******************Search Section***********************/
 .entire-search-section {
-    min-height:100px;
+    max-height:426px;
     background:navy;
     margin-top:85px;
     display:flex;
@@ -924,10 +932,11 @@ footer {
 
 .search-box-output-container {
     /* margin-top:5px; */
-    min-height:280px;
+    height:280px;
     border:navy solid;
     width:320px;
     background:silver;
+    overflow:scroll;
 }
 
 .search-box-results {
@@ -941,6 +950,7 @@ footer {
     margin-top:85px;
     min-height:426px;
     margin-bottom:5px;
+    width: 320px;
 }
 
 .contact-header-holder {
@@ -979,12 +989,13 @@ footer {
     align-items: center;
     text-align: left;
     flex-direction: column;
+    width:310px;
 }
 
 .social-media-logo-and-link-container p {
     font-size: 25px;
     text-decoration: none;
-    max-width:320px;
+    max-width:310px;
     /* flex-wrap: wrap; */
 }
 
@@ -996,11 +1007,20 @@ footer {
 
 .add-contact-button-holder {
     display: flex; 
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     background:silver;
-    height:50px;
+    height:100px;
     margin-bottom:5px;
+}
+
+.add-contact-input-box {
+    width:260px;
+    height:50px;
+    font-size:35px;
+    border:black solid;
+    text-align:center;
 }
 
 .add-contact-button {

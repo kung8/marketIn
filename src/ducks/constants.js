@@ -8,3 +8,5 @@ export const UPDATE_LANG = 'UPDATE_LANG';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 export const CLEAR_USER = 'CLEAR_USER';
 export const UPDATE_SERVICES = 'UPDATE_SERVICES';
+export const UPDATE_PHONE = 'UPDATE_PHONE';
+export const UPDATE_LINKEDIN = 'UPDATE_LINKEDIN';

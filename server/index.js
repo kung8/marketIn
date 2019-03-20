@@ -4,8 +4,8 @@ const session = require('express-session');
 const massive = require('massive');
 const userCtrl = require('./userController/userController')
 const profileCtrl = require('./profileController/profileController');
-
 const serviceCtrl = require('./serviceController/serviceController');
+const contactCtrl = require('./contactController/contactController');
 
 const pg = require('pg');
 const pgSession = require('connect-pg-simple')(session);
@@ -82,7 +82,7 @@ app.post('/auth/logout',userCtrl.logout);
 //profileController ENDPOINTS
 app.get('/profile/get/users',profileCtrl.getUsers);
 app.get('/profile/get/user/:userId',profileCtrl.getUser);
-app.get('/profile/get/contact/:userId',profileCtrl.getContact);
+
 app.get('/profile/get/education/:userId',profileCtrl.getEdProfile);
 app.get('/profile/get/work/:userId',profileCtrl.getWorkProfile);
 app.get('/profile/get/skills/:userId',profileCtrl.getSkillsProfile);
@@ -116,3 +116,9 @@ app.put('/service/update/:id',serviceCtrl.updateService);
 app.delete('/service/delete/:id',serviceCtrl.deleteService);
 app.get('/services/getAll',serviceCtrl.getAllServices);
 
+//contactController ENDPOINTS
+app.get('/contact/get/:userId',contactCtrl.getContact);
+app.post('/contact/add/phone/:id',contactCtrl.addPhone);
+app.post('/contact/add/linkedin/:id',contactCtrl.addLinkedIn);
+app.put('/contact/update/phone',contactCtrl.updatePhone);
+app.put('/contact/update/linkedin',contactCtrl.updateLinkedIn);

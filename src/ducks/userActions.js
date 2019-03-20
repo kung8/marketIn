@@ -1,4 +1,5 @@
-import {UPDATE_SERVICES,UPDATE_VIEWED_USER,UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT, CLEAR_USER} from './constants'
+import {UPDATE_PHONE, UPDATE_LINKEDIN, UPDATE_SERVICES,UPDATE_VIEWED_USER,UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT, CLEAR_USER} from './constants'
+import { link } from 'fs';
 
 export function updateUser ({first_name,last_name,email,image_url,id}){
     return {
@@ -86,4 +87,18 @@ export function updateServices(services){
         } 
         
     }   
+}
+
+export function updatePhone(phone){
+    return {
+        type:UPDATE_PHONE,
+        payload:phone
+    }
+}
+
+export function updateLinkedIn(linkedIn){
+    return {
+        type:UPDATE_LINKEDIN,
+        payload:linkedIn
+    }
 }

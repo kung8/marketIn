@@ -43,7 +43,7 @@ class Auth extends Component {
                 <button className="login-button" onClick={this.login}>Login</button>
                 {/* <Link to='/profile/'><button className="login-button" onClick={this.login}>Login</button></Link> */}
                 {/* <Link to={`/profile/${user.data.id}`}><button className="login-button" onClick={this.login}>Login</button></Link> */}
-                <Link to='/register/step1'>Create an Account</Link>
+                <Link to='/register/step1' style={{color:'black',textDecoration:'none'}}>Create an Account</Link>
             </div> 
         )
     }
