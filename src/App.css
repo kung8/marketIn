@@ -870,3 +870,55 @@ footer {
     font-size:35px;
     margin-bottom:5px;
 }
+
+/*******************Search Section***********************/
+.entire-search-section {
+    min-height:100px;
+    background:navy;
+    margin-top:85px;
+    display:flex;
+    flex-direction: column;
+    margin-bottom:5px;
+}
+
+.search-input-and-button-container {
+    display:flex;
+    height:100px;
+    width:320px;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    border:navy solid;
+    background:silver;
+}
+
+.search-input-box {
+    width:260px;
+    border:solid black;
+    height:50px;
+    font-size: 35px;
+}
+
+.search-button {
+    width:100px;
+    border:black solid;
+    background:black;
+    color:white;
+    height:30px;
+    font-size:20px;
+    text-align:center;
+    border-radius:20%;
+}
+
+.search-box-output-container {
+    /* margin-top:5px; */
+    min-height:280px;
+    border:navy solid;
+    width:320px;
+    background:silver;
+}
+
+.search-box-results {
+    color:black;
+    text-align:center;
+}

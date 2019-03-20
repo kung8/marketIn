@@ -42,18 +42,22 @@ class Search extends Component {
         const users = this.state.usersArr.map(user=>{
             return(
                 <div key={user.id}>
-                    <Link to={`/profile/${user.id}`}><h1>{user.first_name} {user.last_name}</h1></Link>
+                    <Link style={{textDecoration:'none'}} to={`/profile/${user.id}`}><h1 className="search-box-results">{user.first_name} {user.last_name}</h1></Link>
                 </div>
             )
         })
     return(
-        <div>
-            {/* Search functionality will go here */}
-            <div style={{ marginTop:90 ,display:'flex',height:80, width:'100%', flexDirection:'column', alignItems:'center', justifyContent:'space-evenly'}}>
-                <input value={this.state.search} style={{width:260, border:'solid navy',height:40, marginLeft:5, fontSize:35}} onChange={(e)=>this.handleSearchInput(e.target.value)}/>
-                <button style={{width:100,border:'black solid',background:'navy',color:'white', height:30,fontSize:20,textAlign:'center'}} onClick={this.handleSearchClick}>SEARCH</button>
+        <div className="entire-search-section">
+            <div className="section-header-holder">
+                <h1 className="section-header">SEARCH</h1>
             </div>
-            {users}
+            <div className="search-input-and-button-container">
+                <input value={this.state.search} className="search-input-box" onChange={(e)=>this.handleSearchInput(e.target.value)}/>
+                <button className="search-button" onClick={this.handleSearchClick}>SEARCH</button>
+            </div>
+            <div className="search-box-output-container">
+                {users}
+            </div>
         </div>
     )
 }
