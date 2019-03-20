@@ -1,4 +1,4 @@
 UPDATE contacts
 SET linkedin = ${linkedin}
-WHERE id = ${id}
+WHERE user_id = ${user_id}
 RETURNING *;

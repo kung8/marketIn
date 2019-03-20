@@ -16,10 +16,20 @@ module.exports = {
         console.log(phone);
         const user_id = req.params.id;
         console.log(user_id);
-        const phoneNum = await db.contact.add_phone({phone,user_id});
-        console.log(phoneNum);
-        res.status(200).send(phoneNum);
-
+        let user = await db.contact.check_contact({user_id})
+        user = user[0];
+        if(user){
+            //update their information
+            const phoneNum = await db.contact.update_phone({phone,user_id});
+            console.log(phoneNum);
+            res.status(200).send(phoneNum);
+        }
+        else {
+            //add them into the system
+            const phoneNum = await db.contact.add_phone({phone,user_id});
+            console.log(phoneNum);
+            res.status(200).send(phoneNum);
+        }
     },
 
     addLinkedIn: async (req,res) =>{
@@ -28,9 +38,17 @@ module.exports = {
         const {linkedIn} = req.body;
         const user_id = req.params.id;
         console.log(user_id);
-        const linked = await db.contact.add_linkedin({linkedin:linkedIn,user_id});
-        console.log(linked);
-        res.status(200).send(linked);
+        let user = await db.contact.check_contact({user_id});
+        user = user[0];
+        if(user){
+            const linked = await db.contact.update_linkedin({linkedin:linkedIn,user_id})
+            console.log(linked)
+            res.status(200).send(linked);
+        } else {
+            const linked = await db.contact.add_linkedin({linkedin:linkedIn,user_id});
+            console.log(linked);
+            res.status(200).send(linked);
+        }
     },
 
     updatePhone: async (req,res) =>{

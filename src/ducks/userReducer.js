@@ -23,7 +23,7 @@ const initialState = {
 }
 
 export default function userReducer(state = initialState,action){
-    // console.log(1111,action.payload)
+    console.log(1111,action.payload)
     
     switch(action.type){
         case UPDATE_VIEWED_USER:
@@ -57,7 +57,7 @@ export default function userReducer(state = initialState,action){
             return {...state,linkedIn:action.payload}
         case CLEAR_USER:
             // console.log(7777,state); 
-            return {...state,firstName:'',lastName:'',email:'',imageUrl:'',id:0,education:[],work:[],skills:[],languages:[],projects:[],userEmail:'',userFirstName:'',userLastName:'',userImageUrl:'',viewedUserId:''}
+            return {...state,firstName:'',lastName:'',email:'',imageUrl:'',id:0,education:[],work:[],skills:[],languages:[],projects:[],userEmail:'',userFirstName:'',userLastName:'',userImageUrl:'',viewedUserId:'',phone:'',linkedIn:''}
         default: 
             return state
     }
