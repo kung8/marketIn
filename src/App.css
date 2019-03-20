@@ -713,7 +713,16 @@ footer {
   }
 
   /*****************Services***************/
-.services-container {
+.entire-services-section {
+    margin-top:85px;
+    max-width:320px;
+    min-height:426px;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+  .services-container {
     width:100%;
     background:navy;
     display: flex;
@@ -749,7 +758,9 @@ footer {
     flex-direction:column;
     align-items: center;
     justify-content: space-evenly;
-    width:100%;
+    width:310px;
+    /* margin-left:5px; */
+    /* margin-right:5px; */
     min-height:280px;
     margin-bottom:5px;
 }
@@ -808,9 +819,9 @@ footer {
 }
 
 .add-box-container {
-    margin:5px 5px 10px;
+    /* margin:5px 5px 10px; */
     background:silver;
-    width:90%;
+    width:310px;
     min-height:160px;
     display:flex;
     flex-direction: column;

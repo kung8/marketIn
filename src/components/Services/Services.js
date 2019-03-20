@@ -226,7 +226,7 @@ class Services extends Component {
         return (
 
             //if add is clicked it needs to open the 
-          <div style={{marginTop:90,maxWidth:320,background:'red',display:'flex',flexDirection:'column',alignItems:'center'}}>
+          <div className="entire-services-section">
             <div className="services-container">
                 <h1 >SERVICES</h1>
                 <LoadingWrapper loaded={this.state.isLoaded}>
