@@ -40,7 +40,7 @@ class Header extends Component {
 
     }
     render(){
-        console.log(this.props.id)
+        // console.log(this.props.id)
         return(
             <div className="header-container">
                 <div className="header">

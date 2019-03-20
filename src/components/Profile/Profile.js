@@ -86,10 +86,10 @@ class Profile extends Component {
         const {firstName,lastName,email,imageUrl} = this.state;
         const {id} = this.props;
         if(firstName!=='' && lastName!=='' && email!=='' && imageUrl !==''){
-            console.log(id,firstName,lastName,email,imageUrl)
+            // console.log(id,firstName,lastName,email,imageUrl)
             //need to create a call to edit the user's email, first and last name, and picture
             let userProfile = await axios.put('/profile/edit/user',{firstName,lastName,email,imageUrl,id});
-            console.log(userProfile)
+            // console.log(userProfile)
             if(this._isMount){
                 this.props.updateUser(userProfile.data[0])
                 this.setState({
@@ -118,7 +118,7 @@ class Profile extends Component {
     //need to create some input boxes for edit but only want those to show if I press edit. 
 
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         //if a user session id == user then you can edit that profile but this is already a way to check session
 
         return (
@@ -162,7 +162,7 @@ class Profile extends Component {
 }
 
 function mapStateToProps (reduxState){
-    console.log(222,reduxState)
+    // console.log(222,reduxState)
     return {
         id:reduxState.id,
         firstName:reduxState.firstName,

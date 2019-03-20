@@ -59,14 +59,14 @@ app.get('/api/signs3', (req, res) => {
   
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
       if (err) {
-        console.log(err);
+        // console.log(err);
         return res.end();
       }
       const returnData = {
         signedRequest: data,
         url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
       };
-      console.log(returnData)
+      // console.log(returnData)
       return res.send(returnData);
     });
   });

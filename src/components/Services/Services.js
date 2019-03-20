@@ -52,9 +52,9 @@ class Services extends Component {
     getServices=async()=>{
         const {userId} = this.props.match.params;
         const services = await axios.get(`/services/get/${userId}`)
-        console.log(111111,services.data);
+        // console.log(111111,services.data);
         this.props.updateServices(services.data)
-        console.log(this.props.services)
+        // console.log(this.props.services)
         if(this._isMount){
             this.setState({
                 services:services.data,
@@ -79,7 +79,8 @@ class Services extends Component {
         const { signedRequest, url } = response.data;
         this.uploadFile(file, signedRequest, url);
     }  catch(err){
-        console.log(err);
+        // console.log(err);
+        alert(err)
         };
     };
 
@@ -95,9 +96,9 @@ class Services extends Component {
           .then(response => {
               let imgUrl = response.config.url;
               imgUrl = imgUrl.substring(0,imgUrl.indexOf('?'))
-              console.log(77777,response,response.config.url,imgUrl)
+            //   console.log(77777,response,response.config.url,imgUrl)
             this.setState({ isUploading: false, url,picLoaded:true,img:<img style={{width:200,height:200}} src={`${imgUrl}`} alt="uploaded image"/>,image:imgUrl});
-            console.log(888,this.state.img,this.state.url)
+            // console.log(888,this.state.img,this.state.url)
 
             // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
           })
@@ -136,14 +137,14 @@ class Services extends Component {
 
     saveAdd = async ()=>{
         const {price,service,image} = this.state;
-        console.log(333,price,service,image)
+        // console.log(333,price,service,image)
         const {id} = this.props;
         if(price!==''&& service!=='' && image!==''){
-            console.log('hit!')
-            console.log(111,price,service,image,id)
+            // console.log('hit!')
+            // console.log(111,price,service,image,id)
             const services = await axios.post('/service/add',{price,service,image,id})
             this.props.updateServices(services.data)
-            console.log(22222,services.data)
+            // console.log(22222,services.data)
             this.setState({
                 services:services.data,
                 isAdded:false,
@@ -195,7 +196,7 @@ class Services extends Component {
     }
 
     delete = async(serv)=>{
-        console.log(serv)
+        // console.log(serv)
         const {id} = serv;
         // console.log(id)
         const services = await axios.delete(`/service/delete/${id}`)
@@ -206,7 +207,7 @@ class Services extends Component {
     }
 
     render() {
-        console.log(this.props.services,this.state.services,this.props)
+        // console.log(this.props.services,this.state.services,this.props)
         const { url, isUploading,picLoaded,isAdded } = this.state;
         const {services} = this.state;
         const servArray = services.map(serv =>{
@@ -280,7 +281,7 @@ class Services extends Component {
     }
 
     function mapStateToProps(reduxState){
-        console.log(111,reduxState)
+        // console.log(111,reduxState)
         return{
             services:reduxState.services,
             id:reduxState.id,

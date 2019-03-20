@@ -23,7 +23,7 @@ const initialState = {
 }
 
 export default function userReducer(state = initialState,action){
-    console.log(1111,action.payload)
+    // console.log(1111,action.payload)
     
     switch(action.type){
         case UPDATE_VIEWED_USER:

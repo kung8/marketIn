@@ -74,7 +74,7 @@ class Project extends Component {
 
     render (){
         const {proj} = this.props;
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div className="small-experience-box">
                 <div>

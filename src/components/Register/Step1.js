@@ -36,13 +36,13 @@ class StepOne extends Component {
                     await axios.get(`http://hp-api.herokuapp.com/api/characters/`
                     ).then(character =>{
                         const char = character.data[Math.floor(Math.random()*character.data.length)]
-                        console.log(5555,char.image, char)
+                        // console.log(5555,char.image, char)
                         this.setState({
                             imageUrl:char.image
                         })
                     })
                 }
-                console.log(6666,imageUrl)
+                // console.log(6666,imageUrl)
                 const userInfo = {
                     firstName: firstName,
                     lastName: lastName, 
@@ -51,7 +51,7 @@ class StepOne extends Component {
                     imageUrl: this.state.imageUrl
                 }
                 let user = await axios.post('/auth/register', userInfo)
-                console.log(user.data);
+                // console.log(user.data);
                 this.props.updateUser(user.data);
                 this.props.history.push('/register/step2')   
             }   else {

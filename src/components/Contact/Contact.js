@@ -42,7 +42,7 @@ class Contact extends Component {
                 this.props.updateViewedUser(userProfile.data[0])
                 // console.log('hit') 
                 const contactInfo = await axios.get(`/contact/get/${this.props.match.params.userId}`);
-        console.log(999,contactInfo.data[0])
+                // console.log(999,contactInfo.data[0])
         if(contactInfo.data[0] !== undefined){
             // if(this._isMount){
             this.props.updatePhone(contactInfo.data[0].phone)
@@ -71,7 +71,7 @@ class Contact extends Component {
         this.setState({
             [prop]:value
         })
-        console.log(prop,value)
+        // console.log(prop,value)
     }
 
     //Need to make the add button work
@@ -81,7 +81,7 @@ class Contact extends Component {
         const {id} = this.props;
         if(phone!==''){
             const phoneNum = await axios.post(`/contact/add/phone/${id}`,{phone})
-            console.log(phoneNum);
+            // console.log(phoneNum);
             this.props.updatePhone(phoneNum.data[0].phone)
             this.setState({
                 isTypingPhone:false,
@@ -95,7 +95,7 @@ class Contact extends Component {
         const {id} = this.props;
         if(linkedIn !=''){
             const linked = await axios.post(`/contact/add/linkedin/${id}`, {linkedIn});
-            console.log(linked);
+            // console.log(linked);
             this.props.updateLinkedIn(linked.data[0].linkedin)
             this.setState({
                 isTypingLinkedIn:false,
@@ -121,9 +121,9 @@ class Contact extends Component {
     async updatePhone(){
         const {id} = this.props;
         const {phone} = this.state;
-        console.log('entered',phone,id)
+        // console.log('entered',phone,id)
         const phoneNum = await axios.put(`/contact/update/phone/${id}`,{phone})
-        console.log(phoneNum)
+        // console.log(phoneNum)
         this.props.updatePhone(phoneNum.data[0].phone)
         this.setState({
             isEditing1:false,
@@ -135,9 +135,9 @@ class Contact extends Component {
     async updateLinkedIn(){
         const {id} = this.props;
         const {linkedIn} = this.state;
-        console.log(linkedIn);
+        // console.log(linkedIn);
         const linked = await axios.put(`/contact/update/linkedin/${id}`,{linkedIn})
-        console.log(333,linked)
+        // console.log(333,linked)
         this.props.updateLinkedIn(linked.data[0].linkedin)
         this.setState({
             isEditing2:false,
@@ -147,7 +147,7 @@ class Contact extends Component {
     }
 
     render(){
-        console.log(1111,this.props,this.state)
+        // console.log(1111,this.props,this.state)
         return(
             <div className="entire-contact-section">
                 <LoadingWrapper loaded={this.state.isLoaded}>

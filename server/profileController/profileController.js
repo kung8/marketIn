@@ -2,12 +2,12 @@ module.exports = {
     getUsers: async (req,res)=>{
         const db = req.app.get('db');
         // console.log('working!')
-        console.log(req.query)
+        // console.log(req.query)
         let {search} = req.query;
         search = `%${search}%`
-        console.log(search)
+        // console.log(search)
         const users = await db.profiles.getProfiles.get_users({search});
-        console.log(users)
+        // console.log(users)
         res.status(200).send(users)
     },
     

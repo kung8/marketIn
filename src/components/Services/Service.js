@@ -34,11 +34,11 @@ class Service extends Component {
         this.setState({
             [prop]:value
         })
-        console.log(prop,value)
+        // console.log(prop,value)
     }
 
     handleEditToggle(serv){
-        console.log(444,this.state.services,this.props.services)
+        // console.log(444,this.state.services,this.props.services)
 
         this.setState({
             isEditing:true,
@@ -49,13 +49,13 @@ class Service extends Component {
             // editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
 
         })
-        console.log(999,this.state)
+        // console.log(999,this.state)
     }
 
     edit= async (serv)=>{
         const {price,image,service} = this.state;
         const {id} = serv;
-        console.log(55,service,price,image,id);
+        // console.log(55,service,price,image,id);
         this.props.edit(service,price,image,id)
                 this.setState({
                     isEditing:false,
@@ -84,7 +84,7 @@ class Service extends Component {
             const { signedRequest, url } = response.data;
             this.uploadFile(file, signedRequest, url);
         }  catch(err){
-            console.log(err);
+            // console.log(err);
             };
     };
 
@@ -100,9 +100,9 @@ class Service extends Component {
           .then(response => {
               let imgUrl = response.config.url;
               imgUrl = imgUrl.substring(0,imgUrl.indexOf('?'))
-              console.log(77777,response,response.config.url,imgUrl)
+            //   console.log(77777,response,response.config.url,imgUrl)
             this.setState({ isUploading: false, url,picLoaded:true,img:<img style={{width:200,height:200}} src={`${imgUrl}`} alt="uploaded image"/>,image:imgUrl});
-            console.log(888,this.state.img,this.state.url)
+            // console.log(888,this.state.img,this.state.url)
 
             // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
           })

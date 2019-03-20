@@ -47,7 +47,7 @@ class StepFive extends Component {
        }
 
     async completeProfile(){
-        console.log(this.props.id)
+        // console.log(this.props.id)
         const {projects,project} = this.state;
 
         if(project !== '' ){

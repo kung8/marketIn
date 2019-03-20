@@ -31,7 +31,7 @@ class Search extends Component {
         const {search} = this.state;
         if(search!==''){
             const users = await axios.get(`/profile/get/users?search=${search}`)
-            console.log(users)
+            // console.log(users)
             this.setState({
                 usersArr:users.data,
                 search:''
