@@ -89,7 +89,7 @@ class Service extends Component {
                 </Dropzone>:
                     <div style={{position:'relative'}}>
                         <img style={{marginTop:10,height:200,width:180,border:'solid black'}} src={this.state.image}/>
-                        {!this.state.picEdit && <i style={{position:'absolute',top:10,right:0}}class="fas fa-pencil-alt" onClick={()=>this.setState({picEdit:true})}></i>}
+                        {!this.state.picEdit && <i style={{position:'absolute',top:10,left:0,fontSize:30}}class="fas fa-pencil-alt" onClick={()=>this.setState({picEdit:true})}></i>}
                     </div>
                 }
                 
