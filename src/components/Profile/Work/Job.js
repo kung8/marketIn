@@ -9,14 +9,14 @@ class Job extends Component {
         super(props);
         this.state={
             isEditing:false,
-            work:this.props.work,
+            isEditOpened:false,
             empName:'',
             empLoc:'',
             empLogo:'',
             hireDate:'',
             endDate:'',
             position:'',
-            isEditOpened:false
+            work:this.props.work,
         }
     }
 
@@ -126,7 +126,7 @@ class Job extends Component {
                             <button className="large-section-delete-button" onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
                         </div>
                     }
-                    
+
                 </div>
             </div>
 
