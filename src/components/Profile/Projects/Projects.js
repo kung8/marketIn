@@ -49,7 +49,7 @@ class Projects extends Component {
         editAddIsClicked(){
             this.setState({
                 addIsClicked:true,
-                inputBox1:<input className="add-input-box" onChange={(e)=>{this.handleInput('project',e.target.value)}}/>,
+                inputBox1:<input placeholder="Project" className="add-input-box" onChange={(e)=>{this.handleInput('project',e.target.value)}}/>,
                 addDivIsOpened:true
             })
         }

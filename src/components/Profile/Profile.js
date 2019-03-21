@@ -27,7 +27,6 @@ class Profile extends Component {
             inputBox2: '',
             inputBox3: '',
             inputBox4: '',
-            count: 0,
             isLoaded: false,
             isUploading:false, //this is for the picture
             picLoaded:false,

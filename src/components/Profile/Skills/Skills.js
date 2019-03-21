@@ -50,7 +50,7 @@ class Skills extends Component {
     editAddIsClicked(){
         this.setState({
             addIsClicked:true,
-            inputBox1:<input className="add-input-box" onChange={(e)=>{this.handleInput('skill',e.target.value)}}/>,
+            inputBox1:<input placeholder="Skill"  className="add-input-box" onChange={(e)=>{this.handleInput('skill',e.target.value)}}/>,
             addDivIsOpened:true
         })
     }
