@@ -13,13 +13,13 @@ class Service extends Component {
         super(props);
         this.state = {
             isEditing:false,
+            isEditOpened:false,
+            userId:'',
             pic:'',
             image:'',
             service:'',
-            userId:'',
             price:this.props.price,
             services:this.props.services,
-            isEditOpened:false,
             isLoaded:false,
             picLoaded:false,
             picEdit:false,

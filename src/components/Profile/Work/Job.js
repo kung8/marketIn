@@ -3,6 +3,9 @@ import axios from 'axios';
 import {updateWork} from '../../../ducks/userActions';
 import { connect  } from "react-redux";
 import { withRouter } from 'react-router-dom';
+import Dropzone from 'react-dropzone';
+import { GridLoader } from 'react-spinners';
+import { v4 as randomString } from 'uuid';
 
 class Job extends Component {
     constructor(props){ 
@@ -17,6 +20,9 @@ class Job extends Component {
             endDate:'',
             position:'',
             work:this.props.work,
+            isLoaded:false, 
+            picLoaded:false,
+            picEdit:false,
         }
     }
 

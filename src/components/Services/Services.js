@@ -6,7 +6,7 @@ import axios from 'axios';
 import { v4 as randomString } from 'uuid';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
-import { DirectConnect, IoT1ClickDevicesService } from 'aws-sdk';
+// import { DirectConnect, IoT1ClickDevicesService } from 'aws-sdk';
 import Service from './Service';
 import LoadingWrapper from '../Loader/LoadingWrapper';
 
@@ -14,23 +14,22 @@ class Services extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        isUploading: false,
-        // url: 'http://via.placeholder.com/200x200',
-        picture_name:'',
-        picture_description:'',
-        image:'',
-        service:'',
-        userId:'',
-        price:'',
-        services:this.props.services,
-        isAdded:false,
-        inputBox1:'',
-        inputBox2:'',
-        inputBox3:'',
-        isAddOpened:false,
-        img:'',
-        isLoaded:false,
-        picLoaded:false
+            isUploading: false,
+            picture_name:'',
+            picture_description:'',
+            image:'',
+            service:'',
+            userId:'',
+            price:'',
+            services:this.props.services,
+            isAdded:false,
+            inputBox1:'',
+            inputBox2:'',
+            inputBox3:'',
+            isAddOpened:false,
+            img:'',
+            isLoaded:false,
+            picLoaded:false
         };
     }
 
@@ -97,7 +96,7 @@ class Services extends Component {
               let imgUrl = response.config.url;
               imgUrl = imgUrl.substring(0,imgUrl.indexOf('?'))
             //   console.log(77777,response,response.config.url,imgUrl)
-            this.setState({ isUploading: false, picLoaded:true,img:<img style={{width:200,height:200}} src={`${imgUrl}`} alt="uploaded image"/>,image:imgUrl});
+            this.setState({ isUploading: false, picLoaded:true,image:imgUrl});
             // console.log(888,this.state.img,this.state.url)
 
             // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
@@ -125,14 +124,38 @@ class Services extends Component {
     }
 
     toggleAdd(){
-        this.setState({
-            isAdded:true,
-            isAddOpened:true,
-            inputBox1:<input className="add-service-input-box" placeholder="Service" onChange={(e)=>{this.handleInput('service',e.target.value)}}/>,
-            inputBox2:<input className="add-service-input-box" placeholder="Price" onChange={(e)=>{this.handleInput('price',e.target.value)}}/>,
-            // inputBox3:<input className="add-service-input-box" placeholder="Image" onChange={(e)=>{this.handleInput('image',e.target.value)}}/>,
-            img:<img src={this.state.url} alt="" width="200px"/>
-        })
+        return(
+            <div className="add-box-container">
+                {this.state.isAddOpened &&
+                    <Dropzone
+                        onDropAccepted={this.getSignedRequest}
+                        style={{
+                            position: 'relative',
+                            width: 170,
+                            height: 190,
+                            borderWidth: 7,
+                            marginTop: 10,
+                            marginBottom:10,
+                            borderColor: 'rgb(102, 102, 102)',
+                            borderStyle: 'dashed',
+                            borderRadius: 5,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            fontSize: 28,
+                        }}
+                        accept="image/*"
+                        multiple={false}
+                        >
+                        {this.state.picLoaded?<div><img style={{border:'solid black', width:200,height:200,marginTop:5}} src={this.state.image} alt="uploaded image"/></div>:<div>{this.state.isUploading ? <GridLoader /> : <p style={{textAlign:'center'}}>Drop File or Click Here</p>}</div>}
+                        </Dropzone>
+                        
+                    }
+                    <input className="add-service-input-box" placeholder="Service" onChange={(e)=>{this.handleInput('service',e.target.value)}}/>
+                    <input className="add-service-input-box" placeholder="Price" onChange={(e)=>{this.handleInput('price',e.target.value)}}/>
+            </div>
+        )
+        // <img src={this.state.image} alt="" width="200px"/>
     }
 
     saveAdd = async ()=>{
@@ -208,7 +231,7 @@ class Services extends Component {
 
     render() {
         // console.log(this.props.services,this.state.services,this.props)
-        const { url, isUploading,picLoaded,isAdded } = this.state;
+        const { isUploading,picLoaded,isAdded } = this.state;
         const {services} = this.state;
         const servArray = services.map(serv =>{
             return (
@@ -217,15 +240,11 @@ class Services extends Component {
                 serv={serv}
                 delete={this.delete}
                 edit={this.edit}
-                // getSignedRequest={this.getSignedRequest}
-                // uploadFile={this.uploadFile}
-                // handleEditToggle={this.handleEditToggle}
                 />
             )
                     
         })
         return (
-
             //if add is clicked it needs to open the 
           <div className="entire-services-section">
             <div className="services-container">
@@ -236,42 +255,15 @@ class Services extends Component {
                 <div className="service-section-container">
                     {servArray}
                 </div>
-                {this.state.isAddOpened?
-                (<div className="add-box-container">
-                    
-                    <Dropzone
-                    onDropAccepted={this.getSignedRequest}
-                    style={{
-                        position: 'relative',
-                        width: 200,
-                        height: 200,
-                        borderWidth: 7,
-                        marginTop: 10,
-                        marginBottom:10,
-                        borderColor: 'rgb(102, 102, 102)',
-                        borderStyle: 'dashed',
-                        borderRadius: 5,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        fontSize: 28,
-                    }}
-                    accept="image/*"
-                    multiple={false}
-                    >
-                    {picLoaded?<div>{this.state.img}</div>:<div>{isUploading ? <GridLoader /> : <p style={{textAlign:'center'}}>Drop File or Click Here</p>}</div>}
-                    </Dropzone>
-                    {this.state.inputBox1}
-                    {this.state.inputBox2}
-                    {this.state.inputBox3}
-                    <br/>
-                </div>):null
+                
+                {this.state.isAdded&&
+                    this.toggleAdd()
                 }
                 {this.props.id == this.props.match.params.userId?
                 (isAdded?(
                     <button className="add-services-button" onClick={()=>this.saveAdd()}>Save</button>)
                     :
-                    (<button className="add-services-button" onClick={()=>this.toggleAdd()}>Add</button>)):null}
+                    (<button className="add-services-button" onClick={()=>this.setState({isAddOpened:true,isAdded:true})}>Add</button>)):null}
                     </LoadingWrapper>
             </div>            
         

@@ -3,6 +3,9 @@ import axios from 'axios';
 import {updateEducation} from '../../../ducks/userActions'
 import { connect  } from "react-redux";
 import { withRouter } from 'react-router-dom';
+import Dropzone from 'react-dropzone';
+import { GridLoader } from 'react-spinners';
+import { v4 as randomString } from 'uuid';
 
 class School extends Component {
     constructor(props){ 
@@ -17,6 +20,9 @@ class School extends Component {
             gradDate:'',
             schLogo:'',
             education:this.props.education,
+            isLoaded:false, 
+            picLoaded:false,
+            picEdit:false,
         }
     }
     
@@ -51,10 +57,6 @@ class School extends Component {
                 <input value={this.state.schLogo} className="edit-input-box" placeholder="School Logo" onChange={(e)=>this.handleInput('schLogo',e.target.value)}/>
             </div>
         )
-        this.setState({
-            edit:true,
-            isEditOpened:true
-        })
     }
 
     async edit(sch){
