@@ -45,11 +45,9 @@ class Languages extends Component {
     }
 
     editAddIsClicked(){
-        this.setState({
-            addIsClicked:true,
-            inputBox1:<input placeholder="Language" className="add-input-box" onChange={(e)=>{this.handleInput('language',e.target.value)}}/>,
-            addDivIsOpened:true
-        })
+        return(
+            <input placeholder="Language" className="add-input-box" onChange={(e)=>{this.handleInput('language',e.target.value)}}/>
+        )
     }
 
     addToLang=async()=>{
@@ -111,13 +109,22 @@ class Languages extends Component {
                         <p>{langProfile}</p>
                         {this.state.addDivIsOpened?
                         (<div className="add-small-input-box-container">
-                            {this.state.inputBox1}
+                            {this.state.addIsClicked && 
+                                this.editAddIsClicked()
+                            }
                         </div>):(this.state.inputBox1)
                         }
                     </div>
-                    {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                        {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>this.addToLang()}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
-                    </div>):null}
+                    
+                    {this.props.match.params.userId==this.props.id && 
+                        <div className="add-button-container">
+                            {this.state.addIsClicked?
+                                <button className="add-save-edit-button" onClick={()=>this.addToLang()}>Save</button>
+                                :
+                                <button className="add-save-edit-button" onClick={()=>this.setState({addDivIsOpened:true,addIsClicked:true})}>Add</button>
+                            }
+                        </div>
+                    }
                 </LoadingWrapper>
             </div>
         )
