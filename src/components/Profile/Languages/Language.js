@@ -8,10 +8,10 @@ class Language extends Component {
     constructor(props){ 
         super(props);
         this.state={
-            edit:false,
-            editBox:'',
+            isEditing:false,
+            isEditOpened:false,
+            language:'',
             languages:this.props.languages,
-            language:''
         }
     }
 
@@ -35,12 +35,15 @@ class Language extends Component {
             [prop]:value
         })
     }
-
+    
     handleEditToggle=()=>{
-        this.setState({
-            edit:true,
-            editBox:<input className="edit-input-box" onChange={(e)=>this.handleInput('language',e.target.value)}/>
-        })
+        return(
+            <input value={this.state.language} className="edit-input-box" onChange={(e)=>this.handleInput('language',e.target.value)}/>
+        )
+        // this.setState({
+        //     edit:true,
+        //     editBox:<input className="edit-input-box" onChange={(e)=>this.handleInput('language',e.target.value)}/>
+        // })
     }
 
     async edit(lang){
@@ -54,16 +57,16 @@ class Language extends Component {
                 if(this._isMount){
                     this.props.updateLang(langProfile.data)
                     this.setState({
-                        edit:false,
-                        editBox:'',
+                        isEditing:false,
+                        isEditOpened:false,
                         language:'',
                         languages:this.props.languages
                     }) 
                 }
             }   else {
                     this.setState({
-                        edit:false,
-                        editBox:'',
+                        isEditing:false,
+                        isEditOpened:false,
                         language:'',
                         languages:this.props.languages
                     })
@@ -77,14 +80,23 @@ class Language extends Component {
         const {lang} = this.props;
         return (
             <div className="small-experience-box">
-                <div>
-                    <p>{lang.language}</p>
-                </div>
+                {this.state.isEditOpened?
+                    <div>
+                        {this.state.isEditing && 
+                        this.handleEditToggle()
+                        }
+                    </div>
+                    :
+                    <div>
+                        <p>{lang.language}</p>
+                    </div>
+                }
+
                 {this.props.match.params.userId==this.props.id?(
                 <div className="input-edit-delete-container">
                     {this.state.editBox}
                     <div>
-                        {this.state.edit?(<button className="add-save-edit-button" onClick={()=>this.edit(lang)}>Save</button>):<button className="add-save-edit-button" onClick={()=>{this.handleEditToggle(lang)}}>Edit</button>}
+                        {this.state.isEditing?(<button className="add-save-edit-button" onClick={()=>this.edit(lang)}>Save</button>):<button className="add-save-edit-button" onClick={()=>this.setState({language:lang.language,isEditing:true,isEditOpened:true})}>Edit</button>}
                         <button className="small-section-delete-button" onClick={()=>{this.deleteLangProfile(lang)}}>Delete</button>
                     </div>
                 </div>):null}
