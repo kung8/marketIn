@@ -4,6 +4,7 @@ import {updateViewedUser,updatePhone,updateLinkedIn} from '../../ducks/userActio
 import axios from 'axios';
 import LoadingWrapper from '../Loader/LoadingWrapper';
 import '../../index.css'
+import {Link} from 'react-router-dom';
 
 class Contact extends Component {
     constructor(props){
@@ -226,11 +227,11 @@ class Contact extends Component {
                     }
                     
 
-                    {/* <div className="social-media-holder">
+                    <div className="social-media-holder">
                         <div className="social-media-logo-and-link-container">
-                            <p>Chat: <a href='/'>Set up Socket.io?</a></p>
+                            <Link to='/chat'><p>Chat: <a href='/'>Set up Socket.io?</a></p></Link>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
                 </LoadingWrapper>
             </div>
