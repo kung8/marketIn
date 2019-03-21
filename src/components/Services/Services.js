@@ -93,13 +93,7 @@ class Services extends Component {
         axios
           .put(signedRequest, file, options)
           .then(response => {
-              let imgUrl = response.config.url;
-              imgUrl = imgUrl.substring(0,imgUrl.indexOf('?'))
-            //   console.log(77777,response,response.config.url,imgUrl)
-            this.setState({ isUploading: false, picLoaded:true,image:imgUrl});
-            // console.log(888,this.state.img,this.state.url)
-
-            // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
+            this.setState({ isUploading: false, picLoaded:true,image:url});
           })
           .catch(err => {
             this.setState({
@@ -148,14 +142,12 @@ class Services extends Component {
                         multiple={false}
                         >
                         {this.state.picLoaded?<div><img style={{border:'solid black', width:200,height:200,marginTop:5}} src={this.state.image} alt="uploaded image"/></div>:<div>{this.state.isUploading ? <GridLoader /> : <p style={{textAlign:'center'}}>Drop File or Click Here</p>}</div>}
-                        </Dropzone>
-                        
-                    }
-                    <input className="add-service-input-box" placeholder="Service" onChange={(e)=>{this.handleInput('service',e.target.value)}}/>
-                    <input className="add-service-input-box" placeholder="Price" onChange={(e)=>{this.handleInput('price',e.target.value)}}/>
+                    </Dropzone>
+                }
+                <input className="add-service-input-box" placeholder="Service" onChange={(e)=>{this.handleInput('service',e.target.value)}}/>
+                <input className="add-service-input-box" placeholder="Price" onChange={(e)=>{this.handleInput('price',e.target.value)}}/>
             </div>
         )
-        // <img src={this.state.image} alt="" width="200px"/>
     }
 
     saveAdd = async ()=>{
@@ -178,7 +170,8 @@ class Services extends Component {
                 price:'',
                 image:'',
                 service:'',
-                img:''
+                img:'',
+                picLoaded:false
             })
         } else {
             this.setState({
@@ -190,7 +183,8 @@ class Services extends Component {
                 image:'',
                 service:'',
                 price:'',
-                img:''
+                img:'',
+                picLoaded:false
             })
         }
     }
