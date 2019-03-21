@@ -8,13 +8,7 @@ class Job extends Component {
     constructor(props){ 
         super(props);
         this.state={
-            edit:false,
-            editBox1:'',
-            editBox2:'',
-            editBox3:'',
-            editBox4:'',
-            editBox5:'',
-            editBox6:'',
+            isEditing:false,
             work:this.props.work,
             empName:'',
             empLoc:'',
@@ -22,7 +16,7 @@ class Job extends Component {
             hireDate:'',
             endDate:'',
             position:'',
-            addDivIsOpened:false
+            isEditOpened:false
         }
     }
 
@@ -46,16 +40,16 @@ class Job extends Component {
     }
 
     handleEditToggle=()=>{
-        this.setState({
-            edit:true,
-            editBox1:<input className="edit-input-box" placeholder="Employer" onChange={(e)=>this.handleInput('empName',e.target.value)}/>,
-            editBox2:<input className="edit-input-box" placeholder="Position" onChange={(e)=>this.handleInput('position',e.target.value)}/>,
-            editBox3:<input className="edit-input-box" placeholder="Location" onChange={(e)=>this.handleInput('empLoc',e.target.value)}/>,
-            editBox4:<input className="edit-input-box" placeholder="Hire Date" onChange={(e)=>this.handleInput('hireDate',e.target.value)}/>,
-            editBox5:<input className="edit-input-box" placeholder="End Date" onChange={(e)=>this.handleInput('endDate',e.target.value)}/>,
-            editBox6:<input className="edit-input-box" placeholder="Emp Logo" onChange={(e)=>this.handleInput('empLogo',e.target.value)}/>,
-            addDivIsOpened:true
-        })
+        return(
+            <div>
+                <input value={this.state.empName} className="edit-input-box" placeholder="Employer" onChange={(e)=>this.handleInput('empName',e.target.value)}/>
+                <input value={this.state.position} className="edit-input-box" placeholder="Position" onChange={(e)=>this.handleInput('position',e.target.value)}/>
+                <input value={this.state.empLoc} className="edit-input-box" placeholder="Location" onChange={(e)=>this.handleInput('empLoc',e.target.value)}/>
+                <input value={this.state.hireDate} className="edit-input-box" placeholder="Hire Date" onChange={(e)=>this.handleInput('hireDate',e.target.value)}/>
+                <input value={this.state.endDate} className="edit-input-box" placeholder="End Date" onChange={(e)=>this.handleInput('endDate',e.target.value)}/>
+                <input value={this.state.empLogo} className="edit-input-box" placeholder="Emp Logo" onChange={(e)=>this.handleInput('empLogo',e.target.value)}/>
+            </div>
+        )
     }
 
     async edit(job){
@@ -69,32 +63,26 @@ class Job extends Component {
             this.props.updateWork(workProfile.data)
             if(this._isMount){
                 this.setState({
-                    edit:false,
-                    editBox1:'',
-                    editBox2:'',
-                    editBox3:'',
-                    editBox4:'',
-                    editBox5:'',
-                    editBox6:'',
+                    isEditing:false,
+                    isEditOpened:false, 
                     empName:'',
                     empLoc:'',
                     empLogo:'',
                     hireDate:'',
                     endDate:'',
                     position:'',
-                    addDivIsOpened:false 
                 }) 
             }
         }   else {
                 this.setState({
-                    edit:false,
-                    editBox1:'',
-                    editBox2:'',
-                    editBox3:'',
-                    editBox4:'',
-                    editBox5:'',
-                    editBox6:'',
-                    addDivIsOpened:false
+                    isEditing:false,
+                    isEditOpened:false,
+                    empName:job.empName,
+                    empLoc:job.empLoc,
+                    empLogo:job.empLogo,
+                    hireDate:job.hireDate,
+                    endDate:job.endDate,
+                    position:job.position,
                 })
             }
     }
@@ -106,42 +94,39 @@ class Job extends Component {
         return (
             <div>
                 <div className="large-experience-box-top">
-                    <div className="school-work-logo-container">
-                        <img className="school-work-logo" src={job.emp_logo} alt="company logo"/>
-                    </div>
-                    <div className="large-experience-box">
-                        <p>{job.emp_name}</p>
-                        <p>{job.position}</p>
-                        <p>{job.emp_loc}</p>
-                        <p>{job.hire_date}</p>
-                        <p>{job.end_date}</p>
-                    </div>
-                    <div>
-                    {this.state.addDivIsOpened?
-                        (<div 
-                            className="add-edit-box-container">
-                            {this.state.editBox1}
-                            {this.state.editBox2}
-                            {this.state.editBox3}
-                            {this.state.editBox4}
-                            {this.state.editBox5}
-                            {this.state.editBox6}
+                    {this.state.isEditOpened?
+                        <div>
+                            {this.state.isEditing &&
+                                this.handleEditToggle()    
+                            }
                         </div>
-                            ):(
-                        <div>{this.state.editBox1}
-                            {this.state.editBox2}
-                            {this.state.editBox3}
-                            {this.state.editBox4}
-                            {this.state.editBox5}
-                            {this.state.editBox6}
+                        :
+                        <div>
+                            <div className="school-work-logo-container">
+                                <img className="school-work-logo" src={job.emp_logo} alt="company logo"/>
+                            </div>
+                            <div className="large-experience-box">
+                                <p>{job.emp_name}</p>
+                                <p>{job.position}</p>
+                                <p>{job.emp_loc}</p>
+                                <p>{job.hire_date}</p>
+                                <p>{job.end_date}</p>
+                            </div>
                         </div>
-                    )}
-                </div>
-                    {this.props.match.params.userId==this.props.id?
-                    (<div className="edit-delete-button-container">
-                        {this.state.edit?(<button className="large-section-add-save-edit-button" onClick={()=>this.edit(job)}>Save</button>):<button className="large-section-add-save-edit-button" onClick={()=>{this.handleEditToggle(job)}}>Edit</button>}                    
-                        <button className="large-section-delete-button" onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
-                    </div>):null}
+                    }
+
+                    {this.props.match.params.userId==this.props.id &&
+                        <div className="edit-delete-button-container">
+                            {this.state.isEditing?
+                                <button className="large-section-add-save-edit-button" onClick={()=>this.edit(job)}>Save</button>
+                                :
+                                <button className="large-section-add-save-edit-button" onClick={()=>this.setState({isEditOpened:true,isEditing:true,empLoc:job.emp_loc,empLogo:job.emp_logo,empName:job.emp_name,position:job.position,hireDate:job.hire_date,endDate:job.end_date})}>Edit</button>
+                            }    
+
+                            <button className="large-section-delete-button" onClick={()=>{this.deleteWorkProfile(job)}}>Delete</button>
+                        </div>
+                    }
+                    
                 </div>
             </div>
 
