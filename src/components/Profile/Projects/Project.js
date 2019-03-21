@@ -8,10 +8,10 @@ class Project extends Component {
     constructor(props){ 
         super(props);
         this.state={
-            edit:false,
-            editBox:'',
-            projects:this.props.projects,
-            project:''
+            isEditing:false,
+            isEditOpened:false,
+            project:'',
+            projects:this.props.projects
         }
     }
     componentDidMount(){
@@ -35,10 +35,9 @@ class Project extends Component {
     }
 
     handleEditToggle=()=>{
-        this.setState({
-            edit:true,
-            editBox:<input className="edit-input-box" onChange={(e)=>this.handleInput('project',e.target.value)}/>
-        })
+        return(
+            <input value={this.state.project} className="edit-input-box" onChange={(e)=>this.handleInput('project',e.target.value)}/>
+        )        
     }
 
     async edit(proj){
@@ -53,16 +52,16 @@ class Project extends Component {
                 if(this._isMount){
                     this.props.updateProject(projProfile.data)
                     this.setState({
-                        edit:false,
-                        editBox:'',
+                        isEditing:false,
+                        isEditOpened:false,
                         project:'',
                         projects:this.props.projects 
                     }) 
                 }
             }   else {
                     this.setState({
-                        edit:false,
-                        editBox:'',
+                        isEditing:false,
+                        isEditOpened:false,
                         project:'',
                         projects:this.props.projects
                     })
@@ -77,13 +76,23 @@ class Project extends Component {
         // console.log(this.props)
         return (
             <div className="small-experience-box">
+                {this.state.isEditOpened?
+                <div>
+                    {this.state.isEditing && 
+                        this.handleEditToggle()
+                    }
+                </div>:
+
                 <div>
                     <p>{proj.project}</p>
-                </div>   
+                </div>
+                }
+
+
                 {this.props.match.params.userId==this.props.id?(<div className="input-edit-delete-container">
                     {this.state.editBox}
                     <div>
-                        {this.state.edit?(<button className="add-save-edit-button" onClick={()=>this.edit(proj)}>Save</button>):(<button className="add-save-edit-button" onClick={()=>{this.handleEditToggle(proj)}}>Edit</button>)}
+                        {this.state.isEditing?(<button className="add-save-edit-button" onClick={()=>this.edit(proj)}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.setState({isEditOpened:true,isEditing:true,project:proj.project})}>Edit</button>)}
                         
                         <button className="small-section-delete-button" onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
                     </div>

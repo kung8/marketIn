@@ -13,9 +13,6 @@ class Service extends Component {
         super(props);
         this.state = {
             isEditing:false,
-            editBox1:'',
-            editBox2:'',
-            editBox3:'',
             pic:'',
             image:'',
             service:'',
@@ -26,7 +23,6 @@ class Service extends Component {
             isLoaded:false,
             picLoaded:false,
             picEdit:false,
-            isUploading:false
         }
     }
 
@@ -42,18 +38,6 @@ class Service extends Component {
     }
 
     handleEditToggle(serv){
-        // console.log(444,this.state.services,this.props.services)
-
-        // this.setState({
-        //     isEditing:true,
-        //     isEditOpened:true,
-        //     editBox1:<input placeholder="Service" onChange={(e)=>this.handleInput('service',e.target.value)}/>,
-        //     editBox2:<input placeholder="Price" onChange={(e)=>this.handleInput('price',e.target.value)}/>,
-        //     image:serv.image
-            // editBox3:<input placeholder="Image" onChange={(e)=>this.handleInput('image',e.target.value)}/>
-
-        // })
-        // console.log(999,this.state)
         return(
             <div className="edit-service-input-box-container">
                 {this.state.picEdit?
@@ -107,9 +91,6 @@ class Service extends Component {
                 this.setState({
                     isEditing:false,
                     isEditOpened:false,
-                    // editBox1:'',
-                    // editBox2:'',
-                    // editBox3:'',
                     service:'',
                     image:'',
                     price:'',
@@ -118,7 +99,7 @@ class Service extends Component {
     }
 
     getSignedRequest = async ([file]) => {
-        this.setState({ isUploading: true });
+        this.setState({isLoaded:true });
         // We are creating a file name that consists of a random string, and the name of the file that was just uploaded with the spaces removed and hyphens inserted instead. This is done using the .replace function with a specific regular expression. This will ensure that each file uploaded has a unique name which will prevent files from overwriting other files due to duplicate names.
         const fileName = `${randomString()}-${file.name.replace(/\s/g, '-')}`;
     
@@ -149,14 +130,14 @@ class Service extends Component {
               let imgUrl = response.config.url;
               imgUrl = imgUrl.substring(0,imgUrl.indexOf('?'))
             //   console.log(77777,response,response.config.url,imgUrl)
-            this.setState({ isUploading: false, url,picLoaded:true,image:imgUrl,picLoaded:false});
+            this.setState({picLoaded:true,image:imgUrl,picLoaded:false,isLoaded:false});
             // console.log(888,this.state.img,this.state.url)
 
             // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
           })
           .catch(err => {
             this.setState({
-              isUploading: false,
+              isloaded:false
             });
             if (err.response.status === 403) {
               alert(
@@ -173,39 +154,37 @@ class Service extends Component {
 
     render() {
         const {serv} = this.props;
-        const {isLoaded,picLoaded,isEditOpened} = this.state;
         return (
-        <div className="service-section-box">
-                {this.state.isEditOpened?
-                    <div className="edit-service-input-box-container">
-                        <div>
-                            {this.state.isEditing && 
-                                this.handleEditToggle()
-                            }
+            <div className="service-section-box">
+                    {this.state.isEditOpened?
+                        <div className="edit-service-input-box-container">
+                            <div>
+                                {this.state.isEditing && 
+                                    this.handleEditToggle()
+                                }
+                            </div>
                         </div>
-                    </div>
-                    :
-                    <div className="service-mapped-items">
-                        <img src={serv.image} alt="service"/>
-                        <p>{serv.service}</p>
-                        <p>{serv.price}</p>
-                    </div>
-                }
-
-               
-                
-                {this.props.id==this.props.match.params.userId?(
-                    <div className="edit-delete-service-buttons-container">
-                        {this.state.isEditing?
-                            (<button onClick={()=>this.edit(serv)} className="edit-service-button">Save</button>)
-                                :(<button onClick={()=>{this.setState({isEditing:true,isEditOpened:true,service:serv.service,price:serv.price,image:serv.image,picLoaded:true})}} className="edit-service-button">Edit</button>)}
-                        <button className="delete-service-button" onClick={()=>{this.props.delete(serv)}}>Delete</button>  
-                    </div>):
-                    (<div className='purchase-chat-buttons-container'>
-                        <button className="purchase-service-button">Purchase</button>
-                        <Link to='/chat'><button className="add-save-edit-button">Chat</button></Link>
-                    </div>)}
-        </div>)
+                        :
+                        <div className="service-mapped-items">
+                            <img src={serv.image} alt="service"/>
+                            <p>{serv.service}</p>
+                            <p>{serv.price}</p>
+                        </div>
+                    }    
+                    
+                    {this.props.id==this.props.match.params.userId?(
+                        <div className="edit-delete-service-buttons-container">
+                            {this.state.isEditing?
+                                (<button onClick={()=>this.edit(serv)} className="edit-service-button">Save</button>)
+                                    :(<button onClick={()=>this.setState({isEditing:true,isEditOpened:true,service:serv.service,price:serv.price,image:serv.image,picLoaded:true})} className="edit-service-button">Edit</button>)}
+                            <button className="delete-service-button" onClick={()=>{this.props.delete(serv)}}>Delete</button>  
+                        </div>):
+                        (<div className='purchase-chat-buttons-container'>
+                            <button className="purchase-service-button">Purchase</button>
+                            <Link to='/chat'><button className="add-save-edit-button">Chat</button></Link>
+                        </div>)}
+            </div>
+        )
     }
 }
 

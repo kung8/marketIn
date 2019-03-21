@@ -15,7 +15,7 @@ class Services extends Component {
         super(props);
         this.state = {
         isUploading: false,
-        url: 'http://via.placeholder.com/200x200',
+        // url: 'http://via.placeholder.com/200x200',
         picture_name:'',
         picture_description:'',
         image:'',
@@ -97,7 +97,7 @@ class Services extends Component {
               let imgUrl = response.config.url;
               imgUrl = imgUrl.substring(0,imgUrl.indexOf('?'))
             //   console.log(77777,response,response.config.url,imgUrl)
-            this.setState({ isUploading: false, url,picLoaded:true,img:<img style={{width:200,height:200}} src={`${imgUrl}`} alt="uploaded image"/>,image:imgUrl});
+            this.setState({ isUploading: false, picLoaded:true,img:<img style={{width:200,height:200}} src={`${imgUrl}`} alt="uploaded image"/>,image:imgUrl});
             // console.log(888,this.state.img,this.state.url)
 
             // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
