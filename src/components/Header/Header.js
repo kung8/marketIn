@@ -44,7 +44,7 @@ class Header extends Component {
         return(
             <div className="header-container">
                 <div className="header">
-                    <button className="marketin-logo" onClick={()=>{this.toggleNavBar()}}>MI</button>
+                    <button style={{background:'unset'}} className="marketin-logo" onClick={()=>{this.toggleNavBar()}}>MI</button>
                 </div>
                 <h1 className="marketin-name">MarketIn</h1>
                     {this.props.id?

@@ -92,12 +92,12 @@ class Chat extends Component {
             )
         })
 
-        let first = this.props.userFirstName.toUpperCase()
+        // let first = this.props.userFirstName.toUpperCase()
         //figure out how to only display the person that you are chatting with. 
         return (
             <div style={{marginTop:85}}>
                 <div style={{display:'flex',justifyContent:'center',background:'navy'}}>
-                    <h1 style={{textAlign:'center',color:'white',fontSize:35,height:40,marginTop:0}}> {first} CHAT</h1>
+                    <p style={{textAlign:'center',color:'white',fontSize:35,height:40,marginTop:0}}> Chat with {this.props.userFirstName}</p>
                 </div>
                 <div style={{display:'flex',flexDirection:'row',background:'silver',width:320,minHeight:300,justifyContent:'space-between'}}>
                     {/* {chat} */}

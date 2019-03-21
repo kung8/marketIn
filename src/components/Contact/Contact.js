@@ -229,7 +229,8 @@ class Contact extends Component {
 
                     <div className="social-media-holder">
                         <div className="social-media-logo-and-link-container">
-                            <Link to='/chat'><p>Chat: <a href='/'>Set up Socket.io?</a></p></Link>
+                            <i class="far fa-comment"></i>
+                            <Link to='/chat'><a href='/'><p>Chat with {this.props.userFirstName}</p></a></Link>
                         </div>
                     </div>
                 </div>
@@ -248,7 +249,8 @@ function mapStateToProps(reduxState){
         viewedUserId:reduxState.viewedUserId,
         id:reduxState.id,
         linkedIn:reduxState.linkedIn,
-        phone:reduxState.phone
+        phone:reduxState.phone,
+        userFirstName:reduxState.userFirstName
     }
 }
 

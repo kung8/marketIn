@@ -68,6 +68,22 @@ editAddIsClicked (){
         inputBox6:<input className="edit-input-box-last" placeholder="School Logo" onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>,
         addDivIsOpened:true
     })
+//     return(
+//         <div>
+// <input className="edit-input-box" placeholder="School" onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>,
+// <input className="edit-input-box" placeholder="Major" onChange={(e)=>{this.handleInput('major',e.target.value)}}/>,
+// <input className="edit-input-box" placeholder="Ed Level" onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>,
+// <input className="edit-input-box" placeholder="Location" onChange={(e)=>{this.handleInput('schLoc',e.target.value)}}/>,
+// <input className="edit-input-box" placeholder="Grad Date" onChange={(e)=>{this.handleInput('gradDate',e.target.value)}}/>,
+// <input className="edit-input-box-last" placeholder="School Logo" onChange={(e)=>{this.handleInput('schLogo',e.target.value)}}/>,
+
+
+//         </div>
+
+//     )
+
+    
+
 }
 
 addToEd= async()=>{
@@ -152,16 +168,8 @@ addToEd= async()=>{
                     <LoadingWrapper loaded={this.state.isLoaded}>
                         <div className="large-experience-section-box">
                             <p>{edProfile}</p>
-                            {this.state.addDivIsOpened?(
+                            {this.state.addDivIsOpened && (
                                  <div className="add-large-input-box-container">
-                                    {this.state.inputBox1}
-                                    {this.state.inputBox2}
-                                    {this.state.inputBox3}
-                                    {this.state.inputBox4}
-                                    {this.state.inputBox5}
-                                    {this.state.inputBox6}
-                                </div>) : 
-                                (<div>
                                     {this.state.inputBox1}
                                     {this.state.inputBox2}
                                     {this.state.inputBox3}

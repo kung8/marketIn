@@ -125,7 +125,6 @@ class Profile extends Component {
         return (
             <div className="profile-container">
                 <LoadingWrapper loaded={this.state.isLoaded}>
-                    {/* <Search/> */}
                     <div className="profile-basic-info-container">
                         <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic" />
                         <div style={{ width: '100%' }}>

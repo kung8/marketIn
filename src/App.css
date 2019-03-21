@@ -17,7 +17,9 @@
 
 /**************************************Header**************************************/
 .header-container {
-    background:navy;
+    background-color:navy;
+    /* background-image: linear-gradient(to bottom right, navy, #0000bc); */
+    /*do this code for all of the header container background*/
     width:320px;
     height:80px; 
     display: flex;
@@ -36,7 +38,7 @@
     height:42px;
     width: 50px;
     border:navy;
-    background:navy;
+    /* background:navy; */
     color:white;
     font-size:40px;
     font-weight:700;
