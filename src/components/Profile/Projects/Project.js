@@ -89,14 +89,19 @@ class Project extends Component {
                 }
 
 
-                {this.props.match.params.userId==this.props.id?(<div className="input-edit-delete-container">
-                    {this.state.editBox}
-                    <div>
-                        {this.state.isEditing?(<button className="add-save-edit-button" onClick={()=>this.edit(proj)}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.setState({isEditOpened:true,isEditing:true,project:proj.project})}>Edit</button>)}
-                        
-                        <button className="small-section-delete-button" onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
+                {this.props.match.params.userId==this.props.id && 
+                    <div className="input-edit-delete-container">
+                        <div>
+                            {this.state.isEditing?
+                                <button className="add-save-edit-button" onClick={()=>this.edit(proj)}>Save</button>
+                                :
+                                <button className="add-save-edit-button" onClick={()=>this.setState({isEditOpened:true,isEditing:true,project:proj.project})}>Edit</button>
+                            }
+
+                            <button className="small-section-delete-button" onClick={()=>{this.deleteProjProfile(proj)}}>Delete</button>
+                        </div>
                     </div>
-                </div>):null}    
+                }    
             </div>        
         )
     }

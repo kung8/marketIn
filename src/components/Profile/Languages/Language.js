@@ -92,14 +92,19 @@ class Language extends Component {
                     </div>
                 }
 
-                {this.props.match.params.userId==this.props.id?(
-                <div className="input-edit-delete-container">
-                    {this.state.editBox}
-                    <div>
-                        {this.state.isEditing?(<button className="add-save-edit-button" onClick={()=>this.edit(lang)}>Save</button>):<button className="add-save-edit-button" onClick={()=>this.setState({language:lang.language,isEditing:true,isEditOpened:true})}>Edit</button>}
-                        <button className="small-section-delete-button" onClick={()=>{this.deleteLangProfile(lang)}}>Delete</button>
+                {this.props.match.params.userId==this.props.id &&
+                    <div className="input-edit-delete-container">
+                        <div>
+                            {this.state.isEditing?
+                                <button className="add-save-edit-button" onClick={()=>this.edit(lang)}>Save</button>
+                                :
+                                <button className="add-save-edit-button" onClick={()=>this.setState({language:lang.language,isEditing:true,isEditOpened:true})}>Edit</button>
+                            }
+                            
+                            <button className="small-section-delete-button" onClick={()=>{this.deleteLangProfile(lang)}}>Delete</button>
+                        </div>
                     </div>
-                </div>):null}
+                }
             </div>
         )
     }

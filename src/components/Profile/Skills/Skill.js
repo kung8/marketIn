@@ -8,10 +8,10 @@ class Skill extends Component {
     constructor(props){
         super(props);
         this.state={
-            edit:false,
-            editBox:'',
+            isEditing:false,
+            isEditOpened:false,
+            skill:'',
             skills:this.props.skills,
-            skill:''
         }
     }
 
@@ -36,10 +36,10 @@ class Skill extends Component {
     }
 
     handleEditToggle=()=>{
-        this.setState({
-            edit:true,
-            editBox:<input className="edit-input-box" onChange={(e)=>this.handleInput('skill',e.target.value)}/>
-        })
+        return(
+            <input value={this.state.skill} className="edit-input-box" onChange={(e)=>this.handleInput('skill',e.target.value)}/>
+        )
+
     }
 
     
@@ -54,16 +54,16 @@ class Skill extends Component {
             if(this._isMount){
                 this.props.updateSkill(skillsProfile.data)
                 this.setState({
-                    edit:false,
-                    editBox:'',
+                    isEditing:false,
+                    isEditOpened:false,
                     skill:'',
                     skills:this.props.skills
                 })
             }
         } else {
             this.setState({
-                edit:false,
-                editBox:'',
+                isEditing:false,
+                isEditOpened:false,
                 skill:'',
                 skills:this.props.skills
             })
@@ -75,17 +75,31 @@ class Skill extends Component {
         const {skill} = this.props
         return(
         <div className="small-experience-box">
+            {this.state.isEditOpened?
+            <div>
+                {this.state.isEditing && 
+                    this.handleEditToggle()
+                }
+            </div>
+            :
             <div>
                 <p>{skill.skill}</p>
             </div>
+            }
 
-            {this.props.match.params.userId==this.props.id?(<div className="input-edit-delete-container">
-                {this.state.editBox}
-                <div>
-                    {this.state.edit?(<button className="add-save-edit-button" onClick={()=>this.edit(skill)}>Save</button>):<button className="add-save-edit-button" onClick={()=>{this.handleEditToggle(skill)}}>Edit</button>}
-                    <button className="small-section-delete-button" onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
+            {this.props.match.params.userId==this.props.id &&
+                <div className="input-edit-delete-container">
+                    <div>
+                        {this.state.isEditing?
+                            <button className="add-save-edit-button" onClick={()=>this.edit(skill)}>Save</button>
+                            :
+                            <button className="add-save-edit-button" onClick={()=>this.setState({isEditOpened:true,isEditing:true,skill:skill.skill})}>Edit</button>
+                        }
+                        
+                        <button className="small-section-delete-button" onClick={()=>{this.deleteSkillsProfile(skill)}}>Delete</button>
+                    </div>
                 </div>
-            </div>):null}
+            }
         </div>
         )
     }
