@@ -47,11 +47,11 @@ class Projects extends Component {
         }
 
         editAddIsClicked(){
-            this.setState({
-                addIsClicked:true,
-                inputBox1:<input placeholder="Project" className="add-input-box" onChange={(e)=>{this.handleInput('project',e.target.value)}}/>,
-                addDivIsOpened:true
-            })
+            return(
+                <div>
+                    <input placeholder="Project" className="add-input-box" onChange={(e)=>{this.handleInput('project',e.target.value)}}/>
+                </div>
+            )        
         }
     
         addToProj=async()=>{
@@ -115,16 +115,25 @@ class Projects extends Component {
                 <LoadingWrapper loaded={this.state.isLoaded}>
                     <div className="small-experience-section-box">
                         <p>{projProfile}</p>
-                        {this.state.addDivIsOpened?
-                        (<div className="add-small-input-box-container">
-                            {this.state.inputBox1}
-                        </div>):(this.state.inputBox1)
+                        {this.state.addDivIsOpened && 
+                            <div className="add-small-input-box-container">
+                                {this.state.addIsClicked &&
+                                this.editAddIsClicked() 
+                                }
+                            </div>
                         }
                     </div>
 
-                    {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                        {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToProj()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>{this.editAddIsClicked()}}>Add</button>)}
-                    </div>):null}
+
+                    {this.props.match.params.userId==this.props.id && 
+                        <div className="add-button-container">
+                            {this.state.addIsClicked?
+                                <button className="add-save-edit-button" onClick={()=>this.addToProj()}>Save</button>
+                                :
+                                <button className="add-save-edit-button" onClick={()=>this.setState({addIsClicked:true,addDivIsOpened:true})}>Add</button>
+                            }
+                        </div>
+                    }
                 </LoadingWrapper>
             </div>
         )
