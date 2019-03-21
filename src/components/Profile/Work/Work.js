@@ -11,13 +11,7 @@ class Work extends Component {
         super(props);
         this.state={
             addIsClicked: false,
-            inputBox1:'',
-            inputBox2:'',
-            inputBox3:'',
-            inputBox4:'',
-            inputBox5:'',
-            inputBox6:'',
-            work:'',
+            work:this.props.work,
             empName:'',
             empLoc:'',
             empLogo:'',
@@ -57,16 +51,16 @@ class Work extends Component {
     }
 
     editAddIsClicked (){
-        this.setState({
-            addIsClicked:true,
-            inputBox1:<input className="edit-input-box" placeholder="Employer" onChange={(e)=>{this.handleInput('empName',e.target.value)}}/>,
-            inputBox2:<input className="edit-input-box" placeholder="Position" onChange={(e)=>{this.handleInput('position',e.target.value)}}/>,
-            inputBox3:<input className="edit-input-box" placeholder="Location" onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>,
-            inputBox4:<input className="edit-input-box" placeholder="Hire Date" onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}/>,
-            inputBox5:<input className="edit-input-box" placeholder="End Date" onChange={(e)=>{this.handleInput('endDate',e.target.value)}}/>,
-            inputBox6:<input className="edit-input-box-last" placeholder="Emp Logo" onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>,
-            addDivIsOpened:true
-        })
+        return(
+            <div>
+                <input className="edit-input-box" placeholder="Employer" onChange={(e)=>{this.handleInput('empName',e.target.value)}}/>
+                <input className="edit-input-box" placeholder="Position" onChange={(e)=>{this.handleInput('position',e.target.value)}}/>
+                <input className="edit-input-box" placeholder="Location" onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>
+                <input className="edit-input-box" placeholder="Hire Date" onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}/>
+                <input className="edit-input-box" placeholder="End Date" onChange={(e)=>{this.handleInput('endDate',e.target.value)}}/>
+                <input className="edit-input-box-last" placeholder="Emp Logo" onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}/>
+            </div>
+        )
     }
 
     addToWork= async()=>{
@@ -148,29 +142,23 @@ class Work extends Component {
                 <LoadingWrapper loaded={this.state.isLoaded}>
                     <div className="large-experience-section-box">
                         <p>{workProfile}</p> 
-                        {this.state.addDivIsOpened?(
+                        {this.state.addDivIsOpened && 
                             <div className="add-large-input-box-container">
-                                {this.state.inputBox1}
-                                {this.state.inputBox2}
-                                {this.state.inputBox3}
-                                {this.state.inputBox4}
-                                {this.state.inputBox5}
-                                {this.state.inputBox6}
-                            </div>) : 
-                            (<div>
-                                {this.state.inputBox1}
-                                {this.state.inputBox2}
-                                {this.state.inputBox3}
-                                {this.state.inputBox4}
-                                {this.state.inputBox5}
-                                {this.state.inputBox6}
-                            </div>)
+                                {this.state.addIsClicked &&
+                                    this.editAddIsClicked()
+                                }
+                            </div>
                         }
                     </div>
 
-                    {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                        {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToWork()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>this.editAddIsClicked()}>Add</button>)}
-                        </div>):null}
+                    {this.props.match.params.userId==this.props.id && 
+                        <div className="add-button-container">
+                            {this.state.addIsClicked ?
+                                <button className="add-save-edit-button" onClick={()=>{this.addToWork()}}>Save</button>
+                                :
+                                <button className="add-save-edit-button" onClick={()=>this.setState({addDivIsOpened:true,addIsClicked:true})}>Add</button>
+                            }
+                        </div>}
                 </LoadingWrapper>
             </div>
         )
