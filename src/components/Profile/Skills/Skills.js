@@ -48,11 +48,11 @@ class Skills extends Component {
     }
 
     editAddIsClicked(){
-        this.setState({
-            addIsClicked:true,
-            inputBox1:<input placeholder="Skill"  className="add-input-box" onChange={(e)=>{this.handleInput('skill',e.target.value)}}/>,
-            addDivIsOpened:true
-        })
+        return(
+            <div>
+                <input placeholder="Skill"  className="add-input-box" onChange={(e)=>{this.handleInput('skill',e.target.value)}}/>
+            </div>
+        )
     }
 
     addToSkills=async()=>{
@@ -114,14 +114,22 @@ class Skills extends Component {
                         <p>{skillsProfile}</p>
                         {this.state.addDivIsOpened?
                         (<div className="add-small-input-box-container">
-                            {this.state.inputBox1}
+                            {this.state.addIsClicked && 
+                                this.editAddIsClicked()
+                            }
                         </div>):(this.state.inputBox1)
                         }
                     </div>
                 </LoadingWrapper>
-                        {this.props.match.params.userId==this.props.id?(<div className="add-button-container">
-                            {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>{this.addToSkills()}}>Save</button>):(<button className="add-save-edit-button" onClick={()=>{this.editAddIsClicked()}}>Add</button>)}
-                        </div>):null}
+                        {this.props.match.params.userId==this.props.id && 
+                            <div className="add-button-container">
+                                {this.state.addIsClicked ?
+                                    <button className="add-save-edit-button" onClick={()=>this.addToSkills()}>Save</button>
+                                    :
+                                    <button className="add-save-edit-button" onClick={()=>this.setState({addDivIsOpened:true,addIsClicked:true})}>Add</button>
+                                }
+                            </div>
+                        }
             </div>
         )
     }
