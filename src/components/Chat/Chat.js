@@ -73,7 +73,7 @@ class Chat extends Component {
     }
 
     sendMsg=()=>{
-        this.socket.emit('sendMsg',{chat:this.state.chat,message:this.state.message,name:this.props.firstName,date:this.state.date})
+        this.socket.emit('sendMsg',{chat:this.state.chat,message:this.state.message,name:this.props.firstName})
     }
 
     componentWillUnmount(){
@@ -84,6 +84,7 @@ class Chat extends Component {
         const messages = this.state.messages.map(message=>{
             return (
                 <div>
+
                     <p style={{textAlign:'left'}}>{message.name}</p>
                     <p style={{textAlign:'left'}}>{message.date}</p>
                     <p style={{textAlign:'left'}}>{message.message}</p>
