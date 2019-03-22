@@ -1,4 +1,3 @@
-const path = require('path'); // Usually moved to the start of file
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
@@ -196,7 +195,3 @@ app.post('/contact/add/phone/:id',contactCtrl.addPhone);
 app.post('/contact/add/linkedin/:id',contactCtrl.addLinkedIn);
 app.put('/contact/update/phone/:id',contactCtrl.updatePhone);
 app.put('/contact/update/linkedin/:id',contactCtrl.updateLinkedIn);
-
-app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, '../build/index.html'));
-});
