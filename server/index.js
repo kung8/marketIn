@@ -15,7 +15,6 @@ const socket = require('socket.io')
 
 const aws = require('aws-sdk');
 const {CONNECTION_STRING,SESSION_SECRET,SERVER_PORT,S3_BUCKET,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY} = process.env;
-console.log(process.env)
 
 const app = express();
 app.use(express.json());
