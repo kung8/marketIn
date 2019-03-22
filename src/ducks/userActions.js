@@ -2,6 +2,7 @@ import {UPDATE_PHONE, UPDATE_LINKEDIN, UPDATE_SERVICES,UPDATE_VIEWED_USER,UPDATE
 import { link } from 'fs';
 
 export function updateUser ({first_name,last_name,email,image_url,id}){
+    console.log(image_url)
     return {
         type:UPDATE_USER,
         payload:{

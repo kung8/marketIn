@@ -120,9 +120,10 @@ module.exports = {
     editUserProfile:async (req,res)=>{
         const db = req.app.get('db');
         // console.log('hit!')
-        const {id,firstName:first_name,lastName:last_name,email,imageUrl:image_url} = req.body;
+        console.log(req.body)
+        const {id,firstName,lastName:last_name,email,imageUrl} = req.body;
         // console.log(id,first_name,last_name,email,image_url)
-        const userProfile = await db.profiles.editProfiles.edit_user({id,first_name,last_name,email,image_url})
+        const userProfile = await db.profiles.editProfiles.edit_user({id,first_name:firstName,last_name,email,image_url:imageUrl})
         // console.log(userProfile);
         res.status(200).send(userProfile)
     },

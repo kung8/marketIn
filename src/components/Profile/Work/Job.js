@@ -47,7 +47,7 @@ class Job extends Component {
 
     handleEditToggle=()=>{
         return(
-            <div>
+            <div className="add-large-input-box-container">
                 <input value={this.state.empName} className="edit-input-box" placeholder="Employer" onChange={(e)=>this.handleInput('empName',e.target.value)}/>
                 <input value={this.state.position} className="edit-input-box" placeholder="Position" onChange={(e)=>this.handleInput('position',e.target.value)}/>
                 <input value={this.state.empLoc} className="edit-input-box" placeholder="Location" onChange={(e)=>this.handleInput('empLoc',e.target.value)}/>

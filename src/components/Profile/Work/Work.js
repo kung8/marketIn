@@ -52,7 +52,7 @@ class Work extends Component {
 
     editAddIsClicked (){
         return(
-            <div>
+            <div className="add-large-input-box-container">
                 <input className="edit-input-box" placeholder="Employer" onChange={(e)=>{this.handleInput('empName',e.target.value)}}/>
                 <input className="edit-input-box" placeholder="Position" onChange={(e)=>{this.handleInput('position',e.target.value)}}/>
                 <input className="edit-input-box" placeholder="Location" onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}/>
@@ -137,7 +137,7 @@ class Work extends Component {
                     <div className="large-experience-section-box">
                         <p>{workProfile}</p> 
                         {this.state.addDivIsOpened && 
-                            <div className="add-large-input-box-container">
+                            <div>
                                 {this.state.addIsClicked &&
                                     this.editAddIsClicked()
                                 }

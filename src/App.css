@@ -215,6 +215,8 @@
 /************************Logo************************/
 .school-work-logo-container {
     margin-top:5px;
+    display: flex;
+    justify-content: center;
 }
 
 .school-work-logo {
@@ -230,18 +232,20 @@
     display:flex;
     flex-direction: column;
     text-align: center;
+    /* align-items: center; */
 }
 
 /***************Add Functionality***************/
 .add-large-input-box-container {
-    margin:5px 5px 10px;
+    margin:5px;
     background:silver;
     min-height:260px;
     display:flex;
+    flex-direction: column;
     justify-content:space-evenly;
     align-items: center;
     /* flex-direction: column; */
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     width:310px;
 }
 

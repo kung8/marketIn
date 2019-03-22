@@ -48,7 +48,7 @@ class School extends Component {
 
     handleEditToggle=()=>{
         return(
-            <div>
+            <div className="add-large-input-box-container">
                 <input value={this.state.schName} className="edit-input-box" placeholder="School" onChange={(e)=>this.handleInput('schName',e.target.value)}/>
                 <input value={this.state.major} className="edit-input-box" placeholder="Major" onChange={(e)=>this.handleInput('major',e.target.value)}/>
                 <input value={this.state.edLevel} className="edit-input-box" placeholder="Ed Level" onChange={(e)=>this.handleInput('edLevel',e.target.value)}/>

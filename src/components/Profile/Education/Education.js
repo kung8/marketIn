@@ -59,7 +59,7 @@ handleInput(prop,value){
 
 editAddIsClicked (){
     return(
-        <div>
+        <div className="add-large-input-box-container">
             <input className="edit-input-box" placeholder="School" onChange={(e)=>{this.handleInput('schName',e.target.value)}}/>
             <input className="edit-input-box" placeholder="Major" onChange={(e)=>{this.handleInput('major',e.target.value)}}/>
             <input className="edit-input-box" placeholder="Ed Level" onChange={(e)=>{this.handleInput('edLevel',e.target.value)}}/>
@@ -138,7 +138,7 @@ addToEd= async()=>{
                         <div className="large-experience-section-box">
                             <p>{edProfile}</p>
                             {this.state.addDivIsOpened && (
-                                 <div className="add-large-input-box-container">
+                                 <div>
                                     {this.state.addIsClicked && 
                                         this.editAddIsClicked()
                                     }
