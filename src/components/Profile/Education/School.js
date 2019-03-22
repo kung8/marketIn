@@ -58,7 +58,7 @@ class School extends Component {
             </div>
         )
     }
-
+ 
     async edit(sch){
         const {schName,schLoc,major,schLogo,gradDate,edLevel} = this.state;
         if(schName !== '' || schLoc !== '' || major !== '' || schLogo !== '' || gradDate !== '' || edLevel !=='' ){
@@ -121,24 +121,6 @@ class School extends Component {
                         </div>
                     }
                 
-                <div>
-                    {this.state.isEditOpened?
-                    (<div className="add-edit-box-container">
-                        {this.state.editBox1}
-                        {this.state.editBox2}
-                        {this.state.editBox3}
-                        {this.state.editBox4}
-                        {this.state.editBox5}
-                        {this.state.editBox6}
-                    </div>):(<div>{this.state.editBox1}
-                        {this.state.editBox2}
-                        {this.state.editBox3}
-                        {this.state.editBox4}
-                        {this.state.editBox5}
-                        {this.state.editBox6}
-                        </div>)
-                    }
-                    </div>
                     {this.props.match.params.userId==this.props.id &&
                         <div className="edit-delete-button-container">
                             {this.state.isEditing?

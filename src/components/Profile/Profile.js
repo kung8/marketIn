@@ -23,14 +23,11 @@ class Profile extends Component {
             email: this.props.email,
             imageUrl: this.props.imageUrl,
             isEditing: false,
-            inputBox1: '',
-            inputBox2: '',
-            inputBox3: '',
-            inputBox4: '',
             isLoaded: false,
             isUploading:false, //this is for the picture
             picLoaded:false,
             picEdit:false,
+            isEditBoxOpened:false
         }
     }
 
@@ -79,10 +76,39 @@ class Profile extends Component {
     createEditBoxes() {
         return (
             <div>
+                {this.state.picEdit?
+                <Dropzone
+                        onDropAccepted={this.getSignedRequest}
+                        style={{
+                            position: 'relative',
+                            width: 200,
+                            height: 200,
+                            borderWidth: 7,
+                            marginTop: 10,
+                            marginBottom:10,
+                            borderColor: 'rgb(102, 102, 102)',
+                            borderStyle: 'dashed',
+                            borderRadius: 5,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            fontSize: 28,
+                        }}
+                        accept="image/*"
+                        multiple={false}
+                    >
+                        {this.state.picLoaded?<div>{this.state.img}</div>:<div>{this.state.isUploading ? <GridLoader /> : <p style={{textAlign:'center'}}>Drop File or Click Here</p>}</div>}
+                    </Dropzone>
+                    :
+                    <div style={{position:'relative'}}>
+                        <img style={{marginTop:10,height:200,width:180,border:'solid black'}} src={this.state.imageUrl}/>
+                        {!this.state.picEdit && <i style={{position:'absolute',top:13,left:45,fontSize:30}}class="fas fa-pencil-alt" onClick={()=>this.setState({picEdit:true})}></i>}
+                    </div>
+                }
                 <input value={this.state.firstName} className="edit-profile-input-boxes" placeholder="First Name" onChange={(e) => this.handleInput('firstName', e.target.value)} />
                 <input value={this.state.lastName} className="edit-profile-input-boxes" placeholder="Last Name" onChange={(e) => this.handleInput('lastName', e.target.value)} />
                 <input value={this.state.email} className="edit-profile-input-boxes" placeholder="Email" onChange={(e) => this.handleInput('email', e.target.value)} />
-                <input value={this.state.imageUrl} className="edit-profile-input-boxes" placeholder="Profile Pic" onChange={(e) => this.handleInput('imageUrl', e.target.value)} />
+                {/* <input value={this.state.imageUrl} className="edit-profile-input-boxes" placeholder="Profile Pic" onChange={(e) => this.handleInput('imageUrl', e.target.value)} /> */}
             </div>
         )
     }
@@ -99,24 +125,17 @@ class Profile extends Component {
                 this.props.updateUser(userProfile.data[0])
                 this.setState({
                     isEditing: false,
-                    inputBox1: '',
-                    inputBox2: '',
-                    inputBox3: '',
-                    inputBox4: '',
                     firstName: this.props.firstName,
                     lastName: this.props.lastName,
                     email: this.props.email,
                     imageUrl: this.props.imageUrl,
-                    id: this.props.id
+                    id: this.props.id,
+                    isEditBoxOpened:false
                 })
             }
         }
         this.setState({
             isEditing: false,
-            inputBox1: '',
-            inputBox2: '',
-            inputBox3: '',
-            inputBox4: ''
         })
     }
 
@@ -185,40 +204,27 @@ class Profile extends Component {
             <div className="profile-container">
                 <LoadingWrapper loaded={this.state.isLoaded}>
                     <div className="profile-basic-info-container">
-                        <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic" />
-                        <div style={{ width: '100%' }}>
-                            <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
-                            <h1><a style={{ textDecoration: 'none', color: 'black' }} href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></h1>
-                        </div>
-                        <div className="edit-profile-input-button-container">
-                            {this.state.isEditing &&
+                        {this.state.isEditBoxOpened?
+                            <div className="edit-profile-input-button-container">
+                                {this.state.isEditing &&
                                 this.createEditBoxes()
-                            }
-                            {this.props.match.params.userId != this.props.id ? (null) : (this.state.isEditing ? (<button onClick={() => this.editProfile()}>Save</button>) : (<button onClick={() => this.setState({isEditing:true})}>Edit</button>))}
+                                }   
+                            </div>
+                            :
+                            <div>
+                                <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic" />
+                                <div style={{ width: '100%' }}>
+                                    <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
+                                    <h1><a style={{ textDecoration: 'none', color: 'black' }} href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></h1>
+                                </div>
+                            </div>
+                        }
+                        <div className="edit-profile-input-button-container">
+  
+                            {this.props.match.params.userId != this.props.id ? (null) : (this.state.isEditing ? (<button onClick={() => this.editProfile()}>Save</button>) : (<button onClick={() => this.setState({isEditing:true,isEditBoxOpened:true})}>Edit</button>))}
                         </div>
                     </div>
-                    <Dropzone
-                        onDropAccepted={this.getSignedRequest}
-                        style={{
-                            position: 'relative',
-                            width: 200,
-                            height: 200,
-                            borderWidth: 7,
-                            marginTop: 10,
-                            marginBottom:10,
-                            borderColor: 'rgb(102, 102, 102)',
-                            borderStyle: 'dashed',
-                            borderRadius: 5,
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            fontSize: 28,
-                        }}
-                        accept="image/*"
-                        multiple={false}
-                    >
-                        {this.state.picLoaded?<div>{this.state.img}</div>:<div>{this.state.isUploading ? <GridLoader /> : <p style={{textAlign:'center'}}>Drop File or Click Here</p>}</div>}
-                    </Dropzone>
+                    
 
                 </LoadingWrapper>
                 <div className="section-container">

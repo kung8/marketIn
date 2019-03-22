@@ -145,11 +145,13 @@ addToEd= async()=>{
                                 </div>)
                             }
                         </div>
-                        {this.props.match.params.userId==this.props.id?
-                        (<div className="add-button-container">
-                            {this.state.addIsClicked?(<button className="add-save-edit-button" onClick={()=>this.addToEd()}>Save</button>):
-                            (<button className="add-save-edit-button" onClick={()=>this.setState({addIsClicked:true,addDivIsOpened:true})}>Add</button>)}
-                        </div>):null}
+                        {this.props.match.params.userId==this.props.id &&
+                        <div className="add-button-container">
+                            {this.state.addIsClicked?
+                            <button className="add-save-edit-button" onClick={()=>this.addToEd()}>Save</button>
+                            :
+                            <button className="add-save-edit-button" onClick={()=>this.setState({addIsClicked:true,addDivIsOpened:true})}>Add</button>}
+                        </div>}
                     </LoadingWrapper>
             </div>
         )

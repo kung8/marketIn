@@ -72,12 +72,6 @@ class Work extends Component {
                 this.setState({
                     addIsClicked:false,
                     education:this.props.education,
-                    inputBox1:'',
-                    inputBox2:'',
-                    inputBox3:'',
-                    inputBox4:'',
-                    inputBox5:'',
-                    inputBox6:'', 
                     work:this.props.work,
                     empName:'',
                     empLoc:'',
