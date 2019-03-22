@@ -12,6 +12,7 @@ import LoadingWrapper from '../Loader/LoadingWrapper';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import { v4 as randomString } from 'uuid';
+import { wrap } from 'module';
 
 class Profile extends Component {
     constructor(props) {
@@ -81,13 +82,13 @@ class Profile extends Component {
 
     createEditBoxes() {
         return (
-            <div>
+            <div style={{display:'flex',flexDirection:'column',alignItems:'center',maxWidth:320}}>
                 {this.state.picEdit?
                 <Dropzone
                         onDropAccepted={this.getSignedRequest}
                         style={{
                             position: 'relative',
-                            background:'red',
+                            // background:'red',
                             width: 150,
                             height: 180,
                             borderWidth: 7,
@@ -123,7 +124,7 @@ class Profile extends Component {
                         <img style={{marginTop:10,height:200,width:180,border:'solid black'}} src={this.state.imageUrl}/>
                     
                     {/* </LoadingWrapper> */}
-                        {!this.state.picEdit && <i style={{position:'absolute',top:13,left:45,fontSize:30}}class="fas fa-pencil-alt" onClick={()=>this.setState({picEdit:true})}></i>}
+                        {!this.state.picEdit && <div style={{position:'absolute',top:13,right:5,height:30,width:30,background:'white'}}><i style={{fontSize:30}}class="fas fa-pencil-alt" onClick={()=>this.setState({picEdit:true})}></i></div>}
                     </div>
                 }
                 <input value={this.state.firstName} className="edit-profile-input-boxes" placeholder="First Name" onChange={(e) => this.handleInput('firstName', e.target.value)} />
@@ -138,7 +139,6 @@ class Profile extends Component {
     componentDidUpdate(prevProps,prevState){
         if(prevProps !== this.props){
             this.getUser();
-
         }
     }
 
@@ -239,17 +239,17 @@ class Profile extends Component {
                                 }   
                             </div>
                             :
-                            <div>
+                            <div style={{display:'flex',flexDirection:'column',alignItems:'center',overflow:'hide'}}>
                                 <img className="profile-picture" src={this.props.userImageUrl} alt="Profile Pic" />
-                                <div style={{ width: '100%' }}>
+                                <div style={{maxWidth:320}}>
                                     <h1>{this.props.userFirstName} {this.props.userLastName}</h1>
-                                    <h1><a style={{ textDecoration: 'none', color: 'black' }} href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></h1>
+                                    <h1 style={{maxWidth:320,overflowWrap:"break-word"}}><a style={{ textDecoration: 'none', color: 'black' }} href={`mailto:${this.props.userEmail}`}>{this.props.userEmail}</a></h1>
                                 </div>
                             </div>
                         }
-                        <div className="edit-profile-input-button-container">
+                        <div className="edit-delete-button-container">
   
-                            {this.props.match.params.userId != this.props.id ? (null) : (this.state.isEditing ? (<button onClick={() => this.editProfile()}>Save</button>) : (<button onClick={() => this.setState({isEditing:true,isEditBoxOpened:true})}>Edit</button>))}
+                            {this.props.match.params.userId != this.props.id ? (null) : (this.state.isEditing ? (<button className="add-save-edit-button" onClick={() => this.editProfile()}>Save</button>) : (<button className="add-save-edit-button" onClick={() => this.setState({isEditing:true,isEditBoxOpened:true})}>Edit</button>))}
                         </div>
                     </div>
                     

@@ -1,3 +1,4 @@
+const path = require('path'); // Usually moved to the start of file
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
@@ -94,6 +95,32 @@ io.on('connection',function(socket){
   socket.on('sendMsg',function(data){
     console.log(data)
     // let offset = new Date().getTimezoneOffset();
+    function formatDate(date) {
+      var monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+     
+      var day = date.getDate();
+      console.log(day)
+      var monthIndex = date.getMonth();
+      var year = date.getFullYear();
+     
+      return day + " " + monthNames[monthIndex] + " " + year;
+     }
+    
+    
+    
     let ut = -12
     let date = new Date();
     let zone = date.getTime() + (date.getTimezoneOffset()*60000);

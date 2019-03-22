@@ -115,7 +115,6 @@
     align-items: center;
     flex-wrap: wrap;
     text-align: center;
-    word-wrap: break-word;
 }
 
 .profile-picture {
@@ -245,7 +244,7 @@
     justify-content:space-evenly;
     align-items: center;
     /* flex-direction: column; */
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     width:310px;
 }
 
