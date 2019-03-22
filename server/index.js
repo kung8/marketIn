@@ -23,6 +23,8 @@ const pgPool = new pg.Pool({
     connectionString:CONNECTION_STRING
 }) 
 
+app.use( express.static( `${__dirname}/../build` ) );
+
 massive(CONNECTION_STRING).then(db=>{
     app.set('db',db);
     console.log("db is running!");
@@ -194,3 +196,7 @@ app.post('/contact/add/phone/:id',contactCtrl.addPhone);
 app.post('/contact/add/linkedin/:id',contactCtrl.addLinkedIn);
 app.put('/contact/update/phone/:id',contactCtrl.updatePhone);
 app.put('/contact/update/linkedin/:id',contactCtrl.updateLinkedIn);
+
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
