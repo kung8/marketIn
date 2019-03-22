@@ -29,7 +29,8 @@ massive(CONNECTION_STRING).then(db=>{
     console.log("db is running!");
   });
 
-const io = socket(app.listen(SERVER_PORT,()=>{console.log(`Go,go,go...${SERVER_PORT}`)}))
+app.listen(SERVER_PORT,()=>{console.log(`Go,go,go...${SERVER_PORT}`)})
+// const io = socket(app.listen(SERVER_PORT,()=>{console.log(`Go,go,go...${SERVER_PORT}`)}))
   
 app.use(session({
     store:new pgSession({
@@ -77,71 +78,71 @@ app.get('/api/signs3', (req, res) => {
   });
 
 //Sockets
-io.on('connection',function(socket){
-  console.log('working!');
+// io.on('connection',function(socket){
+//   console.log('working!');
   
-  //receives a request to start/join a chat
-  socket.on('startChat',function(chatRoom){
-    console.log(chatRoom);
-    socket.join(chatRoom);
-  });
+//   //receives a request to start/join a chat
+//   socket.on('startChat',function(chatRoom){
+//     console.log(chatRoom);
+//     socket.join(chatRoom);
+//   });
 
-  //receives the request to leave the chat
-  socket.on('endChat',function(chatRoom){
-    console.log(chatRoom)
-    socket.leave(chatRoom);
-  })
+//   //receives the request to leave the chat
+//   socket.on('endChat',function(chatRoom){
+//     console.log(chatRoom)
+//     socket.leave(chatRoom);
+//   })
 
-  //receives the message and then re-emits its to the chatRoom
-  socket.on('sendMsg',function(data){
-    console.log(data)
-    // let offset = new Date().getTimezoneOffset();
-    function formatDate(date) {
-      var monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ];
+//   //receives the message and then re-emits its to the chatRoom
+//   socket.on('sendMsg',function(data){
+//     console.log(data)
+//     // let offset = new Date().getTimezoneOffset();
+//     function formatDate(date) {
+//       var monthNames = [
+//         "January",
+//         "February",
+//         "March",
+//         "April",
+//         "May",
+//         "June",
+//         "July",
+//         "August",
+//         "September",
+//         "October",
+//         "November",
+//         "December"
+//       ];
      
-      var day = date.getDate();
-      console.log(day)
-      var monthIndex = date.getMonth();
-      var year = date.getFullYear();
+//       var day = date.getDate();
+//       console.log(day)
+//       var monthIndex = date.getMonth();
+//       var year = date.getFullYear();
      
-      return day + " " + monthNames[monthIndex] + " " + year;
-     }
+//       return day + " " + monthNames[monthIndex] + " " + year;
+//      }
     
     
     
-    let ut = -12
-    let date = new Date();
-    let zone = date.getTime() + (date.getTimezoneOffset()*60000);
-    let current = new Date(zone + (ut*3600000));
-    console.log(typeof current, current)
-    // current = current.substring(0,current.IndexOf('T'))
-    // let time = current.substring(12,current.IndexOf('Z'))
-    console.log(current)
+//     let ut = -12
+//     let date = new Date();
+//     let zone = date.getTime() + (date.getTimezoneOffset()*60000);
+//     let current = new Date(zone + (ut*3600000));
+//     console.log(typeof current, current)
+//     // current = current.substring(0,current.IndexOf('T'))
+//     // let time = current.substring(12,current.IndexOf('Z'))
+//     console.log(current)
 
-    let message = {
-      message:data.message,
-      name:data.name,
-      date:current,
-      chat:data.chat,
-      // time:time
-    }
+//     let message = {
+//       message:data.message,
+//       name:data.name,
+//       date:current,
+//       chat:data.chat,
+//       // time:time
+//     }
 
-    io.to(data.chat).emit('sendMsg',message)
-  })
-})
+//     io.to(data.chat).emit('sendMsg',message)
+//   })
+// })
 
 
 
