@@ -16,7 +16,7 @@ class App extends Component {
           <Header />
         </div>
         <div>
-          {/* {routes} */}
+          {routes}
         </div>
         <footer>
           <h6>Copyright@Kevin Ung</h6>
