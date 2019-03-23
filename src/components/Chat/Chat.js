@@ -14,7 +14,8 @@ class Chat extends Component {
             message:'',
             messages:[],
             chat:'',
-            date:''
+            date:'',
+            color:'',
         }
     }
 
@@ -60,7 +61,7 @@ class Chat extends Component {
         const chatRoom = userA + '-' + userZ;
         // console.log(userA,userZ,chatRoom);
         this.setState({
-            chat:chatRoom
+            chat:chatRoom,
         })
         this.socket.emit('startChat',chatRoom)
 
@@ -88,8 +89,9 @@ class Chat extends Component {
         let time = this.formatHour(hr,min)
 
         const {imageUrl} = this.props;
-        this.socket.emit('sendMsg',{chat:this.state.chat,message:this.state.message,name:this.props.firstName,date:date,time:time,imageUrl:imageUrl})
+        this.socket.emit('sendMsg',{chat:this.state.chat,message:this.state.message,userId:this.props.id,date:date,time:time,imageUrl:imageUrl})
     }
+
 
     componentWillUnmount(){
         this.socket.disconnect();
@@ -164,14 +166,54 @@ class Chat extends Component {
         }
       }
 
+    
+    // isBigger=(me,you)=>{
+    //     if(me>you){
+    //         this.setState({
+    //             isBigger:true,
+    //             color:'lightgreen'
+    //         })
+    //     } else {
+    //         this.setState({
+    //             isBigger:false,
+    //             color:'yellow'
+    //         })
+    //     } 
+        
+    // }
+
+    // colorPicker(){
+    //     if(this.state.isBigger){
+    //         this.setState({
+    //             color:'lightgreen'
+    //         })
+    //     }
+    // }
+    // mapThroughMessages(message){
+    //     if(message.userId == this.props.id){
+    //         this.setState({
+    //             color:'yellow'
+    //         })
+    //     } else {
+    //         this.setState({
+    //             color:'lightgreen'
+    //         })
+    //     }
+    // }
+
+
+
     render (){
+        const {color} = this.state;
+        
         const messages = this.state.messages.map((message)=>{
             //if time exist don't display, if the date exists already don't display again
             // let date = [];
             // return message[i].date
             
+            // {message.userId == this.props.id?this.setState({color:'yellow'}):this.setState({color:'lightgreen'})}
             return (
-                <div style={{position:'relative',marginBottom:5, minHeight:40,maxWidth:300,background:'green',display:'flex',overflow:'hidden'}}>
+                <div style={{position:'relative',marginBottom:5, minHeight:40,maxWidth:300,background:this.state.color,display:'flex',overflow:'hidden'}}>
                     <img style={{position:'relative',borderRadius:'50%',height:30,width:30,top:8,left:5}} src={message.imageUrl}/>
                     <div style={{position:'relative',left:10,marginTop:5,marginBottom:5}}>
                         <p style={{textAlign:'left',fontSize:12}}>{message.date}</p>

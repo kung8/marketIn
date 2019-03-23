@@ -106,7 +106,7 @@ io.on('connection',function(socket){
 
     let message = {
       message:data.message,
-      name:data.name,
+      userId:data.userId,
       date:data.date,
       time:data.time,
       chat:data.chat,
