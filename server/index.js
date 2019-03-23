@@ -102,7 +102,7 @@ io.on('connection', function(socket){
       let messages = await db.chat.get_all_messages({room_id:id})
       messages = messages.map(message=>{
         let color1 = 'lightblue'
-        let color2 = 'white'
+        let color2 = 'lightgreen'
         for(let key in message){
           if(data.id==message.user_id){
             message.color = color1
@@ -137,7 +137,7 @@ io.on('connection', function(socket){
     //create message sql request (pass in all the info to be stored in the messages table -- room_id,message,time,date,user_id,data, and probably should join with the room table)
     messages = messages.map(message=>{
       let color1 = 'lightblue'
-      let color2 = 'white'
+      let color2 = 'lightgreen'
       for(let key in message){
         if(data.userId==message.user_id){
           message.color = color1

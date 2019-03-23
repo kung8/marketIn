@@ -49,10 +49,10 @@ class Header extends Component {
                 <h1 className="marketin-name">MarketIn</h1>
                     {this.props.id?
                         (<div className="sidebar-container" style={{width:this.state.navBar}}>
-                                <p style={{color:'white'}}>Signed in as:</p>
+                                <p style={{color:'white',padding:10}}>Signed in as:</p>
                                 <Link to={`/profile/${this.props.id}`} onClick={()=>this.toggleNavBar()}>{this.props.firstName} {this.props.lastName}</Link>
                                 <Link to='/search' onClick={()=>this.toggleNavBar()}>Search</Link>
-                                <p style={{color:'white'}}>Viewing</p>
+                                <p style={{color:'white',padding:10}}>Viewing:</p>
                                 <Link to={`/profile/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>{this.props.userFirstName} {this.props.userLastName}</Link>
                                 <Link to={`/services/${this.props.viewedUserId}`} onClick={()=>this.toggleNavBar()}>Services</Link>
                                 {/* <a href={`mailto:${this.props.userEmail}`} onClick={()=>this.toggleNavBar()}>Contact</a> */}
