@@ -12,9 +12,9 @@ import reducer from './userReducer';
 
 // const persistedReducer = persistReducer(persistConfig, reducer)
 
-
+const store = createStore(reducer)
 // export const store = createStore(persistedReducer);
-export default store = createStore(reducer);
+export default store
 
 // export const persistor = persistStore(store);
 
