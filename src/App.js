@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router-dom'
-import routes from './routes'
-
-import { Link } from 'react-router-dom'
+import routes from './routes';
+import { Link, withRouter } from 'react-router-dom';
 
 class App extends Component {
 
@@ -34,4 +32,4 @@ function mapStateToProps(reduxState){
   }
 }
 
-export default withRouter(connect(mapStateToProps)( App));
+export default withRouter(connect(mapStateToProps)( App))

@@ -77,6 +77,11 @@ app.get('/api/signs3', (req, res) => {
     });
   });
 
+
+
+
+
+
 // Sockets
 io.on('connection',function(socket){
   console.log('working!');
@@ -84,8 +89,31 @@ io.on('connection',function(socket){
   //receives a request to start/join a chat
   socket.on('startChat',function(chatRoom){
     console.log(chatRoom);
+    //I will need to bring in db to access the db
+    //I will need to do a db request to check the room, 
+          //if it does not exist I will need to create a room 
+          //and if it does exist I should pull that chat history
     socket.join(chatRoom);
+    //send message history back to the user
   });
+
+  //receives the message and then re-emits its to the chatRoom
+  socket.on('sendMsg',function(data){
+    console.log(data)
+    //bring in db to access db
+    //create message sql request (pass in all the info to be stored in the messages table -- room_id,message,time,date,user_id,data, and probably should join with the room table)
+    //return all the messages from that match the room id
+
+    let message = {
+      message:data.message,
+      name:data.name,
+      date:data.date,
+      time:data.time,
+      chat:data.chat,
+      imageUrl:data.imageUrl
+    }
+    io.to(data.chat).emit('sendMsg',message)
+  })
 
   //receives the request to leave the chat
   socket.on('endChat',function(chatRoom){
@@ -93,55 +121,6 @@ io.on('connection',function(socket){
     socket.leave(chatRoom);
   })
 
-  //receives the message and then re-emits its to the chatRoom
-  socket.on('sendMsg',function(data){
-    console.log(data)
-//     // let offset = new Date().getTimezoneOffset();
-//     function formatDate(date) {
-//       var monthNames = [
-//         "January",
-//         "February",
-//         "March",
-//         "April",
-//         "May",
-//         "June",
-//         "July",
-//         "August",
-//         "September",
-//         "October",
-//         "November",
-//         "December"
-//       ];
-     
-//       var day = date.getDate();
-//       console.log(day)
-//       var monthIndex = date.getMonth();
-//       var year = date.getFullYear();
-     
-//       return day + " " + monthNames[monthIndex] + " " + year;
-//      }
-    
-    
-    
-    let ut = -12
-    let date = new Date();
-    let zone = date.getTime() + (date.getTimezoneOffset()*60000);
-    let current = new Date(zone + (ut*3600000));
-    console.log(typeof current, current)
-//     // current = current.substring(0,current.IndexOf('T'))
-//     // let time = current.substring(12,current.IndexOf('Z'))
-//     console.log(current)
-
-    let message = {
-      message:data.message,
-      name:data.name,
-      date:current,
-      chat:data.chat,
-      // time:time
-    }
-
-    io.to(data.chat).emit('sendMsg',message)
-  })
 })
 
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
 import { clearUser, updateUser, updateViewedUser } from '../../ducks/userActions';
 import Education from './Education/Education';
 import Work from './Work/Work';
@@ -12,7 +11,6 @@ import LoadingWrapper from '../Loader/LoadingWrapper';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import { v4 as randomString } from 'uuid';
-import { wrap } from 'module';
 
 class Profile extends Component {
     constructor(props) {
@@ -292,4 +290,4 @@ function mapStateToProps(reduxState) {
     }
 }
 
-export default withRouter(connect(mapStateToProps, { clearUser, updateUser, updateViewedUser })(Profile))
+export default connect(mapStateToProps, { clearUser, updateUser, updateViewedUser })(Profile)

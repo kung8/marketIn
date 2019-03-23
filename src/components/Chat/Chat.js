@@ -73,21 +73,111 @@ class Chat extends Component {
     }
 
     sendMsg=()=>{
-        this.socket.emit('sendMsg',{chat:this.state.chat,message:this.state.message,name:this.props.firstName})
+        let date = new Date()
+        let month = date.getMonth();
+        let d = date.getDate();
+        let wk = date.getDay();
+        console.log(wk)
+        wk = this.formatDay(wk)
+        let yr = date.getFullYear();
+        month = this.formatMonth(month)
+        let hr = date.getHours()
+        let min = date.getMinutes()
+        
+        date = `${wk} ${d} ${month} ${yr}`
+        let time = this.formatHour(hr,min)
+
+        const {imageUrl} = this.props;
+        this.socket.emit('sendMsg',{chat:this.state.chat,message:this.state.message,name:this.props.firstName,date:date,time:time,imageUrl:imageUrl})
     }
 
     componentWillUnmount(){
         this.socket.disconnect();
     }
 
-    render (){
-        const messages = this.state.messages.map(message=>{
-            return (
-                <div>
+    formatHour=(hr,min)=>{
+        if(hr == 0 ){
+            if(min<10){
+                return min = `0${min}`
+            }
+            return hr = `12:${min} AM`
+        } else if(hr >= 12){
+            hr = hr - 12
+            if(min<10){
+                return min = `0${min}`
+            }
+            return hr = `${hr}:${min} PM` 
+        } else if (0 < hr < 12){
+            if(min<10){
+                return min = `0${min}`
+            }
+            return hr = `${hr}:${min} AM` 
+        }
+    }
 
-                    <p style={{textAlign:'left'}}>{message.name}</p>
-                    <p style={{textAlign:'left'}}>{message.date}</p>
-                    <p style={{textAlign:'left'}}>{message.message}</p>
+    formatDay=(wk)=>{
+        switch(wk){
+            case 0:
+                return wk = "Sun";
+            case 1:
+                return wk = "Mon";
+            case 2:
+                return wk = "Tues";
+            case 3:
+                return wk = "Wed";
+            case 4:
+                return wk = "Thur";
+            case 5:
+                return wk = "Fri";
+            case 6:
+                return wk = "Sat";
+
+        }
+    }
+
+    formatMonth=(month)=> {
+        switch(month){
+          case 0:
+            return month = "Jan";
+          case 1:
+            return "Feb";
+          case 2:
+            return month = "Mar";
+          case 3:
+            return "Apr";
+          case 4:
+            return "May";
+          case 5:
+            return "Jun";
+          case 6:
+            return "Jul";
+          case 7:
+            return "Aug";
+          case 8:
+            return "Sep";
+          case 9:
+            return "Oct";
+          case 10:
+            return "Nov";
+          case 11:
+            return "Dec";
+        }
+      }
+
+    render (){
+        const messages = this.state.messages.map((message)=>{
+            //if time exist don't display, if the date exists already don't display again
+            // let date = [];
+            // return message[i].date
+            
+            return (
+                <div style={{position:'relative',marginBottom:5, minHeight:40,maxWidth:300,background:'green',display:'flex',overflow:'hidden'}}>
+                    <img style={{position:'relative',borderRadius:'50%',height:30,width:30,top:8,left:5}} src={message.imageUrl}/>
+                    <div style={{position:'relative',left:10,marginTop:5,marginBottom:5}}>
+                        <p style={{textAlign:'left',fontSize:12}}>{message.date}</p>
+                        <p style={{fontSize:12}}>{message.time}</p>
+                        <p style={{textAlign:'left',fontSize:12,overflowWrap:"word-break",maxWidth:240}}>{message.message}</p>
+                    </div>
                 </div>
             )
         })
@@ -101,11 +191,11 @@ class Chat extends Component {
                 </div>
                 <div style={{display:'flex',flexDirection:'row',background:'silver',width:320,minHeight:300,justifyContent:'space-between'}}>
                     {/* {chat} */}
-                    <div>
+                    {/* <div> */}
                         {/* <p>{this.props.userFirstName}{this.props.userLastName}</p> */}
-                        <img src={this.props.userImageUrl} alt="Person you're chatting with" style={{width:80,height:120}}/>
-                    </div>
-                    <div> 
+                        {/* <img src={this.props.userImageUrl} alt="Person you're chatting with" style={{width:80,height:120}}/> */}
+                    {/* </div> */}
+                    <div style={{background:'lightblue',maxHeight:300,width:310,marginLeft:5,marginRight:5,border:'black solid',overflowWrap:"break-word",overflowY:'scroll'}}> 
                         {messages}
                     </div>
                 </div>
