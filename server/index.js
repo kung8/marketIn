@@ -16,13 +16,13 @@ const aws = require('aws-sdk');
 const {CONNECTION_STRING,SESSION_SECRET,SERVER_PORT,S3_BUCKET,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY} = process.env;
 
 const app = express();
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(express.json());
 
 const pgPool = new pg.Pool({
     connectionString:CONNECTION_STRING
 }) 
 
-app.use( express.static( `${__dirname}/../build` ) );
 
 massive(CONNECTION_STRING).then(db=>{
     app.set('db',db);
