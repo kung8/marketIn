@@ -4,16 +4,16 @@ import './index.css';
 import App from './App';
 import { HashRouter, BrowserRouter, withRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store, persistor }from './ducks/store';
+import { store, persistor } from './ducks/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
     <Provider store={store}>
-        {/* <PersistGate persistor={persistor} loading={null}> */}
+        <PersistGate persistor={persistor} loading={null}>
             <HashRouter>
                 <App />
             </HashRouter>
-        {/* </PersistGate> */}
+        </PersistGate>
     </Provider>
     , document.getElementById('root'));
 

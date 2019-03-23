@@ -1,16 +1,17 @@
-import { applyMiddleware, createStore, compose } from 'redux';
-import reducer from './userReducer';
+import { createStore} from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import reducer from './userReducer';
 
 const persistConfig = {
-   key: 'keysss',
+   key: 'root',
    storage
 }
 
-const middlewares = [];
+
 
 const persistedReducer = persistReducer(persistConfig, reducer)
+
 
 export const store = createStore(persistedReducer);
 
