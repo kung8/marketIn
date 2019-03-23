@@ -180,7 +180,7 @@ class Service extends Component {
                             <button className="delete-service-button" onClick={()=>{this.props.delete(serv)}}>Delete</button>  
                         </div>):
                         (<div className='purchase-chat-buttons-container'>
-                            <button className="purchase-service-button">Purchase</button>
+                            <Link to='/purchase'><button className="purchase-service-button">Purchase</button></Link>
                             <Link to='/chat'><button className="add-save-edit-button">Chat</button></Link>
                         </div>)}
             </div>

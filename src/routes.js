@@ -8,6 +8,7 @@ import Contact from './components/Contact/Contact';
 import About from './components/Kevin/About';
 import Search from './components/Search/Search';
 import Chat from './components/Chat/Chat';
+import Purchase from './components/Purchase/Purchase';
 
 export default  (
         <Switch>
@@ -18,6 +19,7 @@ export default  (
             <Route path='/services/:userId' component={Services}/>
             <Route path='/contact/:userId' component={Contact}/>
             <Route path='/about' component={About}/>
+            <Route path='/purchase' component={Purchase}/>
             <Route path='/chat' component={Chat}/>
         </Switch>
 )

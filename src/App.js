@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import { connect } from 'react-redux';
 import routes from './routes';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class App extends Component {
 
