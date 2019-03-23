@@ -69,3 +69,20 @@ phone VARCHAR,
 linkedIn TEXT,
 user_id INT REFERENCES users(id)
 )
+
+create table rooms (
+id SERIAL PRIMARY KEY,
+room VARCHAR,
+user_1 INT,
+user_2 INT
+)
+
+CREATE TABLE messages (
+id SERIAL PRIMARY KEY,
+message text,
+date VARCHAR,
+time VARCHAR,
+room_id INT REFERENCES rooms(id),
+user_id INT,
+image_url TEXT
+)

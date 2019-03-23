@@ -15,24 +15,50 @@ class Chat extends Component {
             messages:[],
             chat:'',
             date:'',
-            color:'',
+            isBlue:true
         }
+
+        this.chatStarted = this.chatStarted.bind(this);
+        this.startChat = this.startChat.bind(this);
+        this.sendMsg = this.sendMsg.bind(this);
+        this.updateMsg = this.updateMsg.bind(this);
     }
 
     componentDidMount(){
         this.setSocketListeners();
-        this.startChat();
+        this.startChat(this.props.id,this.props.viewedUserId);
+        this.socket.on('startChat',messages=>{
+            console.log(222, messages)
+            this.chatStarted(messages)
+        })
+        this.socket.on('updateMsg', messages => {
+            this.updateMsg(messages)
+        })
+    }
+    
+    updateMsg(messages){
+        this.setState({
+            messages:messages,
+            message:''
+        })
+    }
+
+    chatStarted(messages){
+        console.log('hit',messages)
+        this.setState({
+            messages:messages
+        })
     }
 
     setSocketListeners = () => {
         this.socket=io();
         // console.log('hit!');
 
+
         this.socket.on('sendMsg',(message)=>{
             // console.log(111,message,typeof message)
             let messages = this.state.messages
             // console.log(222,messages);
-            messages.push(message);
             this.setState({
                 messages,
                 message:''
@@ -42,6 +68,7 @@ class Chat extends Component {
     }
     
     startChat(me,you){
+        console.log('startChat',me,you)
         this.socket.emit('endChat',this.state.chat) //this is to make sure that you are not sending the msg to somebody else...awkward
         const {viewedUserId,id} = this.props;
         me = id;
@@ -63,7 +90,7 @@ class Chat extends Component {
         this.setState({
             chat:chatRoom,
         })
-        this.socket.emit('startChat',chatRoom)
+        this.socket.emit('startChat',{chatRoom,viewedUserId,id})
 
     }
 
@@ -89,31 +116,45 @@ class Chat extends Component {
         let time = this.formatHour(hr,min)
 
         const {imageUrl} = this.props;
-        this.socket.emit('sendMsg',{chat:this.state.chat,message:this.state.message,userId:this.props.id,date:date,time:time,imageUrl:imageUrl})
+        this.socket.emit('sendMsg',{chat:this.state.chat,message:this.state.message,userId:this.props.id,viewedUserId:this.props.viewedUserId,date:date,time:time,imageUrl:imageUrl})
     }
-
 
     componentWillUnmount(){
         this.socket.disconnect();
     }
 
     formatHour=(hr,min)=>{
+        console.log(hr,min)
+        
         if(hr == 0 ){
+            console.log('hit1')
             if(min<10){
                 return min = `0${min}`
             }
             return hr = `12:${min} AM`
-        } else if(hr >= 12){
+        } else if(13 < hr < 23){
+            console.log('hit2',hr)
             hr = hr - 12
+            console.log(hr)
             if(min<10){
+                console.log(min)
                 return min = `0${min}`
             }
+            console.log(min,hr)
             return hr = `${hr}:${min} PM` 
-        } else if (0 < hr < 12){
+        } else if (0 < hr < 12 && !12){
+            console.log('hit3',hr)
             if(min<10){
                 return min = `0${min}`
             }
             return hr = `${hr}:${min} AM` 
+        } else if (hr === 12){
+            console.log('hit4')
+            if(min<10){
+                return min = `0${min}`
+            }
+            return hr = `${hr}:${min} PM`
+
         }
     }
 
@@ -166,43 +207,6 @@ class Chat extends Component {
         }
       }
 
-    
-    // isBigger=(me,you)=>{
-    //     if(me>you){
-    //         this.setState({
-    //             isBigger:true,
-    //             color:'lightgreen'
-    //         })
-    //     } else {
-    //         this.setState({
-    //             isBigger:false,
-    //             color:'yellow'
-    //         })
-    //     } 
-        
-    // }
-
-    // colorPicker(){
-    //     if(this.state.isBigger){
-    //         this.setState({
-    //             color:'lightgreen'
-    //         })
-    //     }
-    // }
-    // mapThroughMessages(message){
-    //     if(message.userId == this.props.id){
-    //         this.setState({
-    //             color:'yellow'
-    //         })
-    //     } else {
-    //         this.setState({
-    //             color:'lightgreen'
-    //         })
-    //     }
-    // }
-
-
-
     render (){
         const {color} = this.state;
         
@@ -211,10 +215,9 @@ class Chat extends Component {
             // let date = [];
             // return message[i].date
             
-            // {message.userId == this.props.id?this.setState({color:'yellow'}):this.setState({color:'lightgreen'})}
             return (
-                <div style={{position:'relative',marginBottom:5, minHeight:40,maxWidth:300,background:this.state.color,display:'flex',overflow:'hidden'}}>
-                    <img style={{position:'relative',borderRadius:'50%',height:30,width:30,top:8,left:5}} src={message.imageUrl}/>
+                <div style={{position:'relative',marginBottom:5, minHeight:40,maxWidth:300,background:message.color,display:'flex',overflow:'hidden',marginLeft:5,marginRight:5}}>
+                    <img style={{position:'relative',borderRadius:'50%',height:30,width:30,top:8,left:5}} src={message.image_url}/>
                     <div style={{position:'relative',left:10,marginTop:5,marginBottom:5}}>
                         <p style={{textAlign:'left',fontSize:12}}>{message.date}</p>
                         <p style={{fontSize:12}}>{message.time}</p>
@@ -237,7 +240,7 @@ class Chat extends Component {
                         {/* <p>{this.props.userFirstName}{this.props.userLastName}</p> */}
                         {/* <img src={this.props.userImageUrl} alt="Person you're chatting with" style={{width:80,height:120}}/> */}
                     {/* </div> */}
-                    <div style={{background:'lightblue',maxHeight:300,width:310,marginLeft:5,marginRight:5,border:'black solid',overflowWrap:"break-word",overflowY:'scroll'}}> 
+                    <div style={{background:'silver',maxHeight:300,width:310,marginLeft:5,marginRight:5,border:'black solid',overflowWrap:"break-word",overflowY:'scroll'}}> 
                         {messages}
                     </div>
                 </div>

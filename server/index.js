@@ -83,36 +83,92 @@ app.get('/api/signs3', (req, res) => {
 
 
 // Sockets
-io.on('connection',function(socket){
+io.on('connection', function(socket){
   console.log('working!');
   
   //receives a request to start/join a chat
-  socket.on('startChat',function(chatRoom){
-    console.log(chatRoom);
+  socket.on('startChat', async function(data){
+    // console.log(data);
+    const {chatRoom,id,viewedUserId} = data
     //I will need to bring in db to access the db
-    //I will need to do a db request to check the room, 
+    const db = app.get('db'); 
+    let room = await db.chat.check_room({id:chatRoom})
+    room = room[0]
+    if(!room) {
+      db.chat.create_room({id:chatRoom,user_1:id,user_2:viewedUserId})
+      socket.join(chatRoom);
+    } else {
+      const {id} = room
+      let messages = await db.chat.get_all_messages({room_id:id})
+      messages = messages.map(message=>{
+        let color1 = 'lightblue'
+        let color2 = 'white'
+        for(let key in message){
+          if(data.id==message.user_id){
+            message.color = color1
+            return message
+          } else {
+            message.color = color2
+            return message
+          }
+        }
+        return message
+      }
+        )
+      console.log(1111,messages)
+      socket.join(chatRoom);
+      console.log(1111,messages)
+      io.to(chatRoom).emit('startChat', messages)
+    }
+        //I will need to do a db request to check the room, 
           //if it does not exist I will need to create a room 
           //and if it does exist I should pull that chat history
-    socket.join(chatRoom);
+
     //send message history back to the user
   });
 
   //receives the message and then re-emits its to the chatRoom
-  socket.on('sendMsg',function(data){
+  socket.on('sendMsg', async function(data){
     console.log(data)
     //bring in db to access db
+    const {userId,message,chat,date,time,imageUrl} = data;
+    const db = app.get('db')
+    let messages = await db.chat.create_message({room_id:chat,message,user_id:userId,date,time,image_url:imageUrl})
     //create message sql request (pass in all the info to be stored in the messages table -- room_id,message,time,date,user_id,data, and probably should join with the room table)
-    //return all the messages from that match the room id
-
-    let message = {
-      message:data.message,
-      userId:data.userId,
-      date:data.date,
-      time:data.time,
-      chat:data.chat,
-      imageUrl:data.imageUrl
+    messages = messages.map(message=>{
+      let color1 = 'lightblue'
+      let color2 = 'white'
+      for(let key in message){
+        if(data.userId==message.user_id){
+          message.color = color1
+          return message
+        } else {
+          message.color = color2
+          return message
+        }
+      }
+      return message
     }
-    io.to(data.chat).emit('sendMsg',message)
+      )
+    //return all the messages from that match the room id
+    
+    // if(data.userId==userId){
+    //   color = color1
+    // } else {
+    //   color = color2
+    // }
+
+    // let messages = {
+    //   message:data.message,
+    //   userId:data.userId,
+    //   date:data.date,
+    //   time:data.time,
+    //   chat:data.chat,
+    //   imageUrl:data.imageUrl,
+    //   color:color
+    // }
+    console.log(1111,messages)
+    io.to(data.chat).emit('updateMsg',messages)
   })
 
   //receives the request to leave the chat
