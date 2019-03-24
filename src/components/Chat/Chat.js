@@ -216,9 +216,9 @@ class Chat extends Component {
             // return message[i].date
             
             return (
-                <div style={{position:'relative',marginBottom:5, minHeight:40,maxWidth:300,background:message.color,display:'flex',overflow:'hidden',marginLeft:5,marginRight:5}}>
-                    <img style={{position:'relative',borderRadius:'50%',height:30,width:30,top:8,left:5}} src={message.image_url}/>
-                    <div style={{position:'relative',left:10,marginTop:5,marginBottom:5}}>
+                <div style={{marginBottom:5, minHeight:40,maxWidth:300,background:message.color,display:'flex',overflow:'hidden',marginLeft:5,marginRight:5}}>
+                    <img style={{borderRadius:'50%',height:30,width:30,marginTop:8,marginLeft:5,marginRight:5}} src={message.image_url}/>
+                    <div style={{marginTop:5,marginBottom:5}}>
                         <p style={{textAlign:'left',fontSize:12}}>{message.date}</p>
                         <p style={{fontSize:12}}>{message.time}</p>
                         <p style={{textAlign:'left',fontSize:12,overflowWrap:"word-break",maxWidth:240}}>{message.message}</p>

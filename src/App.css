@@ -898,7 +898,7 @@ footer {
 
 /*******************Search Section***********************/
 .entire-search-section {
-    max-height:426px;
+    max-height:453px;
     background:navy;
     margin-top:85px;
     display:flex;
@@ -937,7 +937,7 @@ footer {
 
 .search-box-output-container {
     /* margin-top:5px; */
-    height:280px;
+    height:340px;
     border:navy solid;
     width:320px;
     background:silver;
@@ -1037,3 +1037,4 @@ footer {
     border-radius:25%;
     margin-right:5px;
 }
+
