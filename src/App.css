@@ -725,7 +725,7 @@ footer {
   /*****************Services***************/
 .entire-services-section {
     margin-top:85px;
-    max-width:100vw;
+    max-width:320px;
     min-height:426px;
     display:flex;
     flex-direction:column;
@@ -1135,6 +1135,7 @@ footer {
 
     footer {
         height:60px;
+        margin: auto 0;
     }
 
     footer h6 {
@@ -1202,12 +1203,12 @@ footer {
     margin-top:85px;
     min-height:426px;
     margin-bottom:5px;
-    width: 320px;
+    width: 100vw;
 }
 
 .contact-header-holder {
     background:navy;
-    width:320px;
+    width:100vw;
     text-align: center;
     display:flex;
     align-items: center;
@@ -1229,7 +1230,7 @@ footer {
 .social-media-holder {
     background:silver;
     min-height:80px;
-    width:310px;
+    width:calc(100%-10px);
     margin-bottom:5px;
     display:flex;
     flex-direction:column;
