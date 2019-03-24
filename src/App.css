@@ -20,7 +20,7 @@
     background-color:navy;
     /* background-image: linear-gradient(to bottom right, navy, #0000bc); */
     /*do this code for all of the header container background*/
-    width:320px;
+    width:100vw;
     height:80px; 
     display: flex;
     justify-content: space-between;
@@ -415,9 +415,7 @@ footer {
     color:white;
     margin-bottom:0;
     font-size:20px;
-    /* position:absolute; */
-    /* bottom: 0px; */
-    width:100%;
+    width:100vw;
     
 }
 
@@ -727,7 +725,7 @@ footer {
   /*****************Services***************/
 .entire-services-section {
     margin-top:85px;
-    max-width:320px;
+    max-width:100vw;
     min-height:426px;
     display:flex;
     flex-direction:column;
@@ -901,6 +899,7 @@ footer {
     max-height:453px;
     background:navy;
     margin-top:85px;
+    width:100vw;
     display:flex;
     flex-direction: column;
     margin-bottom:5px;
@@ -908,8 +907,8 @@ footer {
 
 .search-input-and-button-container {
     display:flex;
-    height:100px;
-    width:320px;
+    min-height:100px;
+    width:calc(100vw-10px);
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
@@ -918,7 +917,7 @@ footer {
 }
 
 .search-input-box {
-    width:260px;
+    /* width:calc(100vw-10px); */
     border:solid black;
     height:50px;
     font-size: 35px;
@@ -939,7 +938,7 @@ footer {
     /* margin-top:5px; */
     height:340px;
     border:navy solid;
-    width:320px;
+    width:100vw;
     background:silver;
     overflow:scroll;
 }
@@ -948,6 +947,254 @@ footer {
     color:black;
     text-align:center;
 }
+
+@media screen and (min-width: 200px){
+    .search-input-box {
+        width:180px;
+    }
+
+    .marketin-name {
+        color:navy;
+        font-size:0;
+    }
+}
+
+@media screen and (min-width: 280px){
+    .search-input-box {
+        width:260px;
+    }
+
+    .marketin-name {
+        letter-spacing: 0.05em;
+        margin-right:5px;
+        font-size:40px;
+        color:white;
+    }
+
+}
+
+@media screen and (min-width: 320px) {
+    .search-input-box {
+        width:260px
+    } 
+}
+
+@media screen and (min-width: 360px) {
+    .search-input-box {
+        width:320px
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .search-input-box {
+        width:360px
+    }
+
+    footer {
+        height:40px;
+    }
+
+    footer h6 {
+        font-size:25px;
+    }
+
+    .search-box-output-container {
+        height:294px;
+    }
+
+}
+
+@media screen and (min-width: 440px) {
+    .search-input-box {
+        width:400px
+    }
+
+    .search-box-output-container h1 {
+        font-size:40px;
+    }
+
+    .search-button {
+        width:150px;
+        height: 40px;
+        font-size:25px;
+    }
+
+}
+
+@media screen and (min-width: 480px) {
+    .search-input-box {
+        width:440px
+    }
+}
+
+@media screen and (min-width: 520px) {
+    .search-input-box {
+        width:480px
+    }
+
+    .search-box-output-container h1 {
+        font-size:50px;
+    }
+}
+
+@media screen and (min-width: 560px) {
+    .search-input-box {
+        width:520px;
+        margin-top:5px;
+    }
+
+    .search-button {
+        margin-top:5px;
+        margin-bottom:5px;
+    }
+
+    .search-box-output-container {
+        height:280px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .search-input-box {
+        width:560px;
+        margin-top:10px;
+    }
+
+    .search-box-output-container h1 {
+        font-size:60px;
+    }
+
+    .search-button {
+        width:200px;
+        height: 50px;
+        font-size:35px;
+        margin-top:5px;
+        margin-bottom:10px;
+    }
+
+    footer {
+        height:50px;
+        font-size:30px;
+    }
+
+    .search-box-output-container {
+        height:260px;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    .search-input-box {
+        width:600px
+    }
+
+    /* footer {
+        height:60px;
+    }
+
+    footer h6 {
+        font-size: 50px;
+    } */
+}
+
+@media screen and (min-width: 680px) {
+    .search-input-box {
+        width:640px
+    }
+    
+    .marketin-name{
+        font-size:50px;
+    }
+
+    .marketin-logo {
+        font-size:50px;
+        margin-bottom:5px;
+    }
+
+}
+
+@media screen and (min-width: 720px) {
+    .search-input-box {
+        width:680px
+    }
+
+}
+
+@media screen and (min-width: 760px) {
+    .search-input-box {
+        width:720px
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+    .search-input-box {
+        width:760px;
+        height:60px;
+        margin-top:5px;
+        margin-bottom:5px;
+    }
+
+    footer {
+        height:60px;
+    }
+
+    footer h6 {
+        font-size:40px;
+    }
+
+    .search-box-output-container {
+        height:240px;
+    }
+}
+
+@media screen and (min-width: 840px) {
+    .search-input-box {
+        width:800px
+    }
+}
+
+@media screen and (min-width: 880px) {
+    .search-input-box {
+        width:840px
+    }
+}
+
+@media screen and (min-width: 920px) {
+    .search-input-box {
+        width:880px
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .search-input-box {
+        width:920px
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .search-input-box {
+        width:960px
+    }
+}
+@media screen and (min-width: 1040px) {
+    .search-input-box {
+        width:1000px
+    }
+}
+@media screen and (min-width: 1080px) {
+    .search-input-box {
+        width:1040px
+    }
+}
+@media screen and (min-width: 1120px) {
+    .search-input-box {
+        width:1080px
+    }
+}
+
+
+
+
+
 
 /**********************Contact Section**********************/
 .entire-contact-section {
