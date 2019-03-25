@@ -5,6 +5,18 @@ import axios from 'axios';
 import LoadingWrapper from '../Loader/LoadingWrapper';
 import '../../index.css'
 import {Link} from 'react-router-dom';
+import { NONAME } from 'dns';
+
+const body = {background:'navy',marginTop:85,minHeight:426,marginBottom:5,width:'100vw'}
+const header = {background:'navy', width:'100vw',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center',minHeight:50};
+const heading = {color:'white',letterSpacing:'0.05em'};
+const section = {background:'silver',minHeight:80,width:'calc(100%-10px)',marginBottom:5,display:'flex',flexDirection:'column',alignItems:'center'};
+const logoHolder = {display:'flex',alignItems:'center',textAlign:'left',flexDirection:'column',width:310};
+const logo = {fontSize:70,marginTop:5,marginLeft:5};
+const text = {fontSize:25,textDecoration:'none',maxWidth:310};
+const buttonHolder = {display:'flex',flexDirection:'column',justifyContent:'space-evenly',alignItems:'center',background:'silver',height:100,marginBottom:5};
+const input = {width:260,height:50,fontSize:35,border:'solid black',textAlign:'center'};   
+const button = {fontSize:25,width:160,height:40,background:'black',color:'white',borderRadius:'25%',marginRight:5};
 
 class Contact extends Component {
     constructor(props){
@@ -150,44 +162,44 @@ class Contact extends Component {
         // console.log(1111,this.props,this.state)
         const {viewedUserId} = this.props;
         return(
-            <div className="entire-contact-section">
+            <div style={body}>
                 <LoadingWrapper loaded={this.state.isLoaded}>
-                <div className="contact-header-holder">
-                    <h1 className="contact-heading">CONTACT</h1> 
+                <div style={header}>
+                    <h1 style={heading}>CONTACT</h1> 
                 </div>
-                <div className="contact-info-holder">
-                    <div className="social-media-holder">
-                        <div className="social-media-logo-and-link-container">
-                            <i className="far fa-envelope" style={{}}></i>
-                            <a href={`mailto:${this.props.userEmail}`}><p>{this.props.userEmail}</p></a>
+                <div>
+                    <div style={section}>
+                        <div style={logoHolder}>
+                            <i className="far fa-envelope" style={logo}></i>
+                            <a href={`mailto:${this.props.userEmail}`} style={text}><p>{this.props.userEmail}</p></a>
                         </div>
                     </div>
                     
                     {this.props.viewedUserId==this.props.id?
                         (this.props.phone!='' || null?
                         
-                            (<div className="contact-info-holder">
-                                <div className="social-media-holder">
-                                    <div className="social-media-logo-and-link-container">
-                                        <i class="fas fa-phone-square"></i>
-                                        <a href={`tel:${this.state.phone}`}><p>{this.props.phone}</p></a>
+                            (<div>
+                                <div style={section}>
+                                    <div style={logoHolder}>
+                                        <i className="fas fa-phone-square" style={logo}></i>
+                                        <a href={`tel:${this.state.phone}`} style={text}><p>{this.props.phone}</p></a>
                                         {this.state.editBox1}
-                                        {this.state.isEditing1?<button className="add-contact-button" onClick={()=>this.updatePhone()}>Save</button>:<button className="add-contact-button" onClick={()=>this.handleUpdatePhoneToggle()}>Update</button> }   
+                                        {this.state.isEditing1?<button style={button} onClick={()=>this.updatePhone()}>Save</button>:<button style={button} onClick={()=>this.handleUpdatePhoneToggle()}>Update</button> }   
                                     </div>
                                 </div>
                             </div>)
                             :
-                            (<div className="add-contact-button-holder">
-                                <input className="add-contact-input-box" placeholder="phone" value={this.state.phone} onChange={(e)=>this.handleInput('phone',e.target.value)}/>
-                                <button className="add-contact-button" onClick={()=>this.addPhone()}>Add phone</button>
+                            (<div style={buttonHolder}>
+                                <input style={input} placeholder="phone" value={this.state.phone} onChange={(e)=>this.handleInput('phone',e.target.value)}/>
+                                <button style={button} onClick={()=>this.addPhone()}>Add phone</button>
                             </div>))
                     :
                         (this.props.phone!=''?
-                            (<div className="contact-info-holder">
-                                <div className="social-media-holder">
-                                    <div className="social-media-logo-and-link-container">
-                                        <i class="fas fa-phone-square"></i>
-                                        <a href={`tel:${this.props.phone}`}><p>{this.props.phone}</p></a>    
+                            (<div>
+                                <div style={section}>
+                                    <div style={logoHolder}>
+                                        <i className="fas fa-phone-square" style={logo}></i>
+                                        <a href={`tel:${this.props.phone}`} style={text}><p>{this.props.phone}</p></a>    
                                     </div>
                                 </div>
                             </div>)
@@ -197,28 +209,28 @@ class Contact extends Component {
 
                     {this.props.viewedUserId==this.props.id?
                         (this.props.linkedIn != '' || null?
-                            (<div className="contact-info-holder">
-                                <div className="social-media-holder">
-                                    <div className="social-media-logo-and-link-container">
-                                        <i class="fab fa-linkedin"></i>
-                                        <a href={`${this.state.linkedIn}`}><p>{this.props.linkedIn}</p></a>
+                            (<div >
+                                <div style={section}>
+                                    <div style={logoHolder}>
+                                        <i className="fab fa-linkedin" style={logo}></i>
+                                        <a href={`${this.state.linkedIn}`} style={text}><p>{this.props.linkedIn}</p></a>
                                         {this.state.editBox2}
-                                        {this.state.isEditing2?<button className="add-contact-button" onClick={()=>this.updateLinkedIn()}>Save</button>:<button className="add-contact-button" onClick={()=>this.handleUpdateLinkedInToggle()}>Update</button>}    
+                                        {this.state.isEditing2?<button style={button} onClick={()=>this.updateLinkedIn()}>Save</button>:<button style={button} onClick={()=>this.handleUpdateLinkedInToggle()}>Update</button>}    
                                     </div>
                                 </div>
                             </div>)
                             :
-                            (<div className="add-contact-button-holder">
-                                <input className="add-contact-input-box" placeholder="LinkedIn" value={this.state.linkedIn} onChange={(e)=>this.handleInput('linkedIn',e.target.value)}/>
-                                <button className="add-contact-button" onClick={()=>this.addLinkedIn()}>Add LinkedIn</button>
+                            (<div style={buttonHolder}>
+                                <input style={input} placeholder="LinkedIn" value={this.state.linkedIn} onChange={(e)=>this.handleInput('linkedIn',e.target.value)}/>
+                                <button style={button} onClick={()=>this.addLinkedIn()}>Add LinkedIn</button>
                             </div>))
                     :
                     (this.props.linkedIn!=''?
-                        (<div className="contact-info-holder">
-                            <div className="social-media-holder">
-                                <div className="social-media-logo-and-link-container">
-                                    <i class="fab fa-linkedin"></i>
-                                    <a href={`${this.props.linkedIn}`}><p>{this.props.linkedIn}</p></a>    
+                        (<div>
+                            <div style={section}>
+                                <div style={logoHolder}>
+                                    <i className="fab fa-linkedin" style={logo}></i>
+                                    <a href={`${this.props.linkedIn}`} style={text}><p>{this.props.linkedIn}</p></a>    
                                 </div>
                             </div>
                         </div>)
@@ -228,10 +240,10 @@ class Contact extends Component {
                     }
                     
 
-                    <div className="social-media-holder">
-                        <div className="social-media-logo-and-link-container">
-                            <i class="far fa-comment"></i>
-                            <Link to={`/chat/${viewedUserId}`}><a href='/'><p>Chat with {this.props.userFirstName}</p></a></Link>
+                    <div style={section}>
+                        <div style={logoHolder}>
+                            <i className="far fa-comment" style={logo}></i>
+                            <Link to={`/chat/${viewedUserId}`} style={text}><a href='/'><p>Chat with {this.props.userFirstName}</p></a></Link>
                         </div>
                     </div>
                 </div>
