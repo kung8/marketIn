@@ -716,7 +716,7 @@ footer {
     width: 100px;
     height: 100px;
     animation: spin 2s linear infinite;
-  }
+}
   
   @keyframes spin {
     0% { transform: rotate(0deg); }

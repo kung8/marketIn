@@ -1,9 +1,11 @@
 import React from 'react';
 
+const body = {display:'flex',flexDirection:'column',alignItems:'center'}
+
 export default function LoadingWrapper ({children,loaded}){
     return(
-        <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-            {loaded?children:<div className="loader"></div>}
+        <div style={body}>
+            {loaded?children:<div className='loader'></div>}
         </div>
     )
 }
