@@ -4,6 +4,11 @@ import {connect} from 'react-redux';
 import {updateUser} from '../../ducks/userActions';
 import axios from 'axios';
 
+const body = {marginTop:80,height:464,width:320,display:'flex',flexDirection:'column',justifyContent:'space-evenly',alignItems:'center',flexWrap:'wrap',background:'silver',fontSize:30}
+const input = {marginTop:40,minHeight:50,width:250,fontSize:35,border:'solid black'}
+const button = {height:40,width:160,fontSize:35,background:'black',color:'white',border:'black'};
+const link = {color:'black',textDecoration:'none'};
+
 class Auth extends Component {
     constructor(props){
         super(props);
@@ -37,13 +42,11 @@ class Auth extends Component {
     render (){
         // console.log(1111,this.props)
         return (
-            <div className="login-page">
-                <input className="login-input" type="text" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>
-                <input className="login-input" type="password" placeholder="Password" onChange={(e)=>this.handleInput('password',e.target.value)}/>
-                <button className="login-button" onClick={this.login}>Login</button>
-                {/* <Link to='/profile/'><button className="login-button" onClick={this.login}>Login</button></Link> */}
-                {/* <Link to={`/profile/${user.data.id}`}><button className="login-button" onClick={this.login}>Login</button></Link> */}
-                <Link to='/register/step1' style={{color:'black',textDecoration:'none'}}>Create an Account</Link>
+            <div style={body}>
+                <input style={input} type="text" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>
+                <input style={input} type="password" placeholder="Password" onChange={(e)=>this.handleInput('password',e.target.value)}/>
+                <button style={button} onClick={this.login}>Login</button>
+                <Link to='/register/step1' style={link}>Create an Account</Link>
             </div> 
         )
     }
