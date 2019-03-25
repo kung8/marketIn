@@ -23,13 +23,11 @@ const pgPool = new pg.Pool({
     connectionString:CONNECTION_STRING
 }) 
 
-
 massive(CONNECTION_STRING).then(db=>{
     app.set('db',db);
     console.log("db is running!");
   });
 
-// app.listen(SERVER_PORT,()=>{console.log(`Go,go,go...${SERVER_PORT}`)})
 const io = socket(app.listen(SERVER_PORT,()=>{console.log(`Go,go,go...${SERVER_PORT}`)}))
   
 app.use(session({
@@ -65,22 +63,15 @@ app.get('/api/signs3', (req, res) => {
   
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
       if (err) {
-        // console.log(err);
         return res.end();
       }
       const returnData = {
         signedRequest: data,
         url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
       };
-      // console.log(returnData)
       return res.send(returnData);
     });
   });
-
-
-
-
-
 
 // Sockets
 io.on('connection', function(socket){
@@ -88,9 +79,7 @@ io.on('connection', function(socket){
   
   //receives a request to start/join a chat
   socket.on('startChat', async function(data){
-    // console.log(data);
     const {chatRoom,id,viewedUserId} = data
-    //I will need to bring in db to access the db
     const db = app.get('db'); 
     let room = await db.chat.check_room({id:chatRoom})
     room = room[0]
@@ -120,54 +109,29 @@ io.on('connection', function(socket){
       console.log(1111,messages)
       io.to(chatRoom).emit('startChat', messages)
     }
-        //I will need to do a db request to check the room, 
-          //if it does not exist I will need to create a room 
-          //and if it does exist I should pull that chat history
-
-    //send message history back to the user
   });
 
   //receives the message and then re-emits its to the chatRoom
   socket.on('sendMsg', async function(data){
     console.log(data)
-    //bring in db to access db
     const {userId,message,chat,date,time,imageUrl} = data;
     const db = app.get('db')
     let messages = await db.chat.create_message({room_id:chat,message,user_id:userId,date,time,image_url:imageUrl})
-    //create message sql request (pass in all the info to be stored in the messages table -- room_id,message,time,date,user_id,data, and probably should join with the room table)
-    messages = messages.map(message=>{
-      let color1 = 'lightblue'
-      let color2 = 'lightgreen'
-      for(let key in message){
-        if(data.userId==message.user_id){
-          message.color = color1
-          return message
-        } else {
-          message.color = color2
-          return message
+      messages = messages.map(message=>{
+        let color1 = 'lightblue'
+        let color2 = 'lightgreen'
+        for(let key in message){
+          if(data.userId==message.user_id){
+            message.color = color1
+            return message
+          } else {
+            message.color = color2
+            return message
+          }
         }
-      }
-      return message
-    }
-      )
-    //return all the messages from that match the room id
-    
-    // if(data.userId==userId){
-    //   color = color1
-    // } else {
-    //   color = color2
-    // }
-
-    // let messages = {
-    //   message:data.message,
-    //   userId:data.userId,
-    //   date:data.date,
-    //   time:data.time,
-    //   chat:data.chat,
-    //   imageUrl:data.imageUrl,
-    //   color:color
-    // }
-    console.log(1111,messages)
+        return message
+      })
+     
     io.to(data.chat).emit('updateMsg',messages)
   })
 
@@ -176,11 +140,7 @@ io.on('connection', function(socket){
     console.log(chatRoom)
     socket.leave(chatRoom);
   })
-
 })
-
-
-
 
 //userController ENDPOINTS
 app.post('/auth/register',userCtrl.register);

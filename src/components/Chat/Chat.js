@@ -56,14 +56,11 @@ class Chat extends Component {
 
 
         this.socket.on('sendMsg',(message)=>{
-            // console.log(111,message,typeof message)
             let messages = this.state.messages
-            // console.log(222,messages);
             this.setState({
                 messages,
                 message:''
             })
-            // console.log(this.state.messages)
         })
     }
     
@@ -86,7 +83,6 @@ class Chat extends Component {
         }
 
         const chatRoom = userA + '-' + userZ;
-        // console.log(userA,userZ,chatRoom);
         this.setState({
             chat:chatRoom,
         })
@@ -105,7 +101,6 @@ class Chat extends Component {
         let month = date.getMonth();
         let d = date.getDate();
         let wk = date.getDay();
-        console.log(wk)
         wk = this.formatDay(wk)
         let yr = date.getFullYear();
         month = this.formatMonth(month)
@@ -123,38 +118,28 @@ class Chat extends Component {
         this.socket.disconnect();
     }
 
-    formatHour=(hr,min)=>{
-        console.log(hr,min)
-        
+    formatHour=(hr,min)=>{        
         if(hr == 0 ){
-            console.log('hit1')
             if(min<10){
                 return min = `0${min}`
             }
             return hr = `12:${min} AM`
         } else if(13 < hr < 23){
-            console.log('hit2',hr)
             hr = hr - 12
-            console.log(hr)
             if(min<10){
-                console.log(min)
                 return min = `0${min}`
             }
-            console.log(min,hr)
             return hr = `${hr}:${min} PM` 
         } else if (0 < hr < 12 && !12){
-            console.log('hit3',hr)
             if(min<10){
                 return min = `0${min}`
             }
             return hr = `${hr}:${min} AM` 
         } else if (hr === 12){
-            console.log('hit4')
             if(min<10){
                 return min = `0${min}`
             }
             return hr = `${hr}:${min} PM`
-
         }
     }
 
@@ -174,7 +159,6 @@ class Chat extends Component {
                 return wk = "Fri";
             case 6:
                 return wk = "Sat";
-
         }
     }
 
@@ -209,7 +193,6 @@ class Chat extends Component {
 
     render (){
         const {color} = this.state;
-        
         const messages = this.state.messages.map((message)=>{
             //if time exist don't display, if the date exists already don't display again
             // let date = [];
