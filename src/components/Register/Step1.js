@@ -3,6 +3,12 @@ import {connect} from 'react-redux';
 import {updateUser} from '../../ducks/userActions';
 import axios from 'axios';
 
+const body = {display:'flex',flexDirection:'column',height:467,width:'100%',justifyContent:'space-evenly',alignItems:'center',background:'silver'}
+const input = {height:40,fontSize:20,width:260,border:'solid black'};
+const buttonHolder = {width:'90%',display:'flex',justifyContent:'space-between',marginBottom:10};
+const cancel = {width:100,height:40,background:'black',fontSize:30,color:'white'};
+const register = {width:140,height:40,background:'black',fontSize:30,color:'white'};
+
 class StepOne extends Component {
     constructor(props){
         super(props);
@@ -16,15 +22,12 @@ class StepOne extends Component {
     };
     
     componentDidMount(){
-        // const {firstName,lastName,email,password,imageUrl} = this.props;
-        // this.props.updateUser(firstName,lastName,email,password,imageUrl);
     }
 
     handleInput(prop,value){
         this.setState({
             [prop]:value
         });
-        // console.log(123,prop,value)
     }
 
         register =async()=>{
@@ -77,40 +80,42 @@ class StepOne extends Component {
     render (){
         const {firstName,lastName,email,password,imageUrl} = this.state;
         return (
-            <div className="basic-info-register-container">
+            <div style={body}>
                 <h1>Basic Info</h1>
                 <input 
                     value={firstName} 
                     placeholder="First Name" 
                     onChange={(e)=>this.handleInput('firstName',e.target.value)}
+                    style={input}
                     />
                 <input 
                     value={lastName} 
                     placeholder="Last Name" 
                     onChange={(e)=>this.handleInput('lastName',e.target.value)}
+                    style={input}
                     />
                 <input 
                     value={email}
                     placeholder="Email" 
-                    // require 
-                    // minLength='2'
-                    // maxLength='50'
                     onChange={(e)=>this.handleInput('email',e.target.value)}
+                    style={input}
                     />
                 <input 
                     value={password} 
                     type="password"
                     placeholder="Password" 
                     onChange={(e)=>this.handleInput('password',e.target.value)}
+                    style={input}
                     />
                 <input 
                     value={imageUrl} 
                     placeholder="Image URL" 
                     onChange={(e)=>this.handleInput('imageUrl',e.target.value)}
+                    style={input}
                     />
-                <div className="cancel-register-button-container">
-                    <button className="cancel-button" onClick={this.cancel}>Cancel</button>  
-                    <button className="register-button" onClick={()=>{this.register(firstName,lastName,email,password,imageUrl)}}>Register</button>
+                <div style={buttonHolder}>
+                    <button style={cancel} onClick={this.cancel}>Cancel</button>  
+                    <button style={register} onClick={()=>{this.register(firstName,lastName,email,password,imageUrl)}}>Register</button>
                 </div>
             </div>
         )

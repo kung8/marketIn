@@ -5,7 +5,6 @@ import axios from 'axios';
 import LoadingWrapper from '../Loader/LoadingWrapper';
 import '../../index.css'
 import {Link} from 'react-router-dom';
-import { NONAME } from 'dns';
 
 const body = {background:'navy',marginTop:85,minHeight:426,marginBottom:5,width:'100vw'}
 const header = {background:'navy', width:'100vw',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center',minHeight:50};

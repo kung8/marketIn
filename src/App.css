@@ -6,10 +6,7 @@
 
 /********************Overall App*************/
 .App {
-    /* text-align: center; */
-    /* height:960px; */
     width:320px;
-    /* background:lightseagreen; */
     background:white;
     display:flex;
     flex-direction: column;
@@ -38,7 +35,6 @@
     height:42px;
     width: 50px;
     border:navy;
-    /* background:navy; */
     color:white;
     font-size:40px;
     font-weight:700;
@@ -51,14 +47,7 @@
     margin-right:5px;
     font-size:40px;
     color:white;
-    /* background:blue;  */
 }
-
-/* .logout-button-container {
-    /* margin-right: 20px;  */
-/* } */ 
-
-/*if mobile view put in header*/
 
 .logout-button {
     font-size:16px;
@@ -421,48 +410,6 @@ footer {
 }
 
 /*************************************Register******************************************/
-/****************Step 1****************/
-.basic-info-register-container {
-    display:flex; 
-    flex-direction:column;
-    min-height:440px;
-    width:100%;
-    justify-content: space-evenly;
-    align-items: center;
-    background:silver;
-}
-
-.basic-info-register-container input {
-    height:40px;
-    font-size:20px;
-    width:260px;
-    border:solid black;
-}
-
-.cancel-register-button-container {
-    width:90%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom:10px;
-    margin-top:0;
-}
-
-.cancel-button {
-    width:100px;
-    height:40px;
-    background:black;
-    font-size:30px;
-    color:white;
-}
-
-.register-button {
-    width:140px;
-    height:40px;
-    background:black;
-    font-size:30px;
-    color:white;
-}
-
 /****************Step 2****************/
 .education-info-register-container {
     display:flex; 
