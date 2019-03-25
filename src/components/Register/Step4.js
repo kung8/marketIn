@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {updateSkill,updateLang} from '../../ducks/userActions';
 
+const body = {display:'flex',flexDirection:'column',width:'100%',height:440,alignItems:'center',background:'silver',justifyContent:'space-evenly'}
+
+
 class StepFour extends Component {
     constructor(props){
         super(props);
@@ -72,7 +75,7 @@ class StepFour extends Component {
         const {skill,language} = this.state
         
         return (
-            <div className="skills-and-lang-info-register-container">
+            <div style={body}>
                 <div className="skills-info-register-container">
                     <h1>Skills</h1>
                     <input 

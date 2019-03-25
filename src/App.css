@@ -410,7 +410,6 @@ footer {
 }
 
 /*************************************Register******************************************/
-/****************Step 3****************/
 .previous-next-button-register-container {
     width:290px;
     display: flex;
@@ -435,18 +434,7 @@ footer {
     color:white;
 }
 
-
 /****************Step 4****************/
-.skills-and-lang-info-register-container {
-    display:flex; 
-    flex-direction:column;
-    width:100%;
-    justify-content: space-evenly;
-    align-items: center;
-    background:silver;
-    height:440px;
-}
-
 .skills-info-register-container {
     margin-top:5px;
     display:flex; 
@@ -454,7 +442,6 @@ footer {
     width:100%;
     min-height:170px;
     align-items: center;
-    /* background:purple; */
 }
 
 .skills-info-register-container > input {
