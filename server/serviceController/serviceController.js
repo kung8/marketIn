@@ -54,8 +54,9 @@ module.exports={
     },
 
     createPayment:(req,res)=>{
+        const db = req.app.get('db')
         console.log(req.body);
-        const {token:{id},amount} = req.body;
+        const {token:{id},amount,id:payer_id,viewedUserId:paid_id,service} = req.body;
         stripe.charges.create(
             {
                 amount:amount,
@@ -69,9 +70,15 @@ module.exports={
                     return res.status(500).send(err)
                 } else {
                     console.log(charge)
+                    db.payments.create_payment({payer_id,amount,paid_id,service})
                     return res.status(200).send(charge)
                 }
             }
         )
+    },
+
+    getPayments:(req,res)=>{
+        const db = req.app.get('db');
+        
     }
 }

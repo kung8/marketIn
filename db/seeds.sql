@@ -86,3 +86,11 @@ room_id INT REFERENCES rooms(id),
 user_id INT,
 image_url TEXT
 )
+
+create table payments (
+id SERIAL PRIMARY KEY,
+payer_id INT REFERENCES users(id),
+paid_id INT REFERENCES users(id),
+service VARCHAR,
+amount VARCHAR
+)

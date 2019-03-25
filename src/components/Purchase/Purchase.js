@@ -31,11 +31,11 @@ class Purchase extends Component {
         console.log(token)
         token.card = void 0
         console.log(token)
-        axios.post('/api/payment', {token, amount: this.state.amount}).then(res => {
+        const {id,userFirstName,userLastName,price,viewedUserId,service} = this.props;
+        axios.post('/api/payment', {token, amount: this.state.amount,id,viewedUserId,service}).then(res => {
             console.log(111,res)
-            const {firstName,lastName,id,userFirstName,userLastName,price} = this.props;
-            alert(`Congratulations you paid ${userFirstName} ${userLastName} $${price}!`)
-            this.props.history.push(`/services/${this.props.viewedUserId}`)
+            alert(`Congratulations you paid ${userFirstName} ${userLastName} $${price} for ${service}!`)
+            this.props.history.push(`/services/${viewedUserId}`)
         })
     }
 
