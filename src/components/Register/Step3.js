@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {updateWork} from '../../ducks/userActions';
 
+const body = {display:'flex',flexDirection:'column',width:'100%',minHeight:260,alignItems:'center',background:'silver'}
+const input = {height:40,fontSize:20,width:260,border:'black solid',marginTop:5};
+const add  = {height:30,background:'black',color:'white',marginTop:-10,width:200,fontSize:20,border:'solid black'};
+
 class StepThree extends Component {
     constructor (props){
         super(props);
@@ -17,17 +21,6 @@ class StepThree extends Component {
     }
 
     componentDidMount () {
-    //     if(this.props.work[0]){
-    //         let lastIndex = this.props.work.length - 1;
-    //         this.setState({
-    //             empName:this.props.work[lastIndex].empName,
-    //             position:this.props.work[lastIndex].position,
-    //             empLoc:this.props.work[lastIndex].empLoc,
-    //             hireDate:this.props.work[lastIndex].hireDate,
-    //             endDate:this.props.work[lastIndex].endDate,
-    //             empLogo:this.props.work[lastIndex].empLogo
-    //         })
-    //     }
     }
 
     handleInput(prop,value){
@@ -79,51 +72,51 @@ class StepThree extends Component {
         const {empName,position,empLoc,hireDate,endDate,empLogo} = this.state
 
         return (
-            <div className="work-info-register-container">
+            <div style={body}>
                 <h1>Work Experience</h1>
-                {/* <h3>Employer</h3> */}
                 <input 
                     placeholder="Employer Name" 
                     value={empName} 
                     onChange={(e)=>{this.handleInput('empName',e.target.value)}}
+                    style={input}
                     />
-                {/* <h3>Position</h3> */}
                 <input 
                     placeholder="Position" 
                     value={position} 
                     onChange={(e)=>{this.handleInput('position',e.target.value)}}
+                    style={input}
                     />
-                {/* <h3>Location</h3> */}
                 <input 
                     placeholder="Location" 
                     value={empLoc} 
                     onChange={(e)=>{this.handleInput('empLoc',e.target.value)}}
+                    style={input}
                     />
 
-                {/* <h3>Hire Date</h3> */}
                 <input 
                     placeholder="Hire Date" 
                     value={hireDate} 
                     onChange={(e)=>{this.handleInput('hireDate',e.target.value)}}
+                    style={input}
                     />
 
-                {/* <h3>End Date</h3> */}
                 <input 
                     placeholder="End Date" 
                     value={endDate} 
                     onChange={(e)=>{this.handleInput('endDate',e.target.value)}}
+                    style={input}
                     />
 
-                {/* <h3>Employer Logo</h3> */}
                 <input 
                     placeholder="Employer Logo" 
                     value={empLogo} 
                     onChange={(e)=>{this.handleInput('empLogo',e.target.value)}}
+                    style={input}
                     />
                 <br/>
                 <br/>
 
-                <button onClick={this.handleAddWork}>Add Another Job</button>
+                <button onClick={this.handleAddWork} style={add}>Add Another Job</button>
                 <br/>
                 <br/>
                 <div className="previous-next-button-register-container">
