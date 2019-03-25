@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { wrap } from 'module';
 
 const body = {background:'navy',marginTop:85,display:'flex',flexDirection:'column',height:452,marginBottom:5,maxWidth:320,alignItems:'center'}
 const header = {width:'100vw',display:'flex',textAlign:'center',alignItems:'center',justifyContent:'center',minHeight:50}
@@ -59,7 +60,7 @@ class Purchase extends Component {
                 </div>
                 <div style={section}>
                     <img style={image} src={this.props.serviceImg} />
-                    <h1 style={{color:'black'}}>{this.props.service}</h1>
+                    <h1 style={{textAlign: 'center'}}>{this.props.service}</h1>
                     <h1>{this.props.price}</h1>
                 <StripeCheckout 
                     name="MarketIn" // the pop-in header title
