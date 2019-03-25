@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import routes from './routes';
 import { withRouter } from 'react-router-dom';
 
+const contact = {fontSize:"24px",color:"white",textDecoration:"none"}
+
 class App extends Component {
 
   render() {
@@ -18,8 +20,7 @@ class App extends Component {
         </div>
         <footer>
           <h6>Copyright@Kevin Ung</h6>
-          {/* <a href="/kevinung8.com" style={{fontSize:"20px",color:"white",textDecoration:"none"}}>About</a> */}
-          <a href='mailto:ung.kevin78@gmail.com' style={{fontSize:"24px",color:"white",textDecoration:"none"}}><h6>Contact</h6></a>
+          <a href='mailto:ung.kevin78@gmail.com' style={contact}><h6>Contact</h6></a>
         </footer>
       </div>
     );
