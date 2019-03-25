@@ -1,56 +1,63 @@
 import React,{Component} from 'react'
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class Purchase extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
-            amount:1234
+            amount:0
         }
     }
 
+    componentDidMount(){
+        const {price} = this.props
+        this.updatePrice(price)
+    }
+
+    updatePrice(){
+        let {price} = this.props
+        // console.log(price,typeof price)
+        price = +price
+        // console.log(price,typeof price)
+        this.setState({
+            amount:price
+        })
+    }
+
     onToken = (token) => {
+        console.log('hit!')
+        console.log(token)
         token.card = void 0
+        console.log(token)
         axios.post('/api/payment', {token, amount: this.state.amount}).then(res => {
-            console.log(res)
+            console.log(111,res)
+            const {firstName,lastName,id,userFirstName,userLastName,price} = this.props;
+            alert(`Congratulations you paid ${userFirstName} ${userLastName} $${price}!`)
+            this.props.history.push(`/services/${this.props.viewedUserId}`)
         })
     }
 
     render(){
+        console.log(this.props,this.state)
+
         return(
             <div style={{marginTop:85,display:'flex',flexDirection:'column',maxWidth:320,alignItems:'center',minHeight:458}}>
                 I'm the Purchase Page
+                <img src={this.props.serviceImg} />
+                <h1 style={{color:'black'}}>{this.props.service}</h1>
+                <h1>{this.props.price}</h1>
+                {/* <h1>{this.props.serviceId}</h1> */}
                 <StripeCheckout 
                     name="MarketIn" // the pop-in header title
                     description="Portfolio-Services" // the pop-in header subtitle
-                    image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png" // the pop-in header image (default none)
-                    ComponentClass="div"
-                    panelLabel="Give Money" // prepended to the amount in the bottom pay button
-                    amount={1000000} // cents
-                    currency="USD"
-                    stripeKey={process.env.REACT_APP_STRIPE_KEY}
-                    locale="zh"
-                    email="ung.kevin78@gmail.com"
-                    // Note: Enabling either address option will give the user the ability to
-                    // fill out both. Addresses are sent as a second parameter in the token callback.
+                    stripeKey={'pk_test_WCJGhSe8G7i69w9NCh3urRwl000YKzkqwp'}
                     shippingAddress
-                    billingAddress={false}
-                    // Note: enabling both zipCode checks and billing or shipping address will
-                    // cause zipCheck to be pulled from billing address (set to shipping if none provided).
-                    zipCode={false}
-                    alipay // accept Alipay (default false)
-                    bitcoin // accept Bitcoins (default false)
-                    allowRememberMe // "Remember Me" option (default true)
+                    billingAddress
+                    zipCode
                     token={this.onToken} // submit callback
-                    opened={this.onOpened} // called when the checkout popin is opened (no IE6/7)
-                    closed={this.onClosed} // called when the checkout popin is closed (no IE6/7)
-                    // Note: `reconfigureOnUpdate` should be set to true IFF, for some reason
-                    // you are using multiple stripe keys
-                    reconfigureOnUpdate={false}
-                    // Note: you can change the event to `onTouchTap`, `onClick`, `onTouchStart`
-                    // useful if you're using React-Tap-Event-Plugin
-                    triggerEvent="onTouchTap"
+                    amount={this.state.amount}
                     >
                     <button className="btn btn-primary">
                         Checkout
@@ -61,5 +68,19 @@ class Purchase extends Component {
     }
 }
 
+function mapStateToProps(reduxState){
+    return{
+        price:reduxState.price,
+        service:reduxState.service,
+        serviceId:reduxState.serviceId,
+        serviceImg:reduxState.serviceImg,
+        viewedUserId:reduxState.viewedUserId,
+        firstName:reduxState.firstName,
+        lastName:reduxState.lastName,
+        id:reduxState.id,
+        userFirstName:reduxState.userFirstName,
+        userLastName:reduxState.userLastName
+    }
+}
 
-export default Purchase
+export default connect(mapStateToProps)(Purchase)

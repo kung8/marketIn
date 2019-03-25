@@ -224,6 +224,7 @@ app.post('/service/add',serviceCtrl.addService);
 app.put('/service/update/:id',serviceCtrl.updateService);
 app.delete('/service/delete/:id',serviceCtrl.deleteService);
 app.get('/services/getAll',serviceCtrl.getAllServices);
+app.post('/api/payment',serviceCtrl.createPayment);
 
 //contactController ENDPOINTS
 app.get('/contact/get/:userId',contactCtrl.getContact);
@@ -231,3 +232,4 @@ app.post('/contact/add/phone/:id',contactCtrl.addPhone);
 app.post('/contact/add/linkedin/:id',contactCtrl.addLinkedIn);
 app.put('/contact/update/phone/:id',contactCtrl.updatePhone);
 app.put('/contact/update/linkedin/:id',contactCtrl.updateLinkedIn);
+

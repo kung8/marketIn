@@ -1,4 +1,4 @@
-import {UPDATE_VIEWED_USER,UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT,CLEAR_USER, UPDATE_SERVICES, UPDATE_PHONE, UPDATE_LINKEDIN} from './constants'
+import {COLLECT_SERVICE,UPDATE_VIEWED_USER,UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT,CLEAR_USER, UPDATE_SERVICES, UPDATE_PHONE, UPDATE_LINKEDIN} from './constants'
 
 
 const initialState = {
@@ -19,7 +19,11 @@ const initialState = {
     userImageUrl:'',
     services:[],
     phone:'',
-    linkedIn:''
+    linkedIn:'',
+    service:'',
+    price:0,
+    serviceId:0,
+    serviceImg:''
 }
 
 export default function userReducer(state = initialState,action){
@@ -55,9 +59,12 @@ export default function userReducer(state = initialState,action){
             return {...state,phone:action.payload}
         case UPDATE_LINKEDIN:    
             return {...state,linkedIn:action.payload}
+        case COLLECT_SERVICE:
+            const {service,price,id:serviceId,image:serviceImg} = action.payload
+            return {...state,service,price,serviceId,serviceImg}
         case CLEAR_USER:
             // console.log(7777,state); 
-            return {...state,firstName:'',lastName:'',email:'',imageUrl:'',id:0,education:[],work:[],skills:[],languages:[],projects:[],userEmail:'',userFirstName:'',userLastName:'',userImageUrl:'',viewedUserId:'',phone:'',linkedIn:''}
+            return {...state,firstName:'',lastName:'',email:'',imageUrl:'',id:0,education:[],work:[],skills:[],languages:[],projects:[],userEmail:'',userFirstName:'',userLastName:'',userImageUrl:'',viewedUserId:'',phone:'',linkedIn:'',price:0,service:'',serviceId:0,serviceImg:''}
         default: 
             return state
     }

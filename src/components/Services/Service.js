@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {updateServices} from '../../ducks/userActions';
+import {updateServices,collectService} from '../../ducks/userActions';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import { v4 as randomString } from 'uuid';
@@ -151,6 +151,11 @@ class Service extends Component {
           });
       };
 
+    handlePurchase(serv){
+        console.log(222,serv)
+        this.props.collectService(serv)
+        this.props.history.push('/purchase')
+    }
 
     render() {
         const {serv} = this.props;
@@ -180,7 +185,8 @@ class Service extends Component {
                             <button className="delete-service-button" onClick={()=>{this.props.delete(serv)}}>Delete</button>  
                         </div>):
                         (<div className='purchase-chat-buttons-container'>
-                            <Link to='/purchase'><button className="purchase-service-button">Purchase</button></Link>
+                            <button className="purchase-service-button" onClick={()=>this.handlePurchase(serv)}>Purchase</button>
+                            {/* <Link to='/purchase'><button className="purchase-service-button" onClick={()=>this.handlePurchase(serv)}>Purchase</button></Link> */}
                             <Link to='/chat'><button className="add-save-edit-button">Chat</button></Link>
                         </div>)}
             </div>
@@ -197,4 +203,4 @@ function mapStateToProps(reduxState){
     }
 }
 
-export default withRouter(connect(mapStateToProps, {updateServices})(Service));
+export default withRouter(connect(mapStateToProps, {updateServices,collectService})(Service));
