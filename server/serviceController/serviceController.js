@@ -77,8 +77,12 @@ module.exports={
         )
     },
 
-    getPayments:(req,res)=>{
+    getPayments: async (req,res)=>{
         const db = req.app.get('db');
-        
+        console.log("hit",req.params);
+        const {id} = req.params;
+        const payments = await db.payments.get_payments({payer_id:id,paid_id:id})
+        console.log(payments)
+        res.status(200).send(payments)
     }
 }

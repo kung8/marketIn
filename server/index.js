@@ -225,6 +225,7 @@ app.put('/service/update/:id',serviceCtrl.updateService);
 app.delete('/service/delete/:id',serviceCtrl.deleteService);
 app.get('/services/getAll',serviceCtrl.getAllServices);
 app.post('/api/payment',serviceCtrl.createPayment);
+app.get('/api/get/payments/:id',serviceCtrl.getPayments)
 
 //contactController ENDPOINTS
 app.get('/contact/get/:userId',contactCtrl.getContact);

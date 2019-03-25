@@ -153,12 +153,13 @@ class Service extends Component {
 
     handlePurchase(serv){
         console.log(222,serv)
-        this.props.collectService(serv)
-        this.props.history.push('/purchase')
+        const {viewedUserId} = this.props;
+        this.props.collectService(serv);
+        this.props.history.push(`/purchase/${viewedUserId}`)
     }
 
     render() {
-        const {serv} = this.props;
+        const {serv,viewedUserId} = this.props;
         return (
             <div className="service-section-box">
                     {this.state.isEditOpened?
@@ -187,7 +188,7 @@ class Service extends Component {
                         (<div className='purchase-chat-buttons-container'>
                             <button className="purchase-service-button" onClick={()=>this.handlePurchase(serv)}>Purchase</button>
                             {/* <Link to='/purchase'><button className="purchase-service-button" onClick={()=>this.handlePurchase(serv)}>Purchase</button></Link> */}
-                            <Link to='/chat'><button className="add-save-edit-button">Chat</button></Link>
+                            <Link to={`/chat/${viewedUserId}`}><button className="add-save-edit-button">Chat</button></Link>
                         </div>)}
             </div>
         )

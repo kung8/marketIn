@@ -148,6 +148,7 @@ class Contact extends Component {
 
     render(){
         // console.log(1111,this.props,this.state)
+        const {viewedUserId} = this.props;
         return(
             <div className="entire-contact-section">
                 <LoadingWrapper loaded={this.state.isLoaded}>
@@ -230,7 +231,7 @@ class Contact extends Component {
                     <div className="social-media-holder">
                         <div className="social-media-logo-and-link-container">
                             <i class="far fa-comment"></i>
-                            <Link to='/chat'><a href='/'><p>Chat with {this.props.userFirstName}</p></a></Link>
+                            <Link to={`/chat/${viewedUserId}`}><a href='/'><p>Chat with {this.props.userFirstName}</p></a></Link>
                         </div>
                     </div>
                 </div>
