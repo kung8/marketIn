@@ -29,7 +29,6 @@ class Skill extends Component {
     }
 
     handleInput(prop,value){
-        // console.log(555,prop,value)
         this.setState({
             [prop]:value
         })
@@ -39,18 +38,13 @@ class Skill extends Component {
         return(
             <input value={this.state.skill} className="edit-input-box" onChange={(e)=>this.handleInput('skill',e.target.value)}/>
         )
-
     }
-
-    
 
     async edit(oldSkill){
         const {id,user_id} = oldSkill;
-        // console.log(333,this.state.skill,id,user_id);
         const {skill} = this.state;
         if(skill !==""){
             const skillsProfile = await axios.put('/profile/edit/skill',{skill,id,user_id})
-            // console.log(444,skillsProfile.data[0].skill)
             if(this._isMount){
                 this.props.updateSkill(skillsProfile.data)
                 this.setState({

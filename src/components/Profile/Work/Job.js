@@ -62,10 +62,7 @@ class Job extends Component {
         const {empName,empLoc,position,empLogo,hireDate,endDate} = this.state;
         if(empName !== '' || empLoc !== '' || position !== '' || empLogo !== '' || hireDate !== '' || endDate !=='' ){
             const {id,user_id} = job;
-            // console.log(user_id)
-            // console.log(333,this.state.skill,id,user_id);
             const workProfile = await axios.put('/profile/edit/work',{empName,empLoc,position,empLogo,hireDate,endDate,id,user_id})
-            // console.log(444,workProfile.data[0])
             this.props.updateWork(workProfile.data)
             if(this._isMount){
                 this.setState({
@@ -95,8 +92,6 @@ class Job extends Component {
 
     render (){
         const {job} = this.props
-        // console.log(this.props.match.params.userId,this.props.id)
-        // console.log(job)
         return (
             <div>
                 <div className="large-experience-box-top">

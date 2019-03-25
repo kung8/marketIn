@@ -14,19 +14,13 @@ class StepFive extends Component {
 
 
     componentDidMount(){
-        // console.log(7777,this.props.skills,this.props)
-        // if(this.props.skills){
-        //     this.setState({
-        //         skill:this.props.skill(this.props.skills.length-1)
-        //     })
-        // }
+
     }
 
     handleInput(prop,value){
         this.setState({
             [prop]:value
         })
-        // console.log(111,prop,value)
     }
     
     handleAddProject(){
@@ -47,7 +41,6 @@ class StepFive extends Component {
        }
 
     async completeProfile(){
-        // console.log(this.props.id)
         const {projects,project} = this.state;
 
         if(project !== '' ){
@@ -56,13 +49,11 @@ class StepFive extends Component {
         }
         
         const {skills,languages,work,education,id} = this.props;
-        // console.log(education,languages,work,skills)
         await axios.post('/profile/create',{education,work,skills,languages,projects})
         this.props.history.push(`/profile/${id}`)
     }
 
     render (){
-        // console.log(5555,this.props)
         const {project,projects} = this.state
         const {education,work,skills,languages,id} = this.props;
         return (
@@ -88,7 +79,6 @@ class StepFive extends Component {
 }
 
 function mapStateToProps(reduxState){
-//    console.log(reduxState.education)
     return {
         education:reduxState.education,
         skills:reduxState.skills,

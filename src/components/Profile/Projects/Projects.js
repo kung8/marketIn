@@ -56,11 +56,9 @@ class Projects extends Component {
     
         addToProj=async()=>{
             const {project,projects} = this.state;
-            // console.log('hit')
             if(project !== ''){
                 projects.push({project});
                 let projProfile = await axios.post('/profile/create/project',{project})
-                // console.log(5555,projProfile)
                 if(this._isMount){
                     await this.props.updateProject(projProfile.data);
                     this.setState({
@@ -97,7 +95,6 @@ class Projects extends Component {
     render () {
         const {projects} = this.props;
         const projProfile = projects.map(proj =>{
-            // console.log(3333,proj)
             return (
                 <Project 
                     key={proj.id}

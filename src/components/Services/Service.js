@@ -37,7 +37,6 @@ class Service extends Component {
         this.setState({
             [prop]:value
         })
-        // console.log(prop,value)
     }
 
     handleEditToggle(serv){
@@ -89,7 +88,6 @@ class Service extends Component {
     edit= async (serv)=>{
         const {price,image,service} = this.state;
         const {id} = serv;
-        // console.log(55,service,price,image,id);
         this.props.edit(service,price,image,id)
                 this.setState({
                     isEditing:false,
@@ -132,11 +130,8 @@ class Service extends Component {
           .then(response => {
               let imgUrl = response.config.url;
               imgUrl = imgUrl.substring(0,imgUrl.indexOf('?'))
-            //   console.log(77777,response,response.config.url,imgUrl)
             this.setState({picLoaded:true,image:imgUrl,picLoaded:false,isLoaded:false});
-            // console.log(888,this.state.img,this.state.url)
 
-            // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
           })
           .catch(err => {
             this.setState({
@@ -155,7 +150,6 @@ class Service extends Component {
       };
 
     handlePurchase(serv){
-        console.log(222,serv)
         const {viewedUserId} = this.props;
         this.props.collectService(serv);
         this.props.history.push(`/purchase/${viewedUserId}`)
@@ -190,7 +184,6 @@ class Service extends Component {
                         </div>):
                         (<div className='purchase-chat-buttons-container'>
                             <button className="purchase-service-button" onClick={()=>this.handlePurchase(serv)}>Purchase</button>
-                            {/* <Link to='/purchase'><button className="purchase-service-button" onClick={()=>this.handlePurchase(serv)}>Purchase</button></Link> */}
                             <Link to={`/chat/${viewedUserId}`}><button className="add-save-edit-button">Chat</button></Link>
                         </div>)}
             </div>

@@ -75,8 +75,6 @@ app.get('/api/signs3', (req, res) => {
 
 // Sockets
 io.on('connection', function(socket){
-  console.log('working!');
-  
   //receives a request to start/join a chat
   socket.on('startChat', async function(data){
     const {chatRoom,id,viewedUserId} = data
@@ -104,16 +102,13 @@ io.on('connection', function(socket){
         return message
       }
         )
-      console.log(1111,messages)
       socket.join(chatRoom);
-      console.log(1111,messages)
       io.to(chatRoom).emit('startChat', messages)
     }
   });
 
   //receives the message and then re-emits its to the chatRoom
   socket.on('sendMsg', async function(data){
-    console.log(data)
     const {userId,message,chat,date,time,imageUrl} = data;
     const db = app.get('db')
     let messages = await db.chat.create_message({room_id:chat,message,user_id:userId,date,time,image_url:imageUrl})
@@ -137,7 +132,6 @@ io.on('connection', function(socket){
 
   //receives the request to leave the chat
   socket.on('endChat',function(chatRoom){
-    console.log(chatRoom)
     socket.leave(chatRoom);
   })
 })

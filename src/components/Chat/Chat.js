@@ -31,7 +31,6 @@ class Chat extends Component {
         this.setSocketListeners();
         this.startChat(this.props.id,this.props.viewedUserId);
         this.socket.on('startChat',messages=>{
-            console.log(222, messages)
             this.chatStarted(messages)
         })
         this.socket.on('updateMsg', messages => {
@@ -47,7 +46,6 @@ class Chat extends Component {
     }
 
     chatStarted(messages){
-        console.log('hit',messages)
         this.setState({
             messages:messages
         })
@@ -55,8 +53,6 @@ class Chat extends Component {
 
     setSocketListeners = () => {
         this.socket=io();
-        // console.log('hit!');
-
 
         this.socket.on('sendMsg',(message)=>{
             let messages = this.state.messages
@@ -68,7 +64,6 @@ class Chat extends Component {
     }
     
     startChat(me,you){
-        console.log('startChat',me,you)
         this.socket.emit('endChat',this.state.chat) //this is to make sure that you are not sending the msg to somebody else...awkward
         const {viewedUserId,id} = this.props;
         me = id;
@@ -221,11 +216,6 @@ class Chat extends Component {
                     <p style={{textAlign:'center',color:'white',fontSize:35,height:40,marginTop:0}}> Chat with {this.props.userFirstName}</p>
                 </div>
                 <div style={{display:'flex',flexDirection:'row',background:'silver',width:320,minHeight:300,justifyContent:'space-between'}}>
-                    {/* {chat} */}
-                    {/* <div> */}
-                        {/* <p>{this.props.userFirstName}{this.props.userLastName}</p> */}
-                        {/* <img src={this.props.userImageUrl} alt="Person you're chatting with" style={{width:80,height:120}}/> */}
-                    {/* </div> */}
                     <div style={{background:'silver',maxHeight:300,width:310,marginLeft:5,marginRight:5,border:'black solid',overflowWrap:"break-word",overflowY:'scroll'}}> 
                         {messages}
                     </div>
@@ -240,7 +230,6 @@ class Chat extends Component {
 }
 
 function mapStateToProps(reduxState){
-    console.log(reduxState)
     const {id,firstName,lastName,imageUrl,viewedUserId,userFirstName,userLastName,userImageUrl,} = reduxState
     return{
         id,

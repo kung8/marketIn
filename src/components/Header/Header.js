@@ -40,7 +40,6 @@ class Header extends Component {
 
     }
     render(){
-        // console.log(this.props.id)
         const {id} = this.props;
         return(
             <div className="header-container">

@@ -43,7 +43,6 @@ class School extends Component {
         this.setState({
             [prop]:value
         })
-        // console.log(prop,value)
     }
 
     handleEditToggle=()=>{
@@ -63,10 +62,7 @@ class School extends Component {
         const {schName,schLoc,major,schLogo,gradDate,edLevel} = this.state;
         if(schName !== '' || schLoc !== '' || major !== '' || schLogo !== '' || gradDate !== '' || edLevel !=='' ){
             const {id,user_id} = sch;
-            // console.log(user_id)
-            // console.log(333,this.state.skill,id,user_id);
             const edProfile = await axios.put('/profile/edit/education',{schName,schLoc,major,schLogo,gradDate,edLevel,id,user_id})
-            // console.log(444,workProfile.data[0])
             this.props.updateEducation(edProfile.data)
             if(this._isMount){
                 this.setState({

@@ -35,9 +35,6 @@ class Profile extends Component {
         this._isMount = true;
         this.getUser();
         this.checkUser();
-        // this.setState({
-        //     isLoaded2:true
-        // })
     }
 
     async checkUser() {
@@ -49,10 +46,8 @@ class Profile extends Component {
     }
 
     async getUser() {
-        // console.log('hit!',this.props.match.params.userId)
             if (this.props.match.params.userId) {
                 const userProfile = await axios.get('/profile/get/user/' + this.props.match.params.userId);
-                console.log(7777,userProfile.data);
                 this.props.updateViewedUser(userProfile.data[0])
                 this.setState({
                     isLoaded: true,
@@ -62,7 +57,6 @@ class Profile extends Component {
                     imageUrl: userProfile.data[0].image_url,
                     id: userProfile.data[0].id,
                 })
-            // }
         }
     }
 
@@ -86,7 +80,6 @@ class Profile extends Component {
                         onDropAccepted={this.getSignedRequest}
                         style={{
                             position: 'relative',
-                            // background:'red',
                             width: 150,
                             height: 180,
                             borderWidth: 7,
@@ -118,17 +111,13 @@ class Profile extends Component {
                     </Dropzone>
                     :
                     <div style={{position:'relative'}}>
-                    {/* <LoadingWrapper isLoaded={this.state.isLoaded2}> */}
                         <img style={{marginTop:10,height:200,width:180,border:'solid black'}} src={this.state.imageUrl}/>
-                    
-                    {/* </LoadingWrapper> */}
                         {!this.state.picEdit && <div style={{position:'absolute',top:13,right:5,height:30,width:30,background:'white'}}><i style={{fontSize:30}}class="fas fa-pencil-alt" onClick={()=>this.setState({picEdit:true})}></i></div>}
                     </div>
                 }
                 <input value={this.state.firstName} className="edit-profile-input-boxes" placeholder="First Name" onChange={(e) => this.handleInput('firstName', e.target.value)} />
                 <input value={this.state.lastName} className="edit-profile-input-boxes" placeholder="Last Name" onChange={(e) => this.handleInput('lastName', e.target.value)} />
                 <input value={this.state.email} className="edit-profile-input-boxes" placeholder="Email" onChange={(e) => this.handleInput('email', e.target.value)} />
-                {/* <input value={this.state.imageUrl} className="edit-profile-input-boxes" placeholder="Profile Pic" onChange={(e) => this.handleInput('imageUrl', e.target.value)} /> */}
             </div>
         )
     }
@@ -142,14 +131,10 @@ class Profile extends Component {
 
     async editProfile() {
         const { firstName, lastName, email, imageUrl } = this.state;
-        console.log(imageUrl)
         const { id } = this.props;
         if (firstName !== '' && lastName !== '' && email !== '' && imageUrl !== '') {
-            // console.log(id,firstName,lastName,email,imageUrl)
 
             let userProfile = await axios.put('/profile/edit/user', { firstName, lastName, email, imageUrl, id });
-                    // if(this._isMount){
-            console.log(userProfile)
                 this.props.updateUser(userProfile.data[0])
                this.setState({
                     isEditing: false,
@@ -161,7 +146,6 @@ class Profile extends Component {
                     isEditBoxOpened:false,
                     picEdit:false
                 })
-            // }
         } else {
             return alert('Please fill out all boxes')
         }
@@ -183,7 +167,6 @@ class Profile extends Component {
             const { signedRequest, url } = response.data;
             this.uploadFile(file, signedRequest, url);
         }  catch(err){
-            // console.log(err);
             alert(err)
             };
         };
@@ -199,8 +182,6 @@ class Profile extends Component {
             .put(signedRequest, file, options)
             .then(response => {
             this.setState({ isUploading: false, picLoaded:true,imageUrl:url});
-            console.log(url)
-            // console.log(888,this.state.img,this.state.url)
 
             // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
             })
@@ -223,9 +204,7 @@ class Profile extends Component {
     //need to create some input boxes for edit but only want those to show if I press edit. 
 
     render() {
-        console.log(this.props)
         //if a user session id == user then you can edit that profile but this is already a way to check session
-// console.log(this.state.imageUrl)
         return (
             <div className="profile-container">
                 <LoadingWrapper loaded={this.state.isLoaded}>
@@ -274,7 +253,6 @@ class Profile extends Component {
 }
 
 function mapStateToProps(reduxState) {
-    // console.log(222,reduxState)
     return {
         id: reduxState.id,
         firstName: reduxState.firstName,

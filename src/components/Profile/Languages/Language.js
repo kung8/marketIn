@@ -40,10 +40,6 @@ class Language extends Component {
         return(
             <input value={this.state.language} className="edit-input-box" onChange={(e)=>this.handleInput('language',e.target.value)}/>
         )
-        // this.setState({
-        //     edit:true,
-        //     editBox:<input className="edit-input-box" onChange={(e)=>this.handleInput('language',e.target.value)}/>
-        // })
     }
 
     async edit(lang){
@@ -51,9 +47,7 @@ class Language extends Component {
         try {
             if(language !=='' ){
                 const {id,user_id} = lang;
-                // console.log(user_id)
                 const langProfile = await axios.put('/profile/edit/language',{language,id,user_id})
-                // console.log(444,workProfile.data[0])
                 if(this._isMount){
                     this.props.updateLang(langProfile.data)
                     this.setState({

@@ -30,7 +30,6 @@ class Work extends Component {
     }
     
     async getWorkProfile(){
-        // console.log(this.props)
         if(this.props.match.params.userId){
             const profile = await axios.get('/profile/get/work/'+this.props.match.params.userId)
             const {workProfile} = profile.data;
@@ -117,7 +116,6 @@ class Work extends Component {
     render () {
         const {work} = this.props;
         const workProfile = work.map(job =>{
-            // console.log(3333,job)
             return (
                 <Job
                     key={job.id}

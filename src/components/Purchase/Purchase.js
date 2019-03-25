@@ -26,33 +26,23 @@ class Purchase extends Component {
 
     updatePrice(){
         let {price} = this.props
-        // console.log(price,typeof price)
         price =price.replace('$','')
-        console.log(1111,price)
         price = +price*100
-        console.log(2222,price)
-        // console.log(price,typeof price)
         this.setState({
             amount:price
         })
     }
 
     onToken = (token) => {
-        console.log('hit!')
-        console.log(token)
         token.card = void 0
-        console.log(token)
         const {id,userFirstName,userLastName,price,viewedUserId,service} = this.props;
         axios.post('/api/payment', {token, amount: this.state.amount,id,viewedUserId,service}).then(res => {
-            console.log(111,res)
             alert(`Congratulations you paid ${userFirstName} ${userLastName} $${price} for ${service}!`)
             this.props.history.push(`/services/${viewedUserId}`)
         })
     }
 
     render(){
-        console.log(this.props,this.state)
-
         return(
             <div style={body}>
                 <div style={header}>

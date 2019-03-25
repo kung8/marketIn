@@ -24,7 +24,6 @@ class StepFour extends Component {
         this.setState({
             [prop]:value
         })
-        // console.log(111,prop,value)
     }
 
     handleAddSkill (){
@@ -71,7 +70,6 @@ class StepFour extends Component {
     }
 
     render (){
-        // console.log(4444,this.props)
         const {skill,language} = this.state
         
         return (

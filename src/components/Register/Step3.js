@@ -27,7 +27,6 @@ class StepThree extends Component {
         this.setState({
             [prop]:value
         })
-        // console.log(111,prop,value)
     }
 
     handleAddWork=()=>{
@@ -68,7 +67,6 @@ class StepThree extends Component {
     }
 
     render (){
-        // console.log(3333,this.props,this.state)
         const {empName,position,empLoc,hireDate,endDate,empLogo} = this.state
 
         return (

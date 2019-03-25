@@ -46,9 +46,7 @@ class Project extends Component {
         try {
             if(project !=='' ){
                 const {id,user_id} = proj;
-                // console.log(user_id)
                 const projProfile = await axios.put('/profile/edit/project',{project,id,user_id})
-                // console.log(444,workProfile.data[0])
                 if(this._isMount){
                     this.props.updateProject(projProfile.data)
                     this.setState({
@@ -73,7 +71,6 @@ class Project extends Component {
 
     render (){
         const {proj} = this.props;
-        // console.log(this.props)
         return (
             <div className="small-experience-box">
                 {this.state.isEditOpened?

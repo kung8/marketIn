@@ -26,7 +26,6 @@ class Payments extends Component {
     async getPayments(){
         const {id} = this.props;
         const payments = await axios.get(`/api/get/payments/${id}`);
-        console.log(payments.data)
         this.setState({
             payments:payments.data,
             isLoaded:true
@@ -45,7 +44,6 @@ class Payments extends Component {
             )
         })
 
-        console.log(this.props)
         return(
             <div style={body}>
                 <div style={header}>

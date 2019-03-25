@@ -25,18 +25,15 @@ class Search extends Component {
         this.setState({
             search:value
         })
-        // console.log(this.state.search)
     }
 
     handleSearchClick=async()=>{
-        // console.log('hit!')
         this.setState({
             isLoaded:false
         })
         const {search} = this.state;
         if(search!==''){
             const users = await axios.get(`/profile/get/users?search=${search}`)
-            // console.log(users)
             this.setState({
                 usersArr:users.data,
                 search:'',

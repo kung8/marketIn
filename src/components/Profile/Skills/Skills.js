@@ -25,11 +25,8 @@ class Skills extends Component {
     }
     
     async getSkillsProfile(){
-        // console.log(this.props)
         if(this.props.match.params.userId){
-            // console.log('hit')
             const profile = await axios.get('/profile/get/skills/'+this.props.match.params.userId)
-            // console.log(123,profile)
             const {skillsProfile} = profile.data;
             this.props.updateSkill(skillsProfile);
             if(this._isMount){
@@ -91,10 +88,8 @@ class Skills extends Component {
     }
 
     render () {
-        // console.log(1234,this.props.skills,this.props.id)
         const {skills}  = this.props;
         const skillsProfile = skills.map(skill =>{
-            // console.log(3333,skill)
             return (
                 <Skill 
                     key={skill.id}

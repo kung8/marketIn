@@ -40,10 +40,8 @@ class Services extends Component {
     }
 
     async getUser(){
-        // console.log('hit!',this.props.match.params.userId)
         if(this.props.match.params.userId){
             const userProfile = await axios.get('/profile/get/user/'+this.props.match.params.userId);
-            // console.log(7777,userProfile.data);
             this.props.updateViewedUser(userProfile.data[0])
         }
     }
@@ -51,9 +49,7 @@ class Services extends Component {
     getServices=async()=>{
         const {userId} = this.props.match.params;
         const services = await axios.get(`/services/get/${userId}`)
-        // console.log(111111,services.data);
         this.props.updateServices(services.data)
-        // console.log(this.props.services)
         if(this._isMount){
             this.setState({
                 services:services.data,
@@ -78,7 +74,6 @@ class Services extends Component {
         const { signedRequest, url } = response.data;
         this.uploadFile(file, signedRequest, url);
     }  catch(err){
-        // console.log(err);
         alert(err)
         };
     };
@@ -152,14 +147,10 @@ class Services extends Component {
 
     saveAdd = async ()=>{
         const {price,service,image} = this.state;
-        // console.log(333,price,service,image)
         const {id} = this.props;
         if(price!==''&& service!=='' && image!==''){
-            // console.log('hit!')
-            // console.log(111,price,service,image,id)
             const services = await axios.post('/service/add',{price,service,image,id})
             this.props.updateServices(services.data)
-            // console.log(22222,services.data)
             this.setState({
                 services:services.data,
                 isAdded:false,
@@ -190,16 +181,13 @@ class Services extends Component {
     }
 
     edit= async(service,price,image,id)=>{
-        // console.log(77,service,price,image,id)
         if(price !=='' && image !=='' && service !==''){
-            // console.log('hit!')
             const services = await axios.put(`/service/update/${id}`,{price,image,service})
             this.props.updateServices(services.data)
             this.setState({
                 services:services.data
             })
         } else {
-            // console.log('not making it in!')
             this.setState({
                 isEditing:false,
                 editBox1:'',
@@ -213,9 +201,7 @@ class Services extends Component {
     }
 
     delete = async(serv)=>{
-        // console.log(serv)
         const {id} = serv;
-        // console.log(id)
         const services = await axios.delete(`/service/delete/${id}`)
         this.props.updateServices(services.data)
         this.setState({
@@ -224,7 +210,6 @@ class Services extends Component {
     }
 
     render() {
-        // console.log(this.props.services,this.state.services,this.props)
         const { isUploading,picLoaded,isAdded } = this.state;
         const {services} = this.state;
         const servArray = services.map(serv =>{
@@ -267,7 +252,6 @@ class Services extends Component {
     }
 
     function mapStateToProps(reduxState){
-        // console.log(111,reduxState)
         return{
             services:reduxState.services,
             id:reduxState.id,

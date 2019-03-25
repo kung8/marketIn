@@ -37,7 +37,6 @@ componentDidMount(){
 }
 
 async getEdProfile(){
-    // console.log(this.props)
     if(this.props.match.params.userId){
         const profile = await axios.get('/profile/get/education/' + this.props.match.params.userId)
         const {edProfile} = profile.data;
@@ -117,7 +116,6 @@ addToEd= async()=>{
     }
 
     render(){
-        // console.log(this.props.education,this.props.id)
         const {education} = this.props;
         const edProfile = education.map(sch => {
             return (
@@ -159,7 +157,6 @@ addToEd= async()=>{
 }
 
 function mapStateToProps(reduxState){
-    // console.log(reduxState)
     return{
         education:reduxState.education,
         id:reduxState.id,
