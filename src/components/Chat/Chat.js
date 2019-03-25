@@ -5,6 +5,9 @@ import {connect} from 'react-redux';
 //user means the one that is viewing somebody else's page
 //normal id,firstName,lastName,imageUrl is the one being viewed
 
+const button = {fontSize:25,width:160,height:40,background:'black',color:'white',borderRadius:'25%',marginRight:5};
+
+
 class Chat extends Component {
     constructor(props){
         super(props);
@@ -229,7 +232,7 @@ class Chat extends Component {
                 </div>
                 <div style={{display:'flex',flexDirection:'column',alignItems:'center',marginTop:5}}>
                     <input value={this.state.message} style={{height:50,width:260,border:'black solid',fontSize:35}} onChange={(e)=>this.handleMessage(e.target.value)}/>
-                    <button className="add-contact-button" onClick={this.sendMsg}>Send</button>
+                    <button style={button} onClick={this.sendMsg}>Send</button>
                 </div>
             </div>
         )
