@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 const body = {background:'navy',marginTop:85,minHeight:426,marginBottom:5,width:'100vw'}
 const header = {background:'navy', width:'100vw',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center',minHeight:50};
 const heading = {color:'white',letterSpacing:'0.05em'};
-const section = {background:'silver',minHeight:80,width:'calc(100%-10px)',marginBottom:5,display:'flex',flexDirection:'column',alignItems:'center'};
+const section = {background:'silver',minHeight:80,width:'100vw',marginBottom:5,display:'flex',flexDirection:'column',alignItems:'center'};
 const logoHolder = {display:'flex',alignItems:'center',textAlign:'left',flexDirection:'column',width:310};
 const logo = {fontSize:70,marginTop:5,marginLeft:5};
 const text = {fontSize:25,textDecoration:'none',maxWidth:310};
@@ -104,14 +104,14 @@ class Contact extends Component {
     
     handleUpdatePhoneToggle(){
         this.setState({
-            editBox1:<input placeholder="Phone" onChange={(e)=>this.handleInput('phone',e.target.value)}/>,
+            editBox1:<input style={input} placeholder="Phone" onChange={(e)=>this.handleInput('phone',e.target.value)}/>,
             isEditing1:true
         })
     }
     
     handleUpdateLinkedInToggle(){
         this.setState({
-            editBox2:<input placeholder="LinkedIn" onChange={(e)=>this.handleInput('linkedIn',e.target.value)}/>,
+            editBox2:<input style={input} placeholder="LinkedIn" onChange={(e)=>this.handleInput('linkedIn',e.target.value)}/>,
             isEditing2:true
         })
     }
@@ -119,25 +119,41 @@ class Contact extends Component {
     async updatePhone(){
         const {id} = this.props;
         const {phone} = this.state;
-        const phoneNum = await axios.put(`/contact/update/phone/${id}`,{phone})
-        this.props.updatePhone(phoneNum.data[0].phone)
-        this.setState({
-            isEditing1:false,
-            editBox1:'',
-            phone:''
-        })
+        if(phone !== ''){
+            const phoneNum = await axios.put(`/contact/update/phone/${id}`,{phone})
+            this.props.updatePhone(phoneNum.data[0].phone)
+            this.setState({
+                isEditing1:false,
+                editBox1:'',
+                phone:''
+            })
+        } else {
+            this.setState({
+                isEditing1:false,
+                editBox1:'',
+                phone:''
+            })
+        }
     }
 
     async updateLinkedIn(){
         const {id} = this.props;
         const {linkedIn} = this.state;
-        const linked = await axios.put(`/contact/update/linkedin/${id}`,{linkedIn})
-        this.props.updateLinkedIn(linked.data[0].linkedin)
-        this.setState({
-            isEditing2:false,
-            editBox2:'',
-            linkedIn:''
-        })
+        if(linkedIn !==''){
+            const linked = await axios.put(`/contact/update/linkedin/${id}`,{linkedIn})
+            this.props.updateLinkedIn(linked.data[0].linkedin)
+            this.setState({
+                isEditing2:false,
+                editBox2:'',
+                linkedIn:''
+            })
+        } else {
+            this.setState({
+                isEditing2:false,
+                editBox2:'',
+                linkedIn:''
+            })
+        }
     }
 
     render(){
@@ -163,8 +179,7 @@ class Contact extends Component {
                                 <div style={section}>
                                     <div style={logoHolder}>
                                         <i className="fas fa-phone-square" style={logo}></i>
-                                        <a href={`tel:${this.state.phone}`} style={text}><p>{this.props.phone}</p></a>
-                                        {this.state.editBox1}
+                            <a href={`tel:${this.state.phone}`} style={text}>{this.state.isEditing1?<>{this.state.editBox1}</>:<p>{this.props.phone}</p>}</a>
                                         {this.state.isEditing1?<button style={button} onClick={()=>this.updatePhone()}>Save</button>:<button style={button} onClick={()=>this.handleUpdatePhoneToggle()}>Update</button> }   
                                     </div>
                                 </div>
@@ -194,8 +209,8 @@ class Contact extends Component {
                                 <div style={section}>
                                     <div style={logoHolder}>
                                         <i className="fab fa-linkedin" style={logo}></i>
-                                        <a href={`${this.state.linkedIn}`} style={text}><p>{this.props.linkedIn}</p></a>
-                                        {this.state.editBox2}
+                            <a href={`${this.state.linkedIn}`} style={text}>{this.state.isEditing2?<>{this.state.editBox2}</>:<p>{this.props.linkedIn}</p>}</a>
+                                        
                                         {this.state.isEditing2?<button style={button} onClick={()=>this.updateLinkedIn()}>Save</button>:<button style={button} onClick={()=>this.handleUpdateLinkedInToggle()}>Update</button>}    
                                     </div>
                                 </div>
