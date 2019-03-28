@@ -23,7 +23,7 @@ class Payments extends Component {
         this.getPayments();
     }
 
-    async getPayments(){
+    getPayments=async()=>{
         const {id} = this.props;
         const payments = await axios.get(`/api/get/payments/${id}`);
         this.setState({
@@ -50,11 +50,11 @@ class Payments extends Component {
                     <h1 style={heading}>Payments</h1>
                 </div>
                 
-                <div style={section}>
                 <LoadingWrapper loaded={this.state.isLoaded}>
+                <div style={section}>
                     {paymentArr}
-                </LoadingWrapper>
                 </div>
+                </LoadingWrapper>
             </div>
         )
     }

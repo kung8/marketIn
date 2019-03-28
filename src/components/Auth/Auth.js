@@ -39,9 +39,9 @@ class Auth extends Component {
 
     render (){
         return (
-            <div style={body}>
-                <input style={input} type="text" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>
-                <input style={input} type="password" placeholder="Password" onChange={(e)=>this.handleInput('password',e.target.value)}/>
+            <div className='login'>
+                <input type="text" placeholder="Email" onChange={(e)=>this.handleInput('email',e.target.value)}/>
+                <input type="password" placeholder="Password" onChange={(e)=>this.handleInput('password',e.target.value)}/>
                 <button style={button} onClick={this.login}>Login</button>
                 <Link to='/register/step1' style={link}>Create an Account</Link>
             </div> 
