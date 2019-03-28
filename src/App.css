@@ -804,6 +804,17 @@ footer {
     align-items:center;
 }
 
+.entire-about-section {
+    background:silver;
+    width:100vw;
+    min-height:457px;
+    margin-top:85px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    border-left:solid navy;
+    border-right:solid navy
+}
 
 @media screen and (min-height: 560px){
     .login {
@@ -877,6 +888,16 @@ footer {
 
     .contact-section {
         min-height:115px;
+    }
+
+    .entire-about-section {
+        height:540px;
+    }
+
+    .entire-about-section > p {
+        font-size:45px;
+        text-align: center;
+        min-width:310px;
     }
     
 }
