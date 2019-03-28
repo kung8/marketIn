@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 const body = {background:'navy',marginTop:85,minHeight:426,marginBottom:5,width:'100vw'}
 const header = {background:'navy', width:'100vw',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center',minHeight:50};
 const heading = {color:'white',letterSpacing:'0.05em'};
-const section = {background:'silver',minHeight:80,width:'100vw',marginBottom:5,display:'flex',flexDirection:'column',alignItems:'center'};
+// const section = {background:'silver',minHeight:80,width:'100vw',marginBottom:5,display:'flex',flexDirection:'column',alignItems:'center'};
 const logoHolder = {display:'flex',alignItems:'center',textAlign:'left',flexDirection:'column',width:310};
 const logo = {fontSize:70,marginTop:5,marginLeft:5};
 const text = {fontSize:25,textDecoration:'none',maxWidth:310};
@@ -165,7 +165,7 @@ class Contact extends Component {
                     <h1 style={heading}>CONTACT</h1> 
                 </div>
                 <div>
-                    <div style={section}>
+                    <div className="contact-section">
                         <div style={logoHolder}>
                             <i className="far fa-envelope" style={logo}></i>
                             <a href={`mailto:${this.props.userEmail}`} style={text}><p>{this.props.userEmail}</p></a>
@@ -176,7 +176,7 @@ class Contact extends Component {
                         (this.props.phone!='' || null?
                         
                             (<div>
-                                <div style={section}>
+                                <div className="contact-section">
                                     <div style={logoHolder}>
                                         <i className="fas fa-phone-square" style={logo}></i>
                             <a href={`tel:${this.state.phone}`} style={text}>{this.state.isEditing1?<>{this.state.editBox1}</>:<p>{this.props.phone}</p>}</a>
@@ -192,7 +192,7 @@ class Contact extends Component {
                     :
                         (this.props.phone!=''?
                             (<div>
-                                <div style={section}>
+                                <div className="contact-section">
                                     <div style={logoHolder}>
                                         <i className="fas fa-phone-square" style={logo}></i>
                                         <a href={`tel:${this.props.phone}`} style={text}><p>{this.props.phone}</p></a>    
@@ -206,7 +206,7 @@ class Contact extends Component {
                     {this.props.viewedUserId==this.props.id?
                         (this.props.linkedIn != '' || null?
                             (<div >
-                                <div style={section}>
+                                <div className="contact-section">
                                     <div style={logoHolder}>
                                         <i className="fab fa-linkedin" style={logo}></i>
                             <a href={`${this.state.linkedIn}`} style={text}>{this.state.isEditing2?<>{this.state.editBox2}</>:<p>{this.props.linkedIn}</p>}</a>
@@ -223,7 +223,7 @@ class Contact extends Component {
                     :
                     (this.props.linkedIn!=''?
                         (<div>
-                            <div style={section}>
+                            <div className="contact-section">
                                 <div style={logoHolder}>
                                     <i className="fab fa-linkedin" style={logo}></i>
                                     <a href={`${this.props.linkedIn}`} style={text}><p>{this.props.linkedIn}</p></a>    
@@ -236,7 +236,7 @@ class Contact extends Component {
                     }
                     
 
-                    <div style={section}>
+                    <div className="contact-section">
                         <div style={logoHolder}>
                             <i className="far fa-comment" style={logo}></i>
                             <Link to={`/chat/${viewedUserId}`} style={text}><a href='/'><p>Chat with {this.props.userFirstName}</p></a></Link>

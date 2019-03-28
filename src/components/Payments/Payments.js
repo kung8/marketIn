@@ -3,11 +3,11 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import LoadingWrapper from '../Loader/LoadingWrapper';
 
-const body = {background:'navy',marginTop:85,height:452,marginBottom:5,width:'100vw'};
+const body = {background:'navy',marginTop:85,minHeight:540,marginBottom:5,width:'100vw'};
 const header = {display:'flex',justifyContent:'center',minHeight:50,alignItems:'center',textAlign:'center',width:'100vw'};
 const heading = {color:'white',letterSpacing:'0.05em'};
 const section = {height:395,marginLeft:5,marginRight:5};
-const subSection = {display:'flex',flexDirection:'column',width:'100%',background:'silver',minHeight:40,alignItems:'center',marginBottom:5};
+const subSection = {fontSize:35, display:'flex',flexDirection:'column',width:'100vw',background:'silver',minHeight:60,alignItems:'center',marginBottom:5,justifyContent:'center'};
 const text = {textAlign:'center'}
 
 class Payments extends Component {

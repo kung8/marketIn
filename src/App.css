@@ -792,6 +792,19 @@ footer {
     text-align:center;
 }
 
+
+
+.contact-section {
+    background:silver;
+    min-height:80px;
+    width:100vw;
+    margin-bottom:5px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+
 @media screen and (min-height: 560px){
     .login {
         margin-top:80px;
@@ -860,6 +873,10 @@ footer {
 
     .search-box-output-container {
         height:350px
+    }
+
+    .contact-section {
+        min-height:115px;
     }
     
 }

@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {updateUser} from '../../ducks/userActions';
 import axios from 'axios';
 
-const body = {marginTop:80,height:462,width:320,display:'flex',flexDirection:'column',justifyContent:'space-evenly',alignItems:'center',flexWrap:'wrap',background:'silver',fontSize:30}
-const input = {marginTop:40,minHeight:50,width:250,fontSize:35,border:'solid black'}
+// const body = {marginTop:80,height:462,width:320,display:'flex',flexDirection:'column',justifyContent:'space-evenly',alignItems:'center',flexWrap:'wrap',background:'silver',fontSize:30}
+// const input = {marginTop:40,minHeight:50,width:250,fontSize:35,border:'solid black'}
 const button = {height:40,width:160,fontSize:35,background:'black',color:'white',border:'black'};
 const link = {color:'black',textDecoration:'none'};
 
