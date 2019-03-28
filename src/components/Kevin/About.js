@@ -1,9 +1,6 @@
 import React from 'react';
 
-// const body = {background:'silver', width:'100vw',minHeight:457, marginTop:85,display:"flex",flexDirection:'column',alignItems:'center',borderLeft:'solid navy', borderRight:'solid navy'}
 const header = {letterSpacing:'0.05em',background:'navy', width:'100vw',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center',minHeight:50,color:'white'}
-// const text = {textAlign:'center',fontSize:35,width:310}
-
 
 export default function About () {
     return(

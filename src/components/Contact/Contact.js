@@ -9,7 +9,6 @@ import {Link} from 'react-router-dom';
 const body = {background:'navy',marginTop:85,minHeight:426,marginBottom:5,width:'100vw'}
 const header = {background:'navy', width:'100vw',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center',minHeight:50};
 const heading = {color:'white',letterSpacing:'0.05em'};
-// const section = {background:'silver',minHeight:80,width:'100vw',marginBottom:5,display:'flex',flexDirection:'column',alignItems:'center'};
 const logoHolder = {display:'flex',alignItems:'center',textAlign:'left',flexDirection:'column',width:310};
 const logo = {fontSize:70,marginTop:5,marginLeft:5};
 const text = {fontSize:25,textDecoration:'none',maxWidth:310};
