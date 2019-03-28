@@ -93,6 +93,9 @@
 /*************************************Entire Profile**************************************/
 .profile-container {
     margin-top:85px;
+    width:100vw;
+    /* margin-left:5px; */
+    margin-right:5px;
 }
 
 /*************************************Profile Info*********************************/
@@ -100,7 +103,7 @@
     display: flex;
     flex-direction: column;
     background:silver;
-    width:320px;
+    width:100vw;
     border:navy solid 5px;
     align-items: center;
     flex-wrap: wrap;
@@ -113,9 +116,7 @@
     width:120px;
     border-radius: 150%;
     border:black 5px solid;
-    /* padding-left:10px; */
 }
-
 
 .edit-profile-input-button-container {
     display: flex;
@@ -183,7 +184,7 @@
     margin:5px;
     background:navy;
     /* min-height:300px; */
-    width:310px;
+    width:100vw;
     display:flex;
     justify-content:space-between;
     align-items: center;
@@ -196,7 +197,7 @@
     flex-direction: column;
     align-items:center;
     justify-content: space-between;
-    width:310px;
+    width:100vw;
     margin: 5px auto;
     background:silver;
 }
@@ -235,7 +236,7 @@
     align-items: center;
     /* flex-direction: column; */
     flex-wrap: wrap;
-    width:310px;
+    width:100vw;
 }
 
 /*************************Delete Functionality***************/
@@ -306,7 +307,7 @@
 .small-experience-section-box {
     margin-top:5px;
     margin-bottom:5px;
-    width:95%;
+    width:100vw;
     background:navy;
     /* height:140px; */
     display:flex;
@@ -325,7 +326,7 @@
     justify-content: space-between;
     align-items: center;
     text-align:center;
-    width:310px;
+    width:100vw;
     word-wrap: break-word
 }
 
@@ -381,7 +382,7 @@
     margin-left:5px;
     display:flex;
     height:50px;
-    width:310px;
+    width:100vw;
     justify-content: center;
     align-items: center;
 }
@@ -740,7 +741,7 @@ footer {
 
 /*******************Search Section***********************/
 .entire-search-section {
-    max-height:453px;
+    min-height:453px;
     background:navy;
     margin-top:85px;
     width:100vw;
@@ -844,6 +845,24 @@ footer {
     .search-input-box {
         width:260px
     } 
+
+    .profile-basic-info-container {
+        display: flex;
+        flex-direction: column;
+        background:silver;
+        width:175vw;
+        border:navy solid 5px;
+        /* margin-left:10px; */
+        align-items: center;
+        flex-wrap: wrap;
+        text-align: center;
+        /* justify-content: center; */
+    } 
+
+    .search-box-output-container {
+        height:350px
+    }
+    
 }
 
 @media screen and (min-width: 360px) {
@@ -864,11 +883,6 @@ footer {
     footer h6 {
         font-size:25px;
     }
-
-    .search-box-output-container {
-        height:294px;
-    }
-
 
 }
 
@@ -920,15 +934,27 @@ footer {
         margin-bottom:5px;
     }
 
-    .search-box-output-container {
-        height:280px;
-    }
 }
 
 @media screen and (min-width: 600px) {
     .search-input-box {
         width:560px;
         margin-top:10px;
+    }
+
+    .edit-input-box {
+        width:500px;
+        height:45px;
+    }
+
+    .edit-input-box-last {
+        width:500px;
+        height:45px;
+    }
+
+    .add-input-box {
+        width:500px;
+        height:45px;
     }
 
     .search-box-output-container h1 {
@@ -948,9 +974,6 @@ footer {
         font-size:30px;
     }
 
-    .search-box-output-container {
-        height:260px;
-    }
 }
 
 @media screen and (min-width: 640px) {
@@ -1014,9 +1037,6 @@ footer {
         font-size:40px;
     }
 
-    .search-box-output-container {
-        height:240px;
-    }
 }
 
 @media screen and (min-width: 840px) {
