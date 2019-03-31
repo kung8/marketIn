@@ -10,7 +10,8 @@ class Header extends Component {
         super();
         this.state={
             navBar:0,
-            isNavBarOpened:false
+            isNavBarOpened:false,
+            // bigWindow:false
         }
     }
     

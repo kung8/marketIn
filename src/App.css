@@ -70,7 +70,6 @@
     overflow:hidden;
     background-color:black;
     height:100%;
-    /* width:300px; */
     transition:0.2s;
 }
 
@@ -1124,4 +1123,8 @@ footer {
     .search-input-box {
         width:1080px
     }
+
+    /* .sidebar-container {
+        width:0;
+    } */
 }

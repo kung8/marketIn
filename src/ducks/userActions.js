@@ -1,5 +1,4 @@
 import {COLLECT_SERVICE,UPDATE_PHONE, UPDATE_LINKEDIN, UPDATE_SERVICES,UPDATE_VIEWED_USER,UPDATE_USER,UPDATE_EDUCATION,UPDATE_WORK,UPDATE_SKILL,UPDATE_LANG,UPDATE_PROJECT, CLEAR_USER} from './constants'
-import { link } from 'fs';
 
 export function updateUser ({first_name,last_name,email,image_url,id}){
     return {

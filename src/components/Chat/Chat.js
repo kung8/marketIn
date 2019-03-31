@@ -17,8 +17,7 @@ class Chat extends Component {
             message:'',
             messages:[],
             chat:'',
-            date:'',
-            isBlue:true
+            date:''
         }
 
         this.chatStarted = this.chatStarted.bind(this);
