@@ -35,7 +35,9 @@ class StepOne extends Component {
         
         try {
             if(email!=='' && firstName!=='' && lastName!=='' && password!==''){
+                console.log('hit inside first try!')
                 if(imageUrl===''){
+                    console.log('hit inside image!')
                     await axios.get(`http://hp-api.herokuapp.com/api/characters/`
                     ).then(character =>{
                         const char = character.data[Math.floor(Math.random()*character.data.length)]
