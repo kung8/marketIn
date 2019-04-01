@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {updateUser} from '../../ducks/userActions';
 import axios from 'axios';
-
+// something to change
 const body = {display:'flex',flexDirection:'column',height:467,width:'100%',justifyContent:'space-evenly',alignItems:'center',background:'silver'}
 const input = {height:40,fontSize:20,width:260,border:'solid black'};
 const buttonHolder = {width:'90%',display:'flex',justifyContent:'space-between',marginBottom:10};
