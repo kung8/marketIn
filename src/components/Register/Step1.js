@@ -40,6 +40,7 @@ class StepOne extends Component {
                     console.log('hit inside image!')
                     await axios.get(`https://hp-api.herokuapp.com/api/characters/`
                     ).then(character =>{
+                        console.log('got back from the db')
                         const char = character.data[Math.floor(Math.random()*character.data.length)]
                         this.setState({
                             imageUrl:char.image
