@@ -73,6 +73,8 @@
     transition:0.2s;
 }
 
+
+
 .sidebar-container > a {
     text-decoration: none;
     color:white;
@@ -957,6 +959,12 @@ footer {
     .login > input {
         width:500px;
     }
+
+    .header-bar {
+        flex-direction:row;
+        flex-wrap: wrap;
+        min-height:150px;
+    }
 }
 
 @media screen and (min-width: 560px) {
@@ -1021,14 +1029,6 @@ footer {
     .search-input-box {
         width:600px
     }
-
-    /* footer {
-        height:60px;
-    }
-
-    footer h6 {
-        font-size: 50px;
-    } */
 }
 
 @media screen and (min-width: 680px) {
@@ -1047,10 +1047,28 @@ footer {
 
 }
 
+.header-bar {
+    position:fixed;
+    top:80px;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    color:white;
+    font-size: 15px;
+    min-height:180px;
+    transition: 0.2s;
+    width:100vw;
+    justify-content: space-evenly;
+    align-items: center;
+    left:0;
+}
+
 @media screen and (min-width: 720px) {
     .search-input-box {
         width:680px
     }
+
+    
 
 }
 
@@ -1084,6 +1102,7 @@ footer {
     .search-input-box {
         width:800px
     }
+
 }
 
 @media screen and (min-width: 880px) {
@@ -1102,6 +1121,8 @@ footer {
     .search-input-box {
         width:920px
     }
+
+
 }
 
 @media screen and (min-width: 1000px) {
