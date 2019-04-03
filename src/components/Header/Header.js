@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {clearUser} from '../../ducks/userActions';
 import axios from 'axios';
 import {Link,withRouter} from 'react-router-dom';
-// import '../../App.css'
 
 class Header extends Component {
     constructor(){
