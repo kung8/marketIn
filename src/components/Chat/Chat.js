@@ -53,13 +53,13 @@ class Chat extends Component {
     setSocketListeners = () => {
         this.socket=io();
 
-        this.socket.on('sendMsg',(message)=>{
-            let messages = this.state.messages
-            this.setState({
-                messages,
-                message:''
-            })
-        })
+        // this.socket.on('sendMsg',(message)=>{
+        //     let messages = this.state.messages
+        //     this.setState({
+        //         messages,
+        //         message:''
+        //     })
+        // })
     }
     
     startChat(me,you){
