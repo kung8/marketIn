@@ -75,7 +75,7 @@ class Header extends Component {
     toggleHeaderBar=()=>{
         if(this.state.headerBar){
             console.log(this.props.id)
-            if(this.props.id && this.state.headerBar > 700){
+            if(this.props.id && this.state.headerBar < 700){
                 return(
                     <div>
                         <Link to={`/profile/${this.props.id}`}>{this.props.firstName} {this.props.lastName}</Link>
@@ -94,7 +94,7 @@ class Header extends Component {
                         <Link to='/profile/70' onClick={this.handleToggle}><h1>Dev</h1></Link>
                         <Link to={`/services/70`} onClick={this.handleToggle}><h1>Services</h1></Link>
                         <Link to={`/contact/70`} onClick={this.handleToggle}><h1>Contact</h1></Link>
-                        <Link to='/' onClick={this.handleToggle}><h1>Login</h1></Link>
+                        <Link to='/' onClick={this.handleToggle}><h1>Logout</h1></Link>
                     </div>
                 )
             }
