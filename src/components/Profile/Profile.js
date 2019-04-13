@@ -94,7 +94,7 @@ class Profile extends Component {
                             fontSize: 28,
                         }}
                         accept="image/*"
-                        multiple={false}
+                        multiple={true}
                     >
                         {this.state.picLoaded?
                         <div>
