@@ -27,7 +27,6 @@ const initialState = {
 }
 
 export default function userReducer(state = initialState,action){
-    
     switch(action.type){
         case UPDATE_VIEWED_USER:
             const {first_name:userFirstName,last_name:userLastName,email:userEmail,image_url:userImageUrl,id:viewedUserId} = action.payload;
