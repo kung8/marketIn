@@ -6,7 +6,7 @@
   "proxy": "http://localhost:3456",
   "dependencies": {
     "aws-sdk": "^2.422.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "connect-pg-simple": "^5.0.0",
     "dotenv": "^7.0.0",
