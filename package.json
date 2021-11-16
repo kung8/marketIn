@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "proxy": "http://localhost:3456",
   "dependencies": {
-    "aws-sdk": "^2.422.0",
+    "aws-sdk": "^2.814.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "connect-pg-simple": "^5.0.0",
